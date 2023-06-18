@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>OMDb API</title>
+</head>
+
+<body>
+    <div class="search">
+        <form name="search">
+            <div class="textbox">
+                <input type="text" name="keyphrase" id="keyphrase" placeholder="Movie name" required>
+                <label for="keyphrase">Movie name</label>
+                <span class="clear" id="keyphraseClear"></span>
+            </div>
+            <button class="button button-g" type="submit" name="submit" disabled>Search</button>
+        </form>
+    </div>
+    <div class="container" id="container">
+        <h2 class="container-msg">Search...</h2>
+    </div>
+    <div class="shadow" id="shadow">
+        <div class="shadow-modal">
+            <div class="modal-container">
+                <img id="moviePoster" src="" alt="Movie Name">
+                <div class="movie-details">
+                    <h2 id="movieName">Movie Name</h2>
+                    <span class="movie-params" id="movieParams">G YYYY Unknown, Unknown, Unknown</span>
+                    <p class="movie-description" id="movieDescription">Movie description.</p>
+                    <p><b>Written by:</b> <span id="movieWrittenBy">Unknown</span></p>
+                    <p><b>Directed by:</b> <span id="movieDirectedBy">Unknown</span></p>
+                    <p><b>Starring:</b> <span id="movieStarring">Unknown</span></p>
+                    <p><b>BoxOffice:</b> <span id="movieBoxOffice">$0</span></p>
+                    <p><b>Awards:</b> <span id="movieAwards">Unknown</span></p>
+                    <p><b>Ratings:</b> <span id="movieRatings">Unknown</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>

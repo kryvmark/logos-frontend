@@ -1,0 +1,63 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone {
+    width: 600px;
+    height: 600px;
+    position: relative;
+    background: url('img/phone.png');
+    background-size: cover;
+}
+
+.screen {
+    width: 245px;
+    height: 525px;
+    position: absolute;
+    top: 15px;
+    left: 62px;
+    background-color: #000;
+    z-index: -2;
+}
+
+.progress {
+    width: 245px;
+    height: 525px;
+    position: absolute;
+    top: 15px;
+    left: 62px;
+    background-color: #4c5;
+    z-index: -1;
+}
+
+.indicator {
+    width: 245px;
+    position: absolute;
+    top: 185px;
+    left: 62px;
+    background: none;
+}
+
+.indicator span {
+    display: block;
+    font-size: 50px;
+    color: #fff;
+    text-align: center;
+}
+
+span.big {
+    font-size: 100px;
+}

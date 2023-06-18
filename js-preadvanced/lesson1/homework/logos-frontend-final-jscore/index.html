@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>JS Core Final</title>
+</head>
+
+<body>
+    <div id="timer">01:00</div>
+
+    <div class="control">
+        <button id="controlStart">Start game!</button>
+        <button id="controlCheck" disabled>Check result</button>
+        <button id="controlNew">New game</button>
+    </div>
+
+    <div class="puzzle">
+        <div class="puzzle-box" id="puzzleBefore">
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+        </div>
+        <div class="puzzle-box" id="puzzleAfter">
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+            <div class="puzzle-cell"></div>
+        </div>
+    </div>
+
+    <div id="shadow">
+        <div class="modal">
+            <span id="modalMessage">Modal message</span>
+            <div class="modal-control">
+                <button id="modalClose">Close</button>
+                <button id="modalCheck" class="button-green">Check</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/jquery/jquery-3.5.1.min.js"></script>
+    <script src="./js/jquery/jquery-ui-1.13.2.min.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

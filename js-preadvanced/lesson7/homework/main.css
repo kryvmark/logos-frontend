@@ -1,0 +1,383 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    --body: #eee;
+    --highlight: #ccc;
+    --border: #999;
+    --text: #444;
+    --c-success: #4a5;
+    --c-error: #e34;
+    --c-primary: #48f;
+    --c-yellow: #fb3;
+    --c-success-l: #4ca;
+    --c-primary-l: #7bf;
+    --shadow: #4444;
+    --o-success: #4a54;
+    --o-primary: #48f4;
+}
+
+body {
+    background-color: var(--body);
+}
+
+.textbox,
+.button {
+    position: relative;
+    width: 100%;
+}
+
+.textbox input {
+    height: 3.5rem;
+    font-size: 18px;
+    padding: 1rem;
+    border: 2px solid var(--border);
+    border-radius: .25rem;
+    position: relative;
+    width: 100%;
+}
+
+.textbox input.error {
+    border-color: var(--c-error);
+}
+
+.textbox input:focus,
+.checkbox input:focus {
+    border-color: var(--c-primary);
+    outline: .25rem solid var(--o-primary);
+}
+
+.textbox label {
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 1.125rem;
+    font-size: 1.125rem;
+    margin-left: 1.125rem;
+    color: var(--border);
+}
+
+.textbox input:not(.textbox input:placeholder-shown) {
+    padding-bottom: 0;
+}
+
+.textbox input:not(.textbox input:placeholder-shown)+label {
+    visibility: visible;
+    top: .5rem;
+    font-size: 0.75rem;
+    transition: all 0.1s;
+}
+
+.textbox .clear::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: .75rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    text-align: center;
+    font-weight: bold;
+    color: var(--c-success);
+}
+
+.textbox input~.clear::before {
+    display: none;
+    content: "\274C";
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.textbox input:not(.textbox input:placeholder-shown)~.clear::before {
+    display: block;
+}
+
+.textbox .error-msg {
+    visibility: hidden;
+    position: absolute;
+    top: 3.625rem;
+    padding: .375rem;
+    border-radius: .375rem;
+    color: #fff;
+    background-color: var(--c-error);
+}
+
+.textbox input.error~.error-msg {
+    visibility: visible;
+}
+
+.button {
+    padding: .75rem 1.5rem;
+    cursor: pointer;
+    font-size: 1.25rem;
+    background-color: var(--c-primary);
+    color: #fff;
+    border: 1px solid var(--c-primary);
+    border-radius: .375rem;
+}
+
+.button:disabled {
+    background-color: var(--c-primary-l);
+    border: 1px solid var(--c-primary-l);
+    cursor: not-allowed;
+}
+
+.button:not(:disabled):focus {
+    outline: .25rem solid var(--o-primary);
+}
+
+.button-g {
+    background-color: var(--c-success);
+    border: 1px solid var(--c-success);
+}
+
+.button-g:disabled {
+    background-color: var(--c-success-l);
+    border: 1px solid var(--c-success-l);
+}
+
+.button-g:not(:disabled):focus {
+    outline: .25rem solid var(--o-success);
+}
+
+.search {
+    padding: 1rem 2rem;
+}
+
+.search form {
+    display: flex;
+}
+
+.search form .textbox {
+    margin-inline-end: 1rem;
+}
+
+.search form button {
+    width: 200px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.container-msg {
+    text-align: center;
+    font-size: 2rem;
+    width: 100%;
+    font-weight: 500;
+}
+
+.movie {
+    width: 22.8%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    box-shadow: 0 0 16px 4px #4448;
+    animation: fade 0.7s linear 0s 1;
+    animation-play-state: running;
+}
+
+.movie img {
+    height: 350px;
+    background-color: var(--border);
+    margin: -1rem -1rem 0 -1rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    object-fit: cover;
+}
+
+.movie h3 {
+    background-color: var(--highlight);
+    text-align: center;
+    padding: 1rem 0;
+    height: 5rem;
+    margin: 0 -1rem;
+    margin-bottom: .5rem;
+}
+
+.movie p {
+    text-align: center;
+    margin: .5rem;
+}
+
+.movie .movie-type {
+    color: var(--text);
+    font-weight: bold;
+}
+
+.movie button {
+    margin-top: .5rem;
+}
+
+.shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--shadow);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+}
+
+.shadow[data-fade="in"] {
+    animation: shadow-in 0.3s linear 0s 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.shadow[data-fade="out"] {
+    animation: shadow-out 0.3s linear 0s 1;
+    animation-play-state: running;
+}
+
+.shadow-modal {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    background-color: #fff;
+    left: 10%;
+    top: 10%;
+    border-radius: .5rem;
+    padding: 1rem;
+    cursor: auto;
+}
+
+.shadow[data-fade="in"] .shadow-modal {
+    animation: shadow-modal-in 0.3s linear 0s 1;
+    animation-play-state: running;
+}
+
+.shadow[data-fade="out"] .shadow-modal {
+    animation: shadow-modal-out 0.3s linear 0s 1;
+    animation-play-state: running;
+}
+
+.modal-container {
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    height: 100%;
+    padding: .5rem;
+    display: flex;
+}
+
+.shadow[data-fade="in"] .modal-container {
+    animation: fade 1s linear 0s 1;
+    animation-play-state: running;
+}
+
+.modal-container>img {
+    width: 30%;
+    height: 100%;
+    background-color: var(--border);
+    margin-inline-end: .5rem;
+    object-fit: cover;
+}
+
+.movie-details {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.movie-details h2 {
+    background-color: var(--highlight);
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.movie-params {
+    display: block;
+    margin: 1rem 0;
+    font-size: .875rem;
+    color: var(--border);
+}
+
+.movie-description {
+    margin-top: -.25rem;
+    margin-bottom: .25rem;
+}
+
+.movie-details .description~p {
+    margin: .25rem 0;
+}
+
+@keyframes fade {
+    from {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    to {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@keyframes shadow-modal-in {
+    from {
+        top: -10%;
+        opacity: 0;
+    }
+
+    to {
+        top: 10%;
+        opacity: 1;
+    }
+}
+
+@keyframes shadow-modal-out {
+    from {
+        top: 10%;
+        opacity: 1;
+    }
+
+    to {
+        top: -10%;
+        opacity: 0;
+    }
+}
+
+@keyframes shadow-in {
+    from {
+        z-index: 1;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    to {
+        z-index: 1;
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@keyframes shadow-out {
+    from {
+        z-index: 1;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    to {
+        z-index: -1;
+        visibility: hidden;
+        opacity: 0;
+    }
+}

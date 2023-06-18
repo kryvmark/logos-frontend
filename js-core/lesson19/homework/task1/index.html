@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Register Form</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Please sign up</h1>
+        <form name="signUp">
+            <div class="textbox">
+                <input type="text" name="firstName" id="firstName" placeholder="First name" pattern="[A-Za-z]{1,20}"
+                    required>
+                <label for="firstName">First name</label>
+                <span class="validity"></span>
+                <p class="error-msg">Please provide a valid First name.</p>
+            </div>
+            <div class="textbox">
+                <input type="text" name="lastName" id="lastName" placeholder="Last name" pattern="[A-Za-z]{1,20}"
+                    required>
+                <label for="lastName">Last name</label>
+                <span class="validity"></span>
+                <p class="error-msg">Please provide a valid Last name.</p>
+            </div>
+            <div class="textbox">
+                <input type="email" name="email" id="email" placeholder="Email address"
+                    pattern="\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+" required>
+                <label for="email">Email address</label>
+                <span class="validity"></span>
+                <p class="error-msg">Please provide a valid Email address.</p>
+            </div>
+            <div class="textbox">
+                <input type="password" name="password" id="password" placeholder="Password" pattern="[a-z0-9A-Z]{8,15}"
+                    required>
+                <label for="password">Password</label>
+                <span class="validity"></span>
+                <p class="error-msg">Please provide a valid Password.</p>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox" name="agreement" id="agreement" required>
+                <label for="agreement">I agree with Privacy Policy.</label>
+            </div>
+            <button class="button" type="submit" name="submit" disabled>Sign Up</button>
+        </form>
+    </div>
+    <div id="board" class="board hide">
+        <div class="member">
+            <div class="success">
+                <span class="check-circle"></span>
+            </div>
+            <h2>Great!</h2>
+            <p>Your account has been created successfully.</p>
+            <button id="start" class="button button-r-y">Start exploring <span class="arrow-right"></span></button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="divMain" class="d-block">
+            <div id="view" class="rounded bg-gray-300 border border-gray-600 px-5 py-4 mt-5">
+                <p>Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div class="d-flex justify-content-center my-2">
+                <button id="btnEdit" type="button" class="btn bg-yellow outline-yellow mx-2">edit</button>
+                <button id="btnStyle" type="button" class="btn bg-teal text-white outline-teal mx-2">style</button>
+            </div>
+            <div id="divControl" class="rounded bg-gray-300 border border-gray-600 px-5 py-4 mb-5">
+                <div id="divEdit" class="d-none">
+                    <textarea id="edit" class="form-control border-gray-600 mb-3"></textarea>
+                    <button id="btnAdd" type="button" class="btn bg-red text-white outline-red me-3">add</button>
+                    <button id="btnSave" type="button" class="btn bg-green text-white outline-green">save</button>
+                </div>
+                <div id="divStyle" class="d-none justify-content-between">
+                    <form name="style">
+                        <div class="mb-2">
+                            <p class="text-bold mb-2">Font Size:</p>
+                            <div class="d-flex">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input border-gray-600" name="fontSize"
+                                        id="fontSize12" value="12">
+                                    <label for="fontSize12">12px</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input border-gray-600" name="fontSize"
+                                        id="fontSize14" value="14">
+                                    <label for="fontSize14">14px</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input border-gray-600" name="fontSize"
+                                        id="fontSize16" value="16" checked>
+                                    <label for="fontSize16">16px</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input border-gray-600" name="fontSize"
+                                        id="fontSize18" value="18">
+                                    <label for="fontSize18">18px</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input border-gray-600" name="fontSize"
+                                        id="fontSize20" value="20">
+                                    <label for="fontSize20">20px</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="fontFamily" class="text-bold">Font Family:</label>
+                            <select name="fontFamily" id="fontFamily" class="form-select mt-2 border">
+                                <option value="" selected disabled>Choose option</option>
+                                <option value="cursive">cursive</option>
+                                <option value="fantasy">fantasy</option>
+                                <option value="monospace">monospace</option>
+                                <option value="sans-serif">sans-serif</option>
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <p class="text-bold mb-2">Colors:</p>
+                            <button data-setfor="color" type="button"
+                                class="btn bg-gray-600 text-white outline-gray-600 me-3">Color of
+                                Text</button>
+                            <button data-setfor="background-color" type="button"
+                                class="btn bg-gray-600 text-white outline-gray-600">Background
+                                color</button>
+                        </div>
+                        <div class="mt-2">
+                            <p class="text-bold mb-2">Style:</p>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input border-gray-600" name="textBold"
+                                    id="textBold">
+                                <label for="textBold">Bold text</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input border-gray-600" name="textCursive"
+                                    id="textCursive">
+                                <label for="textCursive">Cursive text</label>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="palette" class="d-none flex-wrap shadow" data-setfor>
+                        <div class="bg-red p-5"></div>
+                        <div class="bg-blue p-5"></div>
+                        <div class="bg-green p-5"></div>
+                        <div class="bg-gray-900 p-5"></div>
+                        <div class="bg-yellow p-5"></div>
+                        <div class="bg-pink p-5"></div>
+                        <div class="bg-white p-5"></div>
+                        <div class="bg-purple p-5"></div>
+                        <div class="bg-teal p-5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="divAdd" class="d-none rounded bg-gray-300 border border-gray-600 px-5 py-4 mt-5">
+            <h1>Choose what you want:</h1>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input border-gray-600" name="tagType" id="tagTypeTable"
+                    value="table">
+                <label for="tagTypeTable">table</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input border-gray-600" name="tagType" id="tagTypeList"
+                    value="list">
+                <label for="tagTypeList">list</label>
+            </div>
+            <form name="table" class="d-none">
+                <div class="mb-3 d-flex">
+                    <label for="countTR" class="col-2 col-form-label">Count TR:</label>
+                    <div class="col-10">
+                        <input type="text" class="form-control border-gray-600" id="countTR" name="countTR"
+                            placeholder="Count TR" inputmode="numeric" pattern="\d*" required>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex">
+                    <label for="countTD" class="col-2 col-form-label">Count TD:</label>
+                    <div class="col-10">
+                        <input type="text" class="form-control border-gray-600" id="countTD" name="countTD"
+                            placeholder="Count TD" inputmode="numeric" pattern="\d*" required>
+                    </div>
+                </div>
+                <h2>Add style to your table:</h2>
+                <div class="mb-3 d-flex">
+                    <label for="tdWidth" class="col-2 col-form-label">Width of TD:</label>
+                    <div class="col-10">
+                        <input type="text" class="form-control border-gray-600" id="tdWidth" name="tdWidth"
+                            placeholder="Width of TD" inputmode="numeric" pattern="\d*" required>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex">
+                    <label for="tdHeight" class="col-2 col-form-label">Height of TD:</label>
+                    <div class="col-10">
+                        <input type="text" class="form-control border-gray-600" id="tdHeight" name="tdHeight"
+                            placeholder="Height of TD" inputmode="numeric" pattern="\d*" required>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex">
+                    <label for="borderWidth" class="col-2 col-form-label">Width of border:</label>
+                    <div class="col-2">
+                        <input type="text" class="form-control border-gray-600" id="borderWidth" name="borderWidth"
+                            placeholder="Width" inputmode="numeric" pattern="\d*" required>
+                    </div>
+                    <label for="borderType" class="col-form-label col-2 text-center">Border type:</label>
+                    <select name="borderType" id="borderType" class="col-2 form-select border">
+                        <option value="solid" selected>solid</option>
+                        <option value="dashed">dashed</option>
+                        <option value="dotted">dotted</option>
+                        <option value="double">double</option>
+                    </select>
+                    <label for="borderColor" class="col-form-label col-2 text-center">Border color:</label>
+                    <select name="borderColor" id="borderColor" class="col-2 form-select border">
+                        <option value="black" selected>black</option>
+                        <option value="red">red</option>
+                        <option value="blue">blue</option>
+                        <option value="green">green</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn bg-green text-white outline-green">Create
+                    table</button>
+            </form>
+            <form name="list" class="d-none">
+                <div class="mb-3 d-flex">
+                    <label for="countLI" class="col-2 col-form-label">Count LI:</label>
+                    <div class="col-10">
+                        <input type="text" class="form-control border-gray-600" id="countLI" name="countLI"
+                            placeholder="Count LI" inputmode="numeric" pattern="\d*" required>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex">
+                    <label for="markType" class="col-form-label col-2">type of marks:</label>
+                    <select name="markType" id="markType" class="col-10 form-select border">
+                        <option value="circle" selected>circle</option>
+                        <option value="disc">disc</option>
+                        <option value="square">square</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn bg-green text-white outline-green">Create
+                    list</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

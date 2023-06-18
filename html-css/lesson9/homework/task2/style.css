@@ -1,0 +1,114 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: lavender;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    height: 128px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 12px;
+    margin: 0 16px;
+}
+
+.circle>span {
+    background-color: inherit;
+    outline: solid 0px #fff;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    animation-name: pulse;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    opacity: 0.5;
+}
+
+.circle:nth-child(2) {
+    background-color: orangered;
+}
+
+.circle:nth-child(3) {
+    background-color: darkorange;
+}
+
+.circle:nth-child(4) {
+    background-color: gold;
+}
+
+.circle:nth-child(5) {
+    background-color: dodgerblue;
+}
+
+.circle:nth-child(6) {
+    background-color: mediumaquamarine;
+}
+
+.circle:nth-child(7) {
+    background-color: darkorchid;
+}
+
+.circle:nth-child(8) {
+    background-color: black;
+}
+
+.circle:nth-child(2)>span {
+    outline-color: orangered;
+}
+
+.circle:nth-child(3)>span {
+    outline-color: darkorange;
+}
+
+.circle:nth-child(4)>span {
+    outline-color: gold;
+}
+
+.circle:nth-child(5)>span {
+    outline-color: dodgerblue;
+}
+
+.circle:nth-child(6)>span {
+    outline-color: mediumaquamarine;
+}
+
+.circle:nth-child(7)>span {
+    outline-color: darkorchid;
+}
+
+.circle:nth-child(8)>span {
+    outline-color: black;
+}
+
+@keyframes pulse {
+    50% {
+        outline-width: 12px;
+        opacity: 0.2;
+    }
+
+    70% {
+        outline-width: 0;
+        opacity: 0;
+    }
+}

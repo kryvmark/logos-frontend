@@ -1,0 +1,68 @@
+doctype html
+html(lang='en')
+head: include common/head
+
+body
+    include common/header
+    main(class='main')
+        section(class='main__section main__steps')
+            h2(class='main__h2') How Dreamshare works?
+            div(class='main__steps__flex')
+                article(class='main__steps__step main__steps__step1')
+                    span(class='main__steps__badge') Step 1
+                    h3(class='main__h3 main__steps__h3') Sed leo enim, condimentum
+                    p(class='main__steps__p') Quisque libero libero, dictum non turpis in, luctus semper lorem. Donec rhoncus a leo sit amet facilisis.
+                article(class='main__steps__step main__steps__step2')
+                    span(class='main__steps__badge') Step 2
+                    h3(class='main__h3 main__steps__h3') Morbi velit risus
+                    p(class='main__steps__p') Nulla venenatis tempor dui in molestie. Nulla quis dictum purus, sit amet porttitor est.
+                article(class='main__steps__step main__steps__step3')
+                    span(class='main__steps__badge') Step 3
+                    h3(class='main__h3 main__steps__h3') Sed leo enim, condimentum
+                    p(class='main__steps__p') Quisque libero libero, dictum non turpis in, luctus semper lorem. Donec rhoncus a leo sit amet facilisis.
+        section(class='main__section main__partners')
+            h2(class='main__h2') Meet a partner for your best holiday
+            div(class='main__partners__flex')
+                article(class='main__partners__partner main__partners__partner1')
+                    span(class='main__partners__img'): span(class='main__partners__type main__partners__type__red')
+                    h4(class='main__h4 main__partners__h4') Bradley Hunter
+                    p(class='main__partners__p') Based in Chicago. I love playing tennis and loud music.
+                article(class='main__partners__partner main__partners__partner2')
+                    span(class='main__partners__img'): span(class='main__partners__type main__partners__type__yellow')
+                    h4(class='main__h4 main__partners__h4') Diana Wells
+                    p(class='main__partners__p') Living in Athens, Greece. I love black and white classics, chillout music and green tea.
+                article(class='main__partners__partner main__partners__partner3')
+                    span(class='main__partners__img')
+                        span(class='main__partners__type main__partners__type__green')
+                    h4(class='main__h4 main__partners__h4') Marie Bennett
+                    p(class='main__partners__p') Currently living in Colorado. Lover of art, languages and travelling.
+                article(class='main__partners__partner main__partners__partner4')
+                    span(class='main__partners__img')
+                        span(class='main__partners__type main__partners__type__blue')
+                    h4(class='main__h4 main__partners__h4') Christopher Pierce
+                    p(class='main__partners__p') Star Wars fanatic. I have a persistent enthusiasm to create new things.
+            button(class='main__partners__button') See other partners
+        section(class='main__section main__activities')
+            h2(class='main__h2') Discover holiday activity ideas
+            div(class='main__activities__flex')
+                article(class='main__activities__activity main__activities__activity1')
+                    h3(class='main__h3 main__activities__h3') Sports and Activities
+                article(class='main__activities__activity main__activities__activity2')
+                    h3(class='main__h3 main__activities__h3') Wellness and Health
+                article(class='main__activities__activity main__activities__activity3')
+                    h3(class='main__h3 main__activities__h3') Extreme Sports and Expeditions
+                article(class='main__activities__activity main__activities__activity4')
+                    h3(class='main__h3 main__activities__h3') Games
+                article(class='main__activities__activity main__activities__activity__double main__activities__activity5')
+                    h3(class='main__h3 main__activities__h3') Culture and Education
+                article(class='main__activities__activity main__activities__activity__double main__activities__activity6')
+                    h3(class='main__h3 main__activities__h3') Enjoyment and Relaxation
+                article(class='main__activities__activity main__activities__activity7')
+                    h3(class='main__h3 main__activities__h3') Travelling
+        section(class='main__section main__activityform')
+            h2(class='main__h2') Create your holiday activity
+            p(class='main__activityform__p') Hi! What are your holiday interests?
+            form(action='' class='main__activityform__form')
+                input(type='text' class='main__activityform__form__input' name='activity' placeholder='Enter your interests')
+                button(type='submit' class='main__activityform__form__button') Search partners
+    include common/footer

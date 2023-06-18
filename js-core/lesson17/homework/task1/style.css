@@ -1,0 +1,153 @@
+@font-face {
+    font-family: DSDigiB;
+    src: url('ds-digital-cufonfonts/DS-DIGIB.TTF');
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: DSDigiB;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #000;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #207187;
+}
+
+.h-30 {
+    height: 30%;
+    background-color: #010215;
+    border: 1px solid #207187;
+    text-align: center;
+    padding: 5vmin;
+}
+
+#date {
+    font-size: 5vmin;
+    display: block;
+}
+
+.clock {
+    display: flex;
+    justify-content: center;
+    font-size: 15vmin;
+}
+
+.clock span {
+    display: inline-block;
+    width: 15vmin;
+}
+
+.flex-even {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flex-column-sb {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.stopwatch {
+    font-size: 10vmin;
+}
+
+.stopwatch span {
+    display: inline-block;
+    width: 10vmin;
+}
+
+#stopwatchMS {
+    width: 15vmin;
+}
+
+.w-20vw {
+    width: 20vw;
+}
+
+.w-40vw {
+    width: 40vw;
+}
+
+.stopwatch-loops {
+    height: 100%;
+    box-shadow: inset 0 0 6px 2px #20718780;
+    border: 1px solid #207187;
+    border-radius: 6px;
+    padding: 1vmin;
+    overflow-y: auto;
+}
+
+#stopwatchLoops {
+    list-style-type: none;
+    font-size: 4vmin;
+}
+
+#stopwatchLoops li {
+    margin-block: 2vmin;
+}
+
+button {
+    border-radius: 6px;
+    padding: 1vmin 1rem;
+    font-size: 3vmin;
+    margin: 0 .25rem;
+    background-color: #010215;
+    border: 1px solid #aaa;
+    color: #aaa;
+}
+
+button:not(:disabled) {
+    border: 1px solid #207187;
+    color: #207187;
+    cursor: pointer;
+    box-shadow: 0 0 6px 2px #20718780;
+}
+
+.timer {
+    font-size: 12.5vmin;
+    line-height: 10vmin;
+}
+
+.timer+span {
+    font-size: 3vmin;
+    margin-bottom: 1vmin;
+}
+
+button:not(:disabled):hover {
+    background-color: #207187;
+    color: #010215;
+}
+
+::-webkit-scrollbar {
+    width: .5rem;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #010215;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #207187;
+    border-radius: 6px;
+}
+
+::-moz-selection {
+    background: #207187;
+    color: #fff;
+}
+
+::selection {
+    background: #207187;
+    color: #fff;
+}

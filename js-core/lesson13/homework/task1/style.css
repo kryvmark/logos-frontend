@@ -1,0 +1,113 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+h2 {
+    cursor: default;
+    user-select: none;
+}
+
+.flex {
+    display: none;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 2px solid #000;
+    width: 609px;
+    height: 310px;
+    margin: 0 auto;
+}
+
+.flex div {
+    width: 200px;
+    height: 100px;
+    border: 2px solid #000;
+    background-size: contain;
+}
+
+.flex[data-setting="color"] div:nth-child(1) {
+    background-color: #13a99b;
+}
+
+.flex[data-setting="color"] div:nth-child(2) {
+    background-color: #43ee00;
+}
+
+.flex[data-setting="color"] div:nth-child(3) {
+    background-color: #0001fd;
+}
+
+.flex[data-setting="color"] div:nth-child(4) {
+    background-color: #870100;
+}
+
+.flex[data-setting="color"] div:nth-child(5) {
+    background-color: #888888;
+}
+
+.flex[data-setting="color"] div:nth-child(6) {
+    background-color: #860186;
+}
+
+.flex[data-setting="color"] div:nth-child(7) {
+    background-color: #31cc76;
+}
+
+.flex[data-setting="color"] div:nth-child(8) {
+    background-color: #fd0000;
+}
+
+.flex[data-setting="color"] div:nth-child(9) {
+    background-color: #868800;
+}
+
+.flex[data-setting="image"] div {
+    background-size: cover;
+    background-position: center;
+}
+
+.flex[data-setting="image"] div:nth-child(1) {
+    background-image: url('img/background1.jpg');
+}
+
+.flex[data-setting="image"] div:nth-child(2) {
+    background-image: url('img/background2.jpg');
+}
+
+.flex[data-setting="image"] div:nth-child(3) {
+    background-image: url('img/background3.jpg');
+}
+
+.flex[data-setting="image"] div:nth-child(4) {
+    background-image: url('img/background4.jpg');
+}
+
+.flex[data-setting="image"] div:nth-child(5) {
+    background-image: url('img/background5.jpg');
+}
+
+.flex[data-setting="image"] div:nth-child(6) {
+    background-image: url('img/background6.jpg');
+}
+
+.flex[data-setting="image"] div:nth-child(7) {
+    background-image: url('img/background7.jpg');
+}
+
+.flex[data-setting="image"] div:nth-child(8) {
+    background-image: url('img/background8.jpg');
+}
+
+.flex[data-setting="image"] div:nth-child(9) {
+    background-image: url('img/background9.jpg');
+}

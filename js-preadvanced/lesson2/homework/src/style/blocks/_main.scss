@@ -1,0 +1,395 @@
+.main {
+    margin: 0 10px;
+
+    &__h2 {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: .25rem;
+        text-align: center;
+        color: map-get($colors, 'dark-heading');
+    }
+
+    &__h3 {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    &__h4 {
+        font-size: 14px;
+        font-weight: bold;
+        color: map-get($colors, 'dark-heading');
+    }
+
+    &__section {
+        margin-bottom: 2.25rem;
+    }
+
+    &__steps {
+        &__badge {
+            background-color: map-get($colors, 'red');
+            width: 70px;
+            height: 20px;
+            border-radius: $radius;
+            font-size: 10px;
+            display: block;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 20px;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        &__h3 {
+            line-height: 14px;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        &__p {
+            color: map-get($colors, 'gray-p');
+        }
+
+        &__flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &__step {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 15px 20px;
+            width: 300px;
+            height: 240px;
+            margin-top: .75rem;
+            color: #fff;
+            background-size: cover;
+
+            @for $i from 1 through 3 {
+                &#{$i} {
+                    background-image: url('../images/steps/step#{$i}.png');
+                }
+            }
+
+            &2 .main__steps__h3 {
+                margin-top: 2rem;
+            }
+        }
+    }
+
+    &__partners {
+        text-align: center;
+
+        margin: {
+            left: 12px;
+            right: 12px;
+        }
+
+        &__img {
+            display: block;
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            background-size: cover;
+            margin-bottom: 1.25rem;
+        }
+
+        &__type {
+            display: block;
+            width: 32px;
+            height: 32px;
+
+            margin: {
+                top: 88px;
+                left: 88px;
+            }
+
+            border-radius: 16px;
+
+            background: {
+                repeat: no-repeat;
+                position: center;
+                size: 16px 16px;
+            }
+
+            @each $color,
+            $icon in $partners {
+                &__#{$color} {
+                    background: {
+                        color: map-get($colors, $color);
+                        image: url('../images/svg/#{$icon}.svg');
+                    }
+
+                    @if ($icon =='airplane') {
+                        transform: rotateZ(-30deg);
+                    }
+                }
+            }
+        }
+
+        &__h4 {
+            margin-bottom: 1.5rem;
+        }
+
+        &__p {
+            color: map-get($colors, 'dark-p');
+        }
+
+        &__flex {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        &__partner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 236px;
+            min-height: 205px;
+            margin-top: 1rem;
+
+            @for $i from 1 through 4 {
+                &#{$i} .main__partners__img {
+                    background-image: url('../images/partners/partner#{$i}.png');
+                }
+            }
+        }
+
+        &__button {
+            @include ds-button(true);
+            width: 280px;
+            height: 40px;
+            margin-top: 2.5rem;
+        }
+    }
+
+    &__activities {
+
+        .main__h2 {
+            margin: {
+                left: 10px;
+                right: 10px;
+                bottom: 2rem;
+            }
+        }
+
+        &__flex {
+            width: 300px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        &__activity {
+            width: 100%;
+            height: 120px;
+            cursor: pointer;
+
+            background: {
+                size: cover;
+                position: center;
+            }
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0.625rem;
+            padding: 16px;
+
+            .main__h3 {
+                font-size: 22px;
+                color: #fff;
+                text-align: center;
+            }
+
+            @for $i from 1 through 7 {
+                &#{$i} {
+                    background-image: url('../images/activities/activity#{$i}.png');
+                }
+            }
+        }
+    }
+
+    &__activityform {
+        &__p {
+            font-size: 18px;
+            margin-top: 1.75rem;
+            text-align: center;
+            color: map-get($colors, 'dark-p');
+        }
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &__input {
+                border: 1px solid #d4d4d4;
+                border-radius: 3px;
+                width: 280px;
+                height: 40px;
+                font-family: $fonts-secondary;
+                font-size: 14px;
+                padding: 15px;
+                margin: .75rem 0;
+
+                &:focus {
+                    border-color: map-get($colors, 'red');
+                }
+            }
+
+            &__button {
+                @include ds-button;
+                width: 280px;
+                height: 40px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .main {
+        margin: 0;
+
+        &__h2 {
+            margin-bottom: 2.25rem;
+        }
+
+        &__section {
+            margin-bottom: 6rem;
+        }
+
+        &__steps {
+            &__flex {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            &__step {
+                width: 236px;
+                height: 400px;
+                margin: 0 .5rem;
+
+                &2 .main__steps__h3 {
+                    margin-top: 1rem;
+                }
+            }
+        }
+
+        &__partners {
+            &__flex {
+                width: 536px;
+                margin: 0 auto;
+            }
+
+            &__partner {
+                margin: 0;
+                margin-bottom: 2.75rem;
+            }
+
+            &__button {
+                margin-top: -0.25rem;
+                width: 180px;
+            }
+        }
+
+        &__activities {
+            &__flex {
+                width: 750px;
+            }
+
+            &__activity {
+                width: 230px;
+                height: 310px;
+
+                margin: 0.625rem;
+
+                &__double {
+                    width: 480px;
+                }
+            }
+
+            margin-bottom: 5rem;
+        }
+
+        &__activityform {
+            &__p {
+                margin-top: 3.25rem;
+            }
+
+            &__form {
+                flex-direction: row;
+                justify-content: center;
+                margin-top: 1.5rem;
+
+                &__input {
+                    margin: 0 0.75rem;
+                    width: 299px;
+                }
+
+                &__button {
+                    width: 172px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .main {
+        &__h2 {
+            font-size: 26px;
+        }
+
+        &__steps {
+            &__h3 {
+                line-height: 26px;
+            }
+
+            &__step {
+                width: 300px;
+            }
+        }
+
+        &__partners {
+            &__flex {
+                width: 960px;
+                align-items: flex-start;
+            }
+
+            &__partner {
+                width: 221px;
+
+                &2 {
+                    order: 2;
+                }
+
+                &3 {
+                    order: 1;
+                }
+
+                &4 {
+                    order: 3
+                }
+            }
+        }
+
+        &__activities {
+            &__flex {
+                width: 960px;
+            }
+
+            &__activity {
+                width: 300px;
+                height: 310px;
+
+                &__double {
+                    width: 620px;
+                }
+            }
+        }
+    }
+}

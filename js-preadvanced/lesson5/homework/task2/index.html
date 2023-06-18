@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk-UA">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Магазин</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sub">
+            <form name="balances">
+                <label for="qMoney">Баланс</label>
+                <input id="qMoney" name="qMoney" type="text" value="0 грн" disabled>
+                <label for="qBeer">Пиво</label>
+                <input id="qBeer" name="qBeer" type="text" value="0 шт." disabled>
+                <label for="qWine">Вино</label>
+                <input id="qWine" name="qWine" type="text" value="0 шт." disabled>
+                <label for="qPepsi">Пепсі</label>
+                <input id="qPepsi" name="qPepsi" type="text" value="0 шт." disabled>
+            </form>
+        </div>
+        <div class="sub">
+            <form name="order">
+                <label for="quantity">Кількість</label>
+                <input id="quantity" name="quantity" type="number" value="1" min="1" max="100"> 
+                <input type="radio" name="article" id="aBeer" value="beer" checked><label for="aBeer">Пиво</label>
+                <input type="radio" name="article" id="aWine" value="wine"><label for="aWine">Вино</label>
+                <input type="radio" name="article" id="aPepsi" value="pepsi"><label for="aPepsi">Пепсі</label>
+                <button type="submit" name="submit">Додати</button>
+            </form>
+            <form name="cart">
+                <textarea name="checkout" id="checkout" disabled></textarea>
+                <button type="submit" name="submit">Купити</button>
+            </form>
+        </div>
+        <div class="sub" id="summary">
+        </div>
+    </div>
+    <div class="shadow" id="shadow" style="display: none;">
+        <div id="shadowModal">
+            <div class="close"><span class="close-icon" id="closeIcon"></span></div>
+            <div class="message" id="modalMessage">Modal message!</div>
+        </div>
+    </div>
+
+    <script src="./main.js" type="module"></script>
+</body>
+
+</html>

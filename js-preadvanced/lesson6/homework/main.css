@@ -1,0 +1,324 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    --body: #eee;
+    --border: #999;
+    --text: #444;
+
+    --c-success: #4a5;
+    --c-error: #e34;
+    --c-primary: #48f;
+    --c-yellow: #fb3;
+
+    --c-success-l: #4ca;
+    --c-primary-l: #7bf;
+
+    --c-yellow-d: #ea2;
+
+    --o-primary: #48f4;
+    --o-success: #4a54;
+
+    --v-checkbox: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
+
+body {
+    background-color: var(--body);
+}
+
+.container {
+    margin: 5rem auto 2.5rem;
+    width: 500px;
+}
+
+h1,
+h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: normal;
+}
+
+.textbox,
+.checkbox,
+.button {
+    position: relative;
+    margin-bottom: 2.5rem;
+    width: 100%;
+}
+
+.textbox input {
+    height: 3.5rem;
+    font-size: 18px;
+    padding: 1rem;
+    border: 2px solid var(--border);
+    border-radius: .25rem;
+    position: relative;
+    width: 100%;
+}
+
+.textbox input:valid {
+    border-color: var(--c-success);
+}
+
+.textbox input.error {
+    border-color: var(--c-error);
+}
+
+.textbox input:focus,
+.checkbox input:focus {
+    border-color: var(--c-primary);
+    outline: .25rem solid var(--o-primary);
+}
+
+.textbox label {
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 1.125rem;
+    font-size: 1.125rem;
+    margin-left: 1.125rem;
+    color: var(--border);
+}
+
+.textbox input:not(.textbox input:placeholder-shown) {
+    padding-bottom: 0;
+}
+
+.textbox input:not(.textbox input:placeholder-shown)+label {
+    visibility: visible;
+    top: .5rem;
+    font-size: 0.75rem;
+    transition: all 0.1s;
+}
+
+.textbox .validity::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: .75rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    text-align: center;
+    font-weight: bold;
+    color: var(--c-success);
+}
+
+.textbox input:valid~.validity::before {
+    content: "\2713";
+}
+
+.textbox input.error~.validity::before {
+    content: "\274C";
+    font-size: 1rem;
+}
+
+.textbox .error-msg {
+    visibility: hidden;
+    position: absolute;
+    top: 3.625rem;
+    padding: .375rem;
+    border-radius: .375rem;
+    color: #fff;
+    background-color: var(--c-error);
+}
+
+.textbox input.error~.error-msg {
+    visibility: visible;
+}
+
+.checkbox input {
+    appearance: none;
+    border: 2px solid var(--border);
+    border-radius: .25rem;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: top;
+    background-color: #fff;
+}
+
+.checkbox input+label {
+    margin-left: .25rem;
+}
+
+.checkbox input:checked {
+    background: var(--v-checkbox);
+    background-color: var(--c-primary);
+    border: var(--c-primary);
+}
+
+.button {
+    height: 3rem;
+    cursor: pointer;
+    font-size: 1.25rem;
+    background-color: var(--c-primary);
+    color: #fff;
+    border: 1px solid var(--c-primary);
+    border-radius: .375rem;
+}
+
+.button:disabled {
+    background-color: var(--c-primary-l);
+    border: 1px solid var(--c-primary-l);
+    cursor: not-allowed;
+}
+
+.button:not(:disabled):focus {
+    outline: .25rem solid var(--o-primary);
+}
+
+.greeting {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0008;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.member {
+    position: absolute;
+    width: 30vw;
+    height: 60vh;
+    top: 5vh;
+    left: 35vw;
+    background-color: #fff;
+    color: var(--text);
+    border-radius: .5rem;
+    text-align: center;
+    transition: top 0.3s;
+}
+
+.success {
+    height: 25vh;
+    background-color: var(--c-success-l);
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.check-circle {
+    display: block;
+    width: 6rem;
+    height: 6rem;
+    background: url('svg/check-circle.svg');
+    background-size: 6rem 6rem;
+}
+
+.member p {
+    margin-bottom: 2rem;
+}
+
+.button-r-y {
+    border-radius: 2rem;
+    width: auto;
+    height: 2.5rem;
+    padding: 0 1rem;
+    background-color: var(--c-yellow);
+    border-color: var(--c-yellow);
+    font-size: 1.125rem;
+    transition: background-color 0.3s;
+}
+
+.button-r-y:hover {
+    background-color: var(--c-yellow-d);
+    border-color: var(--c-yellow-d);
+}
+
+.button-g {
+    background-color: var(--c-success);
+    border: 1px solid var(--c-success);
+}
+
+.button-g:disabled {
+    background-color: var(--c-success-l);
+    border: 1px solid var(--c-success-l);
+}
+
+.button-g:not(:disabled):focus {
+    outline: .25rem solid var(--o-success);
+}
+
+form a[href="#"] {
+    display: block;
+    margin-top: -2rem;
+    width: fit-content;
+    color: var(--c-primary);
+    text-decoration: none;
+}
+
+form a[href="#"]:hover {
+    text-decoration: underline;
+}
+
+.arrow-right {
+    display: inline-block;
+    width: 1rem;
+    height: .875rem;
+    background: url('svg/arrow-right.svg');
+}
+
+.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.hide {
+    visibility: hidden;
+    z-index: -1;
+}
+
+.greeting.show .member {
+    top: 15vh;
+}
+
+.collapsed {
+    display: none;
+}
+
+#divPortal {
+    background-color: #fff;
+    border-radius: .5rem;
+    padding: 1rem;
+    height: 500px;
+}
+
+#divPortal h1 {
+    font-weight: 500;
+    font-size: 2.5rem;
+}
+
+#divPortal .center {
+    text-align: center;
+    color: var(--border);
+    font-size: 1.5rem;
+}
+
+#divPortal .user-profile {
+    display: block;
+    width: 9rem;
+    height: 9rem;
+    background: url('svg/user-profile.svg');
+    background-size: 9rem 9rem;
+    margin: 0 auto;
+}
+
+#divPortal hr {
+    border: 2px solid var(--border);
+    margin: 2rem auto 6rem;
+    width: 25%;
+}

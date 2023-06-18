@@ -1,0 +1,144 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    --bg-red: #dc3545;
+    --bg-yellow: #ffc107;
+    --bg-green: #198754;
+    --bg-yellow-d: #ff3;
+    --bg-green-d: #3a7;
+    --bg-blue: #0d6efd;
+    --bg-gray-100: #f5f5f5;
+    --bg-gray-600: #999;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    background-color: var(--bg-gray-100);
+    font-weight: 500;
+    padding: 1rem;
+    border-bottom: 1px solid var(--bg-gray-600);
+}
+
+h2 {
+    font-weight: 500;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.container {
+    width: 700px;
+    height: 300px;
+    background-color: var(--bg-gray-100);
+    border-radius: .5rem;
+    padding: 0.5rem;
+}
+
+#badWords {
+    color: var(--bg-red);
+}
+
+button {
+    padding: .375rem .75rem;
+    cursor: pointer;
+    border: 1px solid var(--bg-gray-600);
+    border-radius: .375em;
+    font-size: inherit;
+    margin: 0.5rem 0.25rem;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+button.yellow {
+    background-color: var(--bg-yellow);
+    border: 1px solid var(--bg-yellow);
+}
+
+button.red {
+    background-color: var(--bg-red);
+    color: #fff;
+    border: 1px solid var(--bg-red);
+}
+
+button.green {
+    background-color: var(--bg-green);
+    color: #fff;
+    border: 1px solid var(--bg-green);
+}
+
+button.yellow:focus {
+    outline: .25em solid #ffc10760;
+}
+
+button.red:focus {
+    outline: .25em solid #dc354560;
+}
+
+button.green:focus {
+    outline: .25em solid #19875460;
+}
+
+button.yellow:disabled {
+    background-color: var(--bg-yellow-d);
+    border: 1px solid var(--bg-yellow-d);
+}
+
+button.green:disabled {
+    background-color: var(--bg-green-d);
+    border: 1px solid var(--bg-green-d);
+}
+
+input[type="text"],
+textarea {
+    padding: .5rem;
+    border: 2px solid var(--bg-gray-600);
+    border-radius: .25rem;
+    position: relative;
+    width: 100%;
+    margin: .5rem .25rem .5rem 0;
+    font-size: 1rem;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: var(--bg-blue);
+    outline: .25rem solid #48f4;
+}
+
+textarea {
+    resize: none;
+    height: 8rem;
+    margin-bottom: 1rem;
+}
+
+.row button:last-child {
+    margin-right: 0;
+}
+
+#censor {
+    margin: 0;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+}

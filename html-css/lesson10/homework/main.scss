@@ -1,0 +1,131 @@
+@import 'base/base';
+@import 'base/variables';
+
+body {
+    height: 100vh;
+    background: $body;
+    font-family: $font;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+.main {
+    position: absolute;
+    top: 20vh;
+    width: 100vw;
+    height: 30vh;
+    display: flex;
+    justify-content: flex-start;
+    background: $main;
+
+    overflow: hidden;
+
+    &__section {
+        display: flex;
+
+        &__bar {
+            background: {
+                color: $icon;
+                position: 50% 50%;
+                size: 32px;
+                repeat: no-repeat;
+            }
+
+            width: 80px;
+            margin: 1px;
+            cursor: pointer;
+            overflow: hidden;
+
+            &__icon {
+                position: absolute;
+                height: 100%;
+
+                &::before,
+                &::after {
+                    content: "";
+
+                    display: block;
+                    position: relative;
+                    height: 30vh;
+                }
+
+                &::before {
+                    width: 80px;
+                    transition: width 0.5s;
+                }
+
+                &::after {
+                    top: -30vh;
+                    left: 80px;
+                    width: 0px;
+                    transition: left 0.5s, width 0.5s;
+                }
+            }
+        }
+
+        &__article {
+            background: #fff;
+            width: 0vw;
+            padding: 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.5s;
+
+            * {
+                min-width: calc(25vw - 20px);
+            }
+        }
+
+        &:hover &__bar__icon::before {
+            width: 0px;
+        }
+
+        &:hover &__bar__icon::after {
+            left: 0px;
+            width: 80px;
+        }
+
+        &:hover &__article {
+            width: 25vw;
+            padding: 10px;
+        }
+    }
+}
+
+@each $name,
+$url,
+$top,
+$bottom in $icons {
+    .icon__#{$name} {
+        @extend .main__section__bar__icon;
+
+        &::before {
+            background: url($url);
+            background-position: 50% 50%;
+            background-size: 32px;
+            background-repeat: no-repeat;
+        }
+
+        &::after {
+            background: $top;
+
+            background: {
+                image: url($url);
+                position: 50% 50%;
+                size: 48px;
+                repeat: no-repeat;
+            }
+
+            background: url($url),
+            linear-gradient(to top, $top, $bottom) {
+                position: 50% 50%;
+                size: 48px, 100%;
+                repeat: no-repeat;
+            }
+        }
+    }
+}

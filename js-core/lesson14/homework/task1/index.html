@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <title>Task1</title>
+</head>
+
+<body>
+    <div class="container mt-5 mb-5">
+        <h2>Task move</h2>
+        <p>Значення переміщується до одного input в інший, тільки якщо там є значення</p>
+        <form name="formMove" class="d-flex flex-row justify-content-between">
+            <div class="col-4"><input type="text" name="nameNew" class="form-control"></div>
+            <div class="col-3"><button type="submit" name="nameSubmit" class="form-control btn btn-success">Move</button></div>
+            <div class="col-4"><input type="text" name="nameOld" class="form-control"></div>
+        </form>
+    </div>
+    <div class="container mb-5">
+        <h2>Task placeholder</h2>
+        <p>Значення переміщується в placeholder, тільки якщо там є значення</p>
+        <form name="formPlaceholder">
+            <input type="text" name="namePlaceholder" class="form-control">
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

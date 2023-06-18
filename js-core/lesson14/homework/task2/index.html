@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        .container {
+            border: 1px solid gray;
+            border-radius: .75rem;
+        }
+
+        .container h5, .container>.p-5, .container hr, .container>.p-1 {
+            margin-left: calc(var(--bs-gutter-x) * -.5);
+            margin-right: calc(var(--bs-gutter-x) * -.5);
+        }
+
+        .container h5, .container>.p-5 {
+            border-top-left-radius: .75rem;
+            border-top-right-radius: .75rem;
+        }
+
+        .container>.p-1 {
+            border-bottom-left-radius: .75rem;
+            border-bottom-right-radius: .75rem;
+        }
+
+        #profilePic {
+            margin: -4rem auto 0;
+            height: 8rem;
+            width: 8rem;
+            display: block;
+            border: .5rem solid #fff;
+            border-radius: 50%;
+            background-color: gray;
+        }
+
+        .social {
+            display: block;
+            width: 2rem;
+            height: 2rem;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+    </style>
+    <title>Task2</title>
+</head>
+
+<body>
+    <div class="container col-md-8 col-lg-4 mt-5 mb-5" id="containerSignUp">
+        <h5 class="text-center bg-success text-white p-3">Create your account</h5>
+        <form name="signUp" class="p-3 mb-3">
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" name="firstName" id="firstName" placeholder="type here" class="form-control"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="secondName" class="form-label">Second Name</label>
+                <input type="text" name="secondName" id="secondName" placeholder="type here" class="form-control"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" name="email" id="email" placeholder="enter email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="sex" value="man" id="sexM" class="form-check-input" checked>
+                    <label for="sexM" class="form-check-label">man</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="sex" value="woman" id="sexF" class="form-check-input">
+                    <label for="sexF" class="form-check-label">woman</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="position" class="form-label">Position</label>
+                <select class="form-select" aria-label="Choose your position" name="position">
+                    <option selected>Choose...</option>
+                    <option value="frontend">Frontend</option>
+                    <option value="backend">Backend</option>
+                    <option value="qcqa">QC/QA</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="agreement">
+                    <label class="form-check-label" for="agreement">
+                        I agree all statements in Terms of service
+                    </label>
+                </div>
+            </div>
+            <button name="signUpSubmit" class="form-control btn btn-success btn-lg" type="submit" disabled>Sign
+                Up</button>
+        </form>
+    </div>
+    <div class="container col-md-6 col-lg-3 mt-5 mb-5 text-center" id="containerProfile" style="display: none;">
+        <div class="p-5 bg-success"></div>
+        <span id="profilePic"></span>
+        <h5 id="name" class="mt-4">User Profile</h5>
+        <p id="emailAddress">email@example.com</p>
+        <p id="position" class="m-3">Position</p>
+        <hr>
+        <button type="button" class="btn btn-outline-success mb-4 form-control m-auto w-25" id="signOut">Sign Out</button>
+        <div class="p-1 bg-success d-flex justify-content-center align-items-center">
+            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer"><span class="social" style="background: url('svg/facebook-f.svg');"></span></a>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><span class="social" style="background: url('svg/github-alt.svg');"></span></a>
+            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer"><span class="social" style="background: url('svg/linkedin-alt.svg');"></span></a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

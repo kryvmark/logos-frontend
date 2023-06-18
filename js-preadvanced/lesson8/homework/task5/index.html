@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Censor</title>
+</head>
+
+<body>
+    <h1>List of prohibited words</h1>
+    <div class="flex">
+        <div class="container">
+            <h2>Bad words: <span id="badWords">&lt;none&gt;</span></h2>
+            <div class="row">
+                <input type="text" id="badWord" placeholder="Word here">
+                <button class="yellow" id="badWordAdd" disabled>Add</button>
+                <button class="red" id="badWordsReset">Reset</button>
+            </div>
+            <textarea id="textArea"></textarea>
+            <button class="green" id="censor" disabled>Censor</button>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>

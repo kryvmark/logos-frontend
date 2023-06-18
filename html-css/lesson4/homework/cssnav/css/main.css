@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Raleway, sans-serif;
+}
+
+body {
+    background: lightgray;
+}
+
+#nav {
+    width: 100%;
+    height: 70px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    background: #fff;
+}
+
+#nav a {
+    text-decoration: none;
+}
+
+#nav>a {
+    font-size: 30px;
+    margin-left: 10px;
+    line-height: 70px;
+    border: 3px solid orangered;
+    padding: 5px;
+    border-radius: 30px;
+    background: orangered;
+    color: #fff;
+    transition-duration: 0.3s;
+    transition-property: all;
+}
+
+#nav>a:hover {
+    background: #fff;
+    color: orangered;
+}
+
+#nav>ul {
+    list-style: none inside;
+    margin: 0;
+    padding: 0;
+    float: right;
+    text-align: center;
+}
+
+#nav>ul li {
+    display: block;
+    position: relative;
+    float: left;
+}
+
+#nav>ul li li:hover ul {
+    display: block;
+    margin-left: 150px;
+    margin-top: -70px;
+}
+
+#nav>ul li a,
+#nav>ul li ul ul a {
+    display: block;
+    color: #000;
+    background: #fff;
+    width: 150px;
+    line-height: 70px;
+    transition-duration: 0.3s;
+    transition-property: all;
+}
+
+#nav>ul li a:hover,
+#nav>ul li ul ul a:hover {
+    background: orangered;
+    color: #fff;
+}
+
+#nav>ul li ul a {
+    display: block;
+    background: orangered;
+    color: #fff;
+    width: 150px;
+    line-height: 70px;
+    transition-duration: 0.3s;
+    transition-property: all;
+}
+
+#nav>ul li ul a:hover {
+    color: #000;
+    background: #fff;
+}
+
+#nav>ul>li>a {
+    border-right: 1px solid orangered;
+}
+
+#nav>ul li:hover a {
+    background: orangered;
+    color: #fff;
+}
+
+#nav>ul ul {
+    position: absolute;
+    padding: 0;
+    left: 0;
+    display: none;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+#nav>ul ul a {
+    text-align: left;
+    padding-left: 24px;
+}
+
+#nav>ul ul li:hover a {
+    background: #fff;
+    color: #000;
+}
+
+#nav>ul li:hover ul {
+    display: block;
+}
+
+#nav>ul li:hover ul ul {
+    display: none;
+}
+
+#nav>ul li li:hover ul {
+    display: block;
+    margin-left: 150px;
+    margin-top: -70px;
+}

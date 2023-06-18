@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Tasklist</title>
+</head>
+
+<body>
+    <div class="black"></div>
+    <div class="pencil shadow"></div>
+    <div class="tablet shadow">
+        <span class="tablet-button-power"></span>
+        <div class="tablet-button-volume">
+            <span class="tablet-volume"></span>
+            <span class="tablet-volume"></span>
+        </div>
+        <div class="tablet-inner">
+            <div class="tablet-div">
+                <h2>Список завдань</h2>
+                <form name="tasks">
+                    <div class="task">
+                        <input type="checkbox" name="task1" id="task1">
+                        <label for="task1">HTML5</label>
+                    </div>
+                    <div class="task">
+                        <input type="checkbox" name="task2" id="task2">
+                        <label for="task2">CSS3</label>
+                    </div>
+                    <div class="task">
+                        <input type="checkbox" name="task3" id="task3">
+                        <label for="task3">SASS/SCSS</label>
+                    </div>
+                    <div class="task">
+                        <input type="checkbox" name="task4" id="task4">
+                        <label for="task4">Bootstrap</label>
+                    </div>
+                </form>
+            </div>
+            <span class="tablet-delimiter"></span>
+            <div class="tablet-div">
+                <h2 class="center">Додати нове завдання</h2>
+                <form name="control">
+                    <input type="text" name="newTask" id="newTask">
+                    <button type="submit" name="submit">додати</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

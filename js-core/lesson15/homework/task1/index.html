@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .container {
+            padding: 5vh 5vw;
+            height: 100vh;
+            margin: 0 auto;
+        }
+
+        body>div:nth-child(2n - 1) {
+            background-color: #eee;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+            transition: color 0.5s;
+        }
+
+        a:hover {
+            color: #c33;
+        }
+
+        .slide {
+            position: relative;
+        }
+
+        .slide span {
+            display: block;
+            margin-top: 1.5rem;
+            border: 3px solid red;
+            width: 220px;
+        }
+    </style>
+    <title>Scroll effect</title>
+</head>
+
+<body>
+    <div id="intro" class="container">
+        <h2 style="text-align: center; position: relative; top: calc(75vh - 64px); font-size: 36px;"><a href="#main">Scroll down</a>
+        </h2>
+    </div>
+    <div id="main" class="container" style="clear: both;">
+        <div class="slide">
+            <h1 style="font-weight: normal; font-size: 36px;">"Slide from left"</h1>
+            <span></span>
+        </div>
+        <img src="kitten.jfif" alt="kitten"
+            style="float: right; object-fit: cover; width: 100vh; height: calc(100vh / 16 * 9); margin-top: 10vh; position: relative;">
+    </div>
+    <div class="container">
+        <h2 style="text-align: center; position: relative; top: calc(50vh - 72px); font-size: 56px;"><a href="#">Scroll up</a>
+        </h2>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

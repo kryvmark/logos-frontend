@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Marvel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Marvel, Arial, Helvetica, sans-serif;
+}
+
+.header {
+    background-color: #eeeeee;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.header > a {
+    color: firebrick;
+    font-weight: bold;
+    font-size: 40px;
+    text-decoration: none;
+    padding: 5px;
+    transition: 0.3s all;
+}
+
+.header > a:hover {
+    color: #fff;
+    background: firebrick;
+}
+
+.wrapper-left>* {
+    float: left;
+}
+
+.wrapper-left::after {
+    clear: both;
+}
+
+img {
+    padding: 3px;
+    border: 2px solid #eeeeee;
+    display: inline-block;
+    margin: 36px 15px;
+}
+
+.img-4>img {
+    width: 140px;
+}
+
+.content {
+    padding: 36px 72px;
+}
+
+.media {
+    width: 55%;
+}
+
+.text {
+    width: 45%;
+}
+
+h1 {
+    margin-top: 50px;
+    font-weight: normal;
+    border-bottom: 3px solid firebrick;
+}
+
+p.desc {
+    padding-top: 10px;
+    line-height: 30px;
+    font-family: Sono, 'Courier New', Courier, monospace;
+}

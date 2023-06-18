@@ -1,0 +1,230 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    --colRed: #e34;
+    --colRedDarker: #c12;
+    --colRedLighter: #f68;
+    --colRedSemi: #f346;
+    --colGreen: #3a4;
+    --colGreenDarker: #182;
+    --colGreenLighter: #6b8;
+    --colGreenSemi: #3b46;
+    --colBlue: #28f;
+    --colGray: #eee;
+    --colGrayDarker: #999;
+    --colTransSemi: #4444;
+}
+
+body {
+    height: 100vh;
+}
+
+body>* {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#timer {
+    padding: 4vmin;
+    font-size: 12.5vmin;
+}
+
+button {
+    background-color: var(--colRed);
+    padding: 1vmin;
+    font-size: 2.25vmin;
+    border: 1px solid var(--colRed);
+    color: #fff;
+    border-radius: 1vmin;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+button:disabled {
+    background-color: var(--colRedLighter);
+    border-color: var(--colRedLighter);
+    cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+    background-color: var(--colRedDarker);
+    border-color: var(--colRedDarker);
+}
+
+button:not(:disabled):focus {
+    outline: 4px solid var(--colRedSemi);
+}
+
+.button-green {
+    background-color: var(--colGreen);
+    border: 1px solid var(--colGreen);
+}
+
+.button-green:disabled {
+    background-color: var(--colGreenLighter);
+    border-color: var(--colGreenLighter);
+    cursor: not-allowed;
+}
+
+.button-green:not(:disabled):hover {
+    background-color: var(--colGreenDarker);
+    border-color: var(--colGreenDarker);
+}
+
+.button-green:not(:disabled):focus {
+    outline: 4px solid var(--colGreenSemi);
+}
+
+.control button,
+.modal button {
+    margin-inline: 1vmin;
+}
+
+.puzzle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.puzzle-box {
+    height: 50vmin;
+    width: 50vmin;
+    margin: 5vmin;
+    background-color: var(--colGray);
+    box-shadow: 0 0 1.5vmin .75vmin var(--colTransSemi);
+    display: grid;
+    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+}
+
+.puzzle-cell {
+    height: 12.5vmin;
+    width: 12.5vmin;
+    position: relative;
+}
+
+.puzzle-cell * {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.puzzle-piece[data-piece] {
+    background-image: url('../images/arsenal.png');
+    background-size: 400%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--colGray);
+}
+
+.puzzle-piece[data-piece="A"] {
+    background-position: 0% 0%;
+}
+
+.puzzle-piece[data-piece="B"] {
+    background-position: 300% 0%;
+}
+
+.puzzle-piece[data-piece="C"] {
+    background-position: 200% 0%;
+}
+
+.puzzle-piece[data-piece="D"] {
+    background-position: 100% 0%;
+}
+
+.puzzle-piece[data-piece="E"] {
+    background-position: 0% 300%;
+}
+
+.puzzle-piece[data-piece="F"] {
+    background-position: 300% 300%;
+}
+
+.puzzle-piece[data-piece="G"] {
+    background-position: 200% 300%;
+}
+
+.puzzle-piece[data-piece="H"] {
+    background-position: 100% 300%;
+}
+
+.puzzle-piece[data-piece="I"] {
+    background-position: 0% 200%;
+}
+
+.puzzle-piece[data-piece="J"] {
+    background-position: 300% 200%;
+}
+
+.puzzle-piece[data-piece="K"] {
+    background-position: 200% 200%;
+}
+
+.puzzle-piece[data-piece="L"] {
+    background-position: 100% 200%;
+}
+
+.puzzle-piece[data-piece="M"] {
+    background-position: 0% 100%;
+}
+
+.puzzle-piece[data-piece="N"] {
+    background-position: 300% 100%;
+}
+
+.puzzle-piece[data-piece="O"] {
+    background-position: 200% 100%;
+}
+
+.puzzle-piece[data-piece="P"] {
+    background-position: 100% 100%;
+}
+
+#shadow {
+    background-color: var(--colTransSemi);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+
+.modal {
+    position: relative;
+    top: 0vmin;
+    background-color: #fff;
+    width: 75vmin;
+    margin: 0 auto;
+    padding: 3vmin 0;
+    border: 1px solid var(--colGrayDarker);
+    border-radius: 1vmin;
+}
+
+#modalMessage {
+    font-size: 4vmin;
+    font-weight: 500;
+    margin: 3vmin 0;
+    padding: 3vmin 0;
+    border-block: 3px solid var(--colGray);
+    display: block;
+}
+
+#timer.timer-running {
+    color: var(--colBlue);
+}
+
+#timer.timer-won {
+    color: var(--colGreen);
+}
+
+#timer.timer-lose {
+    color: var(--colRed);
+}

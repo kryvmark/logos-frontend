@@ -1,0 +1,136 @@
+.header {
+    height: 540px;
+    margin-bottom: 2.25rem;
+
+    background: url('../images/header.png') {
+        size: cover;
+        position-x: calc(700px + 10vw);
+    }
+
+    ;
+
+    &__nav {
+        height: 175px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        &__logo {
+            order: 1;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        &__menu {
+            display: flex;
+            font-size: 14px;
+            margin: 32px;
+            justify-content: space-between;
+            width: 150px;
+            user-select: none;
+
+            &__link {
+                text-decoration: none;
+
+                &--outlined {
+                    padding: 8px 16px;
+                    border-radius: $radius;
+                    border: 2px solid #fff;
+                    transition: all 0.3s;
+
+                    &:hover {
+                        background-color: #fff;
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
+
+    &__intro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 32px 20px;
+
+        &__h1 {
+            font-size: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        &__p {
+            line-height: 24.5px;
+            font-size: 18px;
+            margin-bottom: 1rem;
+            color: map-get($colors, 'gray-intro');
+        }
+
+        &__button {
+            @include ds-button;
+            width: 280px;
+            height: 40px;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .header {
+        background-position-x: center;
+        height: 700px;
+        margin-bottom: 6rem;
+
+        &__nav {
+            flex-direction: row;
+            padding: 48px;
+            height: auto;
+
+            &__logo {
+                order: 0;
+            }
+
+            &__menu {
+                margin: 0;
+            }
+        }
+
+        &__intro {
+            margin: 120px;
+
+            &__h1 {
+                font-size: 52px;
+                margin-bottom: 2.25rem;
+            }
+
+            &__p {
+                font-size: 24px;
+                margin-bottom: 2.25rem;
+            }
+
+            &__button {
+                width: 225px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .header {
+        &__nav {
+            padding: 48px 0;
+            padding-right: 32px;
+            margin: 0 auto;
+            width: 940px;
+        }
+
+        &__intro {
+            margin: 120px auto;
+            padding: 0 160px;
+            width: 940px;
+        }
+    }
+}

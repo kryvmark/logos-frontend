@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Logos</title>
+</head>
+
+<body>
+    <div id="menu">
+        <a href="#">Main</a>
+        <a href="team.html">Team</a>
+        <a href="lessons.html">Lessons</a>
+    </div>
+    <div class="content col-m">
+        <div class="side">
+            <a href="index.html"><span class="folder"></span></a>
+            <a class="current" href="account.html"><span class="monitor"></span></a>
+            <a href="#"><span class="users-alt"></span></a>
+            <a href="#"><span class="cloud-share"></span></a>
+            <a href="#"><span class="cog"></span></a>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row-5 row data">
+                    <div><span class="member-current-avatar"></span></div>
+                    <div class="desc-right">
+                        <h2>Andy Cube</h2>
+                        <h5>andycube@gmail.com</h5>
+                    </div>
+                </div>
+                <div class="row-5 row data">
+                    <div><span class="form-password-img"></span></div>
+                    <div class="desc-right">
+                        <h2>Change password</h2>
+                        <p>Please choose a password which is at least 6 characters long</p>
+                    </div>
+                    <form>
+                        <label for="pwOld">Old password</label>
+                        <input name="pwOld" type="password" minlength="6" placeholder="Enter password">
+                        <label for="pwNew">New password</label>
+                        <input name="pwNew" type="password" minlength="6" placeholder="Enter password">
+                        <label for="pwConfirm">Confirm password</label>
+                        <input name="pwConfirm" type="password" minlength="6" placeholder="Enter password">
+                        <button type="reset">Change</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row-5 row data">
+                <div><span class="form-company-img"></span></div>
+                <div class="desc-right">
+                    <h2>Company</h2>
+                    <p>Optional, but we would appreciate if you fill out this form</p>
+                </div>
+                <form>
+                    <label for="comName">Company name</label>
+                    <input name="comName" type="text" placeholder="Logos IT Academy">
+                    <label for="comAddress">Company address</label>
+                    <textarea name="comAddress" draggable="false" placeholder="61, I. Franka, Lviv"></textarea>
+                    <div class="row">
+                        <div class="col">
+                            <label for="comCountry">Country</label>
+                            <input name="comCountry" type="text" placeholder="Enter country">
+                            <label for="comState">State</label>
+                            <input name="comState" type="text" placeholder="Enter state">
+                        </div>
+                        <div class="col">
+                            <label for="comCity">City</label>
+                            <input name="comCity" type="text" placeholder="Enter city">
+                            <label for="comPostCode">Postal code</label>
+                            <input name="comPostCode" type="text" placeholder="Enter code">
+                        </div>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

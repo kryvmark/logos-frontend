@@ -1,0 +1,225 @@
+@font-face {
+    font-family: 'Libre Franklin';
+    src: url('Libre_Franklin/LibreFranklin-VariableFont_wght.ttf');
+}
+
+:root {
+    --bg-1: #FFFAF2;
+    --bg-2: #F5D6AB;
+    --bg-3: #C66C49;
+    --bg-4: #8B4136;
+    --bg-5: #333333;
+}
+
+*,
+*::before,
+*::after {
+    font-family: 'Libre Franklin';
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 0.25rem rgb(0 0 0 / 25%);
+}
+
+.fs-5 {
+    font-size: 1.125rem !important;
+}
+
+.bg-1 {
+    background-color: var(--bg-1) !important;
+}
+
+.bg-2 {
+    background-color: var(--bg-2) !important;
+}
+
+.bg-3 {
+    background-color: var(--bg-3) !important;
+}
+
+.bg-4 {
+    background-color: var(--bg-4) !important;
+}
+
+.bg-5 {
+    background-color: var(--bg-5) !important;
+}
+
+.text-1 {
+    color: var(--bg-1) !important;
+}
+
+.text-2 {
+    color: var(--bg-2) !important;
+}
+
+.text-3 {
+    color: var(--bg-3) !important;
+}
+
+.text-4 {
+    color: var(--bg-4) !important;
+}
+
+.text-5 {
+    color: var(--bg-5) !important;
+}
+
+.progress,
+.progress-bar {
+    height: 1.5rem;
+    border-radius: 0;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+/* nav */
+
+header {
+    background: url('./img/bg.png');
+    height: 768px;
+}
+
+header>div {
+    background: rgba(198, 108, 73, 30%);
+    height: 100%;
+}
+
+header .nav-link {
+    color: #fff !important;
+}
+
+/* offcanvas */
+
+#information {
+    width: 50vw;
+    background-color: #FFECE4;
+}
+
+#information h2,
+#information h4 {
+    word-wrap: break-word;
+}
+
+#information .offcanvas-body {
+    overflow-x: hidden;
+}
+
+.circle-container {
+    margin-left: 8px;
+}
+
+span.circle {
+    font-size: 12px;
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    border: 4px solid #fff;
+    margin: 0 -8px;
+}
+
+span.circle span {
+    display: block;
+    margin-top: 64px;
+    text-align: center;
+}
+
+span.figma {
+    display: block;
+    width: 64px;
+    height: 64px;
+    background: url('img/figma.svg') no-repeat center;
+    background-size: contain;
+}
+
+/* portfolio */
+
+#carousel {
+    width: 4.5rem;
+    height: 2rem;
+}
+
+#carousel button {
+    filter: invert(1);
+    width: 2rem;
+}
+
+#btnTop {
+    background: url('img/top.svg') no-repeat center;
+}
+
+/* @media */
+
+@media (width < 992px) {
+    header {
+        height: 480px;
+    }
+
+    #information {
+        width: 60vw;
+    }
+}
+
+@media (width < 992px) or (height < 600px) {
+    #information h2 {
+        font-size: 20px !important;
+    }
+
+    #information h4 {
+        font-size: 13px !important;
+    }
+}
+
+@media (width < 576px) {
+    header {
+        height: 275px;
+    }
+
+    #information {
+        width: 100vw;
+    }
+
+    main .container,
+    footer .container {
+        max-width: 350px;
+    }
+
+    .navbar-toggler {
+        padding: 0.5rem;
+    }
+
+    .navbar-brand {
+        font-size: 24px !important;
+    }
+
+    .display-3 {
+        font-size: 20px !important;
+    }
+
+    header h4,
+    .fs-5 {
+        font-size: 13px !important;
+    }
+
+    h4 {
+        font-size: 24px !important;
+    }
+
+    #about p,
+    #skills table,
+    #portfolio p {
+        font-size: 12px !important;
+    }
+
+    #skills img {
+        width: 75%;
+    }
+
+    .progress,
+    .progress-bar {
+        height: 1rem;
+    }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Register Form</title>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <form name="userForm" data-action="addUser">
+                <label for="login">Login</label>
+                <input class="textbox" type="text" name="login" id="login" placeholder="Enter login" pattern="[A-Z]?[a-z]{3,15}|[a-z]{4,16}" required>
+                <label for="password">Password</label>
+                <input class="textbox" type="password" name="password" id="password" placeholder="Enter password" pattern="[A-Za-z0-9-_.]{4,16}" required>
+                <label for="email">Email address</label>
+                <input class="textbox" type="email" name="email" id="email" placeholder="Email address" pattern="\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+" required>
+                <button name="submit" class="button-inv outline-g" type="submit" data-mode="add" disabled>Add user</button>
+            </form>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Login</th>
+                        <th>Password</th>
+                        <th>Email</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="userView">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+@mixin ds-button($inverse: false) {
+    @if ($inverse) {
+        background-color: #fff;
+        border: 2px solid map-get($colors, 'red');
+        color: map-get($colors, 'red');
+
+        &:hover {
+            background-color: map-get($colors, 'red');
+            color: #fff;
+        }
+    }
+
+    @else {
+        background-color: map-get($colors, 'red');
+
+        &:hover {
+            background-color: lighten(map-get($colors, 'red'), 10%);
+        }
+    }
+
+    border-radius: $radius;
+    transition: all 0.3s;
+}

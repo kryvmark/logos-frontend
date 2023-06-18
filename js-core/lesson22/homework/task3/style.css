@@ -1,0 +1,22 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.elem {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    border-radius: 50%;
+    border: 3px solid #000;
+}

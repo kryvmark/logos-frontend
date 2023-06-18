@@ -1,0 +1,63 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background: url('img/space.jpg');
+    background-size: cover;
+}
+
+div {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+}
+
+.orbit {
+    width: 640px;
+    height: 640px;
+    border-radius: 320px;
+    border: 2px solid #ccc;
+    transform-style: preserve-3d;
+    transform: rotateX(80deg);
+}
+
+.earth {
+    width: 320px;
+    height: 320px;
+    background: url('./img/earth.png');
+    transform: rotateX(-80deg);
+}
+
+.moon {
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    margin: auto;
+    background: url('img/moon.svg');
+    background-size: contain;
+    filter: brightness(1.1);
+    transform: rotateZ(90deg) translate(320px) rotateZ(-90deg) rotateX(-80deg);
+    animation: moon-rotation;
+    animation-duration: 8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: reverse;
+    box-shadow: inset 64px 0 16px 0 rgb(0 0 0 / 50%);
+}
+
+@keyframes moon-rotation {
+    50% {
+        box-shadow: inset 0px 0 16px 0 rgb(0 0 0 / 50%);
+    }
+
+    100% {
+        transform: rotateZ(450deg) translate(320px) rotateZ(-450deg) rotateX(-80deg);
+        box-shadow: inset -64px 0 16px 0 rgb(0 0 0 / 50%);
+    }
+}

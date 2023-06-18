@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="h-30">
+        <span id="date">88.88.8888</span>
+        <div class="clock">
+            <span id="HH">88</span>:
+            <span id="MM">88</span>:
+            <span id="SS">88</span>
+        </div>
+    </div>
+    <div class="h-30 flex-even">
+        <div class="flex-column-sb w-40vw">
+            <span class="stopwatch"><span id="stopwatchH">00</span>:<span id="stopwatchM">00</span>:<span id="stopwatchS">00</span>.<span id="stopwatchMS">000</span></span>
+            <div>
+                <button id="swStart">Start</button>
+                <button id="swLoop" disabled>Loop</button>
+                <button id="swStop" disabled>Stop</button>
+                <button id="swReset">Reset</button>
+            </div>
+        </div>
+        <div class="stopwatch-loops w-20vw">
+            <ul id="stopwatchLoops">
+            </ul>
+        </div>
+    </div>
+    <div class="h-30 flex-even">
+        <div class="flex-column-sb w-40vw">
+            <span class="timer" id="tMinutes">25</span>
+            <span>Minutes</span>
+            <div>
+                <button id="tPlus">+</button>
+                <button id="tMinus">-</button>
+            </div>
+        </div>
+        <div class="flex-column-sb w-20vw">
+            <span class="timer" id="timer">00:00</span>
+            <div>
+                <button id="tStart">Start</button>
+                <button id="tStop" disabled>Stop</button>
+                <button id="tReset">Reset</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+}
+
+.shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: background-color 0.2s;
+}
+
+.container {
+    margin: 0 auto;
+    width: 80vw;
+    height: 17vw;
+    border: 3px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    top: 10vh;
+    z-index: 0;
+}
+
+.color {
+    width: 15vw;
+    height: 15vw;
+    background-color: #fff;
+    cursor: pointer;
+    position: relative;
+}
+
+.red {
+    background-color: #d34;
+}
+
+.blue {
+    background-color: #16a;
+}
+
+.yellow {
+    background-color: #fe4;
+}
+
+.turquoise {
+    background-color: #4cc;
+}
+
+.gray {
+    background-color: #666;
+}
+
+.shadow.active {
+    z-index: 1;
+    background-color: #000c;
+}
+
+.shadow .color {
+    position: absolute;
+}

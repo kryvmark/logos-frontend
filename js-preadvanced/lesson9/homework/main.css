@@ -1,0 +1,136 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    --b-blue: #0daefd;
+    --b-red: #fc3545;
+    --b-yellow: #ffe107;
+    --b-green: #19a754;
+
+    --o-blue: #0daefd60;
+    --o-red: #fc354560;
+    --o-yellow: #ffe10760;
+    --o-green: #19a75460;
+
+    --b-gray-300: #dee2e6;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container>div {
+    width: 45%;
+}
+
+@media (width < 1200px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .container>div {
+        width: 100%;
+        margin-bottom: 3rem;
+    }
+}
+
+.textbox {
+    width: 100%;
+    border: 1px solid var(--b-gray-300);
+    border-radius: .375em;
+    padding: 0.5em;
+    font-size: inherit;
+    margin: .5rem 0 1rem;
+}
+
+.textbox:focus {
+    border: 1px solid var(--b-blue);
+    outline: .2rem solid var(--o-blue);
+}
+
+.button,
+.button-inv {
+    padding: .375rem .75rem;
+    cursor: pointer;
+    border: 1px solid var(--b-gray-300);
+    border-radius: .375em;
+    font-size: inherit;
+}
+
+.button-inv {
+    background-color: #fff;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.button:focus,
+.button-inv:focus {
+    outline: .2rem solid var(--o-blue);
+}
+
+.outline-g {
+    border: 1px solid var(--b-green);
+    color: var(--b-green);
+}
+
+.outline-g:not(:disabled):hover {
+    background-color: var(--b-green);
+    color: #fff;
+}
+
+.outline-g:focus {
+    outline-color: var(--o-green);
+}
+
+.button-inv:disabled {
+    border-color: gray;
+    color: gray;
+    cursor: not-allowed;
+}
+
+.filled-r {
+    color: #fff;
+    background-color: var(--b-red);
+    border-color: var(--b-red);
+}
+
+.filled-r:focus {
+    outline-color: var(--o-red);
+}
+
+.filled-y {
+    color: #000;
+    background-color: var(--b-yellow);
+    border-color: var(--b-yellow);
+}
+
+.filled-y:focus {
+    outline-color: var(--o-yellow);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table th {
+    border-top: 2px solid var(--b-gray-300);
+    border-bottom: 3px solid var(--b-gray-300);
+    text-align: left;
+    padding: 1rem .5rem;
+}
+
+table td {
+    border-top: 2px solid var(--b-gray-300);
+    padding: 1rem .5rem;
+    max-height: 3rem;
+}

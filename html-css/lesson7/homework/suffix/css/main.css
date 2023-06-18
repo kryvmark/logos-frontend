@@ -1,0 +1,349 @@
+@import url('./fonts.css');
+
+/* globals */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Kanit, Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+/* globals */
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.content {
+    padding: 58px 149px;
+}
+
+.content>section>.row.space-between {
+    margin: 31px 0;
+}
+
+a {
+    color: #000;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+h1 {
+    font-size: 36px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 29px;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+h4 {
+    font-size: 18.5px;
+    text-transform: uppercase;
+}
+
+.row {
+    display: flex;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.date {
+    font-size: 12px;
+    letter-spacing: 6px;
+}
+
+.category {
+    font-size: 12.5px;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+p {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+button {
+    width: 198px;
+    height: 54px;
+    border: 1px solid #fff;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+section {
+    display: flex;
+}
+
+article:hover button {
+    background-color: #fff;
+    color: #000;
+}
+
+article {
+    transition: all 0.3s;
+}
+
+article:hover {
+    background-color: #2754e7;
+    color: #fff;
+}
+
+article a {
+    text-decoration: none;
+    color: #000;
+    display: inline-block;
+    transition: none;
+}
+
+article:hover a {
+    text-decoration: underline;
+    color: #fff;
+}
+
+/* nav */
+
+nav {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 50px;
+}
+
+#menu {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#menu>button {
+    border: none;
+    background: url('../images/menu.svg') center no-repeat;
+    width: 25px;
+    height: 25px;
+    margin: auto 0;
+    cursor: pointer;
+}
+
+#menu:hover>button {
+    background: url('../images/close.svg') center no-repeat;
+}
+
+#menu>ul {
+    display: none;
+    position: absolute;
+    top: 105px;
+    padding: 40px 66px;
+    width: 345px;
+    background-color: #fff;
+    box-shadow: 0 4px 22px 0 rgba(0, 0, 0, 0.1);
+}
+
+#menu:hover>ul {
+    display: block;
+    list-style-type: none;
+}
+
+#menu>ul>li {
+    margin: 14px 0;
+}
+
+#menu>ul>li>a {
+    transition: color 0.3s;
+}
+
+#menu>ul>li>a:hover {
+    color: #2754e7;
+}
+
+nav>a {
+    height: 31px;
+    margin: 0 44.12% 0 auto;
+}
+
+/* .intro */
+
+.intro {
+    background-color: #000;
+    color: #fff;
+}
+
+.intro>* {
+    width: 50%;
+}
+
+.intro>article {
+    padding: 107px 109px;
+}
+
+.intro h2 {
+    margin-top: 61px;
+}
+
+.intro p {
+    margin: 30px 0 54px;
+}
+
+.intro .date {
+    font-size: 14px;
+    letter-spacing: 7px;
+    line-height: 28px;
+}
+
+.intro .category {
+    font-size: 16px;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+/* featured */
+
+.featured {
+    flex-direction: column;
+}
+
+.featured article {
+    width: 363px;
+}
+
+.featured article .row.space-between {
+    margin: 11px 0 23px;
+}
+
+.featured article .date {
+    line-height: normal;
+}
+
+.featured article.large {
+    width: 557px;
+}
+
+.featured article.large .row.space-between {
+    margin: 20px 0 33px;
+}
+
+article.large p {
+    font-size: 18.5px;
+    margin-top: 18px;
+}
+
+button.see-all {
+    margin: 33px auto 40px;
+    width: 238px;
+    height: 42px;
+}
+
+button.see-all:hover {
+    background-color: #2754E7;
+}
+
+/* issue */
+
+.issue {
+    margin-bottom: 32px;
+}
+
+.issue>div {
+    width: 100%;
+}
+
+.issue article {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    color: #fff;
+}
+
+.issue article:hover {
+    background: #2754e7;
+}
+
+.issue h1 {
+    margin-bottom: 17px;
+}
+
+.issue button {
+    width: 198px;
+    height: 42px;
+    border: 1px solid #fff;
+    background: #000;
+}
+
+/* interviews, news */
+
+.interviews-news {
+    flex-direction: column;
+}
+
+.interviews-news>.row.space-between.condensed {
+    margin: 26px 0 31px;
+}
+
+.interviews-news article .category {
+    line-height: 27px;
+}
+
+.interviews-news article .row.space-between {
+    margin-bottom: 22px;
+}
+
+.interviews-news article .row.space-between.condensed {
+    margin: 8px 0 18px;
+}
+
+.interviews-news article .row.space-between.condensed .date {
+    line-height: 28px;
+}
+
+.interviews-news article button.see-all {
+    margin: 0 auto;
+}
+
+.interviews-news button.see-all {
+    margin: 8px auto 36px;
+}
+
+.interviews-news button.see-all.nomargin {
+    margin-top: 0;
+}
+
+/* footer */
+
+footer {
+    height: 150px;
+    background-color: #000;
+    margin-top: 6px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+}
+
+span.design {
+    color: #fff;
+    font-size: 12.5px;
+    font-weight: 300;
+    margin: 31px 0 12px;
+}
