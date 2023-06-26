@@ -1,0 +1,121 @@
+$tr: #ccc;
+$gray: #aaa;
+$blue: #38c;
+$green: #191;
+$yellow: #fa1;
+$red: #f31;
+$red-d: #f63;
+$blue-o: #38c3;
+$green-o: #1913;
+$yellow-o: #fa13;
+$red-o: #f313;
+
+$svg-checkbox-green: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23191' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+$svg-checkbox-blue-o: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%2338c8' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+
+
+table {
+    border-collapse: collapse;
+    margin: 1rem 0;
+    width: 100%;
+
+    thead {
+        border-bottom: 4px solid $gray;
+    }
+
+    tbody tr:hover {
+        background-color: $tr;
+    }
+
+    th,
+    td {
+        text-align: start;
+        border-block: 2px solid $gray;
+        padding: 1rem;
+    }
+
+    input[type="text"] {
+        border: 2px solid $gray;
+        padding: .5rem;
+        border-radius: .5rem;
+        font-size: 1rem;
+        width: 100%;
+        margin-inline-end: .5rem;
+
+        &:focus {
+            border-color: $blue;
+            outline: .25rem solid $blue-o;
+        }
+    }
+
+    input[type="checkbox"] {
+        appearance: none;
+        border: 3px solid $blue;
+        padding: .5rem;
+        vertical-align: bottom;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            background-image: $svg-checkbox-blue-o;
+        }
+
+        &:focus {
+            outline: .25rem solid $blue-o;
+        }
+
+        &:checked {
+            background-image: $svg-checkbox-green;
+            border-color: $green;
+
+            &:focus {
+                outline: .25rem solid $green-o;
+            }
+        }
+    }
+
+    .done {
+        font-weight: 500;
+        color: $green;
+    }
+
+    .pending {
+        font-weight: 500;
+        color: $red;
+    }
+
+    button {
+        border: 2px solid $gray;
+        border-radius: .5rem;
+        padding: .5rem;
+        font-size: 1rem;
+        cursor: pointer;
+
+        &.edit {
+            background-color: $yellow;
+            border-color: $yellow;
+            color: #000;
+
+            &:focus {
+                outline: .25rem solid $yellow-o;
+            }
+        }
+
+        &.delete {
+            background-color: $red;
+            border-color: $red;
+            color: #fff;
+
+            &:focus {
+                outline: .25rem solid $red-o;
+            }
+        }
+
+        &:disabled {
+            border-color: $gray;
+            background-color: #fff;
+            color: $gray;
+            cursor: not-allowed;
+        }
+    }
+}

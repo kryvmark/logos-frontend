@@ -1,0 +1,32 @@
+<table>
+    <thead>
+        <tr>
+            <th style="width: 5%;">#</th>
+            <th style="width: 30%;">Task</th>
+            <th style="width: 5%;">Check</th>
+            <th style="width: 30%;">Status</th>
+            <th style="width: 10%;">Edit</th>
+            <th style="width: 10%;">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="tasks.length &lt; 1">
+            <th>-</th>
+            <td><i>Add the first task...</i></td>
+            <td><input type="checkbox" disabled></td>
+            <td><i>Check to mark as Done...</i></td>
+            <td><button class="edit" disabled>Edit</button></td>
+            <td><button class="delete" disabled>Delete</button></td>
+        </tr>
+        <tr *ngFor="let task of tasks; index as i">
+            <th>{{ i + 1 }}</th>
+            <td *ngIf="editIndex != i">{{ task.name }}</td>
+            <td *ngIf="editIndex == i"><input type="text" [(ngModel)]="editName"></td>
+            <td><input type="checkbox" [disabled]="editIndex == i" [(ngModel)]="task.done"></td>
+            <td><span [class]="task.done ? 'done' : 'pending'">{{ task.done ? 'Done' : 'In process' }}</span></td>
+            <td *ngIf="editIndex != i"><button class="edit" (click)="editTask(i)">Edit</button></td>
+            <td *ngIf="editIndex == i"><button class="edit" (click)="saveEditTask()">Save</button></td>
+            <td><button class="delete" [disabled]="!(task.done) || editIndex == i" (click)="deleteTask(i)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
