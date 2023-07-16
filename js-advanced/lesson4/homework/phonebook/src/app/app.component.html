@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="form">
+    <h1>My phone book!</h1>
+    <button (click)="openModal()">Add Contact</button>
+  </div>
+  <hr>
+  <div class="input">
+    <input type="text" [(ngModel)]="query" placeholder="Search by name and number" [disabled]="contacts.length &lt; 1">
+    <span class="clear" *ngIf="query" (click)="clear()"></span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">
+          <span [class]="sorting == sortBy.FirstName ? 'sort-active' : 'sort-toggle'" (click)="changeOrder(false, sortBy.FirstName)">First name</span>
+          <ng-container *ngIf="sorting == sortBy.FirstName">
+            <span *ngIf="sortAscending" class="asc" (click)="changeOrder(true)"></span>
+            <span *ngIf="!(sortAscending)" class="desc" (click)="changeOrder(true)"></span>
+          </ng-container>
+        </th>
+        <th style="width: 25%;">
+          <span [class]="sorting == sortBy.SecondName ? 'sort-active' : 'sort-toggle'" (click)="changeOrder(false, sortBy.SecondName)">Last name</span>
+          <ng-container *ngIf="sorting == sortBy.SecondName">
+            <span *ngIf="sortAscending" class="asc" (click)="changeOrder(true)"></span>
+            <span *ngIf="!(sortAscending)" class="desc" (click)="changeOrder(true)"></span>
+          </ng-container></th>
+        <th style="width: 25%;">
+          <span [class]="sorting == sortBy.Phone ? 'sort-active' : 'sort-toggle'" (click)="changeOrder(false, sortBy.Phone)">Phone</span>
+          <ng-container *ngIf="sorting == sortBy.Phone">
+            <span *ngIf="sortAscending" class="asc" (click)="changeOrder(true)"></span>
+            <span *ngIf="!(sortAscending)" class="desc" (click)="changeOrder(true)"></span>
+          </ng-container></th>
+        <th style="width: 7.5%;">Edit</th>
+        <th style="width: 7.5%;">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="contacts.length &lt; 1">
+        <td><i>No contacts yet...</i></td>
+        <td><i>Add the first contact.</i></td>
+        <td><i>(098) 765-43-21</i></td>
+        <td><button class="edit" disabled>Edit</button></td>
+        <td><button class="delete" disabled>Delete</button></td>
+      </tr>
+      <tr *ngFor="let contact of contacts | sort:query:sorting:sortAscending">
+        <td>{{ contact.firstName | titlecase }}</td>
+        <td>{{ contact.secondName | titlecase }}</td>
+        <ng-container *ngIf="contact.phone | phone; then phoneValid; else phoneInvalid"></ng-container>
+        <ng-template #phoneValid>
+          <td>{{ contact.phone | phone }}</td>
+        </ng-template>
+        <ng-template #phoneInvalid>
+          <td><b>&lt;invalid&gt;</b></td>
+        </ng-template>
+        <td><button class="edit" (click)="read(contact.phone)">Edit</button></td>
+        <td><button class="delete" (click)="delete(contact.phone)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-container *ngIf="modalOpen === true || modalOpen === null">
+  <div [ngClass]="{ 'shadow': true, 'shadow-in': modalOpen === true, 'shadow-out': modalOpen === null }" [style.top.px]="shadowTop">
+    <div [ngClass]="{ 'modal': true, 'modal-in': modalOpen === true, 'modal-out': modalOpen === null }">
+      <div class="modal-top">
+        <h2>{{ editIndex &lt; 0 ? 'Add' : 'Edit' }} Contact</h2>
+        <span class="close" (click)="closeModal()"></span>
+      </div>
+      <div class="modal-middle">
+        <input type="text" [(ngModel)]="newContact.firstName" placeholder="First name">
+        <input type="text" [(ngModel)]="newContact.secondName" placeholder="Second name">
+        <input type="text" [(ngModel)]="newContact.phone" placeholder="Phone number">
+      </div>
+      <div class="modal-bottom">
+        <span class="error" [style.visibility]="validateContact() === false ? 'visible' : 'hidden'">This phone already exists.</span>
+        <ng-container *ngIf="editIndex &lt; 0; then creating; else updating"></ng-container>
+        <ng-template #creating><button (click)="create()" [disabled]="!validateContact()">Add</button></ng-template>
+        <ng-template #updating><button (click)="update()" [disabled]="!validateContact()">Edit</button></ng-template>
+      </div>
+    </div>
+  </div>
+</ng-container>
