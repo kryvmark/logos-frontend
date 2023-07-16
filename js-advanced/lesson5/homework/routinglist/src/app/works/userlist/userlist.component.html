@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="form">
+        <form>
+            <label for="login">Login</label>
+            <input class="textbox" type="text" id="login" name="login" placeholder="Enter login"
+                [(ngModel)]="newUser.login" pattern="^[A-Z]?[a-z]{3,15}$|^[a-z]{4,16}$" required>
+            <label for="password">Password</label>
+            <input class="textbox" type="password" id="password" name="password" placeholder="Enter password"
+                [(ngModel)]="newUser.password" pattern="^[A-Za-z0-9-_.]{4,16}$" required>
+            <label for="email">Email address</label>
+            <input class="textbox" type="email" id="email" name="email" placeholder="Email address" pattern=""
+                [(ngModel)]="newUser.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$" required>
+            <span *ngIf="newUserValid() == 2" class="error">Invalid data.</span>
+            <span *ngIf="newUserValid() == 3" class="error">Login or email is already being used in system.</span>
+            <span *ngIf="newUserValid() == 4" class="error">Login or email is already taken. <br>Please use another
+                login or email.</span>
+            <button *ngIf="!(editIndex >= 0)" name="submit" class="button-inv outline-g" type="submit"
+                (click)="addUser()" [disabled]="newUserValid() != 0">Add user</button>
+            <button *ngIf="editIndex >= 0" name="submit" class="button-inv outline-g" type="submit"
+                (click)="saveEditUser(editIndex)" [disabled]="newUserValid() != 0">Edit user</button>
+        </form>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Login</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users; index as i">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ user.login }}</td>
+                    <td>{{ user.password }}</td>
+                    <td>{{ user.email }}</td>
+                    <td><button class="button filled-y" (click)="editUser(i)">Edit</button></td>
+                    <td><button class="button filled-r" (click)="deleteUser(i)"
+                            [disabled]="editIndex >= 0">Delete</button></td>
+                </tr>
+                <ng-container *ngIf="users.length &lt; 1">
+                    <tr>
+                        <td>-</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>&lt;no users yet&gt;</td>
+                        <td>&lt;no users yet&gt;</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="container">
+    <h2>Count of tasks: <span class="info">{{ tasks.length }}</span></h2>
+    <hr>
+    <div class="form">
+        <input type="text" [(ngModel)]="taskName">
+        <button [disabled]="!taskName" (click)="addTask()">Add</button>
+    </div>
+    <app-task-table></app-task-table>
+</div>

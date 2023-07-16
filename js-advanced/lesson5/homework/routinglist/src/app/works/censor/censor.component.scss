@@ -1,0 +1,118 @@
+$bg-red: #dc3545;
+$bg-yellow: #ffc107;
+$bg-green: #198754;
+$bg-yellow-d: #ff3;
+$bg-green-d: #3a7;
+$bg-blue: #0d6efd;
+$bg-gray-100: #f5f5f5;
+$bg-gray-600: #999;
+
+h2 {
+    font-weight: 500;
+
+    span {
+        color: $bg-red;
+    }
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.container {
+    width: 700px;
+    height: 300px;
+    background-color: $bg-gray-100;
+    border-radius: .5rem;
+    padding: 0.5rem;
+}
+
+button {
+    padding: .375rem .75rem;
+    cursor: pointer;
+    border: 1px solid $bg-gray-600;
+    border-radius: .375em;
+    font-size: inherit;
+    margin: 0.5rem 0.25rem;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    &.yellow {
+        background-color: $bg-yellow;
+        border: 1px solid $bg-yellow;
+
+        &:focus {
+            outline: .25em solid #ffc10760;
+        }
+
+        &:disabled {
+            background-color: $bg-yellow-d;
+            border: 1px solid $bg-yellow-d;
+        }
+    }
+
+    &.red {
+        background-color: $bg-red;
+        color: #fff;
+        border: 1px solid $bg-red;
+
+        &:focus {
+            outline: .25em solid #dc354560;
+        }
+    }
+
+    &.green {
+        background-color: $bg-green;
+        color: #fff;
+        border: 1px solid $bg-green;
+
+        &:focus {
+            outline: .25em solid #19875460;
+        }
+
+        &:disabled {
+            background-color: $bg-green-d;
+            border: 1px solid $bg-green-d;
+        }
+    }
+}
+
+input[type="text"],
+textarea {
+    padding: .5rem;
+    border: 2px solid $bg-gray-600;
+    border-radius: .25rem;
+    position: relative;
+    width: 100%;
+    margin: .5rem .25rem .5rem 0;
+    font-size: 1rem;
+
+    &:focus {
+        border-color: $bg-blue;
+        outline: .25rem solid #48f4;
+    }
+}
+
+textarea {
+    resize: none;
+    height: 8rem;
+    margin-bottom: 1rem;
+}
+
+.censor {
+    margin: 0;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+
+    button:last-child {
+        margin-right: 0;
+    }
+}

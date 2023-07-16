@@ -1,0 +1,12 @@
+<div class="flex">
+    <div class="container">
+        <h2>Bad words: <span>{{ words.join(', ') || '&lt;none&gt;' }}</span></h2>
+        <div class="row">
+            <input type="text" placeholder="Word here" [(ngModel)]="newWord">
+            <button class="yellow" [disabled]="newWord.length == 0" (click)="add()">Add</button>
+            <button class="red" (click)="reset()">Reset</button>
+        </div>
+        <textarea [(ngModel)]="text"></textarea>
+        <button class="censor green" [disabled]="text.length == 0" (click)="censor()">Censor</button>
+    </div>
+</div>

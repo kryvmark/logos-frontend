@@ -1,0 +1,60 @@
+$bg-red: #f42;
+$bg-green: #0a4;
+$bg-gray-300: #eee;
+$bg-gray-600: #999;
+
+.container {
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    flex-wrap: wrap;
+
+    .card {
+        width: 300px;
+        height: 300px;
+        background-color: $bg-gray-300;
+        border: 2px solid $bg-gray-600;
+        border-radius: .5rem;
+        display: flex;
+        flex-direction: column;
+
+        img {
+            height: 200px;
+            max-width: 100%;
+            object-fit: contain;
+            margin-block: .5rem;
+            background-color: #fff;
+        }
+
+        h4 {
+            font-weight: 500;
+            color: $bg-red;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        hr {
+            border: 1px solid $bg-gray-600;
+        }
+    }
+}
+
+button {
+    padding: .375rem .75rem;
+    cursor: pointer;
+    border: 1px solid $bg-gray-600;
+    border-radius: .375em;
+    font-size: inherit;
+    margin: 0.5rem auto;
+    background-color: $bg-green;
+    color: #fff;
+    border: 1px solid $bg-green;
+    width: 125px;
+
+    &:focus {
+        outline: .25em solid #0a44;
+    }
+}

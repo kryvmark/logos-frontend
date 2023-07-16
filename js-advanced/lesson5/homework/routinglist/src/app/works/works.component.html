@@ -1,0 +1,12 @@
+<nav>
+    <h3>Recent Works</h3>
+    <ul>
+        <li><a [routerLink]="['censor']" routerLinkActive="active">Censor</a></li>
+        <li><a [routerLink]="['userlist']" routerLinkActive="active">UserList</a></li>
+        <li><a [routerLink]="['tasklist']" routerLinkActive="active">TaskList</a></li>
+    </ul>
+    <div class="home">
+        <a [routerLink]="['../home']" routerLinkActive="active">Home</a>
+    </div>
+</nav>
+<router-outlet></router-outlet>
