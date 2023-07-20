@@ -1,0 +1,94 @@
+<nav>
+  <h1>Angular Blog</h1>
+  <div class="panel">
+    <ng-container *ngIf="uid < 0">
+      <button class="login" (click)="modal(modalNames.Login)">Login</button>
+      <button class="signup" (click)="modal(modalNames.SignUp)">Sign Up</button>
+    </ng-container>
+    <ng-container *ngIf="uid >= 0">
+      <button class="addpost" (click)="modal(modalNames.Post)">Add Post</button>
+      <span>{{ userFromId(uid) }}</span>
+      <button class="logout" (click)="signOut()">Logout</button>
+    </ng-container>
+  </div>
+</nav>
+<div class="container">
+  <div class="post" *ngFor="let post of posts">
+    <h2>{{ post.topic }}</h2>
+    <div class="details">
+      <h3>Posted by: <span>{{ userFromId(post.postedBy) }}</span></h3>
+      <span><i class="clock"></i> {{ post.date | date:'HH:mm dd.MM.YYYY' }}</span>
+    </div>
+    <p>{{ post.message }}</p>
+    <div class="post-buttons" *ngIf="uid == 0 || uid == post.postedBy">
+      <button class="button-yellow" (click)="readPost(post.id)">Edit</button>
+      <button class="button-red" (click)="deletePost(post.id)">Delete</button>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="modalStatus === true || modalStatus === null">
+  <div [ngClass]="{ 'shadow': true, 'shadow-in': modalStatus === true, 'shadow-out': modalStatus === null }"
+    [style.top.px]="shadow">
+    <div [ngClass]="{ 'modal': true, 'modal-in': modalStatus === true, 'modal-out': modalStatus === null }">
+      <div class="modal-top">
+        <ng-container [ngSwitch]="modalName">
+          <h3 *ngSwitchCase="modalNames.Login">Login</h3>
+          <h3 *ngSwitchCase="modalNames.SignUp">Sign Up</h3>
+          <h3 *ngSwitchCase="modalNames.Post">Add Post</h3>
+        </ng-container>
+        <span class="close" (click)="modal(modalName)"></span>
+      </div>
+      <div class="modal-middle">
+        <ng-container [ngSwitch]="modalName">
+          <form *ngSwitchCase="modalNames.Login">
+            <label for="login_userName">Username:</label>
+            <input type="text" id="login_userName" name="login_userName" [(ngModel)]="login.user"
+              placeholder="Username or email" [disabled]="loginError" required>
+            <label for="login_password">Password:</label>
+            <input type="password" id="login_password" name="login_password" [(ngModel)]="login.password"
+              placeholder="Password" [disabled]="loginError" required>
+          </form>
+          <form *ngSwitchCase="modalNames.SignUp">
+            <label for="signUp_userName">Username:</label>
+            <input type="text" id="signUp_userName" name="signUp_userName" [(ngModel)]="signUp.userName"
+              placeholder="Username" required>
+            <label for="signUp_email">Email:</label>
+            <input type="email" id="signUp_email" name="signUp_email" [(ngModel)]="signUp.email"
+              placeholder="Email address" required>
+            <label for="signUp_password">Password:</label>
+            <input type="password" id="signUp_password" name="signUp_password" [(ngModel)]="signUp.password"
+              placeholder="Password" required>
+          </form>
+          <form *ngSwitchCase="modalNames.Post">
+            <label for="addPost_title">Title:</label>
+            <input type="email" id="addPost_title" name="addPost_title" [(ngModel)]="post.topic"
+              placeholder="Name it nicely" required>
+            <label for="newPost_message">Content:</label>
+            <textarea id="newPost_message" name="newPost_message" [(ngModel)]="post.message"
+              placeholder="Write something..." required></textarea>
+          </form>
+        </ng-container>
+      </div>
+      <div class="modal-bottom">
+        <span *ngIf="modalName == 'login'" class="error">{{ checkForm() === true ? '' :
+          (checkForm() === null ? 'Fields should not be empty.' : 'Wrong credential format.') }}
+          <span *ngIf="loginError" class="error">Incorrect login or password.</span>
+        </span>
+        <span *ngIf="modalName == 'signUp'" class="error">{{ checkForm() === true ? '' :
+          (checkForm() === null ? 'Please enter valid data.' : 'Username or email already used.') }}</span>
+        <span *ngIf="modalName == 'post'" class="error">{{ checkForm() ? '' : 'Fields should not be empty.' }}</span>
+        <div class="modal-buttons">
+          <button class="button-dark" (click)="modal(modalName)">Close</button>
+          <button *ngIf="modalName == 'login'" class="button-green" (click)="signIn()"
+            [disabled]="!checkForm() || loginError">Login</button>
+          <button *ngIf="modalName == 'signUp'" class="button-blue" (click)="newUser()"
+            [disabled]="!checkForm()">Sign Up</button>
+          <button *ngIf="modalName == 'post' && postId < 0" class="button-green" (click)="createPost()"
+            [disabled]="!checkForm()">Post</button>
+          <button *ngIf="modalName == 'post' && postId >= 0" class="button-green" (click)="updatePost()"
+            [disabled]="!checkForm()">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
