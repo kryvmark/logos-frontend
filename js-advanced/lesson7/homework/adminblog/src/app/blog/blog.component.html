@@ -4,7 +4,8 @@
         <div>
             <span>{{ post.author }}</span>
             <h2>{{ post.title }}</h2>
-            <p>{{ post.text | slice:0:post.text.indexOf(' ', 500) }} <span *ngIf="post.text.length &gt; 500">...</span></p>
+            <p>{{ post.text.length &gt; 500 ? (post.text | slice:0:post.text.indexOf(' ', 500)) : post.text }} <span
+                    *ngIf="post.text.length &gt; 500">...</span></p>
         </div>
     </div>
 </div>

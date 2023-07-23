@@ -41,7 +41,8 @@
                 <tr *ngFor="let post of posts">
                     <td><b>{{ post.id }}</b></td>
                     <td>{{ post.title }}</td>
-                    <td>{{ post.text | slice:0:post.text.indexOf(' ', 500) }} <span *ngIf="post.text.length &gt; 500">...</span></td>
+                    <td>{{ post.text.length &gt; 500 ? (post.text | slice:0:post.text.indexOf(' ', 500)) : post.text }}
+                        <span *ngIf="post.text.length &gt; 500">...</span></td>
                     <td>{{ post.author }}</td>
                     <td><button (click)="readPost(post.id)">Edit</button></td>
                     <td><button (click)="deletePost(post.id)" [disabled]="editing">Delete</button></td>
