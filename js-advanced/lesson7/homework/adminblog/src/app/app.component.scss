@@ -1,0 +1,43 @@
+$nav: #345;
+$nav-s: #3456;
+$link: #aaa;
+$link-a: #fff;
+
+nav {
+    position: fixed;
+    height: 4rem;
+    width: 100%;
+    background-color: $nav;
+    display: flex;
+    box-shadow: 0 2px 4px 2px $nav-s;
+    display: flex;
+    align-items: center;
+
+    ul {
+        display: flex;
+        list-style-type: none;
+
+        li {
+            padding: 0.5rem;
+            margin: 0.5rem;
+
+            a {
+                color: $link;
+                text-decoration: none;
+
+                &.active {
+                    color: $link-a;
+                }
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.content {
+    padding: 2rem;
+    padding-top: 6rem;
+}

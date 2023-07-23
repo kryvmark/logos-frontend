@@ -1,0 +1,51 @@
+$choco: #234;
+$body: #def;
+$author: #18f;
+
+.container {
+    display: flex;
+    color: $choco;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    .post {
+        width: 425px;
+        max-height: 600px;
+        margin: 1.5rem;
+        border-radius: 1.5rem;
+        background-color: $body;
+        cursor: pointer;
+        transition: all 0.33s;
+
+        &:hover {
+            background-color: $choco;
+            color: $body;
+        }
+
+        img {
+            max-width: 100%;
+            border-top-left-radius: 1.25rem;
+            border-top-right-radius: 1.25rem;
+        }
+
+        div {
+            padding: 1rem;
+
+            * {
+                margin-bottom: .5rem;
+            }
+
+            span {
+                display: block;
+                text-transform: uppercase;
+                font-weight: 500;
+                color: $author;
+                letter-spacing: 2px;
+            }
+
+            p span {
+                display: inline;
+            }
+        }
+    }
+}

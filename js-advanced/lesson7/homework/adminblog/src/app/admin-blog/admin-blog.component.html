@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="left">
+        <nav>
+            <ul>
+                <li><a routerLink="." routerLinkActive="active">Posts</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="right">
+        <h1>Manage Posts</h1>
+        <form>
+            <input type="text" name="postTitle" id="postTitle" placeholder="Title" [(ngModel)]="newPost.title">
+            <textarea name="postText" id="postText" placeholder="Text"
+                [style.height.rem]="newPost.text.length &gt; 200 ? 16 : 8" [(ngModel)]="newPost.text"></textarea>
+            <input type="text" name="postAuthor" id="postAuthor" placeholder="Author" [(ngModel)]="newPost.author">
+            <button *ngIf="!editing" type="button" [disabled]="!(newPost.title && newPost.text && newPost.author)"
+                (click)="createPost()">Add</button>
+            <button *ngIf="editing" type="button" [disabled]="!(newPost.title && newPost.text && newPost.author)"
+                (click)="updatePost()">Edit</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 25%;">Title</th>
+                    <th style="width: 35%;">Text</th>
+                    <th style="width: 15%;">Author</th>
+                    <th style="width: 10%;">Edit</th>
+                    <th style="width: 10%;">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="!posts || posts.length &lt; 1">
+                    <td><b>-</b></td>
+                    <td><i>Add the first post...</i></td>
+                    <td><i>Here is preview of the post text.</i></td>
+                    <td><i>Author Name</i></td>
+                    <td><button disabled>Edit</button></td>
+                    <td><button disabled>Delete</button></td>
+                </tr>
+                <tr *ngFor="let post of posts">
+                    <td><b>{{ post.id }}</b></td>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.text | slice:0:post.text.indexOf(' ', 500) }} <span *ngIf="post.text.length &gt; 500">...</span></td>
+                    <td>{{ post.author }}</td>
+                    <td><button (click)="readPost(post.id)">Edit</button></td>
+                    <td><button (click)="deletePost(post.id)" [disabled]="editing">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
