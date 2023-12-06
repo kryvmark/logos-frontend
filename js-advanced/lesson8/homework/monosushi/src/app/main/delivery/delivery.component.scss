@@ -1,0 +1,221 @@
+@import "../../../style/media";
+@import "../../../style/colors";
+@import "../../../style/mixins";
+
+.delivery {
+  @include container();
+  align-items: flex-start;
+
+  @include _1200 {
+    padding-inline: 20vw;
+  }
+
+  &-h1 {
+    @include h1-lined();
+    align-self: center;
+    margin-bottom: 1.5rem;
+
+    @include _1200 {
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  &-h2 {
+    @include h2();
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    align-self: center;
+
+    @include _1200 {
+      padding-top: 5rem;
+    }
+  }
+
+  &-h3 {
+    &-green,
+    &-yellow {
+      @include h3();
+      letter-spacing: 0.125rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    &-green {
+      color: $green;
+    }
+
+    &-yellow {
+      color: $yellow;
+    }
+  }
+
+  &-h4 {
+    @include h4();
+    margin-bottom: 0.5rem;
+  }
+
+  &-p {
+    @include p();
+    margin-bottom: 1.5rem;
+
+    &-smaller {
+      @include p();
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    &-small {
+      @include p();
+      font-size: 14px;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &-b {
+    &-green {
+      color: $green;
+    }
+
+    &-yellow {
+      color: $yellow;
+    }
+  }
+
+  &-zone {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+
+    @include _1200 {
+      flex-direction: row;
+      justify-content: center;
+      margin-inline: -18.5vw;
+    }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      @include _768 {
+        flex-direction: row;
+        padding: 0.5rem 2rem;
+      }
+
+      .i-main-delivery {
+        width: 10rem;
+        height: 8rem;
+        margin-bottom: 0.5rem;
+
+        @include _768 {
+          width: 16rem;
+          height: 14rem;
+          margin-bottom: 0;
+          margin-inline-end: 1rem;
+        }
+      }
+
+      &-green,
+      &-yellow {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  &-map {
+    align-self: stretch;
+    padding-block: 4rem;
+
+    @include _1200 {
+      margin-inline: -5vw;
+    }
+  }
+
+  &-payment {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+
+    @include _768 {
+      flex-direction: row;
+      padding-block: 1.5rem 2.5rem;
+    }
+
+    @include _1200 {
+      padding-block: 2rem 5rem;
+    }
+
+    &-option {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 1.5rem;
+
+      &-icon {
+        display: block;
+        min-width: 3rem;
+        min-height: 3rem;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.75rem;
+        background-color: $monosushi;
+        padding: 0.375rem;
+        margin-inline-end: 0.5rem;
+      }
+
+      &-info {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0.5rem;
+      }
+
+      @include _768 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-inline: 1.5rem;
+
+        &-icon {
+          margin-inline-end: 0;
+          margin-bottom: 0.5rem;
+          min-width: 3.5rem;
+          min-height: 3.5rem;
+          width: 3.5rem;
+          height: 3.5rem;
+          padding: 0.5rem;
+        }
+
+        &:last-of-type {
+          border-left: 1px solid $gray;
+        }
+      }
+
+      @include _1200 {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+
+        &-icon {
+          margin-bottom: 0;
+          margin-inline-end: 1rem;
+          min-width: 4rem;
+          min-height: 4rem;
+          width: 4rem;
+          height: 4rem;
+          padding: 0.75rem;
+        }
+
+        &-info {
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    @include _1200 {
+      margin-inline: -5vw;
+    }
+  }
+}

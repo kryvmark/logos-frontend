@@ -1,0 +1,18 @@
+$FIREBASE_APP_URL: 'https://firebasestorage.googleapis.com/v0/b/monosushi-63969.appspot.com/o/app%2F';
+
+@function app-firebase($resource) {
+  $path: str-replace($resource, '/', '%2F');
+  $params: '?alt=media';
+
+  @return url('#{$FIREBASE_APP_URL}#{$path}#{$params}');
+}
+
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}

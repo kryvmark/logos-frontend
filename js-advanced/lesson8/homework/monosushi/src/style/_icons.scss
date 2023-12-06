@@ -1,0 +1,159 @@
+.i {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  background: {
+    size: contain;
+    repeat: no-repeat;
+    position: center;
+  }
+
+  &-logo {
+    @extend .i;
+    background-image: app-firebase("logo.svg");
+  }
+
+  &-header {
+    &-phone {
+      @extend .i;
+      background-image: app-firebase("header/phone.svg");
+    }
+
+    &-user {
+      @extend .i;
+      background-image: app-firebase("header/user.svg");
+    }
+
+    &-basket {
+      @extend .i;
+      background-image: app-firebase("header/basket.svg");
+    }
+
+    &-offer {
+      @extend .i;
+      background-image: app-firebase("header/offer.svg");
+    }
+  }
+
+  &-main {
+    &-delivery {
+      @extend .i;
+      background-image: app-firebase("main/delivery.svg");
+    }
+
+    &-monoman {
+      @extend .i;
+      background-image: app-firebase("main/monoman.svg");
+    }
+
+    &-monobonus {
+      @extend .i;
+      background-image: app-firebase("main/monobonus.svg");
+    }
+  }
+
+  &-delivery {
+    &-cash {
+      @extend .i;
+      background-image: app-firebase("main/delivery/cash.svg");
+    }
+
+    &-card {
+      @extend .i;
+      background-image: app-firebase("main/delivery/card.svg");
+    }
+  }
+
+  &-about {
+    &-fresh {
+      @extend .i;
+      background-image: app-firebase("main/about/fresh.svg");
+    }
+
+    &-cuisine {
+      @extend .i;
+      background-image: app-firebase("main/about/cuisine.svg");
+    }
+
+    &-parcel {
+      @extend .i;
+      background-image: app-firebase("main/about/parcel.svg");
+    }
+
+    &-crisp {
+      @extend .i;
+      background-image: app-firebase("main/about/crisp.svg");
+    }
+  }
+
+  &-footer {
+    &-facebook {
+      @extend .i;
+      background-image: app-firebase("footer/facebook.svg");
+    }
+
+    &-instagram {
+      @extend .i;
+      background-image: app-firebase("footer/instagram.svg");
+    }
+
+    &-mastercard {
+      @extend .i;
+      background-image: app-firebase("footer/mastercard.svg");
+    }
+
+    &-visa {
+      @extend .i;
+      background-image: app-firebase("footer/visa.svg");
+    }
+
+    &-liqpay {
+      @extend .i;
+      background-image: app-firebase("footer/liqpay.svg");
+    }
+
+    &-redstone {
+      @extend .i;
+      background-image: app-firebase("footer/redstone.svg");
+    }
+  }
+
+  &-misc {
+    &-stub {
+      @extend .i;
+      background-color: $gray;
+    }
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+
+  &-top,
+  &-middle,
+  &-bottom {
+    fill: none;
+    stroke: $text;
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+
+  &-top,
+  &-bottom {
+    stroke-dasharray: 20 33;
+  }
+}
+
+.counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 0.25rem 0.5rem;
+}
