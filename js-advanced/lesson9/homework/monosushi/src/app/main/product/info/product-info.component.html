@@ -1,0 +1,9 @@
+<div class="product_info">
+  <ng-container *ngIf="product">
+    <nav class="product_info-nav">
+      <a routerLink="/" class="product_info-nav-link">Головна</a>
+      <a routerLink="/product" class="product_info-nav-link">Продукти</a>
+      <a class="product_info-nav-current">{{ product.name | titlecase }}</a>
+    </nav>
+  </ng-container>
+</div>

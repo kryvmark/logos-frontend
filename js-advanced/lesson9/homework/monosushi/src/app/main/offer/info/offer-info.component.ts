@@ -30,12 +30,8 @@ export class OfferInfoComponent implements OnInit {
         .readOne<MarketOffer>('offer', id)
         .pipe(catchError(() => of(null)))
         .subscribe((offer) => {
-          if (offer) {
-            this.offer = offer;
-            console.log(this.offer);
-          } else {
-            this.router.navigate(['/offer'], { replaceUrl: true });
-          }
+          if (offer) this.offer = offer;
+          else this.router.navigate(['/offer'], { replaceUrl: true });
         });
     }
   }

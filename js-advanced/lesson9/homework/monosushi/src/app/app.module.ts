@@ -17,6 +17,7 @@ import { AboutComponent } from './main/about/about.component';
 import { OfferComponent } from './main/offer/offer.component';
 import { OfferInfoComponent } from './main/offer/info/offer-info.component';
 import { ProductComponent } from './main/product/product.component';
+import { ProductInfoComponent } from './main/product/info/product-info.component';
 import { TermsComponent } from './main/terms/terms.component';
 import { AdminComponent } from './main/admin/admin.component';
 import { MapComponent } from './misc/map/map.component';
@@ -39,6 +40,7 @@ register();
     OfferComponent,
     OfferInfoComponent,
     ProductComponent,
+    ProductInfoComponent,
     TermsComponent,
     AdminComponent,
     MapComponent,

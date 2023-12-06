@@ -5,6 +5,7 @@ import { MainComponent } from './main/main.component';
 import { OfferComponent } from './main/offer/offer.component';
 import { OfferInfoComponent } from './main/offer/info/offer-info.component';
 import { ProductComponent } from './main/product/product.component';
+import { ProductInfoComponent } from './main/product/info/product-info.component';
 import { DeliveryComponent } from './main/delivery/delivery.component';
 import { AboutComponent } from './main/about/about.component';
 import { AdminComponent } from './main/admin/admin.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'offer', component: OfferComponent },
   { path: 'offer/:id', component: OfferInfoComponent },
   { path: 'product/:path', component: ProductComponent },
+  { path: 'product/:path/:name', component: ProductInfoComponent },
   { path: 'delivery', component: DeliveryComponent },
   { path: 'about', component: AboutComponent },
   {
