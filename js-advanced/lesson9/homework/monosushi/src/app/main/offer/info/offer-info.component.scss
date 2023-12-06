@@ -1,0 +1,98 @@
+@import "../../../../style/media";
+@import "../../../../style/colors";
+@import "../../../../style/mixins";
+@import "../../../../style/methods";
+
+.offer_info {
+  @include container();
+
+  @include _768 {
+    padding-top: 5rem;
+  }
+
+  &-nav {
+    display: none;
+
+    @include _768 {
+      align-self: flex-start;
+      display: flex;
+      position: relative;
+      top: -2.5rem;
+
+      &-link,
+      &-current {
+        font-size: 0.75rem;
+        text-decoration: none;
+        color: $muted;
+      }
+
+      &-link {
+        margin-inline-end: 2rem;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          right: -1.125rem;
+          top: 0.25rem;
+          width: 0.25rem;
+          height: 0.25rem;
+          border-radius: 50%;
+          background-color: $muted;
+        }
+
+        @include _1200 {
+          transition: 0.33s;
+
+          &:hover {
+            color: $text;
+          }
+        }
+      }
+    }
+  }
+
+  &-banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+    padding: 2.5rem;
+    border-radius: 0.75rem;
+
+    background: {
+      color: $monosushi;
+      image: app-firebase("main/background.svg"),
+        app-firebase("main/background.svg");
+      position: 0 0, 190px -52px;
+    }
+
+    margin-bottom: 1.5rem;
+
+    @include _768 {
+      margin-bottom: 3rem;
+    }
+  }
+
+  &-h1 {
+    @include h1-lined();
+    text-align: center;
+
+    &::before {
+      background-color: $text;
+    }
+  }
+
+  &-ul {
+    @include ul(true);
+
+    &-li {
+      font-size: 1rem !important;
+
+      @include _768 {
+        font-size: 1.125rem !important;
+      }
+    }
+  }
+}

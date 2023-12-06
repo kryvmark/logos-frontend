@@ -1,0 +1,20 @@
+<div class="map">
+  <google-map height="null" width="100%" [options]="ui.map">
+    <map-marker
+      *ngFor="let point of ui.deliveryPoints"
+      [position]="point.marker"
+      [title]="point.address"
+      [icon]="ui.appFirebase('misc/map/marker.png')"
+    ></map-marker>
+  </google-map>
+  <input
+    #mapAutofill
+    class="map-input"
+    [ngClass]="{ touched: ui.inputTouched }"
+    type="text"
+    name="mapAutofill"
+    id="mapAutofill"
+    placeholder="Виберіть адресу"
+    (blur)="ui.inputRegister()"
+  />
+</div>

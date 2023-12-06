@@ -1,0 +1,313 @@
+@import "../../style/media";
+@import "../../style/colors";
+@import "../../style/mixins";
+@import "../../style/methods";
+
+.spoiler {
+  .main-info-more {
+    max-height: 130rem;
+
+    @include _768 {
+      max-height: 65rem;
+    }
+
+    @include _1200 {
+      max-height: 57.5rem;
+    }
+  }
+
+  .main-info-spoiler {
+    &::after {
+      top: 0.375rem;
+      transform: rotate(-135deg);
+    }
+  }
+}
+
+.main {
+  @include container();
+  padding-top: 2.5rem !important;
+
+  @include _1200 {
+    padding-bottom: 7rem;
+  }
+
+  &-offers {
+    align-self: stretch;
+    display: flex;
+    height: auto;
+
+    @include _768 {
+      margin-inline: -4vw;
+    }
+
+    @include _1200 {
+      margin-inline: -11.5vw;
+    }
+
+    &-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin: 0.5rem;
+        margin-bottom: 3rem;
+
+        .i-misc-stub {
+          width: calc(8rem + 50vw);
+          height: calc(5rem + 27vw);
+          background-color: $monosushi;
+          border-radius: 1rem;
+
+          @include _768 {
+            width: calc(4rem + 32vw);
+            height: calc(3rem + 18vw);
+          }
+        }
+
+        &-img {
+          width: 100%;
+          height: 100%;
+          border-radius: 1rem;
+        }
+      }
+    }
+  }
+
+  &-banner {
+    display: none;
+
+    @include _768 {
+      align-self: stretch;
+      display: flex;
+      height: 14rem;
+      margin: 2.5rem -5vw;
+      padding-block: 1.5rem;
+
+      background: {
+        color: $monosushi;
+        image: app-firebase("main/background.svg"),
+          app-firebase("main/background.svg");
+        repeat: repeat;
+        position: 0 0, 190px -52px;
+      }
+
+      &-info {
+        text-align: center;
+        font-size: 1.125rem;
+        line-height: 1.5rem;
+      }
+
+      &-zones,
+      &-time,
+      &-hours {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        padding-inline: 2rem;
+
+        .i-main-delivery {
+          width: 8rem;
+          height: 6rem;
+          min-width: 8rem;
+          min-height: 6rem;
+          margin-bottom: 1rem;
+        }
+
+        .i-main-monoman,
+        .i-main-monobonus {
+          width: 6rem;
+          height: 6rem;
+          min-width: 6rem;
+          min-height: 6rem;
+          margin-bottom: 1rem;
+        }
+      }
+
+      &-time,
+      &-hours {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translate(0, -50%);
+          width: 1px;
+          height: 8rem;
+          background-color: rgba(#fff, 0.4);
+        }
+      }
+
+      &-zones {
+        &-link {
+          @include button();
+          background-color: #fff;
+          border-color: #fff;
+          padding: 1rem;
+        }
+      }
+    }
+
+    @include _1200 {
+      margin-inline: -12.5vw;
+      height: 12rem;
+      justify-content: center;
+
+      &-zones,
+      &-time,
+      &-hours {
+        flex-direction: row;
+        justify-content: center;
+
+        .i-main-delivery,
+        .i-main-monoman,
+        .i-main-monobonus {
+          margin-bottom: 0;
+          margin-inline-end: 1.5rem;
+        }
+      }
+    }
+  }
+
+  &-products {
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    padding-block: 1.5rem;
+    margin-inline: -10.5rem;
+
+    @include _1200 {
+      padding-block: 5rem;
+    }
+
+    &-menu {
+      display: none;
+
+      @include _1200 {
+        list-style: none;
+        display: flex;
+      }
+
+      &-item {
+        text-transform: capitalize;
+        padding: 1.5rem 0.75rem;
+        width: 10rem;
+        text-align: center;
+        border: 1px solid $gray;
+        margin-left: -1px;
+        font-weight: bold;
+        color: $muted;
+        cursor: pointer;
+        transition: 0.33s;
+
+        @include _1200 {
+          &:hover {
+            color: $text;
+          }
+        }
+
+        &-active {
+          @extend .main-products-menu-item;
+          border: none;
+          position: relative;
+          color: $text;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0.25rem;
+            background-color: $monosushi;
+          }
+        }
+      }
+    }
+  }
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &-h1 {
+      @include h1();
+      align-self: center;
+      margin-bottom: 1.5rem;
+    }
+
+    &-h2 {
+      @include h2();
+      margin-bottom: 1.5rem;
+
+      @include _1200 {
+        font-size: 2.5rem;
+      }
+    }
+
+    &-h3 {
+      @include h3();
+      margin-bottom: 1.5rem;
+    }
+
+    &-p {
+      @include p();
+      margin-bottom: 1.5rem;
+    }
+
+    &-ul {
+      @include ul();
+
+      &-li {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    &-action {
+      @include action();
+    }
+
+    &-more {
+      height: auto;
+      max-height: 0;
+      overflow-y: hidden;
+      transition: 0.5s ease-out;
+    }
+
+    &-spoiler {
+      @include button-custom();
+      @include action();
+      padding-inline-end: 1.5rem;
+
+      &::before {
+        bottom: -0.25rem;
+      }
+
+      &::after {
+        content: "";
+        display: block;
+        width: 0.5rem;
+        height: 0.5rem;
+        position: absolute;
+        top: 0.125rem;
+        right: 0.125rem;
+        transform: rotate(45deg);
+        transition: 0.33s;
+
+        border: {
+          bottom: 0.125rem solid $monosushi;
+          right: 0.125rem solid $monosushi;
+        }
+      }
+    }
+  }
+}

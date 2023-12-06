@@ -1,0 +1,11 @@
+@import "../../../style/media";
+@import "../../../style/colors";
+@import "../../../style/mixins";
+
+.product {
+  @include container();
+
+  &-h1 {
+    @include h1-lined();
+  }
+}
