@@ -1,6 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { MarketService } from 'src/core/market/market.service';
-import { MarketProduct } from 'src/core/types';
+import { MarketItem, MarketProduct } from 'src/core/types';
 import { conf } from '../../core/conf';
 
 @Component({
@@ -8,10 +8,15 @@ import { conf } from '../../core/conf';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
   public ui = {
     menu: false,
     mobile: true,
+
+    cart: {
+      items: 0,
+      total: 0,
+    },
 
     toggle: (state?: boolean) => {
       this.ui.menu = state ?? !this.ui.menu;
@@ -29,12 +34,27 @@ export class HeaderComponent {
   };
 
   public products: MarketProduct[] = [];
+  public items: MarketItem[] = [];
+
+  public cartSubject = this.market.cart.subscribe(() => {
+    this.cartTotal();
+  });
 
   constructor(private market: MarketService) {
     this.onResize();
+
     market.read<MarketProduct>('product').subscribe((data) => {
       this.products = data;
     });
+
+    market.read<MarketItem>('item').subscribe((data) => {
+      this.items = data;
+      this.cartTotal();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.cartSubject.unsubscribe();
   }
 
   @HostListener('window:resize')
@@ -45,6 +65,34 @@ export class HeaderComponent {
       this.ui.menu
         ? window.document.body.classList.add('locked')
         : window.document.body.classList.remove('locked');
+    }
+  }
+
+  cartTotal(): void {
+    const jsonCart = localStorage.getItem('cart');
+
+    if (jsonCart) {
+      const cart = JSON.parse(jsonCart);
+
+      if (cart instanceof Array) {
+        let items = 0;
+        let total = 0;
+
+        for (const item of cart) {
+          if (typeof item.itemId == 'number') {
+            const dbItem = this.items.find(
+              (record) => record.id == item.itemId
+            );
+
+            if (dbItem && typeof item.qty == 'number') {
+              total += parseInt(dbItem.price) * item.qty;
+              items += item.qty;
+            }
+          }
+        }
+
+        this.ui.cart = { items, total };
+      }
     }
   }
 }

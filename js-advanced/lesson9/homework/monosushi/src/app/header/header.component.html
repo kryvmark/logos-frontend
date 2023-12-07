@@ -9,10 +9,7 @@
         <i class="i-header-offer"></i> Акції
       </a>
       <ng-container *ngIf="products.length < 1; else topProducts">
-        <a
-          class="header-top-main-link"
-          *ngFor="let i of [1, 2, 3, 4]"
-        >
+        <a class="header-top-main-link" *ngFor="let i of [1, 2, 3, 4]">
           <i class="i"></i>
           ...
         </a>
@@ -48,7 +45,8 @@
           >+380978780837
         </a>
         <span class="header-top-info-hours" *ngIf="ui.conf.workDay"
-          >Працюємо з <b>{{ ui.conf.workFrom }}</b> до <b>{{ ui.conf.workTo }}</b>
+          >Працюємо з <b>{{ ui.conf.workFrom }}</b> до
+          <b>{{ ui.conf.workTo }}</b>
         </span>
       </div>
     </ng-template>
@@ -87,9 +85,11 @@
     </div>
     <button class="header-top-cart">
       <i class="i-header-basket">
-        <span class="counter">0</span>
+        <span class="counter">{{ ui.cart.items }}</span>
       </i>
-      <span class="header-top-cart-total"> <b>0</b> грн </span>
+      <span class="header-top-cart-total">
+        <b>{{ ui.cart.total }}</b> грн
+      </span>
     </button>
   </nav>
 

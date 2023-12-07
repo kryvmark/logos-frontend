@@ -88,11 +88,17 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
   order(item: MarketOrderItem): void {
-    const alreadyOrdered = this.orderItems.find(ordered => ordered.itemId == item.itemId);
+    let cart = JSON.parse(localStorage.getItem('cart') || JSON.stringify([]));
+    if (cart instanceof Array) {
+      const found = cart.find(
+        (ordered) => ordered.itemId == item.itemId
+      );
 
-    if (alreadyOrdered) alreadyOrdered.qty += item.qty;
-    else this.orderItems.push(item);
+      if (found) found.qty += item.qty;
+      else cart.push(item);
+    } else cart = [];
 
-    localStorage.setItem('orderItems', JSON.stringify(this.orderItems));
+    localStorage.setItem('cart', JSON.stringify(cart));
+    this.market.cart.next();
   }
 }

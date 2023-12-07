@@ -26,7 +26,7 @@
 
 .main {
   @include container();
-  padding-top: 2.5rem !important;
+  padding-top: 1.5rem !important;
 
   @include _1200 {
     padding-bottom: 7rem;
@@ -183,9 +183,9 @@
     flex-direction: column;
     justify-content: center;
     padding-block: 1.5rem;
-    margin-inline: -10.5rem;
 
     @include _1200 {
+      margin-inline: -10.5rem;
       padding-block: 5rem;
     }
 

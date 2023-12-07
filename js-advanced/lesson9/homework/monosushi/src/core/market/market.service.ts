@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MarketPath, MarketRecord } from '../types';
-import { Observable, map } from 'rxjs';
+import { Observable, Subject, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import {
   Storage,
@@ -15,6 +15,8 @@ import {
   providedIn: 'root',
 })
 export class MarketService {
+  private _cart = new Subject<void>;
+
   constructor(private http: HttpClient, private storage: Storage) {}
 
   create<T extends MarketRecord>(path: MarketPath, record: T): Observable<T> {
@@ -64,5 +66,9 @@ export class MarketService {
 
   async erase(path: MarketPath, name: string): Promise<void> {
     return deleteObject(ref(this.storage, `upload/${path}/${name}`));
+  }
+
+  get cart() {
+    return this._cart;
   }
 }

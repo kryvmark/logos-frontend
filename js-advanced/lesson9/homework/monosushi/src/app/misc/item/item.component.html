@@ -1,5 +1,5 @@
 <div class="item" *ngIf="item">
-  <a [routerLink]="['product/', item.product, '/', item.path].join('')" class="item-link">
+  <a [routerLink]="['/product/', item.product, '/', item.path].join('')" class="item-link">
     <img [src]="ui.firebase(item.logo)" [alt]="item.path" class="item-link-img">
     <h4 class="item-link-h4">{{ item.name }}</h4>
   </a>

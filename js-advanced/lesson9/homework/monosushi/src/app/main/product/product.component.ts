@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MarketService } from 'src/core/market/market.service';
-import { MarketProduct } from 'src/core/types';
+import {
+  MarketOrderItem,
+  MarketItemSubcat,
+  MarketItem,
+  MarketProduct,
+} from 'src/core/types';
 
 @Component({
   selector: 'app-product',
@@ -14,6 +19,15 @@ export class ProductComponent {
   public product!: MarketProduct;
   public routing!: Subscription;
 
+  public items: MarketItem[] = [];
+
+  public ui = {
+    subcat: '',
+    subcatChange: (subcat: MarketItemSubcat | '') => {
+      this.ui.subcat = subcat;
+    },
+  };
+
   constructor(
     private market: MarketService,
     private route: ActivatedRoute,
@@ -24,10 +38,32 @@ export class ProductComponent {
     this.routing = this.route.url.subscribe(() => {
       this.path = this.route.snapshot.paramMap.get('path')!;
 
-      this.market.readOne<MarketProduct>('product', this.path).subscribe((product) => {
-        if (product) this.product = product;
-        else this.router.navigate(['/'], { replaceUrl: true });
-      });
+      this.market
+        .readOne<MarketProduct>('product', this.path)
+        .subscribe((product) => {
+          if (product) {
+            this.product = product;
+
+            this.market.read<MarketItem>('item').subscribe((items) => {
+              this.items = items;
+            });
+          } else this.router.navigate(['/'], { replaceUrl: true });
+        });
     });
+  }
+
+  order(item: MarketOrderItem): void {
+    let cart = JSON.parse(localStorage.getItem('cart') || JSON.stringify([]));
+    if (cart instanceof Array) {
+      const found = cart.find(
+        (ordered) => ordered.itemId == item.itemId
+      );
+
+      if (found) found.qty += item.qty;
+      else cart.push(item);
+    } else cart = [];
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    this.market.cart.next();
   }
 }

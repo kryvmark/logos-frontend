@@ -66,15 +66,92 @@
       "logo": "1701889769957.jpg"
     },
     {
+      "product": "roll",
+      "subcat": "roll-california",
+      "name": "Каліфорнія з крабом",
+      "path": "california-crab",
+      "comp": "Рис, спайсі соус, авокадо, огірок, краб, кунжут",
+      "weight": "250 г",
+      "price": "263 грн",
+      "logo": "1701970942134.jpg",
+      "id": 2
+    },
+    {
+      "product": "roll",
+      "subcat": "roll-baked",
+      "name": "Запечений сирний з креветкою",
+      "path": "baked-cheese-shrimp",
+      "comp": "Рис, крем сир, салат айсберг, креветка, кунжут, сирний соус, унагі соус",
+      "weight": "330 г",
+      "price": "344 грн",
+      "logo": "1701971122623.jpg",
+      "id": 3
+    },
+    {
+      "product": "roll",
+      "subcat": "sushi-craft",
+      "name": "Сирний",
+      "path": "cheese",
+      "comp": "Рис, крем сир, фета, кунжут",
+      "weight": "240 г",
+      "price": "204 грн",
+      "logo": "1701971260003.jpg",
+      "id": 4
+    },
+    {
+      "product": "roll",
+      "subcat": "sushi-premium",
+      "name": "Мексиканський",
+      "path": "mexican",
+      "comp": "Рис, крем сир, креветка, огірок, кунжут, лосось, гуакамоле, шрірача",
+      "weight": "370 г",
+      "price": "399 грн",
+      "logo": "1701971349352.jpg",
+      "id": 5
+    },
+    {
+      "product": "roll",
+      "subcat": "roll-maki",
+      "name": "Макі з огірком",
+      "path": "maki-cucumber",
+      "comp": "Рис, норі, огірок",
+      "weight": "120 г",
+      "price": "115 грн",
+      "logo": "1701971452387.jpg",
+      "id": 6
+    },
+    {
       "product": "set",
       "subcat": "",
-      "name": "Fufufu",
-      "path": "fufu",
+      "name": "Сет Філадельфія",
+      "path": "set-philadelphia",
+      "comp": "Філадельфія: з лососем / в кунжуті / з тунцем / з вугрем",
+      "weight": "1070 г",
+      "price": "1150 грн",
+      "logo": "1701971735528.jpg",
+      "id": 7
+    },
+    {
+      "product": "drink",
+      "subcat": "",
+      "name": "Fanta апельсин",
+      "path": "fanta-orange",
       "comp": "",
-      "weight": "10 g",
-      "price": "125 uah",
-      "logo": "1701899250811.jpg",
-      "id": 2
+      "weight": "0.33 л",
+      "price": "31 грн",
+      "logo": "1701971821052.jpg",
+      "id": 8
+    },
+    {
+      "product": "sauce",
+      "subcat": "",
+      "name": "Імбир",
+      "path": "ginger",
+      "comp": "",
+      "weight": "30 г",
+      "price": "15 грн",
+      "logo": "1701972849317.png",
+      "id": 9
     }
   ],
   "order": []

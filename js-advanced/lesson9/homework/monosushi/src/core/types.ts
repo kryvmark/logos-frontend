@@ -46,3 +46,8 @@ export type MarketOrderItem = {
 };
 
 export type MarketPath = 'offer' | 'product' | 'item' | 'order';
+
+export type MarketCart = {
+  items: number;
+  total: number;
+};
