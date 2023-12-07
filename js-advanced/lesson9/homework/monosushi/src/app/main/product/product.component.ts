@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { MarketService } from 'src/core/market/market.service';
 import { MarketProduct } from 'src/core/types';
 
@@ -9,8 +10,9 @@ import { MarketProduct } from 'src/core/types';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent {
-  public path = this.route.snapshot.paramMap.get('path');
+  public path = this.route.snapshot.paramMap.get('path')!;
   public product!: MarketProduct;
+  public routing!: Subscription;
 
   constructor(
     private market: MarketService,
@@ -19,11 +21,13 @@ export class ProductComponent {
   ) {}
 
   ngOnInit(): void {
-    this.market.read<MarketProduct>('product').subscribe((products) => {
-      const product = products.find((record) => record.path == this.path);
+    this.routing = this.route.url.subscribe(() => {
+      this.path = this.route.snapshot.paramMap.get('path')!;
 
-      if (product) this.product = product;
-      else this.router.navigate(['/'], { replaceUrl: true });
+      this.market.readOne<MarketProduct>('product', this.path).subscribe((product) => {
+        if (product) this.product = product;
+        else this.router.navigate(['/'], { replaceUrl: true });
+      });
     });
   }
 }

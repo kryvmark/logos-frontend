@@ -16,8 +16,35 @@ export type MarketProduct = MarketRecord & {
   logo: string;
 };
 
-export type MarketItem = MarketRecord;
+export type MarketItem = MarketRecord & {
+  product: string;
+  subcat?: MarketItemSubcat;
+  name: string;
+  path: string;
+  comp?: string;
+  weight: string;
+  price: string;
+  logo: string;
+};
 
-export type MarketOrder = MarketRecord;
+export type MarketOrder = MarketRecord & {
+  status: MarketOrderStatus;
+  items: MarketOrderItem[];
+};
+
+export type MarketItemSubcat =
+  | 'roll-philadelphia'
+  | 'roll-california'
+  | 'roll-baked'
+  | 'sushi-craft'
+  | 'roll-maki'
+  | 'sushi-premium';
+
+export type MarketOrderStatus = 'chosen' | 'pending' | 'complete';
+
+export type MarketOrderItem = {
+  itemId: number;
+  qty: number;
+};
 
 export type MarketPath = 'offer' | 'product' | 'item' | 'order';

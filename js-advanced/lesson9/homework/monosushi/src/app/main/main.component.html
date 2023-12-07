@@ -3,7 +3,10 @@
     <swiper-slide *ngIf="offers.length < 1" class="main-offers-slide">
       <a class="main-offers-slide-link"><i class="i-misc-stub"></i></a>
     </swiper-slide>
-    <swiper-slide *ngIf="offers.length < 1 && !ui.mobile" class="main-offers-slide">
+    <swiper-slide
+      *ngIf="offers.length < 1 && !ui.mobile"
+      class="main-offers-slide"
+    >
       <a class="main-offers-slide-link"><i class="i-misc-stub"></i></a>
     </swiper-slide>
     <swiper-slide *ngFor="let offer of offers" class="main-offers-slide">
@@ -38,14 +41,17 @@
   </div>
   <div class="main-products">
     <ul class="main-products-menu">
-      <li class="main-products-menu-item-active">Всі</li>
-      <li class="main-products-menu-item">Роли Філадельфія</li>
-      <li class="main-products-menu-item">Роли Каліфорнія</li>
-      <li class="main-products-menu-item">Запечені роли</li>
-      <li class="main-products-menu-item">Фірмові суші</li>
-      <li class="main-products-menu-item">Роли Макі</li>
-      <li class="main-products-menu-item">Преміум суші</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == '' }" (click)="ui.subcatChange('')">Всі</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'roll-philadelphia' }" (click)="ui.subcatChange('roll-philadelphia')">Роли Філадельфія</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'roll-california' }" (click)="ui.subcatChange('roll-california')">Роли Каліфорнія</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'roll-baked' }" (click)="ui.subcatChange('roll-baked')">Запечені роли</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'sushi-craft' }" (click)="ui.subcatChange('sushi-craft')">Фірмові суші</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'roll-maki' }" (click)="ui.subcatChange('roll-maki')">Роли Макі</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'sushi-premium' }" (click)="ui.subcatChange('sushi-premium')">Преміум суші</li>
     </ul>
+    <div class="main-products-wrap">
+      <app-item *ngFor="let item of items | filter:'roll':ui.subcat" [item]="item"></app-item>
+    </div>
   </div>
   <article class="main-info" [ngClass]="{ spoiler: ui.spoiler }">
     <h1 class="main-info-h1">Доставка суші у Львові від "Monosushi"</h1>

@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { conf } from 'src/core/conf';
 import { MarketService } from 'src/core/market/market.service';
-import { MarketOffer } from 'src/core/types';
+import { MarketItem, MarketItemSubcat, MarketOffer } from 'src/core/types';
 import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions } from 'swiper/types';
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -20,13 +20,15 @@ import { Autoplay, Pagination } from 'swiper/modules';
 })
 export class MainComponent implements OnInit, AfterViewInit {
   public offers: MarketOffer[] = [];
+  public items: MarketItem[] = [];
 
   public ui = {
     spoiler: false,
     mobile: window.innerWidth < 768,
 
-    swiper: {
-      navigation: 'true',
+    subcat: '',
+    subcatChange: (subcat: MarketItemSubcat | '') => {
+      this.ui.subcat = subcat;
     },
 
     toggle: () => {
@@ -51,6 +53,10 @@ export class MainComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.market.read<MarketOffer>('offer').subscribe((offers) => {
       this.offers = offers;
+    });
+
+    this.market.read<MarketItem>('item').subscribe((items) => {
+      this.items = items;
     });
   }
 

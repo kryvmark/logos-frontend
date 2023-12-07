@@ -53,6 +53,29 @@
       "id": 4
     }
   ],
-  "item": [],
+  "item": [
+    {
+      "id": 1,
+      "product": "roll",
+      "subcat": "roll-philadelphia",
+      "name": "Філадельфія в кунжуті",
+      "path": "philadelphia-sesame",
+      "comp": "Рис, крем сир, огірок, лосось, кунжут",
+      "weight": "240 г",
+      "price": "268 грн",
+      "logo": "1701889769957.jpg"
+    },
+    {
+      "product": "set",
+      "subcat": "",
+      "name": "Fufufu",
+      "path": "fufu",
+      "comp": "",
+      "weight": "10 g",
+      "price": "125 uah",
+      "logo": "1701899250811.jpg",
+      "id": 2
+    }
+  ],
   "order": []
 }

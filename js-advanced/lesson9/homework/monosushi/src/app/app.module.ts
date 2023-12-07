@@ -26,6 +26,9 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment.development';
 import { register } from 'swiper/element/bundle';
+import { ItemComponent } from './misc/item/item.component';
+import { NumericComponent } from './misc/numeric/numeric.component';
+import { FilterPipe } from '../core/filter/filter.pipe';
 
 register();
 
@@ -44,6 +47,9 @@ register();
     TermsComponent,
     AdminComponent,
     MapComponent,
+    ItemComponent,
+    NumericComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

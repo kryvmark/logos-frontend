@@ -80,6 +80,7 @@
       &::after {
         content: "";
         position: absolute;
+        z-index: -1;
         display: block;
         border: 0.125rem solid transparent;
         border-radius: 0.5rem;

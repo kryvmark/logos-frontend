@@ -25,10 +25,6 @@ export class MainComponent implements OnInit, AfterViewInit {
     spoiler: false,
     mobile: window.innerWidth < 768,
 
-    swiper: {
-      navigation: 'true',
-    },
-
     toggle: () => {
       this.ui.spoiler = !this.ui.spoiler;
     },

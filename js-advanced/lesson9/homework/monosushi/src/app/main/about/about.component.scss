@@ -205,6 +205,10 @@
         cursor: pointer;
         transform: rotate(45deg);
         transition: 0.33s;
+
+        @include _1200 {
+          top: 2.25rem;
+        }
       }
 
       @include _1200 {
@@ -279,6 +283,10 @@
         &::after {
           transform: rotate(-135deg);
           top: 1.875rem;
+
+          @include _1200 {
+            top: 2.5rem;
+          }
         }
       }
     }

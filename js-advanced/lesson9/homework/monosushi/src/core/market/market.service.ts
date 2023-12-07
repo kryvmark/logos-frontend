@@ -1,9 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MarketPath, MarketRecord } from '../types';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { Storage, deleteObject, UploadResult, ref, uploadBytes } from '@angular/fire/storage';
+import {
+  Storage,
+  deleteObject,
+  UploadResult,
+  ref,
+  uploadBytes,
+} from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +25,18 @@ export class MarketService {
     return this.http.get<T[]>(`${environment.backendUrl}/${path}`);
   }
 
-  readOne<T extends MarketRecord>(path: MarketPath, id: number): Observable<T> {
-    return this.http.get<T>(`${environment.backendUrl}/${path}/${id}`);
+  readOne<T extends MarketRecord>(
+    path: MarketPath,
+    needle: number | string
+  ): Observable<T> {
+    switch (typeof needle) {
+      case 'number':
+        return this.http.get<T>(`${environment.backendUrl}/${path}/${needle}`);
+      case 'string':
+        return this.http
+          .get<T>(`${environment.backendUrl}/${path}?path=${needle}`)
+          .pipe(map((record: any) => record[0]));
+    }
   }
 
   update<T extends MarketRecord>(path: MarketPath, record: T): Observable<T> {
@@ -38,7 +54,11 @@ export class MarketService {
     return `https://firebasestorage.googleapis.com/v0/b/monosushi-63969.appspot.com/o/upload%2F${path}%2F${name}?alt=media`;
   }
 
-  async upload(path: MarketPath, name: string, file: File): Promise<UploadResult> {
+  async upload(
+    path: MarketPath,
+    name: string,
+    file: File
+  ): Promise<UploadResult> {
     return uploadBytes(ref(this.storage, `upload/${path}/${name}`), file);
   }
 

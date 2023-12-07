@@ -214,9 +214,8 @@
           }
         }
 
-        &-active {
-          @extend .main-products-menu-item;
-          border: none;
+        &.active {
+          border-color: transparent;
           position: relative;
           color: $text;
 

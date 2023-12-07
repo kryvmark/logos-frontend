@@ -1,0 +1,35 @@
+@import "../../../style/media";
+@import "../../../style/colors";
+@import "../../../style/mixins";
+
+.numeric {
+  width: 5rem;
+  border: 1px solid $gray;
+  padding: 0.25rem;
+  border-radius: 0.625rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-button {
+    @include button-custom();
+    width: 1.5rem;
+    height: 2rem;
+    color: $muted;
+    font-size: 1.5rem;
+    padding-bottom: 0.125rem;
+    border-radius: 0.5rem;
+
+    @include _1200 {
+      transition: 0.33s;
+
+      &:hover {
+        background-color: $monosushi;
+      }
+    }
+  }
+
+  &-value {
+    font-weight: bold;
+  }
+}

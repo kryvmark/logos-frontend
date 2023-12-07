@@ -180,6 +180,7 @@
   &-products {
     align-self: stretch;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding-block: 1.5rem;
     margin-inline: -10.5rem;
@@ -193,7 +194,10 @@
 
       @include _1200 {
         list-style: none;
+        align-self: stretch;
         display: flex;
+        justify-content: center;
+        margin-bottom: 3rem;
       }
 
       &-item {
@@ -214,9 +218,8 @@
           }
         }
 
-        &-active {
-          @extend .main-products-menu-item;
-          border: none;
+        &.active {
+          border-color: transparent;
           position: relative;
           color: $text;
 
@@ -231,6 +234,11 @@
           }
         }
       }
+    }
+
+    &-wrap {
+      display: flex;
+      flex-wrap: wrap;
     }
   }
 

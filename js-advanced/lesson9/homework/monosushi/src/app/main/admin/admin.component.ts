@@ -41,6 +41,10 @@ export class AdminComponent implements OnInit {
 
       if (!this.ui.form && this.form) {
         this.form.reset();
+        if (this.form.controls['product'])
+          this.form.controls['product'].setValue('');
+        if (this.form.controls['subcat'])
+          this.form.controls['subcat'].setValue('');
         this.ui.formIndex = -1;
         this.ui.formImage = '';
         this.ui.formFile = new File([], '');
@@ -110,6 +114,33 @@ export class AdminComponent implements OnInit {
           }
 
           break;
+        case 'item':
+          const itemFileExt = this.ui.formFile.name.split('.').pop();
+          const itemFileDate = Date.now();
+          const itemFileName = `${itemFileDate}.${itemFileExt}`;
+
+          const item: MarketItem = {
+            product: this.form.controls['product'].value,
+            subcat: this.form.controls['subcat'].value,
+            name: this.form.controls['name'].value,
+            path: this.form.controls['path'].value,
+            comp: this.form.controls['comp'].value,
+            weight: this.form.controls['weight'].value,
+            price: this.form.controls['price'].value,
+            logo: itemFileName,
+          };
+
+          if (item.logo) {
+            this.market
+              .upload('item', itemFileName, this.ui.formFile)
+              .finally(() => {
+                this.market.create('item', item).subscribe(() => {
+                  this.ui.read();
+                });
+              });
+          }
+
+          break;
       }
     },
 
@@ -118,22 +149,26 @@ export class AdminComponent implements OnInit {
 
       switch (this.path) {
         case 'offer':
-          this.market.read<MarketOffer>(this.path).subscribe((records) => {
+          this.market.read<MarketOffer>('offer').subscribe((records) => {
             this.records.offer = records;
           });
           break;
         case 'product':
-          this.market.read<MarketProduct>(this.path).subscribe((records) => {
+          this.market.read<MarketProduct>('product').subscribe((records) => {
             this.records.product = records;
           });
           break;
         case 'item':
-          this.market.read<MarketItem>(this.path).subscribe((records) => {
+          this.market.read<MarketItem>('item').subscribe((records) => {
             this.records.item = records;
+          });
+
+          this.market.read<MarketProduct>('product').subscribe((records) => {
+            this.records.product = records;
           });
           break;
         case 'order':
-          this.market.read<MarketOrder>(this.path).subscribe((records) => {
+          this.market.read<MarketOrder>('order').subscribe((records) => {
             this.records.order = records;
           });
           break;
@@ -166,6 +201,22 @@ export class AdminComponent implements OnInit {
           });
 
           this.ui.formImage = this.ui.firebase(product.logo);
+
+          break;
+        case 'item':
+          const item = this.records.item[i];
+
+          this.form.patchValue({
+            product: item.product,
+            subcat: item.subcat,
+            path: item.path,
+            name: item.name,
+            comp: item.comp,
+            weight: item.weight,
+            price: item.price,
+          });
+
+          this.ui.formImage = this.ui.firebase(item.logo);
 
           break;
       }
@@ -227,6 +278,36 @@ export class AdminComponent implements OnInit {
             });
 
           break;
+        case 'item':
+          const item = { ...this.records.item[this.ui.formIndex] };
+          item.product = this.form.controls['product'].value;
+          item.subcat = this.form.controls['subcat'].value;
+          item.name = this.form.controls['name'].value;
+          item.path = this.form.controls['path'].value;
+          item.comp = this.form.controls['comp'].value;
+          item.weight = this.form.controls['weight'].value;
+          item.price = this.form.controls['price'].value;
+
+          if (this.ui.formFile.name) {
+            this.market.erase('item', item.logo).finally(() => {
+              const itemFileExt = this.ui.formFile.name.split('.').pop();
+              const itemFileDate = Date.now();
+              item.logo = `${itemFileDate}.${itemFileExt}`;
+
+              this.market
+                .upload('item', item.logo, this.ui.formFile)
+                .finally(() => {
+                  this.market.update('item', item).subscribe(() => {
+                    this.ui.read();
+                  });
+                });
+            });
+          } else
+            this.market.update('item', item).subscribe(() => {
+              this.ui.read();
+            });
+
+          break;
       }
     },
 
@@ -262,7 +343,59 @@ export class AdminComponent implements OnInit {
           }
 
           break;
+        case 'item':
+          const item = this.records.item[i];
+          const itemId = item.id;
+
+          if (itemId) {
+            this.market.erase('item', item.logo).finally(() => {
+              this.market.delete<MarketItem>('item', itemId).subscribe(() => {
+                this.ui.read();
+              });
+            });
+          }
+
+          break;
       }
+    },
+
+    misc: {
+      itemProductName: (i: number) => {
+        const item = this.records.item[i];
+
+        if (item) {
+          const product = this.records.product.find(
+            (record) => record.path == item.product
+          );
+
+          if (product) return product.name;
+        }
+        return 'Невідомо';
+      },
+
+      itemSubcatDict: {
+        'roll-philadelphia': 'Роли Філадельфія',
+        'roll-california': 'Роли Каліфорнія',
+        'roll-baked': 'Запечені Роли',
+        'sushi-craft': 'Фірмові Суші',
+        'roll-maki': 'Роли Макі',
+        'sushi-premium': 'Преміум Суші',
+      },
+
+      itemSubcat: () => {
+        const object: any = { ...this.ui.misc.itemSubcatDict };
+        const subcat = [];
+
+        for (const key in object) {
+          if (Object.prototype.hasOwnProperty.call(object, key)) {
+            subcat.push({
+              name: key,
+              title: object[key],
+            });
+          }
+        }
+        return subcat;
+      },
     },
   };
 
@@ -291,6 +424,19 @@ export class AdminComponent implements OnInit {
           this.form = this.forms.group({
             name: ['', Validators.required],
             path: ['', Validators.required],
+            image: [null],
+          });
+
+          break;
+        case 'item':
+          this.form = this.forms.group({
+            product: ['', Validators.required],
+            subcat: [''],
+            name: ['', Validators.required],
+            path: ['', Validators.required],
+            comp: [''],
+            weight: ['', Validators.required],
+            price: ['', Validators.required],
             image: [null],
           });
 
