@@ -50,7 +50,7 @@
       <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'sushi-premium' }" (click)="ui.subcatChange('sushi-premium')">Преміум суші</li>
     </ul>
     <div class="main-products-wrap">
-      <app-item *ngFor="let item of items | filter:'roll':ui.subcat" [item]="item"></app-item>
+      <app-item *ngFor="let item of items | filter:'roll':ui.subcat" [item]="item" (orderEvent)="order($event)"></app-item>
     </div>
   </div>
   <article class="main-info" [ngClass]="{ spoiler: ui.spoiler }">

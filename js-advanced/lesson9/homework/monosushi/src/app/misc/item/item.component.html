@@ -10,6 +10,6 @@
   <div class="item-order">
     <span class="item-order-price"><b>{{ ui.parseInt(item.price) * qty }}</b> грн</span>
     <app-numeric #numeric [value]="qty" (changeEvent)="changeQty($event)"></app-numeric>
-    <button class="item-order-button">Замовити</button>
+    <button class="item-order-button" (click)="order()">Замовити</button>
   </div>
 </div>

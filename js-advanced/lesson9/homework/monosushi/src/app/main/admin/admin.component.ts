@@ -4,10 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MarketService } from 'src/core/market/market.service';
 import {
+  MarketPath,
   MarketItem,
   MarketOffer,
   MarketOrder,
-  MarketPath,
   MarketProduct,
 } from 'src/core/types';
 
@@ -166,11 +166,7 @@ export class AdminComponent implements OnInit {
           this.market.read<MarketProduct>('product').subscribe((records) => {
             this.records.product = records;
           });
-          break;
-        case 'order':
-          this.market.read<MarketOrder>('order').subscribe((records) => {
-            this.records.order = records;
-          });
+
           break;
       }
     },

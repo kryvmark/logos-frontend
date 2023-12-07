@@ -8,7 +8,12 @@ import {
 } from '@angular/core';
 import { conf } from 'src/core/conf';
 import { MarketService } from 'src/core/market/market.service';
-import { MarketItem, MarketItemSubcat, MarketOffer } from 'src/core/types';
+import {
+  MarketItem,
+  MarketItemSubcat,
+  MarketOffer,
+  MarketOrderItem,
+} from 'src/core/types';
 import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions } from 'swiper/types';
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -21,6 +26,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 export class MainComponent implements OnInit, AfterViewInit {
   public offers: MarketOffer[] = [];
   public items: MarketItem[] = [];
+  public orderItems: MarketOrderItem[] = [];
 
   public ui = {
     spoiler: false,
@@ -79,5 +85,14 @@ export class MainComponent implements OnInit, AfterViewInit {
   onResize(): void {
     this.ui.mobile = window.innerWidth < 768;
     this.swiper.nativeElement.slidesPerView = this.ui.mobile ? 1 : 2;
+  }
+
+  order(item: MarketOrderItem): void {
+    const alreadyOrdered = this.orderItems.find(ordered => ordered.itemId == item.itemId);
+
+    if (alreadyOrdered) alreadyOrdered.qty += item.qty;
+    else this.orderItems.push(item);
+
+    localStorage.setItem('orderItems', JSON.stringify(this.orderItems));
   }
 }

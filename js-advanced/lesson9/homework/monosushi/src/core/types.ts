@@ -28,7 +28,7 @@ export type MarketItem = MarketRecord & {
 };
 
 export type MarketOrder = MarketRecord & {
-  status: MarketOrderStatus;
+  completed: boolean;
   items: MarketOrderItem[];
 };
 
@@ -39,8 +39,6 @@ export type MarketItemSubcat =
   | 'sushi-craft'
   | 'roll-maki'
   | 'sushi-premium';
-
-export type MarketOrderStatus = 'chosen' | 'pending' | 'complete';
 
 export type MarketOrderItem = {
   itemId: number;
