@@ -2,12 +2,18 @@
 @import "../../style/colors";
 @import "../../style/mixins";
 
-@mixin header-top-colored {
+@mixin header-top-side($color: true) {
   align-self: stretch;
   display: flex;
   align-items: center;
   width: 4rem;
-  background-color: $monosushi;
+
+  @if $color {
+    background-color: $monosushi;
+  } @else {
+    background-color: transparent;
+  }
+
   padding-inline: 0.5rem;
 
   @include _768 {
@@ -107,6 +113,22 @@
     }
   }
 
+  &.cart {
+    pointer-events: none;
+
+    .header-top-cart {
+      pointer-events: all;
+
+      &::after {
+        height: 0.25rem;
+      }
+
+      .counter {
+        background-color: $monosushi;
+      }
+    }
+  }
+
   &-top {
     position: relative;
     z-index: 2;
@@ -118,7 +140,7 @@
     box-shadow: 0 0 0.25rem 0.125rem rgba($color: #000, $alpha: 0.1);
 
     &-logo {
-      @include header-top-colored();
+      @include header-top-side();
 
       @include _1200 {
         width: 10rem;
@@ -261,14 +283,25 @@
 
     &-cart {
       @include button-custom();
-      @include header-top-colored();
+      @include header-top-side(false);
       padding: 0.75rem;
-      display: flex;
       justify-content: center;
-      align-items: center;
+      position: relative;
 
       @include _768 {
         padding: 0;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $monosushi;
+        transition: 0.4s;
       }
 
       .i-header-basket {
@@ -289,6 +322,8 @@
           right: -0.5rem;
           width: 1.25rem;
           height: 1.25rem;
+
+          transition: 0.4s;
         }
       }
 
@@ -419,7 +454,7 @@
   left: 0;
   right: 0;
   background-color: rgba($color: #000, $alpha: 0.33);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(0.125rem);
   visibility: hidden;
   opacity: 0;
   transition: 0.33s;

@@ -90,13 +90,7 @@
       margin: 2.5rem -5vw;
       padding-block: 1.5rem;
 
-      background: {
-        color: $monosushi;
-        image: app-firebase("main/background.svg"),
-          app-firebase("main/background.svg");
-        repeat: repeat;
-        position: 0 0, 190px -52px;
-      }
+      @include bg-monosushi();
 
       &-info {
         text-align: center;

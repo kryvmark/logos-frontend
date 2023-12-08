@@ -1,0 +1,42 @@
+<div class="blur" [ngClass]="{ loaded: ui.loaded }"></div>
+<div class="cart" [ngClass]="{ loaded: ui.loaded }">
+  <div class="cart-container">
+    <div
+      class="cart-container-stub"
+      *ngIf="cart.length < 1; else cartView"
+    ></div>
+    <ng-template #cartView>
+      <div class="cart-container-view">
+        <div
+          class="cart-container-view-item"
+          *ngFor="let item of cart; index as i"
+        >
+          <img
+            [src]="ui.firebase(ui.itemMap(item.itemId)!.logo!)"
+            alt=""
+            class="cart-container-view-item-img"
+          />
+          <span class="cart-container-view-item-name">{{
+            ui.itemMap(item.itemId)!.name
+          }}</span>
+          <app-numeric
+            class="cart-container-view-item-numeric"
+            [value]="item.qty"
+          ></app-numeric>
+          <span class="cart-container-view-item-price">
+            <b>{{ ui.parseInt(ui.itemMap(item.itemId)!.price) }}</b> грн
+          </span>
+          <i class="i-misc-remove" (click)="cartDelete(i)"></i>
+        </div>
+      </div>
+    </ng-template>
+    <div class="cart-container-order">
+      <span class="cart-container-order-total">
+        Сума: <strong>{{ ui.cart.total }}</strong> грн
+      </span>
+      <a routerLink="/checkout" class="cart-container-order-link"
+        >Оформити замовлення</a
+      >
+    </div>
+  </div>
+</div>

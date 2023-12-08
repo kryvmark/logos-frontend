@@ -29,6 +29,7 @@ import { register } from 'swiper/element/bundle';
 import { ItemComponent } from './misc/item/item.component';
 import { NumericComponent } from './misc/numeric/numeric.component';
 import { FilterPipe } from '../core/filter/filter.pipe';
+import { CartComponent } from './misc/cart/cart.component';
 
 register();
 
@@ -50,6 +51,7 @@ register();
     ItemComponent,
     NumericComponent,
     FilterPipe,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

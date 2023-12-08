@@ -1,9 +1,36 @@
 <div class="product_info">
-  <ng-container *ngIf="product">
+  <ng-container *ngIf="product && item">
     <nav class="product_info-nav">
       <a routerLink="/" class="product_info-nav-link">Головна</a>
-      <a routerLink="/product" class="product_info-nav-link">Продукти</a>
-      <a class="product_info-nav-current">{{ product.name | titlecase }}</a>
+      <a
+        [routerLink]="'/product/' + product.path"
+        class="product_info-nav-link"
+        >{{ product.name | titlecase }}</a
+      >
+      <a class="product_info-nav-current">{{ item.name }}</a>
     </nav>
+    <div class="product_info-view">
+      <img
+        [src]="ui.firebase(item.logo)"
+        [alt]="item.path"
+        class="product_info-view-img"
+      />
+      <div class="product_info-view-info">
+        <h1 class="product_info-view-info-h1">{{ item.name }}</h1>
+        <p class="product_info-view-info-p">
+          <b class="monosushi">Склад:</b> {{ item.comp }}
+        </p>
+        <p class="product_info-view-info-p">
+          <b class="monosushi">Вага:</b> {{ item.weight }}
+        </p>
+        <div class="product_info-view-info-order">
+          <span class="product_info-view-info-order-price">
+            <b>{{ ui.parseInt(item.price) * ui.qty }}</b> грн
+          </span>
+          <app-numeric (changeEvent)="changeQty($event)"></app-numeric>
+          <button class="product_info-view-info-order-button" (click)="order()">Замовити</button>
+        </div>
+      </div>
+    </div>
   </ng-container>
 </div>

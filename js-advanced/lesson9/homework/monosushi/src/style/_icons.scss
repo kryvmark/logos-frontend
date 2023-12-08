@@ -51,6 +51,11 @@
       @extend .i;
       background-image: app-firebase("main/monobonus.svg");
     }
+
+    &-empty {
+      @extend .i;
+      background-image: app-firebase("main/empty.svg");
+    }
   }
 
   &-delivery {
@@ -123,6 +128,63 @@
     &-stub {
       @extend .i;
       background-color: $gray;
+    }
+
+    &-remove {
+      @extend .i;
+      position: relative;
+      display: block;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        background: $muted;
+        cursor: pointer;
+        transition: 0.33s;
+      }
+
+      &::before {
+        bottom: 0;
+        left: 3px;
+        width: 10px;
+        height: 12px;
+        border-radius: 0 0 3px 3px;
+      }
+
+      &::after {
+        top: 0;
+        left: 1px;
+        width: 14px;
+        height: 4px;
+
+        clip-path: polygon(
+          35% 0,
+          65% 0,
+          75% 50%,
+          100% 50%,
+          100% 100%,
+          0 100%,
+          0 50%,
+          25% 50%
+        );
+
+        transform: translateY(-1px);
+      }
+
+      @include _1200 {
+        &:hover {
+          &::before,
+          &::after {
+            background-color: $monosushi;
+          }
+
+          &::after {
+            transform: translateY(-4px);
+          }
+        }
+      }
     }
   }
 }

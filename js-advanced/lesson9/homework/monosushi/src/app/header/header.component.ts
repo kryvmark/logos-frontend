@@ -2,6 +2,7 @@ import { Component, HostListener, OnDestroy } from '@angular/core';
 import { MarketService } from 'src/core/market/market.service';
 import { MarketItem, MarketProduct } from 'src/core/types';
 import { conf } from '../../core/conf';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,17 @@ export class HeaderComponent implements OnDestroy {
     cart: {
       items: 0,
       total: 0,
+    },
+
+    cartOpen: false,
+    cartToggle: (state?: boolean) => {
+      if (this.router.url.split('?')[0].split('/').pop() == 'checkout')
+        return (state = false);
+      else {
+        this.ui.cartOpen = state ?? !this.ui.cartOpen;
+        this.onResize();
+        return this.ui.cartOpen;
+      }
     },
 
     toggle: (state?: boolean) => {
@@ -40,7 +52,7 @@ export class HeaderComponent implements OnDestroy {
     this.cartTotal();
   });
 
-  constructor(private market: MarketService) {
+  constructor(private market: MarketService, private router: Router) {
     this.onResize();
 
     market.read<MarketProduct>('product').subscribe((data) => {
@@ -66,6 +78,10 @@ export class HeaderComponent implements OnDestroy {
         ? window.document.body.classList.add('locked')
         : window.document.body.classList.remove('locked');
     }
+
+    this.ui.cartOpen
+      ? window.document.body.classList.add('locked')
+      : window.document.body.classList.remove('locked');
   }
 
   cartTotal(): void {

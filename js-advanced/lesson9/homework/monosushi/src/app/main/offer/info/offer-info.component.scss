@@ -61,12 +61,7 @@
     padding: 2.5rem;
     border-radius: 0.75rem;
 
-    background: {
-      color: $monosushi;
-      image: app-firebase("main/background.svg"),
-        app-firebase("main/background.svg");
-      position: 0 0, 190px -52px;
-    }
+    @include bg-monosushi();
 
     margin-bottom: 1.5rem;
 

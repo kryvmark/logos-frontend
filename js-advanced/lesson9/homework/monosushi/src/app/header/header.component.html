@@ -1,4 +1,4 @@
-<header class="header" [ngClass]="{ locked: ui.menu }">
+<header class="header" [ngClass]="{ locked: ui.menu, cart: ui.cartOpen }">
   <div class="shadow" (click)="ui.toggle(false)"></div>
   <nav class="header-top">
     <a class="header-top-logo" routerLink="" (click)="ui.toggle(false)">
@@ -83,7 +83,7 @@
         </nav>
       </ng-container>
     </div>
-    <button class="header-top-cart">
+    <button class="header-top-cart" (click)="ui.cartToggle()">
       <i class="i-header-basket">
         <span class="counter">{{ ui.cart.items }}</span>
       </i>
@@ -156,3 +156,4 @@
     </nav>
   </ng-container>
 </header>
+<app-cart *ngIf="ui.cartOpen"></app-cart>

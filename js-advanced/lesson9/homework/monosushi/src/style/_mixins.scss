@@ -405,3 +405,13 @@
     }
   }
 }
+
+@mixin bg-monosushi {
+  background: {
+    color: $monosushi;
+    image: url(https://monosushi.com.ua/wp-content/themes/monosushi/img/bg-monosushi-logo.svg),
+      url(https://monosushi.com.ua/wp-content/themes/monosushi/img/bg-monosushi-logo.svg);
+    repeat: repeat;
+    position: 0 0, 190px -52px;
+  }
+}
