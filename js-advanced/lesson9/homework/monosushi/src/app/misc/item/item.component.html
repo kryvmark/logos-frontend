@@ -1,15 +1,33 @@
 <div class="item" *ngIf="item">
-  <a [routerLink]="['/product/', item.product, '/', item.path].join('')" class="item-link">
-    <img [src]="ui.firebase(item.logo)" [alt]="item.path" class="item-link-img">
-    <h4 class="item-link-h4">{{ item.name }}</h4>
+  <a
+    [routerLink]="['/product/', item.product, '/', item.path].join('')"
+    class="item-link"
+  >
+    <img
+      [src]="ui.firebase(item.logo)"
+      [alt]="item.path"
+      class="item-link-img"
+    />
+  </a>
+  <a
+    [routerLink]="['/product/', item.product, '/', item.path].join('')"
+    class="item-h4"
+  >
+    {{ item.name }}
   </a>
   <div class="item-details">
     <span class="item-details-comp">{{ item.comp }}</span>
     <b class="item-details-weight">{{ item.weight }}</b>
   </div>
   <div class="item-order">
-    <span class="item-order-price"><b>{{ ui.parseInt(item.price) * qty }}</b> грн</span>
-    <app-numeric #numeric [value]="qty" (changeEvent)="changeQty($event)"></app-numeric>
+    <span class="item-order-price"
+      ><b>{{ ui.parseInt(item.price) * qty }}</b> грн</span
+    >
+    <app-numeric
+      #numeric
+      [value]="qty"
+      (changeEvent)="changeQty($event)"
+    ></app-numeric>
     <button class="item-order-button" (click)="order()">Замовити</button>
   </div>
 </div>

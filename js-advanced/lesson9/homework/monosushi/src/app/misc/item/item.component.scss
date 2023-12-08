@@ -7,18 +7,21 @@
   display: flex;
   flex-direction: column;
   padding: 0.75rem;
-  margin: 1rem;
   cursor: pointer;
+  width: 100%;
 
   &-link {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-decoration: none;
+    padding-block: 1rem;
 
     &-img {
-      max-width: 24rem;
-      padding-block: 4rem;
+      width: 100%;
+      height: 12rem;
+      padding-block: 2rem;
+      object-fit: contain;
 
       @include _1200 {
         transition: 0.33s;
@@ -28,16 +31,25 @@
         }
       }
     }
+  }
 
-    &-h4 {
-      @include h4();
+  &-h4 {
+    @include h4();
+    text-decoration: none;
+    align-self: center;
+    font-size: 1.125rem;
+    text-align: center;
+    height: 4rem;
 
-      @include _1200 {
-        transition: 0.33s;
+    @include _768 {
+      font-size: 1.25rem;
+    }
 
-        &:hover {
-          color: $monosushi;
-        }
+    @include _1200 {
+      transition: 0.33s;
+
+      &:hover {
+        color: $monosushi;
       }
     }
   }
@@ -45,14 +57,15 @@
   &-details {
     display: flex;
     justify-content: space-between;
-    margin-block: 1.5rem 2.5rem;
 
     &-comp,
     &-weight {
       color: $muted;
+      height: 5rem;
     }
 
     &-weight {
+      margin-inline-start: 0.5rem;
       white-space: nowrap;
     }
   }
@@ -63,13 +76,19 @@
     align-items: center;
 
     &-price {
-      font-size: 1.125rem;
-      width: 5.5rem;
+      width: 4rem;
+      font-size: 1rem;
+
+      @include _768 {
+        width: 5.5rem;
+        font-size: 1.125rem;
+      }
     }
 
     &-button {
       @include button();
       font-size: 0.75rem;
+      margin-inline-start: 0.5rem;
     }
   }
 }

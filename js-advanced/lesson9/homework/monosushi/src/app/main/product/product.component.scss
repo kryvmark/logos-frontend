@@ -4,8 +4,10 @@
 
 .product {
   @include container();
+  align-items: flex-start;
 
   &-h1 {
+    align-self: center;
     @include h1-lined();
   }
 
@@ -13,12 +15,18 @@
     align-self: stretch;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     padding-block: 1.5rem;
 
+    @include _768 {
+      padding-top: 2rem;
+      padding-bottom: 4rem;
+    }
+
     @include _1200 {
-      margin-inline: -10.5rem;
-      padding-block: 4rem;
+      margin-inline: -12vw;
+      padding-top: 4rem;
+      padding-bottom: 8rem;
     }
 
     &-menu {
@@ -70,7 +78,49 @@
 
     &-wrap {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
+
+      @include _768 {
+        align-self: stretch;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 22rem);
+        grid-gap: 1rem;
+        justify-content: space-around;
+      }
+
+      &-item {
+        width: calc(10rem + 40vw);
+
+        @include _768 {
+          width: auto;
+        }
+      }
+    }
+  }
+
+  &-h2 {
+    @include h2();
+    margin-bottom: 1.5rem;
+
+    &:not(.smaller) {
+      @include _1200 {
+        font-size: 2.5rem;
+      }
+    }
+  }
+
+  &-p {
+    @include p();
+    margin-bottom: 1.5rem;
+  }
+
+  &-ul {
+    @include ul();
+    margin-bottom: 1.5rem;
+
+    &-li {
+      margin-bottom: 0.5rem;
     }
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { conf } from 'src/core/conf';
 import { MarketService } from 'src/core/market/market.service';
 import {
   MarketOrderItem,
@@ -26,6 +27,10 @@ export class ProductComponent {
     subcatChange: (subcat: MarketItemSubcat | '') => {
       this.ui.subcat = subcat;
     },
+
+    workFrom: conf.workFrom,
+    workTo: conf.workTo,
+    maxDeliveryTime: conf.maxDeliveryTime,
   };
 
   constructor(
@@ -55,9 +60,7 @@ export class ProductComponent {
   order(item: MarketOrderItem): void {
     let cart = JSON.parse(localStorage.getItem('cart') || JSON.stringify([]));
     if (cart instanceof Array) {
-      const found = cart.find(
-        (ordered) => ordered.itemId == item.itemId
-      );
+      const found = cart.find((ordered) => ordered.itemId == item.itemId);
 
       if (found) found.qty += item.qty;
       else cart.push(item);

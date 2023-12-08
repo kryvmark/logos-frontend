@@ -184,9 +184,12 @@
     justify-content: center;
     padding-block: 1.5rem;
 
+    @include _768 {
+      padding-block: 5rem;
+    }
+
     @include _1200 {
       margin-inline: -10.5rem;
-      padding-block: 5rem;
     }
 
     &-menu {
@@ -238,7 +241,24 @@
 
     &-wrap {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
+
+      @include _768 {
+        align-self: stretch;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 22rem);
+        grid-gap: 1rem;
+        justify-content: space-around;
+      }
+
+      &-item {
+        width: calc(10rem + 40vw);
+
+        @include _768 {
+          width: auto;
+        }
+      }
     }
   }
 
