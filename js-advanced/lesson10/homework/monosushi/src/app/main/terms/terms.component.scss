@@ -1,0 +1,36 @@
+@import "../../../style/media";
+@import "../../../style/colors";
+@import "../../../style/mixins";
+
+.terms {
+  @include container();
+  align-items: flex-start;
+
+  @include _1200 {
+    padding-inline: 20vw;
+  }
+
+  &-h1 {
+    @include h1-lined();
+    align-self: center;
+    margin-bottom: 2.5rem;
+  }
+
+  &-h2 {
+    @include h2();
+    margin-bottom: 1.5rem;
+  }
+
+  &-p {
+    @include p();
+    margin-bottom: 1.5rem;
+  }
+
+  &-strong {
+    text-transform: uppercase;
+  }
+
+  &-link {
+    @include action();
+  }
+}

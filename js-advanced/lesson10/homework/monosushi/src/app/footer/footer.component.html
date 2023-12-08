@@ -1,0 +1,82 @@
+<footer class="footer">
+  <div class="footer-top">
+    <a routerLink="" class="footer-top-logo">
+      <i class="i-logo"></i>
+    </a>
+    <div class="footer-top-social">
+      <a
+        class="footer-top-social-button"
+        href="https://www.facebook.com/monosushi.com.ua/"
+      >
+        <i class="i-footer-facebook"></i>
+      </a>
+      <a
+        class="footer-top-social-button"
+        href="https://www.instagram.com/monosushi.com.ua/"
+      >
+        <i class="i-footer-instagram"></i>
+      </a>
+    </div>
+    <nav class="footer-top-nav">
+      <a routerLink="offer" class="footer-top-nav-link">Акції на суші</a>
+      <a routerLink="about" class="footer-top-nav-link">Про нас</a>
+      <a routerLink="terms" class="footer-top-nav-link">Оферта</a>
+    </nav>
+    <ul class="footer-top-delivery">
+      <li class="footer-top-delivery-heading">Точки самовивозу</li>
+      <li *ngFor="let point of ui.conf.deliveryPoints" class="footer-top-delivery-point">{{ point.address }}</li>
+    </ul>
+    <ul class="footer-top-order">
+      <li class="footer-top-order-heading">Оформити замовлення</li>
+      <li class="footer-top-order-tel">
+        <a href="tel:+380978780837" class="footer-top-order-tel-link">
+          +380978780837
+        </a>
+      </li>
+    </ul>
+    <ul *ngIf="ui.conf.workDay" class="footer-top-hours">
+      <li class="footer-top-hours-heading">Графік роботи</li>
+      <li class="footer-top-hours-info">
+        працюємо з <b>{{ ui.conf.workFrom }}</b> до <b>{{ ui.conf.workTo }}</b>
+      </li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-payment">
+      <span class="footer-bottom-payment-mastercard">
+        <i class="i-footer-mastercard"></i>
+      </span>
+      <span class="footer-bottom-payment-visa">
+        <i class="i-footer-visa"></i>
+      </span>
+      <span class="footer-bottom-payment-liqpay">
+        <i class="i-footer-liqpay"></i>
+      </span>
+    </div>
+    <span class="footer-bottom-copyright">&copy; 2023 Monosushi</span>
+    <div class="footer-bottom-social">
+      <span class="footer-bottom-social-text">
+        Слідкуйте за нами
+      </span>
+      <a
+        class="footer-bottom-social-button"
+        href="https://www.facebook.com/monosushi.com.ua/"
+      >
+        <i class="i-footer-facebook"></i>
+      </a>
+      <a
+        class="footer-bottom-social-button"
+        href="https://www.instagram.com/monosushi.com.ua/"
+      >
+        <i class="i-footer-instagram"></i>
+      </a>
+    </div>
+    <a class="footer-bottom-redstone" href="https://redstone.media/">
+      <span class="footer-bottom-redstone-text">
+        Створення сайтів REDSTONE
+      </span>
+      <i class="i-footer-redstone"></i>
+    </a>
+  </div>
+  <span class="footer-entity">ФОП Тимофійчук Максим Ігорович</span>
+</footer>

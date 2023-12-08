@@ -1,0 +1,15 @@
+:root {
+  --swiper-pagination-color: #5099db;
+  --swiper-pagination-bullet-inactive-color: #b5d8f7;
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-bullet-size: 0.75rem;
+  --swiper-pagination-bullet-horizontal-gap: 1rem;
+}
+
+swiper-container::part(bullet) {
+  transition: 0.33s;
+}
+
+swiper-container::part(bullet-active) {
+  cursor: default;
+}

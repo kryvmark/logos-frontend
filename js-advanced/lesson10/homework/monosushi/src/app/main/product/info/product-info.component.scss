@@ -1,0 +1,174 @@
+@import "../../../../style/media";
+@import "../../../../style/colors";
+@import "../../../../style/mixins";
+@import "../../../../style/methods";
+
+.product_info {
+  @include container();
+
+  @include _768 {
+    padding-top: 5rem;
+  }
+
+  &-nav {
+    display: none;
+    margin-bottom: 5rem;
+
+    @include _768 {
+      align-self: flex-start;
+      display: flex;
+      position: relative;
+      top: -2.5rem;
+
+      &-link,
+      &-current {
+        font-size: 0.75rem;
+        text-decoration: none;
+        color: $muted;
+      }
+
+      &-link {
+        margin-inline-end: 2rem;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          right: -1.125rem;
+          top: 0.25rem;
+          width: 0.25rem;
+          height: 0.25rem;
+          border-radius: 50%;
+          background-color: $muted;
+        }
+
+        @include _1200 {
+          transition: 0.33s;
+
+          &:hover {
+            color: $text;
+          }
+        }
+      }
+    }
+  }
+
+  &-banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+    padding: 2.5rem;
+    border-radius: 0.75rem;
+
+    background: {
+      color: $monosushi;
+      image: app-firebase("main/background.svg"),
+        app-firebase("main/background.svg");
+      position: 0 0, 190px -52px;
+    }
+
+    margin-bottom: 1.5rem;
+
+    @include _768 {
+      margin-bottom: 3rem;
+    }
+  }
+
+  &-h1 {
+    @include h1-lined();
+    text-align: center;
+
+    &::before {
+      background-color: $text;
+    }
+  }
+
+  &-ul {
+    @include ul(true);
+
+    &-li {
+      font-size: 1rem !important;
+
+      @include _768 {
+        font-size: 1.125rem !important;
+      }
+    }
+  }
+
+  &-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include _768 {
+      flex-direction: row;
+    }
+
+    &-img {
+      width: calc(10rem + 40vw);
+      margin-bottom: 4rem;
+
+      @include _768 {
+        width: 22rem;
+        margin-bottom: 0;
+        margin-inline-end: 3rem;
+      }
+
+      @include _1200 {
+        width: 28rem;
+      }
+    }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      &-h1 {
+        @include h1();
+        text-align: left;
+        font-size: 2.5rem !important;
+        margin-bottom: 1.5rem;
+      }
+
+      &-p {
+        @include p();
+        margin-bottom: 0.75rem;
+      }
+
+      &-order {
+        align-self: stretch;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1.5rem;
+
+        &-price {
+          width: 4rem;
+
+          @include _1200 {
+            width: 5.5rem;
+            font-size: 1.125rem;
+          }
+        }
+
+        &-button {
+          @include button();
+          padding: 0.75rem;
+          font-size: 0.75rem;
+          margin-inline-start: 0.5rem;
+
+          @include _1200 {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.monosushi {
+  color: $monosushi;
+}

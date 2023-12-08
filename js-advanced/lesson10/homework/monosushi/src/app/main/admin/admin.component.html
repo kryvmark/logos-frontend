@@ -1,0 +1,786 @@
+<div class="admin">
+  <div class="admin-control">
+    <nav class="admin-control-nav">
+      <a
+        routerLink="../offer"
+        routerLinkActive="active"
+        class="admin-control-nav-link"
+        >Акції</a
+      >
+      <a
+        routerLink="../product"
+        routerLinkActive="active"
+        class="admin-control-nav-link"
+        >Категорії</a
+      >
+      <a
+        routerLink="../item"
+        routerLinkActive="active"
+        class="admin-control-nav-link"
+        >Товари</a
+      >
+      <a
+        routerLink="../order"
+        routerLinkActive="active"
+        class="admin-control-nav-link"
+        >Замовлення</a
+      >
+    </nav>
+    <a routerLink="/" class="admin-control-logout">Вихід</a>
+  </div>
+  <div class="admin-view">
+    <ng-container *ngIf="path != 'order'">
+      <button
+        class="admin-view-switch"
+        [ngClass]="{ form: ui.form }"
+        (click)="ui.formToggle()"
+      >
+        <ng-container *ngIf="!ui.form; else adminCloseForm">
+          <ng-container *ngIf="path == 'offer'">Додати акцію</ng-container>
+          <ng-container *ngIf="path == 'product'">
+            Додати категорію
+          </ng-container>
+          <ng-container *ngIf="path == 'item'">Додати товар</ng-container>
+        </ng-container>
+        <ng-template #adminCloseForm>Закрити форму</ng-template>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="!ui.form; else adminForm">
+      <div class="admin-view-wrap" *ngIf="ui.mobile; else adminTableDesktop">
+        <ng-container [ngSwitch]="path">
+          <ng-container *ngSwitchCase="'offer'">
+            <table
+              class="admin-view-wrap-table stub"
+              *ngIf="records.offer.length < 1"
+            >
+              <tbody class="admin-view-wrap-table-tbody">
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Дата</th>
+                  <td class="admin-view-wrap-table-td">-</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Назва</th>
+                  <td class="admin-view-wrap-table-td">...</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Заголовок</th>
+                  <td class="admin-view-wrap-table-td">(немає)</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Опис</th>
+                  <td class="admin-view-wrap-table-td">...</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Картинка</th>
+                  <td class="admin-view-wrap-table-td">
+                    <i class="i-misc-stub"></i>
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Дії</th>
+                  <td class="admin-view-wrap-table-td">
+                    <div class="admin-view-action">
+                      <button class="admin-view-action-control" disabled>
+                        Редагувати
+                      </button>
+                      <button class="admin-view-action-control" disabled>
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table
+              class="admin-view-wrap-table"
+              *ngFor="let offer of records.offer; index as i"
+            >
+              <tbody class="admin-view-wrap-table-tbody">
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Дата</th>
+                  <td class="admin-view-wrap-table-td">
+                    {{ offer.date | date : "MM/yyyy" }}
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Назва</th>
+                  <td class="admin-view-wrap-table-td">
+                    {{ offer.name | titlecase }}
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Заголовок</th>
+                  <td class="admin-view-wrap-table-td">{{ offer.title }}</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Опис</th>
+                  <td class="admin-view-wrap-table-td">
+                    {{ offer.terms.join(" ") }}
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Картинка</th>
+                  <td class="admin-view-wrap-table-td">
+                    <img
+                      class="admin-view-wrap-table-img"
+                      [src]="ui.firebase(offer.logo)"
+                      [alt]="offer.name | titlecase"
+                    />
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Дії</th>
+                  <td class="admin-view-wrap-table-td">
+                    <div class="admin-view-action">
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.readOne(i)"
+                      >
+                        Редагувати
+                      </button>
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.delete(i)"
+                      >
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-container>
+          <ng-container *ngSwitchCase="'product'">
+            <table
+              class="admin-view-wrap-table stub"
+              *ngIf="records.product.length < 1"
+            >
+              <tbody class="admin-view-wrap-table-tbody">
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">№</th>
+                  <td class="admin-view-wrap-table-td">-</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Назва</th>
+                  <td class="admin-view-wrap-table-td">(немає)</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Шлях</th>
+                  <td class="admin-view-wrap-table-td">...</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Картинка</th>
+                  <td class="admin-view-wrap-table-td"></td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Дії</th>
+                  <td class="admin-view-wrap-table-td">
+                    <div class="admin-view-action">
+                      <button class="admin-view-action-control" disabled>
+                        Редагувати
+                      </button>
+                      <button class="admin-view-action-control" disabled>
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table
+              class="admin-view-wrap-table"
+              *ngFor="let product of records.product; index as i"
+            >
+              <tbody class="admin-view-wrap-table-tbody">
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">№</th>
+                  <td class="admin-view-wrap-table-td">
+                    {{ product.id }}
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Назва</th>
+                  <td class="admin-view-wrap-table-td">
+                    {{ product.name | titlecase }}
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Шлях</th>
+                  <td class="admin-view-wrap-table-td">{{ product.path }}</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Картинка</th>
+                  <td class="admin-view-wrap-table-td">
+                    <img
+                      class="admin-view-wrap-table-logo"
+                      [src]="ui.firebase(product.logo)"
+                      [alt]="product.name | titlecase"
+                    />
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Дії</th>
+                  <td class="admin-view-wrap-table-td">
+                    <div class="admin-view-action">
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.readOne(i)"
+                      >
+                        Редагувати
+                      </button>
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.delete(i)"
+                      >
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-container>
+          <ng-container *ngSwitchCase="'item'">
+            <table
+              class="admin-view-wrap-table stub"
+              *ngIf="records.item.length < 1"
+            >
+              <tbody class="admin-view-wrap-table-tbody">
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Тип</th>
+                  <td class="admin-view-wrap-table-td">...</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Назва</th>
+                  <td class="admin-view-wrap-table-td">...</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Склад</th>
+                  <td class="admin-view-wrap-table-td">(немає)</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Вага</th>
+                  <td class="admin-view-wrap-table-td">...</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Ціна</th>
+                  <td class="admin-view-wrap-table-td">-</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Картинка</th>
+                  <td class="admin-view-wrap-table-td">
+                    <i class="i-misc-stub"></i>
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Дії</th>
+                  <td class="admin-view-wrap-table-td">
+                    <div class="admin-view-action">
+                      <button class="admin-view-action-control" disabled>
+                        Редагувати
+                      </button>
+                      <button class="admin-view-action-control" disabled>
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table
+              class="admin-view-wrap-table"
+              *ngFor="let item of records.item; index as i"
+            >
+              <tbody class="admin-view-wrap-table-tbody">
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Тип</th>
+                  <td class="admin-view-wrap-table-td">
+                    <b>{{ item.path }}</b>
+                    <br /><br />
+                    {{ ui.misc.itemProductName(i) | titlecase }}
+                    <br /><br />
+                    <i *ngIf="item.subcat">
+                      "{{ ui.misc.itemSubcatDict[item.subcat] }}"
+                    </i>
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Назва</th>
+                  <td class="admin-view-wrap-table-td">{{ item.name }}</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Склад</th>
+                  <td class="admin-view-wrap-table-td">{{ item.comp }}</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Вага</th>
+                  <td class="admin-view-wrap-table-td">{{ item.weight }}</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Ціна</th>
+                  <td class="admin-view-wrap-table-td">{{ item.price }}</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Картинка</th>
+                  <td class="admin-view-wrap-table-td">
+                    <img
+                      class="admin-view-wrap-table-photo"
+                      [src]="ui.firebase(item.logo)"
+                      [alt]="item.path"
+                    />
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Дії</th>
+                  <td class="admin-view-wrap-table-td">
+                    <div class="admin-view-action">
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.readOne(i)"
+                      >
+                        Редагувати
+                      </button>
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.delete(i)"
+                      >
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-container>
+        </ng-container>
+      </div>
+      <ng-template #adminTableDesktop>
+        <table class="admin-view-table">
+          <thead class="admin-view-table-thead">
+            <tr class="admin-view-table-tr">
+              <ng-container [ngSwitch]="path">
+                <ng-container *ngSwitchCase="'offer'">
+                  <th class="admin-view-table-th" style="width: 10%">Дата</th>
+                  <th class="admin-view-table-th" style="width: 10%">Назва</th>
+                  <th class="admin-view-table-th" style="width: 20%">
+                    Заголовок
+                  </th>
+                  <th class="admin-view-table-th" style="width: 25%">Опис</th>
+                  <th class="admin-view-table-th" style="width: 20%">
+                    Картинка
+                  </th>
+                  <th class="admin-view-table-th" style="width: 15%">Дії</th>
+                </ng-container>
+                <ng-container *ngSwitchCase="'product'">
+                  <th class="admin-view-table-th" style="width: 10%">№</th>
+                  <th class="admin-view-table-th" style="width: 25%">Назва</th>
+                  <th class="admin-view-table-th" style="width: 20%">Шлях</th>
+                  <th class="admin-view-table-th" style="width: 20%">
+                    Картинка
+                  </th>
+                  <th class="admin-view-table-th" style="width: 15%">Дії</th>
+                </ng-container>
+                <ng-container *ngSwitchCase="'item'">
+                  <th class="admin-view-table-th" style="width: 12.5%">Тип</th>
+                  <th class="admin-view-table-th" style="width: 17.5%">
+                    Назва
+                  </th>
+                  <th class="admin-view-table-th" style="width: 20%">Склад</th>
+                  <th class="admin-view-table-th" style="width: 7.5%">Вага</th>
+                  <th class="admin-view-table-th" style="width: 7.5%">Ціна</th>
+                  <th class="admin-view-table-th" style="width: 20%">
+                    Картинка
+                  </th>
+                  <th class="admin-view-table-th" style="width: 15%">Дії</th>
+                </ng-container>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody class="admin-view-table-tbody">
+            <ng-container [ngSwitch]="path">
+              <ng-container *ngSwitchCase="'offer'">
+                <tr
+                  class="admin-view-table-tr stub"
+                  *ngIf="records.offer.length < 1"
+                >
+                  <td class="admin-view-table-td">-</td>
+                  <td class="admin-view-table-td">...</td>
+                  <td class="admin-view-table-td">(немає)</td>
+                  <td class="admin-view-table-td">...</td>
+                  <td class="admin-view-table-td">
+                    <i class="i-misc-stub"></i>
+                  </td>
+                  <td class="admin-view-table-td">
+                    <div class="admin-view-action">
+                      <button class="admin-view-action-control" disabled>
+                        Редагувати
+                      </button>
+                      <button class="admin-view-action-control" disabled>
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class="admin-view-table-tr"
+                  *ngFor="let offer of records.offer; index as i"
+                >
+                  <td class="admin-view-table-td">
+                    {{ offer.date | date : "MM/yyyy" }}
+                  </td>
+                  <td class="admin-view-table-td">
+                    {{ offer.name | titlecase }}
+                  </td>
+                  <td class="admin-view-table-td">{{ offer.title }}</td>
+                  <td class="admin-view-table-td">
+                    {{ offer.terms.join(" ") }}
+                  </td>
+                  <td class="admin-view-table-td">
+                    <img
+                      class="admin-view-table-img"
+                      [src]="ui.firebase(offer.logo)"
+                      [alt]="offer.name | titlecase"
+                    />
+                  </td>
+                  <td class="admin-view-table-td">
+                    <div class="admin-view-action">
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.readOne(i)"
+                      >
+                        Редагувати
+                      </button>
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.delete(i)"
+                      >
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-container *ngSwitchCase="'product'">
+                <tr
+                  class="admin-view-table-tr stub"
+                  *ngIf="records.product.length < 1"
+                >
+                  <td class="admin-view-table-td">-</td>
+                  <td class="admin-view-table-td">(немає)</td>
+                  <td class="admin-view-table-td">...</td>
+                  <td class="admin-view-table-td"></td>
+                  <td class="admin-view-table-td">
+                    <div class="admin-view-action">
+                      <button class="admin-view-action-control" disabled>
+                        Редагувати
+                      </button>
+                      <button class="admin-view-action-control" disabled>
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class="admin-view-table-tr"
+                  *ngFor="let product of records.product; index as i"
+                >
+                  <td class="admin-view-table-td">{{ product.id }}</td>
+                  <td class="admin-view-table-td">
+                    {{ product.name | titlecase }}
+                  </td>
+                  <td class="admin-view-table-td">{{ product.path }}</td>
+                  <td class="admin-view-table-td">
+                    <img
+                      class="admin-view-table-logo"
+                      [src]="ui.firebase(product.logo)"
+                      [alt]="product.name | titlecase"
+                    />
+                  </td>
+                  <td class="admin-view-table-td">
+                    <div class="admin-view-action">
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.readOne(i)"
+                      >
+                        Редагувати
+                      </button>
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.delete(i)"
+                      >
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-container *ngSwitchCase="'item'">
+                <tr
+                  class="admin-view-table-tr stub"
+                  *ngIf="records.product.length < 1"
+                >
+                  <td class="admin-view-table-td">...</td>
+                  <td class="admin-view-table-td">...</td>
+                  <td class="admin-view-table-td">(немає)</td>
+                  <td class="admin-view-table-td">...</td>
+                  <td class="admin-view-table-td">-</td>
+                  <td class="admin-view-table-td">
+                    <i class="i-misc-stub"></i>
+                  </td>
+                  <td class="admin-view-table-td">
+                    <div class="admin-view-action">
+                      <button class="admin-view-action-control" disabled>
+                        Редагувати
+                      </button>
+                      <button class="admin-view-action-control" disabled>
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class="admin-view-table-tr"
+                  *ngFor="let item of records.item; index as i"
+                >
+                  <td class="admin-view-table-td">
+                    <b>{{ item.path }}</b>
+                    <br /><br />
+                    {{ ui.misc.itemProductName(i) | titlecase }}
+                    <br /><br />
+                    <i *ngIf="item.subcat">
+                      "{{ ui.misc.itemSubcatDict[item.subcat] }}"
+                    </i>
+                  </td>
+                  <td class="admin-view-table-td">{{ item.name }}</td>
+                  <td class="admin-view-table-td">{{ item.comp }}</td>
+                  <td class="admin-view-table-td">{{ item.weight }}</td>
+                  <td class="admin-view-table-td">{{ item.price }}</td>
+                  <td class="admin-view-table-td">
+                    <img
+                      class="admin-view-table-photo"
+                      [src]="ui.firebase(item.logo)"
+                      [alt]="item.path"
+                    />
+                  </td>
+                  <td class="admin-view-table-td">
+                    <div class="admin-view-action">
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.readOne(i)"
+                      >
+                        Редагувати
+                      </button>
+                      <button
+                        class="admin-view-action-control"
+                        (click)="ui.delete(i)"
+                      >
+                        Видалити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </table>
+      </ng-template>
+    </ng-container>
+    <ng-template #adminForm>
+      <form class="admin-view-form" [formGroup]="form">
+        <input
+          *ngIf="path == 'offer'"
+          type="text"
+          class="admin-view-form-input"
+          formControlName="name"
+          [ngClass]="{
+            touched:
+              form.controls['name'].touched && form.controls['name'].invalid
+          }"
+          name="inputName"
+          id="inputName"
+          placeholder="Назва"
+        />
+        <div *ngIf="path == 'product'" class="admin-view-form-row">
+          <input
+            type="text"
+            class="admin-view-form-row-input"
+            formControlName="name"
+            [ngClass]="{
+              touched:
+                form.controls['name'].touched && form.controls['name'].invalid
+            }"
+            name="inputName"
+            id="inputName"
+            placeholder="Назва"
+          />
+          <input
+            *ngIf="path == 'product'"
+            type="text"
+            class="admin-view-form-row-input"
+            formControlName="path"
+            [ngClass]="{
+              touched:
+                form.controls['path'].touched && form.controls['path'].invalid
+            }"
+            name="inputPath"
+            id="inputPath"
+            placeholder="Шлях"
+          />
+        </div>
+        <div *ngIf="path == 'item'" class="admin-view-form-row">
+          <select
+            type=""
+            class="admin-view-form-row-input"
+            formControlName="product"
+            name="inputProduct"
+            id="inputProduct"
+          >
+            <option value="" disabled selected>Продукт</option>
+            <option
+              *ngFor="let product of records.product"
+              [value]="product.path"
+            >
+              {{ product.name | titlecase }} ({{ product.path }})
+            </option>
+          </select>
+          <select
+            type="text"
+            class="admin-view-form-row-input"
+            formControlName="subcat"
+            name="inputSubcat"
+            id="inputSubcat"
+          >
+            <option value="" selected>Підкатегорія</option>
+            <option
+              *ngFor="let subcat of ui.misc.itemSubcat()"
+              [value]="subcat.name"
+            >
+              {{ subcat.title }} ({{ subcat.name }})
+            </option>
+          </select>
+        </div>
+        <input
+          *ngIf="path == 'item'"
+          type="text"
+          class="admin-view-form-input bold"
+          formControlName="path"
+          [ngClass]="{
+            touched:
+              form.controls['path'].touched && form.controls['path'].invalid
+          }"
+          name="inputPath"
+          id="inputPath"
+          placeholder="Шлях"
+        />
+        <input
+          *ngIf="path == 'item'"
+          type="text"
+          class="admin-view-form-input"
+          formControlName="name"
+          [ngClass]="{
+            touched:
+              form.controls['name'].touched && form.controls['name'].invalid
+          }"
+          name="inputName"
+          id="inputName"
+          placeholder="Назва"
+        />
+        <input
+          *ngIf="path == 'offer'"
+          type="text"
+          class="admin-view-form-input"
+          formControlName="title"
+          [ngClass]="{
+            touched:
+              form.controls['title'].touched && form.controls['title'].invalid
+          }"
+          name="inputTitle"
+          id="inputTitle"
+          placeholder="Заголовок"
+        />
+        <textarea
+          *ngIf="path == 'offer'"
+          class="admin-view-form-terms"
+          formControlName="terms"
+          [ngClass]="{
+            touched:
+              form.controls['terms'].touched && form.controls['terms'].invalid
+          }"
+          name="inputTerms"
+          id="inputTerms"
+          placeholder="Кожна умова з іншого рядка"
+        ></textarea>
+        <textarea
+          *ngIf="path == 'item'"
+          class="admin-view-form-comp"
+          formControlName="comp"
+          name="inputComp"
+          id="inputComp"
+          placeholder="Склад"
+        ></textarea>
+        <div *ngIf="path == 'item'" class="admin-view-form-row">
+          <input
+            type="text"
+            class="admin-view-form-row-input"
+            formControlName="weight"
+            [ngClass]="{
+              touched:
+                form.controls['weight'].touched &&
+                form.controls['weight'].invalid
+            }"
+            name="inputWeight"
+            id="inputWeight"
+            value="0 г"
+            placeholder="Вага"
+          />
+          <input
+            type="text"
+            class="admin-view-form-row-input"
+            formControlName="price"
+            [ngClass]="{
+              touched:
+                form.controls['price'].touched && form.controls['price'].invalid
+            }"
+            name="inputPrice"
+            id="inputPrice"
+            value="0 грн"
+            placeholder="Ціна"
+          />
+        </div>
+        <input
+          type="file"
+          class="admin-view-form-file"
+          formControlName="image"
+          name="inputFile"
+          id="inputFile"
+          accept="image/*"
+          (change)="ui.formUpload($event.target)"
+        />
+        <img
+          *ngIf="path == 'offer' && ui.formImage"
+          [src]="ui.formImage"
+          class="admin-view-form-img"
+        />
+        <img
+          *ngIf="path == 'product' && ui.formImage"
+          [src]="ui.formImage"
+          class="admin-view-form-logo"
+        />
+        <img
+          *ngIf="path == 'item' && ui.formImage"
+          [src]="ui.formImage"
+          class="admin-view-form-photo"
+        />
+        <button
+          type="submit"
+          class="admin-view-form-submit"
+          [disabled]="form.invalid || !ui.formImage"
+          (click)="ui.formIndex > -1 ? ui.update() : ui.create()"
+        >
+          Зберегти
+        </button>
+      </form>
+    </ng-template>
+    <a *ngIf="false" routerLink="/" class="admin-view-logout">Вихід</a>
+  </div>
+</div>
