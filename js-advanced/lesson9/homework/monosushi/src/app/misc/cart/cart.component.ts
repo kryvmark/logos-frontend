@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
       total: 0,
     },
 
-    itemMapping: Array<MarketItem>,
+    itemMapping: new Array<MarketItem>(),
     itemMap: (id: number) => {
       return this.items.find(item => item.id == id);
     },
@@ -41,6 +41,9 @@ export class CartComponent implements OnInit {
   }
 
   cartUpdate(): void {
+    this.cart = [];
+    this.ui.itemMapping = [];
+
     const jsonCart = localStorage.getItem('cart');
 
     if (jsonCart) {
@@ -69,10 +72,19 @@ export class CartComponent implements OnInit {
         this.ui.cart = { items, total };
       }
     }
+
+    this.market.cart.next();
   }
 
   cartDelete(i: number): void {
-    localStorage.setItem('cart', JSON.stringify(this.cart.splice(i, 1)));
+    this.cart.splice(i, 1);
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+    this.cartUpdate();
+  }
+
+  changeQty(i: number, qty: number): void {
+    this.cart[i].qty = qty;
+    localStorage.setItem('cart', JSON.stringify(this.cart));
     this.cartUpdate();
   }
 }

@@ -56,6 +56,11 @@
       @extend .i;
       background-image: app-firebase("main/empty.svg");
     }
+
+    &-error {
+      @extend .i;
+      background-image: app-firebase("main/error.svg");
+    }
   }
 
   &-delivery {

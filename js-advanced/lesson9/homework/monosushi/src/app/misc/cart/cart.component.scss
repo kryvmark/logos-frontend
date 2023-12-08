@@ -43,6 +43,33 @@
     height: 100%;
     position: relative;
 
+    &-stub {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: calc(100% - 4rem);
+
+      @include _768 {
+        max-height: calc(100% - 6rem);
+      }
+
+      .i-main-empty {
+        width: 6rem;
+        height: 6rem;
+        margin-bottom: 1rem;
+      }
+
+      &-h4 {
+        @include h4();
+        margin-bottom: 1.5rem;
+      }
+
+      &-link {
+        @include button();
+      }
+    }
+
     &-view {
       display: flex;
       flex-direction: column;
