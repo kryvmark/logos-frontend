@@ -27,4 +27,14 @@ export const conf = {
     south: 49.73118511137695,
     east: 24.1991222899474,
   },
+
+  categories: {
+    '': 'Всі',
+    philadelphia: 'Роли Філадельфія',
+    california: 'Роли Каліфорнія',
+    baked: 'Запечені роли',
+    craft: 'Фірмові суші',
+    maki: 'Роли Макі',
+    premium: 'Преміум суші',
+  },
 };

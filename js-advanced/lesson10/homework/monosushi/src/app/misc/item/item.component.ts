@@ -25,13 +25,4 @@ export class ItemComponent {
   changeQty(qty: number): void {
     this.qty = qty;
   }
-
-  order(): void {
-    // if (this.item.id) {
-    //   this.orderEvent.emit({
-    //     id: this.item.id,
-    //     qty: this.qty,
-    //   });
-    // }
-  }
 }

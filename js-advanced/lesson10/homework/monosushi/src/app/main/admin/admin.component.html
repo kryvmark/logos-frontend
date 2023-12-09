@@ -48,10 +48,10 @@
     <ng-container *ngIf="!ui.form; else adminForm">
       <div class="admin-view-wrap" *ngIf="ui.mobile; else adminTableDesktop">
         <ng-container [ngSwitch]="path">
-          <ng-container *ngSwitchCase="'offer'">
+          <ng-container *ngSwitchCase="'offers'">
             <table
               class="admin-view-wrap-table stub"
-              *ngIf="records.offer.length < 1"
+              *ngIf="records.offers.length < 1"
             >
               <tbody class="admin-view-wrap-table-tbody">
                 <tr class="admin-view-wrap-table-tr">
@@ -93,7 +93,7 @@
             </table>
             <table
               class="admin-view-wrap-table"
-              *ngFor="let offer of records.offer; index as i"
+              *ngFor="let offer of records.offers; index as i"
             >
               <tbody class="admin-view-wrap-table-tbody">
                 <tr class="admin-view-wrap-table-tr">
@@ -150,10 +150,10 @@
               </tbody>
             </table>
           </ng-container>
-          <ng-container *ngSwitchCase="'product'">
+          <ng-container *ngSwitchCase="'products'">
             <table
               class="admin-view-wrap-table stub"
-              *ngIf="records.product.length < 1"
+              *ngIf="records.products.length < 1"
             >
               <tbody class="admin-view-wrap-table-tbody">
                 <tr class="admin-view-wrap-table-tr">
@@ -189,7 +189,7 @@
             </table>
             <table
               class="admin-view-wrap-table"
-              *ngFor="let product of records.product; index as i"
+              *ngFor="let product of records.products; index as i"
             >
               <tbody class="admin-view-wrap-table-tbody">
                 <tr class="admin-view-wrap-table-tr">
@@ -240,10 +240,10 @@
               </tbody>
             </table>
           </ng-container>
-          <ng-container *ngSwitchCase="'item'">
+          <ng-container *ngSwitchCase="'items'">
             <table
               class="admin-view-wrap-table stub"
-              *ngIf="records.item.length < 1"
+              *ngIf="records.items.length < 1"
             >
               <tbody class="admin-view-wrap-table-tbody">
                 <tr class="admin-view-wrap-table-tr">
@@ -289,7 +289,7 @@
             </table>
             <table
               class="admin-view-wrap-table"
-              *ngFor="let item of records.item; index as i"
+              *ngFor="let item of records.items; index as i"
             >
               <tbody class="admin-view-wrap-table-tbody">
                 <tr class="admin-view-wrap-table-tr">
@@ -359,7 +359,7 @@
           <thead class="admin-view-table-thead">
             <tr class="admin-view-table-tr">
               <ng-container [ngSwitch]="path">
-                <ng-container *ngSwitchCase="'offer'">
+                <ng-container *ngSwitchCase="'offers'">
                   <th class="admin-view-table-th" style="width: 10%">Дата</th>
                   <th class="admin-view-table-th" style="width: 10%">Назва</th>
                   <th class="admin-view-table-th" style="width: 20%">
@@ -371,7 +371,7 @@
                   </th>
                   <th class="admin-view-table-th" style="width: 15%">Дії</th>
                 </ng-container>
-                <ng-container *ngSwitchCase="'product'">
+                <ng-container *ngSwitchCase="'products'">
                   <th class="admin-view-table-th" style="width: 10%">№</th>
                   <th class="admin-view-table-th" style="width: 25%">Назва</th>
                   <th class="admin-view-table-th" style="width: 20%">Шлях</th>
@@ -380,7 +380,7 @@
                   </th>
                   <th class="admin-view-table-th" style="width: 15%">Дії</th>
                 </ng-container>
-                <ng-container *ngSwitchCase="'item'">
+                <ng-container *ngSwitchCase="'items'">
                   <th class="admin-view-table-th" style="width: 12.5%">Тип</th>
                   <th class="admin-view-table-th" style="width: 17.5%">
                     Назва
@@ -398,10 +398,10 @@
           </thead>
           <tbody class="admin-view-table-tbody">
             <ng-container [ngSwitch]="path">
-              <ng-container *ngSwitchCase="'offer'">
+              <ng-container *ngSwitchCase="'offers'">
                 <tr
                   class="admin-view-table-tr stub"
-                  *ngIf="records.offer.length < 1"
+                  *ngIf="records.offers.length < 1"
                 >
                   <td class="admin-view-table-td">-</td>
                   <td class="admin-view-table-td">...</td>
@@ -423,7 +423,7 @@
                 </tr>
                 <tr
                   class="admin-view-table-tr"
-                  *ngFor="let offer of records.offer; index as i"
+                  *ngFor="let offer of records.offers; index as i"
                 >
                   <td class="admin-view-table-td">
                     {{ offer.date | date : "MM/yyyy" }}
@@ -460,10 +460,10 @@
                   </td>
                 </tr>
               </ng-container>
-              <ng-container *ngSwitchCase="'product'">
+              <ng-container *ngSwitchCase="'products'">
                 <tr
                   class="admin-view-table-tr stub"
-                  *ngIf="records.product.length < 1"
+                  *ngIf="records.products.length < 1"
                 >
                   <td class="admin-view-table-td">-</td>
                   <td class="admin-view-table-td">(немає)</td>
@@ -482,7 +482,7 @@
                 </tr>
                 <tr
                   class="admin-view-table-tr"
-                  *ngFor="let product of records.product; index as i"
+                  *ngFor="let product of records.products; index as i"
                 >
                   <td class="admin-view-table-td">{{ product.id }}</td>
                   <td class="admin-view-table-td">
@@ -514,10 +514,10 @@
                   </td>
                 </tr>
               </ng-container>
-              <ng-container *ngSwitchCase="'item'">
+              <ng-container *ngSwitchCase="'items'">
                 <tr
                   class="admin-view-table-tr stub"
-                  *ngIf="records.product.length < 1"
+                  *ngIf="records.products.length < 1"
                 >
                   <td class="admin-view-table-td">...</td>
                   <td class="admin-view-table-td">...</td>
@@ -540,7 +540,7 @@
                 </tr>
                 <tr
                   class="admin-view-table-tr"
-                  *ngFor="let item of records.item; index as i"
+                  *ngFor="let item of records.items; index as i"
                 >
                   <td class="admin-view-table-td">
                     <b>{{ item.path }}</b>
@@ -637,7 +637,7 @@
           >
             <option value="" disabled selected>Продукт</option>
             <option
-              *ngFor="let product of records.product"
+              *ngFor="let product of records.products"
               [value]="product.path"
             >
               {{ product.name | titlecase }} ({{ product.path }})

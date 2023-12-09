@@ -29,16 +29,16 @@ export class MainComponent implements OnInit, AfterViewInit {
   public orderItems: MarketOrderItem[] = [];
 
   public ui = {
-    spoiler: false,
     mobile: window.innerWidth < 768,
-
-    category: '',
-    categoryChange: (category: MarketItemCategory | '') => {
-      this.ui.category = category;
-    },
-
+    spoiler: false,
     toggle: () => {
       this.ui.spoiler = !this.ui.spoiler;
+    },
+
+    category: '',
+    categories: conf.categories,
+    categoryChange: (category: MarketItemCategory | '') => {
+      this.ui.category = category;
     },
 
     firebase: (name: string) => this.market.image('offers', name),
@@ -62,6 +62,9 @@ export class MainComponent implements OnInit, AfterViewInit {
         this.offers = this.market.records.offers;
         this.items = this.market.records.items;
       });
+    } else {
+      this.offers = this.market.records.offers;
+      this.items = this.market.records.items;
     }
   }
 
@@ -84,18 +87,5 @@ export class MainComponent implements OnInit, AfterViewInit {
   onResize(): void {
     this.ui.mobile = window.innerWidth < 768;
     this.swiper.nativeElement.slidesPerView = this.ui.mobile ? 1 : 2;
-  }
-
-  order(item: MarketOrderItem): void {
-    let cart = JSON.parse(localStorage.getItem('cart') || JSON.stringify([]));
-    if (cart instanceof Array) {
-      const found = cart.find((ordered) => ordered.itemId == item.id);
-
-      if (found) found.qty += item.qty;
-      else cart.push(item);
-    } else cart = [];
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    this.market.subject.next();
   }
 }

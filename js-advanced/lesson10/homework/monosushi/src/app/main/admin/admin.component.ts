@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AdminService } from 'src/core/admin/admin.service';
 import { MarketService } from 'src/core/market/market.service';
 import {
   MarketItem,
@@ -21,9 +22,9 @@ export class AdminComponent implements OnInit {
   public form!: FormGroup;
 
   public records = {
-    offer: new Array<MarketOffer>(),
-    product: new Array<MarketProduct>(),
-    item: new Array<MarketItem>(),
+    offers: new Array<MarketOffer>(),
+    products: new Array<MarketProduct>(),
+    items: new Array<MarketItem>(),
   };
 
   public ui = {
@@ -41,8 +42,8 @@ export class AdminComponent implements OnInit {
         this.form.reset();
         if (this.form.controls['product'])
           this.form.controls['product'].setValue('');
-        if (this.form.controls['subcat'])
-          this.form.controls['subcat'].setValue('');
+        if (this.form.controls['category'])
+          this.form.controls['category'].setValue('');
         this.ui.formIndex = -1;
         this.ui.formImage = '';
         this.ui.formFile = new File([], '');
@@ -66,114 +67,102 @@ export class AdminComponent implements OnInit {
 
     create: () => {
       switch (this.path) {
-        // case 'offer':
-        //   const offerFileExt = this.ui.formFile.name.split('.').pop();
-        //   const offerFileDate = Date.now();
-        //   const offerFileName = `${offerFileDate}.${offerFileExt}`;
+        case 'offer':
+          const offerFileExt = this.ui.formFile.name.split('.').pop();
+          const offerFileDate = Date.now();
+          const offerFileName = `${offerFileDate}.${offerFileExt}`;
 
-        //   const offer: MarketOffer = {
-        //     date: offerFileDate,
-        //     name: this.form.controls['name'].value,
-        //     title: this.form.controls['title'].value,
-        //     terms: this.form.controls['terms'].value.toString().split('\n'),
-        //     logo: offerFileName,
-        //   };
+          const offer: MarketOffer = {
+            date: offerFileDate,
+            name: this.form.controls['name'].value,
+            title: this.form.controls['title'].value,
+            terms: this.form.controls['terms'].value.toString().split('\n'),
+            logo: offerFileName,
+          };
 
-        //   if (offer.logo) {
-        //     this.market
-        //       .upload('offer', offerFileName, this.ui.formFile)
-        //       .finally(() => {
-        //         this.market.create('offer', offer).subscribe(() => {
-        //           this.ui.read();
-        //         });
-        //       });
-        //   }
+          if (offer.logo) {
+            this.admin
+              .upload('offers', offerFileName, this.ui.formFile)
+              .finally(() => {
+                this.admin.create('offers', offer).subscribe(() => {
+                  this.ui.read();
+                });
+              });
+          }
 
-        //   break;
-        // case 'product':
-        //   const productFileExt = this.ui.formFile.name.split('.').pop();
-        //   const productFileDate = Date.now();
-        //   const productFileName = `${productFileDate}.${productFileExt}`;
+          break;
+        case 'product':
+          const productFileExt = this.ui.formFile.name.split('.').pop();
+          const productFileDate = Date.now();
+          const productFileName = `${productFileDate}.${productFileExt}`;
 
-        //   const product: MarketProduct = {
-        //     name: this.form.controls['name'].value,
-        //     path: this.form.controls['path'].value,
-        //     logo: productFileName,
-        //   };
+          const product: MarketProduct = {
+            name: this.form.controls['name'].value,
+            path: this.form.controls['path'].value,
+            logo: productFileName,
+          };
 
-        //   if (product.logo) {
-        //     this.market
-        //       .upload('product', productFileName, this.ui.formFile)
-        //       .finally(() => {
-        //         this.market.create('product', product).subscribe(() => {
-        //           this.ui.read();
-        //         });
-        //       });
-        //   }
+          if (product.logo) {
+            this.admin
+              .upload('products', productFileName, this.ui.formFile)
+              .finally(() => {
+                this.admin.create('products', product).subscribe(() => {
+                  this.ui.read();
+                });
+              });
+          }
 
-        //   break;
-        // case 'item':
-        //   const itemFileExt = this.ui.formFile.name.split('.').pop();
-        //   const itemFileDate = Date.now();
-        //   const itemFileName = `${itemFileDate}.${itemFileExt}`;
+          break;
+        case 'item':
+          const itemFileExt = this.ui.formFile.name.split('.').pop();
+          const itemFileDate = Date.now();
+          const itemFileName = `${itemFileDate}.${itemFileExt}`;
 
-        //   const item: MarketItem = {
-        //     product: this.form.controls['product'].value,
-        //     subcat: this.form.controls['subcat'].value,
-        //     name: this.form.controls['name'].value,
-        //     path: this.form.controls['path'].value,
-        //     comp: this.form.controls['comp'].value,
-        //     weight: this.form.controls['weight'].value,
-        //     price: this.form.controls['price'].value,
-        //     logo: itemFileName,
-        //   };
+          const item: MarketItem = {
+            product: this.form.controls['product'].value,
+            category: this.form.controls['category'].value,
+            name: this.form.controls['name'].value,
+            path: this.form.controls['path'].value,
+            comp: this.form.controls['comp'].value,
+            weight: this.form.controls['weight'].value,
+            price: this.form.controls['price'].value,
+            logo: itemFileName,
+          };
 
-        //   if (item.logo) {
-        //     this.market
-        //       .upload('item', itemFileName, this.ui.formFile)
-        //       .finally(() => {
-        //         this.market.create('item', item).subscribe(() => {
-        //           this.ui.read();
-        //         });
-        //       });
-        //   }
+          if (item.logo) {
+            this.admin
+              .upload('items', itemFileName, this.ui.formFile)
+              .finally(() => {
+                this.admin.create('items', item).subscribe(() => {
+                  this.ui.read();
+                });
+              });
+          }
 
-        //   break;
+          break;
       }
     },
 
-    read: () => {
-      // this.ui.formToggle(false);
+    read: (update = true) => {
+      this.ui.formToggle(false);
 
-      // switch (this.path) {
-      //   case 'offer':
-      //     this.market.read<MarketOffer>('offer').subscribe((records) => {
-      //       this.records.offer = records;
-      //     });
-      //     break;
-      //   case 'product':
-      //     this.market.read<MarketProduct>('product').subscribe((records) => {
-      //       this.records.product = records;
-      //     });
-      //     break;
-      //   case 'item':
-      //     this.market.read<MarketItem>('item').subscribe((records) => {
-      //       this.records.item = records;
-      //     });
-
-      //     this.market.read<MarketProduct>('product').subscribe((records) => {
-      //       this.records.product = records;
-      //     });
-
-      //     break;
-      // }
+      if (update || !this.market.records) {
+        this.market.read().subscribe(() => {
+          const { offers, products, items } = this.market.records;
+          this.records = { offers, products, items };
+        });
+      } else {
+        const { offers, products, items } = this.market.records;
+        this.records = { offers, products, items };
+      }
     },
 
     readOne: (i: number) => {
       this.ui.formToggle();
       this.ui.formIndex = i;
 
-      switch (this.path) {
+      switch (
+        this.path
         // case 'offer':
         //   const offer = this.records.offer[i];
 
@@ -213,11 +202,13 @@ export class AdminComponent implements OnInit {
         //   this.ui.formImage = this.ui.firebase(item.logo);
 
         //   break;
+      ) {
       }
     },
 
     update: () => {
-      switch (this.path) {
+      switch (
+        this.path
         // case 'offer':
         //   const offer = { ...this.records.offer[this.ui.formIndex] };
         //   offer.name = this.form.controls['name'].value;
@@ -302,11 +293,13 @@ export class AdminComponent implements OnInit {
         //     });
 
         //   break;
+      ) {
       }
     },
 
     delete: (i: number) => {
-      switch (this.path) {
+      switch (
+        this.path
         // case 'offer':
         //   const offer = this.records.offer[i];
         //   const offerId = offer.id;
@@ -350,15 +343,16 @@ export class AdminComponent implements OnInit {
         //   }
 
         //   break;
+      ) {
       }
     },
 
     misc: {
       itemProductName: (i: number) => {
-        const item = this.records.item[i];
+        const item = this.records.items[i];
 
         if (item) {
-          const product = this.records.product.find(
+          const product = this.records.products.find(
             (record) => record.path == item.product
           );
 
@@ -368,12 +362,12 @@ export class AdminComponent implements OnInit {
       },
 
       itemSubcatDict: {
-        'philadelphia': 'Роли Філадельфія',
-        'california': 'Роли Каліфорнія',
-        'baked': 'Запечені Роли',
-        'craft': 'Фірмові Суші',
-        'maki': 'Роли Макі',
-        'premium': 'Преміум Суші',
+        philadelphia: 'Роли Філадельфія',
+        california: 'Роли Каліфорнія',
+        baked: 'Запечені Роли',
+        craft: 'Фірмові Суші',
+        maki: 'Роли Макі',
+        premium: 'Преміум Суші',
       },
 
       itemSubcat: () => {
@@ -396,45 +390,46 @@ export class AdminComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private market: MarketService,
+    private admin: AdminService,
     private forms: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.routing = this.route.url.subscribe(([url]) => {
       this.path = url.path as AdminPath;
-      this.ui.read();
+      this.ui.read(false);
 
       switch (this.path) {
-        // case 'offer':
-        //   this.form = this.forms.group({
-        //     name: ['', Validators.required],
-        //     title: ['', Validators.required],
-        //     terms: ['', Validators.required],
-        //     image: [null],
-        //   });
+        case 'offers':
+          this.form = this.forms.group({
+            name: ['', Validators.required],
+            title: ['', Validators.required],
+            terms: ['', Validators.required],
+            image: [null],
+          });
 
-        //   break;
-        // case 'product':
-        //   this.form = this.forms.group({
-        //     name: ['', Validators.required],
-        //     path: ['', Validators.required],
-        //     image: [null],
-        //   });
+          break;
+        case 'products':
+          this.form = this.forms.group({
+            name: ['', Validators.required],
+            path: ['', Validators.required],
+            image: [null],
+          });
 
-        //   break;
-        // case 'item':
-        //   this.form = this.forms.group({
-        //     product: ['', Validators.required],
-        //     subcat: [''],
-        //     name: ['', Validators.required],
-        //     path: ['', Validators.required],
-        //     comp: [''],
-        //     weight: ['', Validators.required],
-        //     price: ['', Validators.required],
-        //     image: [null],
-        //   });
+          break;
+        case 'items':
+          this.form = this.forms.group({
+            product: ['', Validators.required],
+            category: [''],
+            name: ['', Validators.required],
+            path: ['', Validators.required],
+            comp: [''],
+            weight: ['', Validators.required],
+            price: ['', Validators.required],
+            image: [null],
+          });
 
-        //   break;
+          break;
       }
     });
   }

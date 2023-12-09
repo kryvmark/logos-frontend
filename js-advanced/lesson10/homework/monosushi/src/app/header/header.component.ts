@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MarketService } from 'src/core/market/market.service';
 import { MarketItem, MarketProduct } from 'src/core/types';
 import { conf } from '../../core/conf';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
   public ui = {
     menu: false,
     mobile: true,
@@ -46,21 +46,22 @@ export class HeaderComponent implements OnDestroy {
   };
 
   public products: MarketProduct[] = [];
-  public items: MarketItem[] = [];
 
   public subject = this.market.subject.subscribe(() => {
-    this.cartTotal();
+
   });
 
   constructor(private market: MarketService, private router: Router) {
     this.onResize();
+  }
 
-    if (!market.records) {
-      market.read().subscribe(() => {
+  ngOnInit(): void {
+    if (!this.market.records) {
+      this.market.read().subscribe(() => {
         this.products = this.market.records.products;
-        this.items = this.market.records.items;
-        this.cartTotal();
       });
+    } else {
+      this.products = this.market.records.products;
     }
   }
 
@@ -81,33 +82,5 @@ export class HeaderComponent implements OnDestroy {
     this.ui.cartOpen
       ? window.document.body.classList.add('locked')
       : window.document.body.classList.remove('locked');
-  }
-
-  cartTotal(): void {
-    const jsonCart = localStorage.getItem('cart');
-
-    if (jsonCart) {
-      const cart = JSON.parse(jsonCart);
-
-      if (cart instanceof Array) {
-        let items = 0;
-        let total = 0;
-
-        for (const item of cart) {
-          if (typeof item.itemId == 'number') {
-            const dbItem = this.items.find(
-              (record) => record.id == item.itemId
-            );
-
-            if (dbItem && typeof item.qty == 'number') {
-              total += parseInt(dbItem.price) * item.qty;
-              items += item.qty;
-            }
-          }
-        }
-
-        this.ui.cart = { items, total };
-      }
-    }
   }
 }

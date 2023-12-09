@@ -2,7 +2,60 @@
 @import "../../../style/colors";
 @import "../../../style/mixins";
 
-.product {
+.spoiler {
+  .products {
+    &-rolls {
+      .products-expand {
+        max-height: 105rem;
+
+        @include _768 {
+          max-height: 45rem;
+        }
+
+        @include _1200 {
+          max-height: 40rem;
+        }
+      }
+    }
+
+    &-sets {
+      .products-expand {
+        max-height: 87rem;
+
+        @include _768 {
+          max-height: 36rem;
+        }
+
+        @include _1200 {
+          max-height: 32rem;
+        }
+      }
+    }
+
+    &-drinks {
+      .products-expand {
+        max-height: 41rem;
+
+        @include _768 {
+          max-height: 21rem;
+        }
+
+        @include _1200 {
+          max-height: 17rem;
+        }
+      }
+    }
+  }
+
+  .products-spoiler {
+    &::after {
+      top: 0.375rem;
+      transform: rotate(-135deg);
+    }
+  }
+}
+
+.products {
   @include container();
   align-items: flex-start;
 
@@ -121,6 +174,40 @@
 
     &-li {
       margin-bottom: 0.5rem;
+    }
+  }
+
+  &-expand {
+    height: auto;
+    max-height: 0;
+    overflow-y: hidden;
+    transition: 0.5s ease-out;
+  }
+
+  &-spoiler {
+    @include button-custom();
+    @include action();
+    padding-inline-end: 1.5rem;
+
+    &::before {
+      bottom: -0.25rem;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      width: 0.5rem;
+      height: 0.5rem;
+      position: absolute;
+      top: 0.125rem;
+      right: 0.125rem;
+      transform: rotate(45deg);
+      transition: 0.33s;
+
+      border: {
+        bottom: 0.125rem solid $monosushi;
+        right: 0.125rem solid $monosushi;
+      }
     }
   }
 }

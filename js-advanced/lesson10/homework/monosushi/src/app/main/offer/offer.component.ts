@@ -21,6 +21,8 @@ export class OfferComponent implements OnInit {
       this.market.read().subscribe(() => {
         this.offers = this.market.records.offers;
       });
+    } else {
+      this.offers = this.market.records.offers;
     }
   }
 }

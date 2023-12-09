@@ -4,7 +4,7 @@
 @import "../../style/methods";
 
 .spoiler {
-  .main-info-more {
+  .main-info-expand {
     max-height: 130rem;
 
     @include _768 {
@@ -307,7 +307,7 @@
       @include action();
     }
 
-    &-more {
+    &-expand {
       height: auto;
       max-height: 0;
       overflow-y: hidden;

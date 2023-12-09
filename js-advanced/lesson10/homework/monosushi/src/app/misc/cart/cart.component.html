@@ -23,13 +23,12 @@
           <app-numeric
             class="cart-container-view-item-numeric"
             [value]="item.qty"
-            (changeEvent)="changeQty(i, $event)"
           ></app-numeric>
           <span class="cart-container-view-item-price">
             <b>{{ ui.parseInt(ui.itemMap(item.id)!.price) * item.qty }}</b>
             грн
           </span>
-          <i class="i-misc-remove" (click)="cartDelete(i)"></i>
+          <i class="i-misc-remove"></i>
         </div>
       </div>
     </ng-template>
