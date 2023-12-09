@@ -1,0 +1,17 @@
+<div class="offer_info">
+  <ng-container *ngIf="offer">
+    <nav class="offer_info-nav">
+      <a routerLink="/" class="offer_info-nav-link">Головна</a>
+      <a routerLink="/offers" class="offer_info-nav-link">Акції</a>
+      <a class="offer_info-nav-current">{{ offer.name | titlecase }}</a>
+    </nav>
+    <div class="offer_info-banner">
+      <h1 class="offer_info-h1">{{ offer.title }}</h1>
+    </div>
+    <ul class="offer_info-ul">
+      <li *ngFor="let term of offer.terms" class="offer_info-ul-li">
+        {{ term }}
+      </li>
+    </ul>
+  </ng-container>
+</div>

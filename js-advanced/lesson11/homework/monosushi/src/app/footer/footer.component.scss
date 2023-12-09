@@ -1,0 +1,343 @@
+@import "../../style/media";
+@import "../../style/colors";
+@import "../../style/mixins";
+
+@mixin footer-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  margin-inline: 0.5rem;
+  align-self: flex-start;
+
+  @include _768 {
+    margin-inline: auto;
+  }
+
+  @include _1200 {
+    margin-inline: 0;
+  }
+}
+
+@mixin footer-list-heading {
+  font-weight: bold;
+  margin-block: 0.25rem;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem 4rem;
+  border-top: 0.25rem solid $monosushi;
+
+  @include _1200 {
+    padding: 1.5rem;
+    padding-bottom: 0.75rem;
+  }
+
+  &-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    @include _768 {
+      justify-content: space-between;
+    }
+
+    &-logo {
+      width: 8rem;
+      height: 4rem;
+
+      .i-logo {
+        background: {
+          size: 8rem 2.5rem;
+          position-x: -0.25rem;
+        }
+      }
+
+      @include _1200 {
+        width: 9rem;
+
+        .i-logo {
+          background: {
+            size: 9rem 3rem;
+            position: center;
+          }
+        }
+      }
+    }
+
+    &-social {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+
+      @include _768 {
+        display: none;
+      }
+
+      &-button {
+        @include button();
+        margin: 0.25rem;
+        padding: 0.5rem;
+
+        .i-footer-facebook,
+        .i-footer-instagram {
+          padding: 0.5rem;
+        }
+      }
+    }
+
+    &-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-block: 0.25rem;
+      width: 100%;
+
+      @include _768 {
+        width: 80%;
+        justify-content: flex-end;
+      }
+
+      @include _1200 {
+        width: auto;
+        justify-content: center;
+      }
+
+      &-link {
+        @include link($smaller: true);
+        margin: 0.25rem 0.5rem;
+
+        @include _768 {
+          margin: 0 1rem;
+
+          &:first-of-type {
+            margin-inline-start: 0;
+          }
+
+          &:last-of-type {
+            margin-inline-end: 0;
+          }
+        }
+
+        @include _1200 {
+          @include link($highlight: true);
+          font-size: 1rem;
+        }
+      }
+    }
+
+    &-delivery {
+      @include footer-list();
+
+      &-heading {
+        @include footer-list-heading();
+      }
+
+      &-point {
+        margin-block: 0.25rem;
+        color: $muted;
+      }
+    }
+
+    &-order {
+      @include footer-list();
+
+      &-heading {
+        @include footer-list-heading();
+      }
+
+      &-tel {
+        margin-block: 0.25rem;
+
+        &-link {
+          @include link($smaller: true);
+        }
+      }
+    }
+
+    &-hours {
+      @include footer-list();
+
+      &-heading {
+        @include footer-list-heading();
+      }
+
+      &-info {
+        margin-block: 0.25rem;
+        color: $muted;
+
+        b {
+          font-weight: normal;
+          color: $text;
+        }
+      }
+    }
+  }
+
+  &-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    @include _768 {
+      justify-content: space-between;
+    }
+
+    &-payment {
+      display: flex;
+      justify-content: center;
+      padding-block: 0.25rem;
+      width: 100%;
+
+      @include _768 {
+        order: -1;
+        width: auto;
+      }
+
+      &-mastercard,
+      &-visa,
+      &-liqpay {
+        border: 1px solid $gray;
+        border-radius: 0.5rem;
+        padding-inline: 0.5rem;
+        margin: 0.25rem;
+
+        @include _1200 {
+          padding-inline: 1rem;
+        }
+
+        .i-footer-mastercard,
+        .i-footer-visa,
+        .i-footer-liqpay {
+          padding: 1rem;
+
+          @include _1200 {
+            padding: 1.125rem;
+          }
+        }
+
+        .i-footer-mastercard {
+          background-position-x: 0.125rem;
+        }
+
+        .i-footer-liqpay {
+          transform: scale(1.25);
+        }
+      }
+    }
+
+    &-copyright {
+      font-size: 0.75rem;
+      padding-block: 0.25rem;
+      color: $muted;
+      margin-inline: 1rem;
+
+      @include _768 {
+        order: -2;
+        margin-inline: 0;
+      }
+
+      @include _1200 {
+        font-size: 14px;
+      }
+    }
+
+    &-social {
+      display: none;
+
+      @include _768 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &-text {
+        font-size: 14px;
+        margin-inline-end: 0.5rem;
+        display: none;
+
+        @include _1200 {
+          display: block;
+        }
+      }
+
+      &-button {
+        @include button();
+        margin: 0.25rem;
+        padding: 0.5rem;
+
+        @include _1200 {
+          padding: 0.75rem;
+        }
+
+        .i-footer-facebook,
+        .i-footer-instagram {
+          padding: 0.5rem;
+        }
+      }
+    }
+
+    &-redstone {
+      margin-inline: 1rem;
+      font-size: 14px;
+      @include link($highlight: true);
+      position: relative;
+
+      @include _768 {
+        margin-inline: 0;
+      }
+
+      @include _1200 {
+        &:hover &-text {
+          color: $monosushi;
+        }
+      }
+
+      &-text {
+        display: none;
+
+        @include _1200 {
+          display: block;
+          width: 11.875rem;
+          color: $muted;
+          transition: 0.33s;
+        }
+      }
+
+      .i-footer-redstone {
+        width: 5rem;
+        height: 1.125rem;
+
+        background: {
+          color: #fff;
+          position-y: 1px;
+        }
+
+        @include _1200 {
+          position: absolute;
+          top: -0.125rem;
+          right: 0;
+        }
+      }
+    }
+  }
+
+  &-entity {
+    padding-block: 0.25rem 0.5rem;
+    color: $muted;
+    text-align: center;
+
+    @include _768 {
+      text-align: left;
+    }
+
+    @include _1200 {
+      font-size: 1.125rem;
+    }
+  }
+}

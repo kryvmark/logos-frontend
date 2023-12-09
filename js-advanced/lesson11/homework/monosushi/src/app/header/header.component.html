@@ -1,0 +1,159 @@
+<header class="header" [ngClass]="{ 'locked-menu': ui.menu, 'locked-cart': ui.cart }">
+  <div class="shadow" (click)="ui.menuToggle(false)"></div>
+  <nav class="header-top">
+    <a class="header-top-logo" routerLink="" (click)="ui.menuToggle(false)">
+      <i class="i-logo"></i>
+    </a>
+    <nav class="header-top-main">
+      <a class="header-top-main-link" routerLink="offers">
+        <i class="i-header-offer"></i> Акції
+      </a>
+      <ng-container *ngIf="products.length < 1; else topProducts">
+        <a class="header-top-main-link" *ngFor="let i of [1, 2, 3, 4]">
+          <i class="i"></i>
+          ...
+        </a>
+      </ng-container>
+      <ng-template #topProducts>
+        <a
+          class="header-top-main-link"
+          *ngFor="let product of products"
+          [routerLink]="'products/' + product.path"
+        >
+          <i
+            class="i"
+            [style.backgroundImage]="'url(' + ui.logo(product.logo) + ')'"
+          ></i>
+          {{ product.name | titlecase }}
+        </a>
+      </ng-template>
+    </nav>
+    <ng-container *ngIf="ui.mobile; else desktopTel">
+      <a class="header-top-tel" href="tel:+380978780837">
+        <i class="i-header-phone"></i>
+      </a>
+    </ng-container>
+    <ng-template #desktopTel>
+      <div class="header-top-call">
+        <button class="header-top-call-button">
+          <i class="i-header-phone"></i>
+          <span class="header-top-call-button-text">Ми зателефонуємо</span>
+        </button>
+      </div>
+      <div class="header-top-info">
+        <a class="header-top-info-tel" href="tel:+380978780837"
+          >+380978780837
+        </a>
+        <span class="header-top-info-hours" *ngIf="ui.conf.workDay"
+          >Працюємо з <b>{{ ui.conf.workFrom }}</b> до
+          <b>{{ ui.conf.workTo }}</b>
+        </span>
+      </div>
+    </ng-template>
+    <div class="header-top-client">
+      <a
+        class="header-top-client-link"
+        routerLink="admin"
+        (click)="ui.menuToggle(false)"
+      >
+        <i class="i-header-user"></i>
+      </a>
+    </div>
+    <div class="header-top-menu">
+      <button class="header-top-menu-button" (click)="ui.menuToggle()">
+        <svg class="menu" viewBox="0 0 32 24">
+          <path
+            class="menu-top"
+            d="M 6 3 H 26 C 28 3 30 5 30 7.5 C 30 10 28 12 26 12 H 16"
+          ></path>
+          <path class="menu-middle" d="M 26 12 H 6"></path>
+          <path
+            class="menu-bottom"
+            d="M 26 21 H 6 C 4 21 2 19 2 16.5 C 2 14 4 12 6 12 H 16"
+          ></path>
+        </svg>
+      </button>
+      <ng-container *ngIf="!ui.mobile">
+        <nav class="header-float" (click)="ui.menuToggle()">
+          <a class="header-float-link" routerLink="delivery">
+            Доставка та оплата
+          </a>
+          <a class="header-float-link" routerLink="about"> Про нас </a>
+          <a class="header-float-link" routerLink="offers"> Акції на суші </a>
+        </nav>
+      </ng-container>
+    </div>
+    <button class="header-top-cart" (click)="ui.cartToggle()">
+      <i class="i-header-basket">
+        <span class="counter">{{ cart.total.items }}</span>
+      </i>
+      <span class="header-top-cart-total">
+        <b>{{ cart.total.price }}</b> грн
+      </span>
+    </button>
+  </nav>
+
+  <ng-container *ngIf="ui.mobile">
+    <nav class="header-side">
+      <a
+        class="header-side-link"
+        *ngFor="let product of products.slice(3)"
+        [routerLink]="'products/' + product.path"
+        (click)="ui.menuToggle(false)"
+      >
+        {{ product.name | titlecase }}
+      </a>
+      <a
+        class="header-side-link"
+        routerLink="delivery"
+        (click)="ui.menuToggle(false)"
+      >
+        Доставка та оплата
+      </a>
+      <a class="header-side-link" routerLink="about" (click)="ui.menuToggle(false)"
+        >Про нас
+      </a>
+      <a class="header-side-link" routerLink="offers" (click)="ui.menuToggle(false)"
+        >Акції на суші
+      </a>
+      <a class="header-side-tel" href="tel:+380978780837">+380978780837</a>
+      <button class="header-side-call">
+        <i class="i-header-phone"></i> Ми зателефонуємо
+      </button>
+    </nav>
+    <nav class="header-bottom">
+      <a
+        class="header-bottom-link"
+        routerLink="offers"
+        (click)="ui.menuToggle(false)"
+      >
+        <i class="i-header-offer"></i> Акції
+      </a>
+      <ng-container *ngIf="products.length < 1; else bottomProducts">
+        <a
+          class="header-bottom-link"
+          *ngFor="let i of [1, 2, 3]"
+          (click)="ui.menuToggle(false)"
+        >
+          <i class="i"></i>
+          ...
+        </a>
+      </ng-container>
+      <ng-template #bottomProducts>
+        <a
+          class="header-bottom-link"
+          *ngFor="let product of products.slice(0, 3)"
+          [routerLink]="'products/' + product.path"
+          (click)="ui.menuToggle(false)"
+        >
+          <i
+            class="i"
+            [style.backgroundImage]="'url(' + ui.logo(product.logo) + ')'"
+          ></i>
+          {{ product.name | titlecase }}
+        </a>
+      </ng-template>
+    </nav>
+  </ng-container>
+</header>
+<app-cart [cart]="cart" [active]="ui.cart" (closeEvent)="ui.cartToggle()"></app-cart>
