@@ -13,29 +13,29 @@ import { TermsComponent } from './main/terms/terms.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
-  { path: 'offer', component: OfferComponent },
-  { path: 'offer/:id', component: OfferInfoComponent },
-  { path: 'product/:path', component: ProductComponent },
-  { path: 'product/:name/:path', component: ProductInfoComponent },
+  { path: 'offers', component: OfferComponent },
+  { path: 'offers/:id', component: OfferInfoComponent },
+  { path: 'products/:path', component: ProductComponent },
+  { path: 'products/:name/:path', component: ProductInfoComponent },
   { path: 'delivery', component: DeliveryComponent },
   { path: 'about', component: AboutComponent },
   {
     path: 'admin',
     children: [
       {
-        path: 'offer',
+        path: 'offers',
         component: AdminComponent,
       },
       {
-        path: 'product',
+        path: 'products',
         component: AdminComponent,
       },
       {
-        path: 'item',
+        path: 'items',
         component: AdminComponent,
       },
       {
-        path: 'order',
+        path: 'orders',
         component: AdminComponent,
       },
       {
@@ -45,7 +45,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'offer',
+        redirectTo: 'offers',
         pathMatch: 'full',
       },
     ],

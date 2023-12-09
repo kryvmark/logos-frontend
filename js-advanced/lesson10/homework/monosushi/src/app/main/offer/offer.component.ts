@@ -11,14 +11,16 @@ export class OfferComponent implements OnInit {
   public offers: MarketOffer[] = [];
 
   public ui = {
-    firebase: (name: string) => this.market.image('offer', name),
+    firebase: (name: string) => this.market.image('offers', name),
   };
 
   constructor(private market: MarketService) {}
 
   ngOnInit(): void {
-    this.market.read<MarketOffer>('offer').subscribe((offers) => {
-      this.offers = offers;
-    });
+    if (!this.market.records) {
+      this.market.read().subscribe(() => {
+        this.offers = this.market.records.offers;
+      });
+    }
   }
 }

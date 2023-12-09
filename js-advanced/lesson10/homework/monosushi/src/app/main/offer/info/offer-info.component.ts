@@ -11,7 +11,7 @@ import { MarketOffer } from 'src/core/types';
 })
 export class OfferInfoComponent implements OnInit {
   public ui = {
-    firebase: (name: string) => this.market.image('offer', name),
+    firebase: (name: string) => this.market.image('offers', name),
   };
 
   public offer!: MarketOffer;
@@ -26,13 +26,13 @@ export class OfferInfoComponent implements OnInit {
     const id = parseInt(this.route.snapshot.paramMap.get('id') ?? '');
 
     if (id) {
-      this.market
-        .readOne<MarketOffer>('offer', id)
-        .pipe(catchError(() => of(null)))
-        .subscribe((offer) => {
-          if (offer) this.offer = offer;
-          else this.router.navigate(['/offer'], { replaceUrl: true });
-        });
+      // this.market
+      //   .readOne<MarketOffer>('offer', id)
+      //   .pipe(catchError(() => of(null)))
+      //   .subscribe((offer) => {
+      //     if (offer) this.offer = offer;
+      //     else this.router.navigate(['/offer'], { replaceUrl: true });
+      //   });
     }
   }
 }

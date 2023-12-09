@@ -20,16 +20,16 @@ export class CartComponent implements OnInit {
       return this.items.find(item => item.id == id);
     },
 
-    firebase: (name: string) => this.market.image('item', name),
+    firebase: (name: string) => this.market.image('items', name),
     parseInt: (s: string) => parseInt(s),
   };
 
   public items: MarketItem[] = [];
-  public cart: MarketOrderItem[] = [];
+  public cart!: MarketOrderItem[];
 
   constructor(private market: MarketService) {
-    this.market.read<MarketItem>('item').subscribe((items) => {
-      this.items = items;
+    this.market.read().subscribe(() => {
+      this.items = this.market.records.items;
       this.cartUpdate();
     });
   }
@@ -73,7 +73,7 @@ export class CartComponent implements OnInit {
       }
     }
 
-    this.market.cart.next();
+    this.market.subject.next();
   }
 
   cartDelete(i: number): void {

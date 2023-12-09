@@ -4,11 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MarketService } from 'src/core/market/market.service';
 import {
-  MarketPath,
   MarketItem,
   MarketOffer,
-  MarketOrder,
   MarketProduct,
+  AdminPath,
 } from 'src/core/types';
 
 @Component({
@@ -17,7 +16,7 @@ import {
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  public path!: MarketPath;
+  public path!: AdminPath;
   public routing!: Subscription;
   public form!: FormGroup;
 
@@ -25,7 +24,6 @@ export class AdminComponent implements OnInit {
     offer: new Array<MarketOffer>(),
     product: new Array<MarketProduct>(),
     item: new Array<MarketItem>(),
-    order: new Array<MarketOrder>(),
   };
 
   public ui = {
@@ -68,107 +66,107 @@ export class AdminComponent implements OnInit {
 
     create: () => {
       switch (this.path) {
-        case 'offer':
-          const offerFileExt = this.ui.formFile.name.split('.').pop();
-          const offerFileDate = Date.now();
-          const offerFileName = `${offerFileDate}.${offerFileExt}`;
+        // case 'offer':
+        //   const offerFileExt = this.ui.formFile.name.split('.').pop();
+        //   const offerFileDate = Date.now();
+        //   const offerFileName = `${offerFileDate}.${offerFileExt}`;
 
-          const offer: MarketOffer = {
-            date: offerFileDate,
-            name: this.form.controls['name'].value,
-            title: this.form.controls['title'].value,
-            terms: this.form.controls['terms'].value.toString().split('\n'),
-            logo: offerFileName,
-          };
+        //   const offer: MarketOffer = {
+        //     date: offerFileDate,
+        //     name: this.form.controls['name'].value,
+        //     title: this.form.controls['title'].value,
+        //     terms: this.form.controls['terms'].value.toString().split('\n'),
+        //     logo: offerFileName,
+        //   };
 
-          if (offer.logo) {
-            this.market
-              .upload('offer', offerFileName, this.ui.formFile)
-              .finally(() => {
-                this.market.create('offer', offer).subscribe(() => {
-                  this.ui.read();
-                });
-              });
-          }
+        //   if (offer.logo) {
+        //     this.market
+        //       .upload('offer', offerFileName, this.ui.formFile)
+        //       .finally(() => {
+        //         this.market.create('offer', offer).subscribe(() => {
+        //           this.ui.read();
+        //         });
+        //       });
+        //   }
 
-          break;
-        case 'product':
-          const productFileExt = this.ui.formFile.name.split('.').pop();
-          const productFileDate = Date.now();
-          const productFileName = `${productFileDate}.${productFileExt}`;
+        //   break;
+        // case 'product':
+        //   const productFileExt = this.ui.formFile.name.split('.').pop();
+        //   const productFileDate = Date.now();
+        //   const productFileName = `${productFileDate}.${productFileExt}`;
 
-          const product: MarketProduct = {
-            name: this.form.controls['name'].value,
-            path: this.form.controls['path'].value,
-            logo: productFileName,
-          };
+        //   const product: MarketProduct = {
+        //     name: this.form.controls['name'].value,
+        //     path: this.form.controls['path'].value,
+        //     logo: productFileName,
+        //   };
 
-          if (product.logo) {
-            this.market
-              .upload('product', productFileName, this.ui.formFile)
-              .finally(() => {
-                this.market.create('product', product).subscribe(() => {
-                  this.ui.read();
-                });
-              });
-          }
+        //   if (product.logo) {
+        //     this.market
+        //       .upload('product', productFileName, this.ui.formFile)
+        //       .finally(() => {
+        //         this.market.create('product', product).subscribe(() => {
+        //           this.ui.read();
+        //         });
+        //       });
+        //   }
 
-          break;
-        case 'item':
-          const itemFileExt = this.ui.formFile.name.split('.').pop();
-          const itemFileDate = Date.now();
-          const itemFileName = `${itemFileDate}.${itemFileExt}`;
+        //   break;
+        // case 'item':
+        //   const itemFileExt = this.ui.formFile.name.split('.').pop();
+        //   const itemFileDate = Date.now();
+        //   const itemFileName = `${itemFileDate}.${itemFileExt}`;
 
-          const item: MarketItem = {
-            product: this.form.controls['product'].value,
-            subcat: this.form.controls['subcat'].value,
-            name: this.form.controls['name'].value,
-            path: this.form.controls['path'].value,
-            comp: this.form.controls['comp'].value,
-            weight: this.form.controls['weight'].value,
-            price: this.form.controls['price'].value,
-            logo: itemFileName,
-          };
+        //   const item: MarketItem = {
+        //     product: this.form.controls['product'].value,
+        //     subcat: this.form.controls['subcat'].value,
+        //     name: this.form.controls['name'].value,
+        //     path: this.form.controls['path'].value,
+        //     comp: this.form.controls['comp'].value,
+        //     weight: this.form.controls['weight'].value,
+        //     price: this.form.controls['price'].value,
+        //     logo: itemFileName,
+        //   };
 
-          if (item.logo) {
-            this.market
-              .upload('item', itemFileName, this.ui.formFile)
-              .finally(() => {
-                this.market.create('item', item).subscribe(() => {
-                  this.ui.read();
-                });
-              });
-          }
+        //   if (item.logo) {
+        //     this.market
+        //       .upload('item', itemFileName, this.ui.formFile)
+        //       .finally(() => {
+        //         this.market.create('item', item).subscribe(() => {
+        //           this.ui.read();
+        //         });
+        //       });
+        //   }
 
-          break;
+        //   break;
       }
     },
 
     read: () => {
-      this.ui.formToggle(false);
+      // this.ui.formToggle(false);
 
-      switch (this.path) {
-        case 'offer':
-          this.market.read<MarketOffer>('offer').subscribe((records) => {
-            this.records.offer = records;
-          });
-          break;
-        case 'product':
-          this.market.read<MarketProduct>('product').subscribe((records) => {
-            this.records.product = records;
-          });
-          break;
-        case 'item':
-          this.market.read<MarketItem>('item').subscribe((records) => {
-            this.records.item = records;
-          });
+      // switch (this.path) {
+      //   case 'offer':
+      //     this.market.read<MarketOffer>('offer').subscribe((records) => {
+      //       this.records.offer = records;
+      //     });
+      //     break;
+      //   case 'product':
+      //     this.market.read<MarketProduct>('product').subscribe((records) => {
+      //       this.records.product = records;
+      //     });
+      //     break;
+      //   case 'item':
+      //     this.market.read<MarketItem>('item').subscribe((records) => {
+      //       this.records.item = records;
+      //     });
 
-          this.market.read<MarketProduct>('product').subscribe((records) => {
-            this.records.product = records;
-          });
+      //     this.market.read<MarketProduct>('product').subscribe((records) => {
+      //       this.records.product = records;
+      //     });
 
-          break;
-      }
+      //     break;
+      // }
     },
 
     readOne: (i: number) => {
@@ -176,182 +174,182 @@ export class AdminComponent implements OnInit {
       this.ui.formIndex = i;
 
       switch (this.path) {
-        case 'offer':
-          const offer = this.records.offer[i];
+        // case 'offer':
+        //   const offer = this.records.offer[i];
 
-          this.form.patchValue({
-            name: offer.name,
-            title: offer.title,
-            terms: offer.terms.join('\n'),
-          });
+        //   this.form.patchValue({
+        //     name: offer.name,
+        //     title: offer.title,
+        //     terms: offer.terms.join('\n'),
+        //   });
 
-          this.ui.formImage = this.ui.firebase(offer.logo);
+        //   this.ui.formImage = this.ui.firebase(offer.logo);
 
-          break;
-        case 'product':
-          const product = this.records.product[i];
+        //   break;
+        // case 'product':
+        //   const product = this.records.product[i];
 
-          this.form.patchValue({
-            name: product.name,
-            path: product.path,
-          });
+        //   this.form.patchValue({
+        //     name: product.name,
+        //     path: product.path,
+        //   });
 
-          this.ui.formImage = this.ui.firebase(product.logo);
+        //   this.ui.formImage = this.ui.firebase(product.logo);
 
-          break;
-        case 'item':
-          const item = this.records.item[i];
+        //   break;
+        // case 'item':
+        //   const item = this.records.item[i];
 
-          this.form.patchValue({
-            product: item.product,
-            subcat: item.subcat,
-            path: item.path,
-            name: item.name,
-            comp: item.comp,
-            weight: item.weight,
-            price: item.price,
-          });
+        //   this.form.patchValue({
+        //     product: item.product,
+        //     subcat: item.subcat,
+        //     path: item.path,
+        //     name: item.name,
+        //     comp: item.comp,
+        //     weight: item.weight,
+        //     price: item.price,
+        //   });
 
-          this.ui.formImage = this.ui.firebase(item.logo);
+        //   this.ui.formImage = this.ui.firebase(item.logo);
 
-          break;
+        //   break;
       }
     },
 
     update: () => {
       switch (this.path) {
-        case 'offer':
-          const offer = { ...this.records.offer[this.ui.formIndex] };
-          offer.name = this.form.controls['name'].value;
-          offer.title = this.form.controls['title'].value;
+        // case 'offer':
+        //   const offer = { ...this.records.offer[this.ui.formIndex] };
+        //   offer.name = this.form.controls['name'].value;
+        //   offer.title = this.form.controls['title'].value;
 
-          offer.terms = this.form.controls['terms'].value
-            .toString()
-            .split('\n');
+        //   offer.terms = this.form.controls['terms'].value
+        //     .toString()
+        //     .split('\n');
 
-          if (this.ui.formFile.name) {
-            this.market.erase('offer', offer.logo).finally(() => {
-              const offerFileExt = this.ui.formFile.name.split('.').pop();
-              const offerFileDate = Date.now();
-              offer.logo = `${offerFileDate}.${offerFileExt}`;
+        //   if (this.ui.formFile.name) {
+        //     this.market.erase('offer', offer.logo).finally(() => {
+        //       const offerFileExt = this.ui.formFile.name.split('.').pop();
+        //       const offerFileDate = Date.now();
+        //       offer.logo = `${offerFileDate}.${offerFileExt}`;
 
-              this.market
-                .upload('offer', offer.logo, this.ui.formFile)
-                .finally(() => {
-                  this.market.update('offer', offer).subscribe(() => {
-                    this.ui.read();
-                  });
-                });
-            });
-          } else
-            this.market.update('offer', offer).subscribe(() => {
-              this.ui.read();
-            });
+        //       this.market
+        //         .upload('offer', offer.logo, this.ui.formFile)
+        //         .finally(() => {
+        //           this.market.update('offer', offer).subscribe(() => {
+        //             this.ui.read();
+        //           });
+        //         });
+        //     });
+        //   } else
+        //     this.market.update('offer', offer).subscribe(() => {
+        //       this.ui.read();
+        //     });
 
-          break;
-        case 'product':
-          const product = { ...this.records.product[this.ui.formIndex] };
-          product.name = this.form.controls['name'].value;
-          product.path = this.form.controls['path'].value;
+        //   break;
+        // case 'product':
+        //   const product = { ...this.records.product[this.ui.formIndex] };
+        //   product.name = this.form.controls['name'].value;
+        //   product.path = this.form.controls['path'].value;
 
-          if (this.ui.formFile.name) {
-            this.market.erase('product', product.logo).finally(() => {
-              const productFileExt = this.ui.formFile.name.split('.').pop();
-              const productFileDate = Date.now();
-              product.logo = `${productFileDate}.${productFileExt}`;
+        //   if (this.ui.formFile.name) {
+        //     this.market.erase('product', product.logo).finally(() => {
+        //       const productFileExt = this.ui.formFile.name.split('.').pop();
+        //       const productFileDate = Date.now();
+        //       product.logo = `${productFileDate}.${productFileExt}`;
 
-              this.market
-                .upload('product', product.logo, this.ui.formFile)
-                .finally(() => {
-                  this.market.update('product', product).subscribe(() => {
-                    this.ui.read();
-                  });
-                });
-            });
-          } else
-            this.market.update('product', product).subscribe(() => {
-              this.ui.read();
-            });
+        //       this.market
+        //         .upload('product', product.logo, this.ui.formFile)
+        //         .finally(() => {
+        //           this.market.update('product', product).subscribe(() => {
+        //             this.ui.read();
+        //           });
+        //         });
+        //     });
+        //   } else
+        //     this.market.update('product', product).subscribe(() => {
+        //       this.ui.read();
+        //     });
 
-          break;
-        case 'item':
-          const item = { ...this.records.item[this.ui.formIndex] };
-          item.product = this.form.controls['product'].value;
-          item.subcat = this.form.controls['subcat'].value;
-          item.name = this.form.controls['name'].value;
-          item.path = this.form.controls['path'].value;
-          item.comp = this.form.controls['comp'].value;
-          item.weight = this.form.controls['weight'].value;
-          item.price = this.form.controls['price'].value;
+        //   break;
+        // case 'item':
+        //   const item = { ...this.records.item[this.ui.formIndex] };
+        //   item.product = this.form.controls['product'].value;
+        //   item.subcat = this.form.controls['subcat'].value;
+        //   item.name = this.form.controls['name'].value;
+        //   item.path = this.form.controls['path'].value;
+        //   item.comp = this.form.controls['comp'].value;
+        //   item.weight = this.form.controls['weight'].value;
+        //   item.price = this.form.controls['price'].value;
 
-          if (this.ui.formFile.name) {
-            this.market.erase('item', item.logo).finally(() => {
-              const itemFileExt = this.ui.formFile.name.split('.').pop();
-              const itemFileDate = Date.now();
-              item.logo = `${itemFileDate}.${itemFileExt}`;
+        //   if (this.ui.formFile.name) {
+        //     this.market.erase('item', item.logo).finally(() => {
+        //       const itemFileExt = this.ui.formFile.name.split('.').pop();
+        //       const itemFileDate = Date.now();
+        //       item.logo = `${itemFileDate}.${itemFileExt}`;
 
-              this.market
-                .upload('item', item.logo, this.ui.formFile)
-                .finally(() => {
-                  this.market.update('item', item).subscribe(() => {
-                    this.ui.read();
-                  });
-                });
-            });
-          } else
-            this.market.update('item', item).subscribe(() => {
-              this.ui.read();
-            });
+        //       this.market
+        //         .upload('item', item.logo, this.ui.formFile)
+        //         .finally(() => {
+        //           this.market.update('item', item).subscribe(() => {
+        //             this.ui.read();
+        //           });
+        //         });
+        //     });
+        //   } else
+        //     this.market.update('item', item).subscribe(() => {
+        //       this.ui.read();
+        //     });
 
-          break;
+        //   break;
       }
     },
 
     delete: (i: number) => {
       switch (this.path) {
-        case 'offer':
-          const offer = this.records.offer[i];
-          const offerId = offer.id;
+        // case 'offer':
+        //   const offer = this.records.offer[i];
+        //   const offerId = offer.id;
 
-          if (offerId) {
-            this.market.erase('offer', offer.logo).finally(() => {
-              this.market
-                .delete<MarketOffer>('offer', offerId)
-                .subscribe(() => {
-                  this.ui.read();
-                });
-            });
-          }
+        //   if (offerId) {
+        //     this.market.erase('offer', offer.logo).finally(() => {
+        //       this.market
+        //         .delete<MarketOffer>('offer', offerId)
+        //         .subscribe(() => {
+        //           this.ui.read();
+        //         });
+        //     });
+        //   }
 
-          break;
-        case 'product':
-          const product = this.records.product[i];
-          const productId = product.id;
+        //   break;
+        // case 'product':
+        //   const product = this.records.product[i];
+        //   const productId = product.id;
 
-          if (productId) {
-            this.market.erase('product', product.logo).finally(() => {
-              this.market
-                .delete<MarketProduct>('product', productId)
-                .subscribe(() => {
-                  this.ui.read();
-                });
-            });
-          }
+        //   if (productId) {
+        //     this.market.erase('product', product.logo).finally(() => {
+        //       this.market
+        //         .delete<MarketProduct>('product', productId)
+        //         .subscribe(() => {
+        //           this.ui.read();
+        //         });
+        //     });
+        //   }
 
-          break;
-        case 'item':
-          const item = this.records.item[i];
-          const itemId = item.id;
+        //   break;
+        // case 'item':
+        //   const item = this.records.item[i];
+        //   const itemId = item.id;
 
-          if (itemId) {
-            this.market.erase('item', item.logo).finally(() => {
-              this.market.delete<MarketItem>('item', itemId).subscribe(() => {
-                this.ui.read();
-              });
-            });
-          }
+        //   if (itemId) {
+        //     this.market.erase('item', item.logo).finally(() => {
+        //       this.market.delete<MarketItem>('item', itemId).subscribe(() => {
+        //         this.ui.read();
+        //       });
+        //     });
+        //   }
 
-          break;
+        //   break;
       }
     },
 
@@ -370,12 +368,12 @@ export class AdminComponent implements OnInit {
       },
 
       itemSubcatDict: {
-        'roll-philadelphia': 'Роли Філадельфія',
-        'roll-california': 'Роли Каліфорнія',
-        'roll-baked': 'Запечені Роли',
-        'sushi-craft': 'Фірмові Суші',
-        'roll-maki': 'Роли Макі',
-        'sushi-premium': 'Преміум Суші',
+        'philadelphia': 'Роли Філадельфія',
+        'california': 'Роли Каліфорнія',
+        'baked': 'Запечені Роли',
+        'craft': 'Фірмові Суші',
+        'maki': 'Роли Макі',
+        'premium': 'Преміум Суші',
       },
 
       itemSubcat: () => {
@@ -403,40 +401,40 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.routing = this.route.url.subscribe(([url]) => {
-      this.path = url.path as MarketPath;
+      this.path = url.path as AdminPath;
       this.ui.read();
 
       switch (this.path) {
-        case 'offer':
-          this.form = this.forms.group({
-            name: ['', Validators.required],
-            title: ['', Validators.required],
-            terms: ['', Validators.required],
-            image: [null],
-          });
+        // case 'offer':
+        //   this.form = this.forms.group({
+        //     name: ['', Validators.required],
+        //     title: ['', Validators.required],
+        //     terms: ['', Validators.required],
+        //     image: [null],
+        //   });
 
-          break;
-        case 'product':
-          this.form = this.forms.group({
-            name: ['', Validators.required],
-            path: ['', Validators.required],
-            image: [null],
-          });
+        //   break;
+        // case 'product':
+        //   this.form = this.forms.group({
+        //     name: ['', Validators.required],
+        //     path: ['', Validators.required],
+        //     image: [null],
+        //   });
 
-          break;
-        case 'item':
-          this.form = this.forms.group({
-            product: ['', Validators.required],
-            subcat: [''],
-            name: ['', Validators.required],
-            path: ['', Validators.required],
-            comp: [''],
-            weight: ['', Validators.required],
-            price: ['', Validators.required],
-            image: [null],
-          });
+        //   break;
+        // case 'item':
+        //   this.form = this.forms.group({
+        //     product: ['', Validators.required],
+        //     subcat: [''],
+        //     name: ['', Validators.required],
+        //     path: ['', Validators.required],
+        //     comp: [''],
+        //     weight: ['', Validators.required],
+        //     price: ['', Validators.required],
+        //     image: [null],
+        //   });
 
-          break;
+        //   break;
       }
     });
   }

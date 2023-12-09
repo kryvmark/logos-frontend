@@ -2,25 +2,25 @@
   <div class="admin-control">
     <nav class="admin-control-nav">
       <a
-        routerLink="../offer"
+        routerLink="../offers"
         routerLinkActive="active"
         class="admin-control-nav-link"
         >Акції</a
       >
       <a
-        routerLink="../product"
+        routerLink="../products"
         routerLinkActive="active"
         class="admin-control-nav-link"
         >Категорії</a
       >
       <a
-        routerLink="../item"
+        routerLink="../items"
         routerLinkActive="active"
         class="admin-control-nav-link"
         >Товари</a
       >
       <a
-        routerLink="../order"
+        routerLink="../orders"
         routerLinkActive="active"
         class="admin-control-nav-link"
         >Замовлення</a
@@ -29,18 +29,18 @@
     <a routerLink="/" class="admin-control-logout">Вихід</a>
   </div>
   <div class="admin-view">
-    <ng-container *ngIf="path != 'order'">
+    <ng-container *ngIf="path != 'orders'">
       <button
         class="admin-view-switch"
         [ngClass]="{ form: ui.form }"
         (click)="ui.formToggle()"
       >
         <ng-container *ngIf="!ui.form; else adminCloseForm">
-          <ng-container *ngIf="path == 'offer'">Додати акцію</ng-container>
-          <ng-container *ngIf="path == 'product'">
+          <ng-container *ngIf="path == 'offers'">Додати акцію</ng-container>
+          <ng-container *ngIf="path == 'products'">
             Додати категорію
           </ng-container>
-          <ng-container *ngIf="path == 'item'">Додати товар</ng-container>
+          <ng-container *ngIf="path == 'items'">Додати товар</ng-container>
         </ng-container>
         <ng-template #adminCloseForm>Закрити форму</ng-template>
       </button>
@@ -299,8 +299,8 @@
                     <br /><br />
                     {{ ui.misc.itemProductName(i) | titlecase }}
                     <br /><br />
-                    <i *ngIf="item.subcat">
-                      "{{ ui.misc.itemSubcatDict[item.subcat] }}"
+                    <i *ngIf="item.category">
+                      "{{ ui.misc.itemSubcatDict[item.category] }}"
                     </i>
                   </td>
                 </tr>
@@ -547,8 +547,8 @@
                     <br /><br />
                     {{ ui.misc.itemProductName(i) | titlecase }}
                     <br /><br />
-                    <i *ngIf="item.subcat">
-                      "{{ ui.misc.itemSubcatDict[item.subcat] }}"
+                    <i *ngIf="item.category">
+                      "{{ ui.misc.itemSubcatDict[item.category] }}"
                     </i>
                   </td>
                   <td class="admin-view-table-td">{{ item.name }}</td>
@@ -588,7 +588,7 @@
     <ng-template #adminForm>
       <form class="admin-view-form" [formGroup]="form">
         <input
-          *ngIf="path == 'offer'"
+          *ngIf="path == 'offers'"
           type="text"
           class="admin-view-form-input"
           formControlName="name"
@@ -600,7 +600,7 @@
           id="inputName"
           placeholder="Назва"
         />
-        <div *ngIf="path == 'product'" class="admin-view-form-row">
+        <div *ngIf="path == 'products'" class="admin-view-form-row">
           <input
             type="text"
             class="admin-view-form-row-input"
@@ -614,7 +614,7 @@
             placeholder="Назва"
           />
           <input
-            *ngIf="path == 'product'"
+            *ngIf="path == 'products'"
             type="text"
             class="admin-view-form-row-input"
             formControlName="path"
@@ -627,7 +627,7 @@
             placeholder="Шлях"
           />
         </div>
-        <div *ngIf="path == 'item'" class="admin-view-form-row">
+        <div *ngIf="path == 'items'" class="admin-view-form-row">
           <select
             type=""
             class="admin-view-form-row-input"
@@ -646,9 +646,9 @@
           <select
             type="text"
             class="admin-view-form-row-input"
-            formControlName="subcat"
-            name="inputSubcat"
-            id="inputSubcat"
+            formControlName="category"
+            name="inputCategory"
+            id="inputCategory"
           >
             <option value="" selected>Підкатегорія</option>
             <option
@@ -660,7 +660,7 @@
           </select>
         </div>
         <input
-          *ngIf="path == 'item'"
+          *ngIf="path == 'items'"
           type="text"
           class="admin-view-form-input bold"
           formControlName="path"
@@ -673,7 +673,7 @@
           placeholder="Шлях"
         />
         <input
-          *ngIf="path == 'item'"
+          *ngIf="path == 'items'"
           type="text"
           class="admin-view-form-input"
           formControlName="name"
@@ -686,7 +686,7 @@
           placeholder="Назва"
         />
         <input
-          *ngIf="path == 'offer'"
+          *ngIf="path == 'offers'"
           type="text"
           class="admin-view-form-input"
           formControlName="title"
@@ -699,7 +699,7 @@
           placeholder="Заголовок"
         />
         <textarea
-          *ngIf="path == 'offer'"
+          *ngIf="path == 'offers'"
           class="admin-view-form-terms"
           formControlName="terms"
           [ngClass]="{
@@ -711,14 +711,14 @@
           placeholder="Кожна умова з іншого рядка"
         ></textarea>
         <textarea
-          *ngIf="path == 'item'"
+          *ngIf="path == 'items'"
           class="admin-view-form-comp"
           formControlName="comp"
           name="inputComp"
           id="inputComp"
           placeholder="Склад"
         ></textarea>
-        <div *ngIf="path == 'item'" class="admin-view-form-row">
+        <div *ngIf="path == 'items'" class="admin-view-form-row">
           <input
             type="text"
             class="admin-view-form-row-input"
@@ -757,17 +757,17 @@
           (change)="ui.formUpload($event.target)"
         />
         <img
-          *ngIf="path == 'offer' && ui.formImage"
+          *ngIf="path == 'offers' && ui.formImage"
           [src]="ui.formImage"
           class="admin-view-form-img"
         />
         <img
-          *ngIf="path == 'product' && ui.formImage"
+          *ngIf="path == 'products' && ui.formImage"
           [src]="ui.formImage"
           class="admin-view-form-logo"
         />
         <img
-          *ngIf="path == 'item' && ui.formImage"
+          *ngIf="path == 'items' && ui.formImage"
           [src]="ui.formImage"
           class="admin-view-form-photo"
         />
@@ -781,6 +781,6 @@
         </button>
       </form>
     </ng-template>
-    <a *ngIf="false" routerLink="/" class="admin-view-logout">Вихід</a>
+    <a *ngIf="ui.mobile && !ui.form" routerLink="/" class="admin-view-logout">Вихід</a>
   </div>
 </div>

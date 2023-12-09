@@ -17,7 +17,7 @@ export class ItemComponent {
 
   public ui = {
     parseInt: (s: string) => parseInt(s),
-    firebase: (name: string) => this.market.image('item', name),
+    firebase: (name: string) => this.market.image('items', name),
   };
 
   constructor(private market: MarketService) {}
@@ -27,11 +27,11 @@ export class ItemComponent {
   }
 
   order(): void {
-    if (this.item.id) {
-      this.orderEvent.emit({
-        itemId: this.item.id,
-        qty: this.qty,
-      });
-    }
+    // if (this.item.id) {
+    //   this.orderEvent.emit({
+    //     id: this.item.id,
+    //     qty: this.qty,
+    //   });
+    // }
   }
 }

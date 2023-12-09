@@ -1,6 +1,6 @@
 <div class="item" *ngIf="item">
   <a
-    [routerLink]="['/product/', item.product, '/', item.path].join('')"
+    [routerLink]="['/products/', item.product, '/', item.path].join('')"
     class="item-link"
   >
     <img
@@ -10,7 +10,7 @@
     />
   </a>
   <a
-    [routerLink]="['/product/', item.product, '/', item.path].join('')"
+    [routerLink]="['/products/', item.product, '/', item.path].join('')"
     class="item-h4"
   >
     {{ item.name }}

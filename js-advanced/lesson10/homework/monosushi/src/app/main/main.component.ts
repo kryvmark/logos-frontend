@@ -10,7 +10,7 @@ import { conf } from 'src/core/conf';
 import { MarketService } from 'src/core/market/market.service';
 import {
   MarketItem,
-  MarketItemSubcat,
+  MarketItemCategory,
   MarketOffer,
   MarketOrderItem,
 } from 'src/core/types';
@@ -32,16 +32,16 @@ export class MainComponent implements OnInit, AfterViewInit {
     spoiler: false,
     mobile: window.innerWidth < 768,
 
-    subcat: '',
-    subcatChange: (subcat: MarketItemSubcat | '') => {
-      this.ui.subcat = subcat;
+    category: '',
+    categoryChange: (category: MarketItemCategory | '') => {
+      this.ui.category = category;
     },
 
     toggle: () => {
       this.ui.spoiler = !this.ui.spoiler;
     },
 
-    firebase: (name: string) => this.market.image('offer', name),
+    firebase: (name: string) => this.market.image('offers', name),
 
     conf: {
       workFrom: conf.workFrom,
@@ -57,13 +57,12 @@ export class MainComponent implements OnInit, AfterViewInit {
   constructor(private market: MarketService) {}
 
   ngOnInit(): void {
-    this.market.read<MarketOffer>('offer').subscribe((offers) => {
-      this.offers = offers;
-    });
-
-    this.market.read<MarketItem>('item').subscribe((items) => {
-      this.items = items;
-    });
+    if (!this.market.records) {
+      this.market.read().subscribe(() => {
+        this.offers = this.market.records.offers;
+        this.items = this.market.records.items;
+      });
+    }
   }
 
   ngAfterViewInit(): void {
@@ -90,15 +89,13 @@ export class MainComponent implements OnInit, AfterViewInit {
   order(item: MarketOrderItem): void {
     let cart = JSON.parse(localStorage.getItem('cart') || JSON.stringify([]));
     if (cart instanceof Array) {
-      const found = cart.find(
-        (ordered) => ordered.itemId == item.itemId
-      );
+      const found = cart.find((ordered) => ordered.itemId == item.id);
 
       if (found) found.qty += item.qty;
       else cart.push(item);
     } else cart = [];
 
     localStorage.setItem('cart', JSON.stringify(cart));
-    this.market.cart.next();
+    this.market.subject.next();
   }
 }

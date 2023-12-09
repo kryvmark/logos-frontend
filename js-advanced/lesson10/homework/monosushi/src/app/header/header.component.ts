@@ -36,7 +36,7 @@ export class HeaderComponent implements OnDestroy {
       return this.ui.menu;
     },
 
-    logo: (name: string) => this.market.image('product', name),
+    logo: (name: string) => this.market.image('products', name),
 
     conf: {
       workFrom: conf.workFrom,
@@ -48,25 +48,24 @@ export class HeaderComponent implements OnDestroy {
   public products: MarketProduct[] = [];
   public items: MarketItem[] = [];
 
-  public cartSubject = this.market.cart.subscribe(() => {
+  public subject = this.market.subject.subscribe(() => {
     this.cartTotal();
   });
 
   constructor(private market: MarketService, private router: Router) {
     this.onResize();
 
-    market.read<MarketProduct>('product').subscribe((data) => {
-      this.products = data;
-    });
-
-    market.read<MarketItem>('item').subscribe((data) => {
-      this.items = data;
-      this.cartTotal();
-    });
+    if (!market.records) {
+      market.read().subscribe(() => {
+        this.products = this.market.records.products;
+        this.items = this.market.records.items;
+        this.cartTotal();
+      });
+    }
   }
 
   ngOnDestroy(): void {
-    this.cartSubject.unsubscribe();
+    this.subject.unsubscribe();
   }
 
   @HostListener('window:resize')

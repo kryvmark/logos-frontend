@@ -4,50 +4,50 @@
     <ul class="product-view-menu" *ngIf="path == 'roll'">
       <li
         class="product-view-menu-item"
-        [ngClass]="{ active: ui.subcat == '' }"
-        (click)="ui.subcatChange('')"
+        [ngClass]="{ active: ui.category == '' }"
+        (click)="ui.categoryChange('')"
       >
         Всі
       </li>
       <li
         class="product-view-menu-item"
-        [ngClass]="{ active: ui.subcat == 'roll-philadelphia' }"
-        (click)="ui.subcatChange('roll-philadelphia')"
+        [ngClass]="{ active: ui.category == 'philadelphia' }"
+        (click)="ui.categoryChange('philadelphia')"
       >
         Роли Філадельфія
       </li>
       <li
         class="product-view-menu-item"
-        [ngClass]="{ active: ui.subcat == 'roll-california' }"
-        (click)="ui.subcatChange('roll-california')"
+        [ngClass]="{ active: ui.category == 'california' }"
+        (click)="ui.categoryChange('california')"
       >
         Роли Каліфорнія
       </li>
       <li
         class="product-view-menu-item"
-        [ngClass]="{ active: ui.subcat == 'roll-baked' }"
-        (click)="ui.subcatChange('roll-baked')"
+        [ngClass]="{ active: ui.category == 'baked' }"
+        (click)="ui.categoryChange('baked')"
       >
         Запечені роли
       </li>
       <li
         class="product-view-menu-item"
-        [ngClass]="{ active: ui.subcat == 'sushi-craft' }"
-        (click)="ui.subcatChange('sushi-craft')"
+        [ngClass]="{ active: ui.category == 'craft' }"
+        (click)="ui.categoryChange('craft')"
       >
         Фірмові суші
       </li>
       <li
         class="product-view-menu-item"
-        [ngClass]="{ active: ui.subcat == 'roll-maki' }"
-        (click)="ui.subcatChange('roll-maki')"
+        [ngClass]="{ active: ui.category == 'maki' }"
+        (click)="ui.categoryChange('maki')"
       >
         Роли Макі
       </li>
       <li
         class="product-view-menu-item"
-        [ngClass]="{ active: ui.subcat == 'sushi-premium' }"
-        (click)="ui.subcatChange('sushi-premium')"
+        [ngClass]="{ active: ui.category == 'premium' }"
+        (click)="ui.categoryChange('premium')"
       >
         Преміум суші
       </li>
@@ -55,7 +55,7 @@
     <div class="product-view-wrap">
       <app-item
         class="product-view-wrap-item"
-        *ngFor="let item of items | filter : path : ui.subcat"
+        *ngFor="let item of items | filter : path : ui.category"
         [item]="item"
         (orderEvent)="order($event)"
       ></app-item>

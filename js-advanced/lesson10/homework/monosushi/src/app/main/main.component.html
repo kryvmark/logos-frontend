@@ -10,7 +10,7 @@
       <a class="main-offers-slide-link"><i class="i-misc-stub"></i></a>
     </swiper-slide>
     <swiper-slide *ngFor="let offer of offers" class="main-offers-slide">
-      <a [routerLink]="'offer/' + offer.id" class="main-offers-slide-link">
+      <a [routerLink]="'offers/' + offer.id" class="main-offers-slide-link">
         <img
           [src]="ui.firebase(offer.logo)"
           class="main-offers-slide-link-img"
@@ -41,16 +41,16 @@
   </div>
   <div class="main-products">
     <ul class="main-products-menu">
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == '' }" (click)="ui.subcatChange('')">Всі</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'roll-philadelphia' }" (click)="ui.subcatChange('roll-philadelphia')">Роли Філадельфія</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'roll-california' }" (click)="ui.subcatChange('roll-california')">Роли Каліфорнія</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'roll-baked' }" (click)="ui.subcatChange('roll-baked')">Запечені роли</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'sushi-craft' }" (click)="ui.subcatChange('sushi-craft')">Фірмові суші</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'roll-maki' }" (click)="ui.subcatChange('roll-maki')">Роли Макі</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.subcat == 'sushi-premium' }" (click)="ui.subcatChange('sushi-premium')">Преміум суші</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == '' }" (click)="ui.categoryChange('')">Всі</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'philadelphia' }" (click)="ui.categoryChange('philadelphia')">Роли Філадельфія</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'california' }" (click)="ui.categoryChange('california')">Роли Каліфорнія</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'baked' }" (click)="ui.categoryChange('baked')">Запечені роли</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'craft' }" (click)="ui.categoryChange('craft')">Фірмові суші</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'maki' }" (click)="ui.categoryChange('maki')">Роли Макі</li>
+      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'premium' }" (click)="ui.categoryChange('premium')">Преміум суші</li>
     </ul>
     <div class="main-products-wrap">
-      <app-item *ngFor="let item of items | filter:'roll':ui.subcat" [item]="item" (orderEvent)="order($event)"></app-item>
+      <app-item *ngFor="let item of items | filter:'rolls':ui.category" [item]="item" (orderEvent)="order($event)"></app-item>
     </div>
   </div>
   <article class="main-info" [ngClass]="{ spoiler: ui.spoiler }">
@@ -105,7 +105,7 @@
       </p>
       <p class="main-info-p">
         У нас є запечені
-        <a class="main-info-action" routerLink="product/roll">роли</a> &mdash;
+        <a class="main-info-action" routerLink="products/rolls">роли</a> &mdash;
         гарячі та смачні. Готуємо їх з креветкою, лососем, крем-сиром, копченим
         лососем, соусом Унагі. Ставимося до приготування суші з особливою
         увагою. Використовуємо добірні складники, щоб ви могли по-справжньому
@@ -114,7 +114,7 @@
       </p>
       <p class="main-info-p">
         Найкращий вибір для компанії &mdash; це
-        <a class="main-info-action" routerLink="product/set">сети суші</a> від
+        <a class="main-info-action" routerLink="products/sets">сети суші</a> від
         Monosushi. Великі порції та поєднання різноманітних смаків &mdash;
         можливість спробувати щось новеньке. До ролів ми пропонуємо
         безалкогольні напої &mdash; ви можете замовити суші у Львові та одразу

@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { MarketItem, MarketItemSubcat } from '../types';
+import { MarketItem } from '../types';
 
 @Pipe({
   name: 'filter',
 })
 export class FilterPipe implements PipeTransform {
-  transform(value: MarketItem[], product: string, subcat: string): MarketItem[] {
+  transform(value: MarketItem[], product: string, category: string): MarketItem[] {
     if (product) value = value.filter(record => record.product == product);
-    if (subcat) value = value.filter(record => record.subcat == subcat);
+    if (category) value = value.filter(record => record.category == category);
     return value;
   }
 }

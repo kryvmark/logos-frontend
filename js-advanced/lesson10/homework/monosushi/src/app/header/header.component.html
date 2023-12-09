@@ -5,7 +5,7 @@
       <i class="i-logo"></i>
     </a>
     <nav class="header-top-main">
-      <a class="header-top-main-link" routerLink="offer">
+      <a class="header-top-main-link" routerLink="offers">
         <i class="i-header-offer"></i> Акції
       </a>
       <ng-container *ngIf="products.length < 1; else topProducts">
@@ -18,7 +18,7 @@
         <a
           class="header-top-main-link"
           *ngFor="let product of products"
-          [routerLink]="'product/' + product.path"
+          [routerLink]="'products/' + product.path"
         >
           <i
             class="i"
@@ -79,7 +79,7 @@
             Доставка та оплата
           </a>
           <a class="header-float-link" routerLink="about"> Про нас </a>
-          <a class="header-float-link" routerLink="offer"> Акції на суші </a>
+          <a class="header-float-link" routerLink="offers"> Акції на суші </a>
         </nav>
       </ng-container>
     </div>
@@ -98,7 +98,7 @@
       <a
         class="header-side-link"
         *ngFor="let product of products.slice(3)"
-        [routerLink]="'product/' + product.path"
+        [routerLink]="'products/' + product.path"
         (click)="ui.toggle(false)"
       >
         {{ product.name | titlecase }}
@@ -113,7 +113,7 @@
       <a class="header-side-link" routerLink="about" (click)="ui.toggle(false)"
         >Про нас
       </a>
-      <a class="header-side-link" routerLink="offer" (click)="ui.toggle(false)"
+      <a class="header-side-link" routerLink="offers" (click)="ui.toggle(false)"
         >Акції на суші
       </a>
       <a class="header-side-tel" href="tel:+380978780837">+380978780837</a>
@@ -124,7 +124,7 @@
     <nav class="header-bottom">
       <a
         class="header-bottom-link"
-        routerLink="offer"
+        routerLink="offers"
         (click)="ui.toggle(false)"
       >
         <i class="i-header-offer"></i> Акції
@@ -143,7 +143,7 @@
         <a
           class="header-bottom-link"
           *ngFor="let product of products.slice(0, 3)"
-          [routerLink]="'product/' + product.path"
+          [routerLink]="'products/' + product.path"
           (click)="ui.toggle(false)"
         >
           <i

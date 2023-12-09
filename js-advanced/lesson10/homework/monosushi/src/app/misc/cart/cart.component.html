@@ -13,12 +13,12 @@
           *ngFor="let item of cart; index as i"
         >
           <img
-            [src]="ui.firebase(ui.itemMap(item.itemId)!.logo!)"
+            [src]="ui.firebase(ui.itemMap(item.id)!.logo!)"
             alt=""
             class="cart-container-view-item-img"
           />
           <span class="cart-container-view-item-name">{{
-            ui.itemMap(item.itemId)!.name
+            ui.itemMap(item.id)!.name
           }}</span>
           <app-numeric
             class="cart-container-view-item-numeric"
@@ -26,7 +26,7 @@
             (changeEvent)="changeQty(i, $event)"
           ></app-numeric>
           <span class="cart-container-view-item-price">
-            <b>{{ ui.parseInt(ui.itemMap(item.itemId)!.price) * item.qty }}</b>
+            <b>{{ ui.parseInt(ui.itemMap(item.id)!.price) * item.qty }}</b>
             грн
           </span>
           <i class="i-misc-remove" (click)="cartDelete(i)"></i>

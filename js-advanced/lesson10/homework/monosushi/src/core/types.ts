@@ -1,3 +1,9 @@
+export type Market = {
+  offers: MarketOffer[];
+  products: MarketProduct[];
+  items: MarketItem[];
+};
+
 export type MarketRecord = {
   id?: number;
 };
@@ -18,7 +24,7 @@ export type MarketProduct = MarketRecord & {
 
 export type MarketItem = MarketRecord & {
   product: string;
-  subcat?: MarketItemSubcat;
+  category?: MarketItemCategory;
   name: string;
   path: string;
   comp?: string;
@@ -27,27 +33,34 @@ export type MarketItem = MarketRecord & {
   logo: string;
 };
 
-export type MarketOrder = MarketRecord & {
-  completed: boolean;
+export type MarketItemCategory =
+  | 'philadelphia'
+  | 'california'
+  | 'baked'
+  | 'craft'
+  | 'maki'
+  | 'premium';
+
+export type MarketCart = {
+  total: {
+    items: number;
+    price: number;
+  };
+
   items: MarketOrderItem[];
 };
 
-export type MarketItemSubcat =
-  | 'roll-philadelphia'
-  | 'roll-california'
-  | 'roll-baked'
-  | 'sushi-craft'
-  | 'roll-maki'
-  | 'sushi-premium';
-
-export type MarketOrderItem = {
-  itemId: number;
+export type MarketStoredItem = {
+  id: number;
   qty: number;
 };
 
-export type MarketPath = 'offer' | 'product' | 'item' | 'order';
-
-export type MarketCart = {
-  items: number;
-  total: number;
+export type MarketOrderItem = MarketStoredItem & {
+  name: string;
+  price: number;
 };
+
+export type MarketPath = 'offers' | 'products' | 'items';
+
+export type AdminPath = MarketPath & 'orders';
+
