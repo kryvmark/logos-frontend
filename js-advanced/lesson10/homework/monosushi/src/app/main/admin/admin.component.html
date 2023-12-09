@@ -123,8 +123,7 @@
                   <td class="admin-view-wrap-table-td">
                     <img
                       class="admin-view-wrap-table-img"
-                      [src]="ui.firebase(offer.logo)"
-                      [alt]="offer.name | titlecase"
+                      [src]="ui.firebase('offers', offer.logo)"
                     />
                   </td>
                 </tr>
@@ -213,8 +212,7 @@
                   <td class="admin-view-wrap-table-td">
                     <img
                       class="admin-view-wrap-table-logo"
-                      [src]="ui.firebase(product.logo)"
-                      [alt]="product.name | titlecase"
+                      [src]="ui.firebase('products', product.logo)"
                     />
                   </td>
                 </tr>
@@ -325,8 +323,7 @@
                   <td class="admin-view-wrap-table-td">
                     <img
                       class="admin-view-wrap-table-photo"
-                      [src]="ui.firebase(item.logo)"
-                      [alt]="item.path"
+                      [src]="ui.firebase('items', item.logo)"
                     />
                   </td>
                 </tr>
@@ -438,8 +435,7 @@
                   <td class="admin-view-table-td">
                     <img
                       class="admin-view-table-img"
-                      [src]="ui.firebase(offer.logo)"
-                      [alt]="offer.name | titlecase"
+                      [src]="ui.firebase('offers', offer.logo)"
                     />
                   </td>
                   <td class="admin-view-table-td">
@@ -492,8 +488,7 @@
                   <td class="admin-view-table-td">
                     <img
                       class="admin-view-table-logo"
-                      [src]="ui.firebase(product.logo)"
-                      [alt]="product.name | titlecase"
+                      [src]="ui.firebase('products', product.logo)"
                     />
                   </td>
                   <td class="admin-view-table-td">
@@ -558,8 +553,7 @@
                   <td class="admin-view-table-td">
                     <img
                       class="admin-view-table-photo"
-                      [src]="ui.firebase(item.logo)"
-                      [alt]="item.path"
+                      [src]="ui.firebase('items', item.logo)"
                     />
                   </td>
                   <td class="admin-view-table-td">

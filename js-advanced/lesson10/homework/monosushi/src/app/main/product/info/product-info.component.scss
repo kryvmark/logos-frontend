@@ -136,6 +136,11 @@
       &-p {
         @include p();
         margin-bottom: 0.75rem;
+
+        &.category {
+          font-weight: bold;
+          color: $muted;
+        }
       }
 
       &-order {

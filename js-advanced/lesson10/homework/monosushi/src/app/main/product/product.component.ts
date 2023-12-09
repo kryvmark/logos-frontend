@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { conf } from 'src/core/conf';
 import { MarketService } from 'src/core/market/market.service';
 import { MarketItemCategory, MarketItem, MarketProduct } from 'src/core/types';
@@ -10,9 +9,8 @@ import { MarketItemCategory, MarketItem, MarketProduct } from 'src/core/types';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements OnInit, OnDestroy {
+export class ProductComponent implements OnInit {
   public product!: MarketProduct;
-  public routing!: Subscription;
 
   public items: MarketItem[] = [];
 
@@ -48,8 +46,5 @@ export class ProductComponent implements OnInit, OnDestroy {
         );
       } else this.router.navigate(['/'], { replaceUrl: true });
     });
-  }
-
-  ngOnDestroy(): void {
   }
 }

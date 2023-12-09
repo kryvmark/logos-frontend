@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, of } from 'rxjs';
+import { conf } from 'src/core/conf';
 import { MarketService } from 'src/core/market/market.service';
-import { MarketItem, MarketOrderItem, MarketProduct } from 'src/core/types';
+import { MarketItem, MarketProductItem } from 'src/core/types';
 
 @Component({
   selector: 'app-product-info',
@@ -12,12 +12,12 @@ import { MarketItem, MarketOrderItem, MarketProduct } from 'src/core/types';
 export class ProductInfoComponent implements OnInit {
   public ui = {
     qty: 1,
+    categories: conf.categories,
     parseInt: (s: string) => parseInt(s),
     firebase: (name: string) => this.market.image('items', name),
   };
 
-  public product!: MarketProduct;
-  public item!: MarketItem;
+  public view!: MarketProductItem;
 
   constructor(
     private market: MarketService,
@@ -26,35 +26,17 @@ export class ProductInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const name = this.route.snapshot.paramMap.get('name') ?? '';
+    this.route.data.subscribe((data) => {
+      const view = data['response'];
 
-    // if (name)
-    // this.market
-    //   .readOne<MarketProduct>('product', name)
-    //   .pipe(catchError(() => of(null)))
-    //   .subscribe((product) => {
-    //     if (product) {
-    //       this.product = product;
+      if (view) {
+        const item = view.item as MarketItem;
 
-    //       const path = this.route.snapshot.paramMap.get('path') ?? '';
-
-    //       if (path)
-    //         this.market
-    //           .readOne<MarketItem>('item', path)
-    //           .pipe(catchError(() => of(null)))
-    //           .subscribe((item) => {
-    //             if (item) {
-    //               this.item = item;
-    //             } else {
-    //               this.router.navigate([`/product/${name}`], {
-    //                 replaceUrl: true,
-    //               });
-    //             }
-    //           });
-    //     } else {
-    //       this.router.navigate(['/product'], { replaceUrl: true });
-    //     }
-    //   });
+        if (item) {
+          this.view = view as MarketProductItem;
+        } else this.router.navigate([`/products/${view.path}`], { replaceUrl: true });
+      } else this.router.navigate(['/'], { replaceUrl: true });
+    });
   }
 
   changeQty(qty: number): void {
@@ -62,19 +44,6 @@ export class ProductInfoComponent implements OnInit {
   }
 
   order(): void {
-    if (this.item.id) {
-      //     const item: MarketOrderItem = {
-      //       itemId: this.item.id,
-      //       qty: this.ui.qty,
-      //     };
-      //     let cart = JSON.parse(localStorage.getItem('cart') || JSON.stringify([]));
-      //     if (cart instanceof Array) {
-      //       const found = cart.find((ordered) => ordered.itemId == item.itemId);
-      //       if (found) found.qty += item.qty;
-      //       else cart.push(item);
-      //     } else cart = [];
-      //     localStorage.setItem('cart', JSON.stringify(cart));
-      //     this.market.subject.next();
-    }
+
   }
 }

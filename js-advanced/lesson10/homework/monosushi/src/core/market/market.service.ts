@@ -1,7 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Market, MarketCart, MarketPath } from '../types';
-import { Observable, Subject, map } from 'rxjs';
+import {
+  Market,
+  MarketCart,
+  MarketItem,
+  MarketOffer,
+  MarketPath,
+  MarketProduct,
+} from '../types';
+import { Observable, Subject, forkJoin, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -15,9 +22,16 @@ export class MarketService {
   constructor(private http: HttpClient) {}
 
   read(): Observable<void> {
-    return this.http.get<Market>(`${environment.backendUrl}/market`).pipe(map(data => {
-      this._records = data;
-    }));
+    return forkJoin([
+      this.http.get<MarketOffer[]>(`${environment.backendUrl}/offers`),
+      this.http.get<MarketProduct[]>(`${environment.backendUrl}/products`),
+      this.http.get<MarketItem[]>(`${environment.backendUrl}/items`),
+    ]).pipe(
+      map((data) => {
+        const [ offers, products, items ] = data;
+        this._records = { offers, products, items };
+      })
+    );
   }
 
   image(path: MarketPath, name: string) {

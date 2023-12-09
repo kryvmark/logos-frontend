@@ -1,34 +1,37 @@
 <div class="product_info">
-  <ng-container *ngIf="product && item">
+  <ng-container *ngIf="view">
     <nav class="product_info-nav">
       <a routerLink="/" class="product_info-nav-link">Головна</a>
-      <a
-        [routerLink]="'/product/' + product.path"
-        class="product_info-nav-link"
-        >{{ product.name | titlecase }}</a
-      >
-      <a class="product_info-nav-current">{{ item.name }}</a>
+      <a [routerLink]="'/products/' + view.path" class="product_info-nav-link">
+        {{ view.name | titlecase }}
+      </a>
+      <a class="product_info-nav-current">{{ view.item!.name }}</a>
     </nav>
-    <div class="product_info-view">
+    <div *ngIf="view.item" class="product_info-view">
       <img
-        [src]="ui.firebase(item.logo)"
-        [alt]="item.path"
+        [src]="ui.firebase(view.item.logo)"
+        [alt]="view.item!.path"
         class="product_info-view-img"
       />
       <div class="product_info-view-info">
-        <h1 class="product_info-view-info-h1">{{ item.name }}</h1>
-        <p class="product_info-view-info-p">
-          <b class="monosushi">Склад:</b> {{ item.comp }}
+        <h1 class="product_info-view-info-h1">{{ view.item.name }}</h1>
+        <p *ngIf="view.item.category" class="product_info-view-info-p category">
+          {{ ui.categories[view.item.category] | titlecase }}
+        </p>
+        <p *ngIf="view.item.comp" class="product_info-view-info-p">
+          <b class="monosushi">Склад:</b> {{ view.item.comp }}
         </p>
         <p class="product_info-view-info-p">
-          <b class="monosushi">Вага:</b> {{ item.weight }}
+          <b class="monosushi">Вага:</b> {{ view.item.weight }}
         </p>
         <div class="product_info-view-info-order">
           <span class="product_info-view-info-order-price">
-            <b>{{ ui.parseInt(item.price) * ui.qty }}</b> грн
+            <b>{{ ui.parseInt(view.item!.price) * ui.qty }}</b> грн
           </span>
           <app-numeric (changeEvent)="changeQty($event)"></app-numeric>
-          <button class="product_info-view-info-order-button" (click)="order()">Замовити</button>
+          <button class="product_info-view-info-order-button" (click)="order()">
+            Замовити
+          </button>
         </div>
       </div>
     </div>

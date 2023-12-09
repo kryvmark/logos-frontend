@@ -1,7 +1,7 @@
 <div class="products" [ngClass]="{ spoiler: ui.spoiler }">
   <h1 class="products-h1">{{ product.name | titlecase }}</h1>
   <div class="products-view">
-    <ul class="products-view-menu" *ngIf="product.name == 'rolls'">
+    <ul class="products-view-menu" *ngIf="product.path == 'rolls'">
       <li
         class="products-view-menu-item"
         [ngClass]="{ active: ui.category == '' }"

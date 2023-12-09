@@ -17,6 +17,7 @@ import {
 import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions } from 'swiper/types';
 import { Autoplay, Pagination } from 'swiper/modules';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -54,18 +55,15 @@ export class MainComponent implements OnInit, AfterViewInit {
   @ViewChild('swiper')
   public swiper!: ElementRef<SwiperContainer>;
 
-  constructor(private market: MarketService) {}
+  constructor(private market: MarketService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    if (!this.market.records) {
-      this.market.read().subscribe(() => {
-        this.offers = this.market.records.offers;
-        this.items = this.market.records.items;
-      });
-    } else {
-      this.offers = this.market.records.offers;
-      this.items = this.market.records.items;
-    }
+    this.route.data.subscribe((data) => {
+      if (data['response']) {
+        this.offers = data['response'].offers as MarketOffer[];
+        this.items = data['response'].items as MarketItem[];
+      }
+    });
   }
 
   ngAfterViewInit(): void {

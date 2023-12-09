@@ -10,18 +10,35 @@ import { DeliveryComponent } from './main/delivery/delivery.component';
 import { AboutComponent } from './main/about/about.component';
 import { AdminComponent } from './main/admin/admin.component';
 import { TermsComponent } from './main/terms/terms.component';
-import { productResolver } from 'src/core/resolvers/resolvers';
+import {
+  itemResolver,
+  marketResolver,
+  offerResolver,
+  productResolver,
+} from 'src/core/resolvers/resolvers';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
-  { path: 'offers', component: OfferComponent },
-  { path: 'offers/:id', component: OfferInfoComponent },
+  { path: '', component: MainComponent, resolve: { response: marketResolver } },
+  {
+    path: 'offers',
+    component: OfferComponent,
+    resolve: { response: marketResolver },
+  },
+  {
+    path: 'offers/:id',
+    component: OfferInfoComponent,
+    resolve: { response: offerResolver },
+  },
   {
     path: 'products/:name',
     component: ProductComponent,
     resolve: { response: productResolver },
   },
-  { path: 'products/:name/:path', component: ProductInfoComponent },
+  {
+    path: 'products/:name/:path',
+    component: ProductInfoComponent,
+    resolve: { response: itemResolver },
+  },
   { path: 'delivery', component: DeliveryComponent },
   { path: 'about', component: AboutComponent },
   {
@@ -30,18 +47,22 @@ const routes: Routes = [
       {
         path: 'offers',
         component: AdminComponent,
+        resolve: { response: marketResolver },
       },
       {
         path: 'products',
         component: AdminComponent,
+        resolve: { response: marketResolver },
       },
       {
         path: 'items',
         component: AdminComponent,
+        resolve: { response: marketResolver },
       },
       {
         path: 'orders',
         component: AdminComponent,
+        resolve: { response: marketResolver },
       },
       {
         path: '',

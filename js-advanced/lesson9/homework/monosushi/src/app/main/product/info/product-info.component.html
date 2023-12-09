@@ -17,7 +17,7 @@
       />
       <div class="product_info-view-info">
         <h1 class="product_info-view-info-h1">{{ item.name }}</h1>
-        <p class="product_info-view-info-p">
+        <p *ngIf="item.comp" class="product_info-view-info-p">
           <b class="monosushi">Склад:</b> {{ item.comp }}
         </p>
         <p class="product_info-view-info-p">

@@ -8,7 +8,9 @@ import {
   MarketItem,
   MarketOffer,
   MarketProduct,
+  MarketPath,
   AdminPath,
+  Market,
 } from 'src/core/types';
 
 @Component({
@@ -63,11 +65,11 @@ export class AdminComponent implements OnInit {
       }
     },
 
-    firebase: (name: string) => this.market.image(this.path, name),
+    firebase: (path: MarketPath, name: string) => this.market.image(path, name),
 
     create: () => {
       switch (this.path) {
-        case 'offer':
+        case 'offers':
           const offerFileExt = this.ui.formFile.name.split('.').pop();
           const offerFileDate = Date.now();
           const offerFileName = `${offerFileDate}.${offerFileExt}`;
@@ -91,7 +93,7 @@ export class AdminComponent implements OnInit {
           }
 
           break;
-        case 'product':
+        case 'products':
           const productFileExt = this.ui.formFile.name.split('.').pop();
           const productFileDate = Date.now();
           const productFileName = `${productFileDate}.${productFileExt}`;
@@ -113,7 +115,7 @@ export class AdminComponent implements OnInit {
           }
 
           break;
-        case 'item':
+        case 'items':
           const itemFileExt = this.ui.formFile.name.split('.').pop();
           const itemFileDate = Date.now();
           const itemFileName = `${itemFileDate}.${itemFileExt}`;
@@ -146,14 +148,15 @@ export class AdminComponent implements OnInit {
     read: (update = true) => {
       this.ui.formToggle(false);
 
-      if (update || !this.market.records) {
+      this.route.data.subscribe((data) => {
+        if (data['response']) this.records = data['response'] as Market;
+      });
+
+      if (update) {
         this.market.read().subscribe(() => {
           const { offers, products, items } = this.market.records;
           this.records = { offers, products, items };
         });
-      } else {
-        const { offers, products, items } = this.market.records;
-        this.records = { offers, products, items };
       }
     },
 
@@ -161,189 +164,179 @@ export class AdminComponent implements OnInit {
       this.ui.formToggle();
       this.ui.formIndex = i;
 
-      switch (
-        this.path
-        // case 'offer':
-        //   const offer = this.records.offer[i];
+      switch (this.path) {
+        case 'offers':
+          const offer = this.records.offers[i];
 
-        //   this.form.patchValue({
-        //     name: offer.name,
-        //     title: offer.title,
-        //     terms: offer.terms.join('\n'),
-        //   });
+          this.form.patchValue({
+            name: offer.name,
+            title: offer.title,
+            terms: offer.terms.join('\n'),
+          });
 
-        //   this.ui.formImage = this.ui.firebase(offer.logo);
+          this.ui.formImage = this.ui.firebase('offers', offer.logo);
 
-        //   break;
-        // case 'product':
-        //   const product = this.records.product[i];
+          break;
+        case 'products':
+          const product = this.records.products[i];
 
-        //   this.form.patchValue({
-        //     name: product.name,
-        //     path: product.path,
-        //   });
+          this.form.patchValue({
+            name: product.name,
+            path: product.path,
+          });
 
-        //   this.ui.formImage = this.ui.firebase(product.logo);
+          this.ui.formImage = this.ui.firebase('products', product.logo);
 
-        //   break;
-        // case 'item':
-        //   const item = this.records.item[i];
+          break;
+        case 'items':
+          const item = this.records.items[i];
 
-        //   this.form.patchValue({
-        //     product: item.product,
-        //     subcat: item.subcat,
-        //     path: item.path,
-        //     name: item.name,
-        //     comp: item.comp,
-        //     weight: item.weight,
-        //     price: item.price,
-        //   });
+          this.form.patchValue({
+            product: item.product,
+            category: item.category,
+            path: item.path,
+            name: item.name,
+            comp: item.comp,
+            weight: item.weight,
+            price: item.price,
+          });
 
-        //   this.ui.formImage = this.ui.firebase(item.logo);
+          this.ui.formImage = this.ui.firebase('items', item.logo);
 
-        //   break;
-      ) {
+          break;
       }
     },
 
     update: () => {
-      switch (
-        this.path
-        // case 'offer':
-        //   const offer = { ...this.records.offer[this.ui.formIndex] };
-        //   offer.name = this.form.controls['name'].value;
-        //   offer.title = this.form.controls['title'].value;
+      switch (this.path) {
+        case 'offers':
+          const offer = { ...this.records.offers[this.ui.formIndex] };
+          offer.name = this.form.controls['name'].value;
+          offer.title = this.form.controls['title'].value;
 
-        //   offer.terms = this.form.controls['terms'].value
-        //     .toString()
-        //     .split('\n');
+          offer.terms = this.form.controls['terms'].value
+            .toString()
+            .split('\n');
 
-        //   if (this.ui.formFile.name) {
-        //     this.market.erase('offer', offer.logo).finally(() => {
-        //       const offerFileExt = this.ui.formFile.name.split('.').pop();
-        //       const offerFileDate = Date.now();
-        //       offer.logo = `${offerFileDate}.${offerFileExt}`;
+          if (this.ui.formFile.name) {
+            this.admin.erase('offers', offer.logo).finally(() => {
+              const offerFileExt = this.ui.formFile.name.split('.').pop();
+              const offerFileDate = Date.now();
+              offer.logo = `${offerFileDate}.${offerFileExt}`;
 
-        //       this.market
-        //         .upload('offer', offer.logo, this.ui.formFile)
-        //         .finally(() => {
-        //           this.market.update('offer', offer).subscribe(() => {
-        //             this.ui.read();
-        //           });
-        //         });
-        //     });
-        //   } else
-        //     this.market.update('offer', offer).subscribe(() => {
-        //       this.ui.read();
-        //     });
+              this.admin
+                .upload('offers', offer.logo, this.ui.formFile)
+                .finally(() => {
+                  this.admin.update('offers', offer).subscribe(() => {
+                    this.ui.read();
+                  });
+                });
+            });
+          } else
+            this.admin.update('offers', offer).subscribe(() => {
+              this.ui.read();
+            });
 
-        //   break;
-        // case 'product':
-        //   const product = { ...this.records.product[this.ui.formIndex] };
-        //   product.name = this.form.controls['name'].value;
-        //   product.path = this.form.controls['path'].value;
+          break;
+        case 'products':
+          const product = { ...this.records.products[this.ui.formIndex] };
+          product.name = this.form.controls['name'].value;
+          product.path = this.form.controls['path'].value;
 
-        //   if (this.ui.formFile.name) {
-        //     this.market.erase('product', product.logo).finally(() => {
-        //       const productFileExt = this.ui.formFile.name.split('.').pop();
-        //       const productFileDate = Date.now();
-        //       product.logo = `${productFileDate}.${productFileExt}`;
+          if (this.ui.formFile.name) {
+            this.admin.erase('products', product.logo).finally(() => {
+              const productFileExt = this.ui.formFile.name.split('.').pop();
+              const productFileDate = Date.now();
+              product.logo = `${productFileDate}.${productFileExt}`;
 
-        //       this.market
-        //         .upload('product', product.logo, this.ui.formFile)
-        //         .finally(() => {
-        //           this.market.update('product', product).subscribe(() => {
-        //             this.ui.read();
-        //           });
-        //         });
-        //     });
-        //   } else
-        //     this.market.update('product', product).subscribe(() => {
-        //       this.ui.read();
-        //     });
+              this.admin
+                .upload('products', product.logo, this.ui.formFile)
+                .finally(() => {
+                  this.admin.update('products', product).subscribe(() => {
+                    this.ui.read();
+                  });
+                });
+            });
+          } else
+            this.admin.update('products', product).subscribe(() => {
+              this.ui.read();
+            });
 
-        //   break;
-        // case 'item':
-        //   const item = { ...this.records.item[this.ui.formIndex] };
-        //   item.product = this.form.controls['product'].value;
-        //   item.subcat = this.form.controls['subcat'].value;
-        //   item.name = this.form.controls['name'].value;
-        //   item.path = this.form.controls['path'].value;
-        //   item.comp = this.form.controls['comp'].value;
-        //   item.weight = this.form.controls['weight'].value;
-        //   item.price = this.form.controls['price'].value;
+          break;
+        case 'items':
+          const item = { ...this.records.items[this.ui.formIndex] };
+          item.product = this.form.controls['product'].value;
+          item.category = this.form.controls['category'].value;
+          item.name = this.form.controls['name'].value;
+          item.path = this.form.controls['path'].value;
+          item.comp = this.form.controls['comp'].value;
+          item.weight = this.form.controls['weight'].value;
+          item.price = this.form.controls['price'].value;
 
-        //   if (this.ui.formFile.name) {
-        //     this.market.erase('item', item.logo).finally(() => {
-        //       const itemFileExt = this.ui.formFile.name.split('.').pop();
-        //       const itemFileDate = Date.now();
-        //       item.logo = `${itemFileDate}.${itemFileExt}`;
+          if (this.ui.formFile.name) {
+            this.admin.erase('items', item.logo).finally(() => {
+              const itemFileExt = this.ui.formFile.name.split('.').pop();
+              const itemFileDate = Date.now();
+              item.logo = `${itemFileDate}.${itemFileExt}`;
 
-        //       this.market
-        //         .upload('item', item.logo, this.ui.formFile)
-        //         .finally(() => {
-        //           this.market.update('item', item).subscribe(() => {
-        //             this.ui.read();
-        //           });
-        //         });
-        //     });
-        //   } else
-        //     this.market.update('item', item).subscribe(() => {
-        //       this.ui.read();
-        //     });
+              this.admin
+                .upload('items', item.logo, this.ui.formFile)
+                .finally(() => {
+                  this.admin.update('items', item).subscribe(() => {
+                    this.ui.read();
+                  });
+                });
+            });
+          } else
+            this.admin.update('items', item).subscribe(() => {
+              this.ui.read();
+            });
 
-        //   break;
-      ) {
+          break;
       }
     },
 
     delete: (i: number) => {
-      switch (
-        this.path
-        // case 'offer':
-        //   const offer = this.records.offer[i];
-        //   const offerId = offer.id;
+      switch (this.path) {
+        case 'offers':
+          const offer = this.records.offers[i];
+          const offerId = offer.id;
 
-        //   if (offerId) {
-        //     this.market.erase('offer', offer.logo).finally(() => {
-        //       this.market
-        //         .delete<MarketOffer>('offer', offerId)
-        //         .subscribe(() => {
-        //           this.ui.read();
-        //         });
-        //     });
-        //   }
+          if (offerId) {
+            this.admin.erase('offers', offer.logo).finally(() => {
+              this.admin.delete('offers', offerId).subscribe(() => {
+                this.ui.read();
+              });
+            });
+          }
 
-        //   break;
-        // case 'product':
-        //   const product = this.records.product[i];
-        //   const productId = product.id;
+          break;
+        case 'products':
+          const product = this.records.products[i];
+          const productId = product.id;
 
-        //   if (productId) {
-        //     this.market.erase('product', product.logo).finally(() => {
-        //       this.market
-        //         .delete<MarketProduct>('product', productId)
-        //         .subscribe(() => {
-        //           this.ui.read();
-        //         });
-        //     });
-        //   }
+          if (productId) {
+            this.admin.erase('products', product.logo).finally(() => {
+              this.admin.delete('products', productId).subscribe(() => {
+                this.ui.read();
+              });
+            });
+          }
 
-        //   break;
-        // case 'item':
-        //   const item = this.records.item[i];
-        //   const itemId = item.id;
+          break;
+        case 'items':
+          const item = this.records.items[i];
+          const itemId = item.id;
 
-        //   if (itemId) {
-        //     this.market.erase('item', item.logo).finally(() => {
-        //       this.market.delete<MarketItem>('item', itemId).subscribe(() => {
-        //         this.ui.read();
-        //       });
-        //     });
-        //   }
+          if (itemId) {
+            this.admin.erase('items', item.logo).finally(() => {
+              this.admin.delete('items', itemId).subscribe(() => {
+                this.ui.read();
+              });
+            });
+          }
 
-        //   break;
-      ) {
+          break;
       }
     },
 

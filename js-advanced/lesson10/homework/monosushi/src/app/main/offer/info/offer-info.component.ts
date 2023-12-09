@@ -23,16 +23,9 @@ export class OfferInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = parseInt(this.route.snapshot.paramMap.get('id') ?? '');
-
-    if (id) {
-      // this.market
-      //   .readOne<MarketOffer>('offer', id)
-      //   .pipe(catchError(() => of(null)))
-      //   .subscribe((offer) => {
-      //     if (offer) this.offer = offer;
-      //     else this.router.navigate(['/offer'], { replaceUrl: true });
-      //   });
-    }
+    this.route.data.subscribe((data) => {
+      if (data['response']) this.offer = data['response'] as MarketOffer;
+      else this.router.navigate(['/'], { replaceUrl: true });
+    });
   }
 }

@@ -33,6 +33,12 @@ export type MarketItem = MarketRecord & {
   logo: string;
 };
 
+export type MarketProductItem = {
+  name: string;
+  path: string;
+  item: MarketItem | null;
+};
+
 export type MarketItemCategory =
   | 'philadelphia'
   | 'california'
@@ -62,5 +68,4 @@ export type MarketOrderItem = MarketStoredItem & {
 
 export type MarketPath = 'offers' | 'products' | 'items';
 
-export type AdminPath = MarketPath & 'orders';
-
+export type AdminPath = MarketPath | 'orders';
