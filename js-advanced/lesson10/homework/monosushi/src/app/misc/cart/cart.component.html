@@ -1,43 +1,52 @@
-<div class="blur" [ngClass]="{ loaded: ui.loaded }"></div>
-<div class="cart" [ngClass]="{ loaded: ui.loaded }">
+<div class="blur" [ngClass]="{ active }" (click)="close()"></div>
+<div class="cart" [ngClass]="{ active }">
   <div class="cart-container">
-    <div class="cart-container-stub" *ngIf="cart.length < 1; else cartView">
+    <div
+      class="cart-container-stub"
+      *ngIf="cart.items.length < 1; else cartView"
+    >
       <i class="i-main-empty"></i>
       <h4 class="cart-container-stub-h4">Кошик порожній</h4>
-      <a routerLink="/" class="cart-container-stub-link">Перейти до каталогу</a>
+      <a routerLink="/" class="cart-container-stub-link" (click)="close()"
+        >Перейти до каталогу</a
+      >
     </div>
     <ng-template #cartView>
       <div class="cart-container-view">
         <div
           class="cart-container-view-item"
-          *ngFor="let item of cart; index as i"
+          *ngFor="let item of cart.items; index as i"
         >
           <img
-            [src]="ui.firebase(ui.itemMap(item.id)!.logo!)"
+            [src]="ui.firebase(item.logo)"
             class="cart-container-view-item-img"
           />
-          <span class="cart-container-view-item-name">{{
-            ui.itemMap(item.id)!.name
-          }}</span>
+          <span class="cart-container-view-item-name">{{ item.name }}</span>
           <app-numeric
             class="cart-container-view-item-numeric"
             [value]="item.qty"
+            (changeEvent)="changeQty(i, $event)"
           ></app-numeric>
           <span class="cart-container-view-item-price">
-            <b>{{ ui.parseInt(ui.itemMap(item.id)!.price) * item.qty }}</b>
+            <b>{{ item.price * item.qty }}</b>
             грн
           </span>
-          <i class="i-misc-remove"></i>
+          <i class="i-misc-remove" (click)="remove(i)"></i>
         </div>
       </div>
     </ng-template>
     <div class="cart-container-order">
       <span class="cart-container-order-total">
-        Сума: <strong>{{ ui.cart.total }}</strong> грн
+        Сума: <strong>{{ cart.total.price }}</strong> грн
       </span>
-      <a routerLink="/checkout" class="cart-container-order-link"
-        >Оформити замовлення</a
+      <a
+        *ngIf="cart.total.items > 0"
+        routerLink="/checkout"
+        class="cart-container-order-link"
+        (click)="close()"
       >
+        Оформити замовлення
+      </a>
     </div>
   </div>
 </div>

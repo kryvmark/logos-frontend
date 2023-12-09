@@ -58,7 +58,7 @@
     height: 6rem;
   }
 
-  &.locked {
+  &.locked-menu {
     @include _1200 {
       .header-top {
         pointer-events: none;
@@ -113,7 +113,7 @@
     }
   }
 
-  &.cart {
+  &.locked-cart {
     pointer-events: none;
 
     .header-top-cart {

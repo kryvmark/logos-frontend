@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { conf } from 'src/core/conf';
 import { MarketService } from 'src/core/market/market.service';
-import { MarketItemCategory, MarketItem, MarketProduct } from 'src/core/types';
+import { MarketItemCategory, MarketItem, MarketProduct, MarketOrderItem } from 'src/core/types';
+import { UserService } from 'src/core/user/user.service';
 
 @Component({
   selector: 'app-product',
@@ -33,6 +34,7 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private market: MarketService,
+    private user: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -46,5 +48,9 @@ export class ProductComponent implements OnInit {
         );
       } else this.router.navigate(['/'], { replaceUrl: true });
     });
+  }
+
+  order(item: MarketOrderItem): void {
+    this.user.addItem(item);
   }
 }

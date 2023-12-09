@@ -18,6 +18,7 @@ import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions } from 'swiper/types';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/core/user/user.service';
 
 @Component({
   selector: 'app-main',
@@ -55,7 +56,11 @@ export class MainComponent implements OnInit, AfterViewInit {
   @ViewChild('swiper')
   public swiper!: ElementRef<SwiperContainer>;
 
-  constructor(private market: MarketService, private route: ActivatedRoute) {}
+  constructor(
+    private market: MarketService,
+    private user: UserService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
@@ -79,6 +84,10 @@ export class MainComponent implements OnInit, AfterViewInit {
 
     Object.assign(this.swiper.nativeElement, options);
     this.swiper.nativeElement.initialize();
+  }
+
+  order(item: MarketOrderItem): void {
+    this.user.addItem(item);
   }
 
   @HostListener('window:resize')

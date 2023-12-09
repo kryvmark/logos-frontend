@@ -41,16 +41,62 @@
   </div>
   <div class="main-products">
     <ul class="main-products-menu">
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == '' }" (click)="ui.categoryChange('')">{{ ui.categories[''] }}</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'philadelphia' }" (click)="ui.categoryChange('philadelphia')">{{ ui.categories.philadelphia }}</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'california' }" (click)="ui.categoryChange('california')">{{ ui.categories.california }}</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'baked' }" (click)="ui.categoryChange('baked')">{{ ui.categories.baked }}</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'craft' }" (click)="ui.categoryChange('craft')">{{ ui.categories.craft }}</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'maki' }" (click)="ui.categoryChange('maki')">{{ ui.categories.maki }}</li>
-      <li class="main-products-menu-item" [ngClass]="{ active: ui.category == 'premium' }" (click)="ui.categoryChange('premium')">{{ ui.categories.premium }}</li>
+      <li
+        class="main-products-menu-item"
+        [ngClass]="{ active: ui.category == '' }"
+        (click)="ui.categoryChange('')"
+      >
+        {{ ui.categories[""] }}
+      </li>
+      <li
+        class="main-products-menu-item"
+        [ngClass]="{ active: ui.category == 'philadelphia' }"
+        (click)="ui.categoryChange('philadelphia')"
+      >
+        {{ ui.categories.philadelphia }}
+      </li>
+      <li
+        class="main-products-menu-item"
+        [ngClass]="{ active: ui.category == 'california' }"
+        (click)="ui.categoryChange('california')"
+      >
+        {{ ui.categories.california }}
+      </li>
+      <li
+        class="main-products-menu-item"
+        [ngClass]="{ active: ui.category == 'baked' }"
+        (click)="ui.categoryChange('baked')"
+      >
+        {{ ui.categories.baked }}
+      </li>
+      <li
+        class="main-products-menu-item"
+        [ngClass]="{ active: ui.category == 'craft' }"
+        (click)="ui.categoryChange('craft')"
+      >
+        {{ ui.categories.craft }}
+      </li>
+      <li
+        class="main-products-menu-item"
+        [ngClass]="{ active: ui.category == 'maki' }"
+        (click)="ui.categoryChange('maki')"
+      >
+        {{ ui.categories.maki }}
+      </li>
+      <li
+        class="main-products-menu-item"
+        [ngClass]="{ active: ui.category == 'premium' }"
+        (click)="ui.categoryChange('premium')"
+      >
+        {{ ui.categories.premium }}
+      </li>
     </ul>
     <div class="main-products-wrap">
-      <app-item *ngFor="let item of items | filter:'rolls':ui.category" [item]="item"></app-item>
+      <app-item
+        *ngFor="let item of items | filter : 'rolls' : ui.category"
+        [item]="item"
+        (orderEvent)="order($event)"
+      ></app-item>
     </div>
   </div>
   <article class="main-info" [ngClass]="{ spoiler: ui.spoiler }">

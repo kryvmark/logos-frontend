@@ -10,6 +10,8 @@ import { DeliveryComponent } from './main/delivery/delivery.component';
 import { AboutComponent } from './main/about/about.component';
 import { AdminComponent } from './main/admin/admin.component';
 import { TermsComponent } from './main/terms/terms.component';
+import { CheckoutComponent } from './main/checkout/checkout.component';
+
 import {
   itemResolver,
   marketResolver,
@@ -77,6 +79,7 @@ const routes: Routes = [
     ],
   },
   { path: 'terms', component: TermsComponent },
+  { path: 'checkout', component: CheckoutComponent },
 ];
 
 @NgModule({

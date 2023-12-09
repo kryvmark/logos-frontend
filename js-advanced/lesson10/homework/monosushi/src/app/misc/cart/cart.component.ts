@@ -1,37 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MarketService } from 'src/core/market/market.service';
-import { MarketItem, MarketOrderItem } from 'src/core/types';
+import { MarketCart, MarketItem, MarketOrderItem } from 'src/core/types';
+import { UserService } from 'src/core/user/user.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
   public ui = {
-    loaded: false,
-    cart: {
-      items: 0,
-      total: 0,
-    },
-
-    itemMapping: new Array<MarketItem>(),
-    itemMap: (id: number) => {
-      return this.items.find((item) => item.id == id);
-    },
-
     firebase: (name: string) => this.market.image('items', name),
     parseInt: (s: string) => parseInt(s),
   };
 
   public items: MarketItem[] = [];
-  public cart!: MarketOrderItem[];
 
-  constructor(private market: MarketService) {}
+  @Input('active')
+  public active!: boolean;
 
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.ui.loaded = true;
-    }, 10);
+  @Input('cart')
+  public cart!: MarketCart;
+
+  @Output() closeEvent = new EventEmitter<void>();
+
+  constructor(private market: MarketService, private user: UserService) {}
+
+  changeQty(i: number, qty: number) {
+    this.user.changeQty(i, qty);
+  }
+
+  remove(i: number) {
+    this.user.removeItem(i);
+  }
+
+  close() {
+    this.closeEvent.emit();
   }
 }

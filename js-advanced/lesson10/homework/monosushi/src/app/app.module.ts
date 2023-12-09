@@ -30,6 +30,7 @@ import { ItemComponent } from './misc/item/item.component';
 import { NumericComponent } from './misc/numeric/numeric.component';
 import { FilterPipe } from '../core/filter/filter.pipe';
 import { CartComponent } from './misc/cart/cart.component';
+import { CheckoutComponent } from './main/checkout/checkout.component';
 
 register();
 
@@ -52,6 +53,7 @@ register();
     NumericComponent,
     FilterPipe,
     CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

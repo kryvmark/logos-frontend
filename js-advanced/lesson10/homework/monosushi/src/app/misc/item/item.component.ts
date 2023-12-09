@@ -25,4 +25,16 @@ export class ItemComponent {
   changeQty(qty: number): void {
     this.qty = qty;
   }
+
+  order() {
+    if (this.item.id) {
+      this.orderEvent.emit({
+        id: this.item.id,
+        name: this.item.name,
+        logo: this.item.logo,
+        price: parseInt(this.item.price),
+        qty: this.qty,
+      });
+    }
+  }
 }

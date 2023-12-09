@@ -1,7 +1,8 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MarketService } from 'src/core/market/market.service';
-import { MarketItem, MarketProduct } from 'src/core/types';
+import { MarketCart, MarketItem, MarketProduct } from 'src/core/types';
 import { conf } from '../../core/conf';
+import { UserService } from 'src/core/user/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,29 +12,24 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   public ui = {
-    menu: false,
     mobile: true,
 
-    cart: {
-      items: 0,
-      total: 0,
+    menu: false,
+    menuToggle: (state?: boolean) => {
+      this.ui.menu = state ?? !this.ui.menu;
+      this.onResize();
+      return this.ui.menu;
     },
 
-    cartOpen: false,
+    cart: false,
     cartToggle: (state?: boolean) => {
       if (this.router.url.split('?')[0].split('/').pop() == 'checkout')
         return (state = false);
       else {
-        this.ui.cartOpen = state ?? !this.ui.cartOpen;
+        this.ui.cart = state ?? !this.ui.cart;
         this.onResize();
-        return this.ui.cartOpen;
+        return this.ui.cart;
       }
-    },
-
-    toggle: (state?: boolean) => {
-      this.ui.menu = state ?? !this.ui.menu;
-      this.onResize();
-      return this.ui.menu;
     },
 
     logo: (name: string) => this.market.image('products', name),
@@ -45,13 +41,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
     },
   };
 
+  public cart: MarketCart = {
+    total: {
+      items: 0,
+      price: 0,
+    },
+    items: [],
+  };
+
   public products: MarketProduct[] = [];
+  public items: MarketItem[] = [];
 
-  public subject = this.market.subject.subscribe(() => {
-
+  public subject = this.user.subject.subscribe(() => {
+    this.cart = this.user.getCart(this.items);
   });
 
-  constructor(private market: MarketService, private router: Router) {
+  constructor(
+    private market: MarketService,
+    private user: UserService,
+    private router: Router
+  ) {
     this.onResize();
   }
 
@@ -59,9 +68,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (!this.market.records) {
       this.market.read().subscribe(() => {
         this.products = this.market.records.products;
+        this.items = this.market.records.items;
+        this.user.subject.next();
       });
     } else {
       this.products = this.market.records.products;
+      this.items = this.market.records.items;
+      this.user.subject.next();
     }
   }
 
@@ -79,7 +92,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         : window.document.body.classList.remove('locked');
     }
 
-    this.ui.cartOpen
+    this.ui.cart
       ? window.document.body.classList.add('locked')
       : window.document.body.classList.remove('locked');
   }

@@ -1,7 +1,7 @@
-<header class="header" [ngClass]="{ locked: ui.menu, cart: ui.cartOpen }">
-  <div class="shadow" (click)="ui.toggle(false)"></div>
+<header class="header" [ngClass]="{ 'locked-menu': ui.menu, 'locked-cart': ui.cart }">
+  <div class="shadow" (click)="ui.menuToggle(false)"></div>
   <nav class="header-top">
-    <a class="header-top-logo" routerLink="" (click)="ui.toggle(false)">
+    <a class="header-top-logo" routerLink="" (click)="ui.menuToggle(false)">
       <i class="i-logo"></i>
     </a>
     <nav class="header-top-main">
@@ -54,13 +54,13 @@
       <a
         class="header-top-client-link"
         routerLink="admin"
-        (click)="ui.toggle(false)"
+        (click)="ui.menuToggle(false)"
       >
         <i class="i-header-user"></i>
       </a>
     </div>
     <div class="header-top-menu">
-      <button class="header-top-menu-button" (click)="ui.toggle()">
+      <button class="header-top-menu-button" (click)="ui.menuToggle()">
         <svg class="menu" viewBox="0 0 32 24">
           <path
             class="menu-top"
@@ -74,7 +74,7 @@
         </svg>
       </button>
       <ng-container *ngIf="!ui.mobile">
-        <nav class="header-float" (click)="ui.toggle()">
+        <nav class="header-float" (click)="ui.menuToggle()">
           <a class="header-float-link" routerLink="delivery">
             Доставка та оплата
           </a>
@@ -85,10 +85,10 @@
     </div>
     <button class="header-top-cart" (click)="ui.cartToggle()">
       <i class="i-header-basket">
-        <span class="counter">{{ ui.cart.items }}</span>
+        <span class="counter">{{ cart.total.items }}</span>
       </i>
       <span class="header-top-cart-total">
-        <b>{{ ui.cart.total }}</b> грн
+        <b>{{ cart.total.price }}</b> грн
       </span>
     </button>
   </nav>
@@ -99,21 +99,21 @@
         class="header-side-link"
         *ngFor="let product of products.slice(3)"
         [routerLink]="'products/' + product.path"
-        (click)="ui.toggle(false)"
+        (click)="ui.menuToggle(false)"
       >
         {{ product.name | titlecase }}
       </a>
       <a
         class="header-side-link"
         routerLink="delivery"
-        (click)="ui.toggle(false)"
+        (click)="ui.menuToggle(false)"
       >
         Доставка та оплата
       </a>
-      <a class="header-side-link" routerLink="about" (click)="ui.toggle(false)"
+      <a class="header-side-link" routerLink="about" (click)="ui.menuToggle(false)"
         >Про нас
       </a>
-      <a class="header-side-link" routerLink="offers" (click)="ui.toggle(false)"
+      <a class="header-side-link" routerLink="offers" (click)="ui.menuToggle(false)"
         >Акції на суші
       </a>
       <a class="header-side-tel" href="tel:+380978780837">+380978780837</a>
@@ -125,7 +125,7 @@
       <a
         class="header-bottom-link"
         routerLink="offers"
-        (click)="ui.toggle(false)"
+        (click)="ui.menuToggle(false)"
       >
         <i class="i-header-offer"></i> Акції
       </a>
@@ -133,7 +133,7 @@
         <a
           class="header-bottom-link"
           *ngFor="let i of [1, 2, 3]"
-          (click)="ui.toggle(false)"
+          (click)="ui.menuToggle(false)"
         >
           <i class="i"></i>
           ...
@@ -144,7 +144,7 @@
           class="header-bottom-link"
           *ngFor="let product of products.slice(0, 3)"
           [routerLink]="'products/' + product.path"
-          (click)="ui.toggle(false)"
+          (click)="ui.menuToggle(false)"
         >
           <i
             class="i"
@@ -156,4 +156,4 @@
     </nav>
   </ng-container>
 </header>
-<app-cart *ngIf="ui.cartOpen"></app-cart>
+<app-cart [cart]="cart" [active]="ui.cart" (closeEvent)="ui.cartToggle()"></app-cart>

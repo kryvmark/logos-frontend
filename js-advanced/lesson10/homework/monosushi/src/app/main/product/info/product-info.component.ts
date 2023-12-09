@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { conf } from 'src/core/conf';
 import { MarketService } from 'src/core/market/market.service';
-import { MarketItem, MarketProductItem } from 'src/core/types';
+import { MarketItem, MarketOrderItem, MarketProductItem } from 'src/core/types';
+import { UserService } from 'src/core/user/user.service';
 
 @Component({
   selector: 'app-product-info',
@@ -21,6 +22,7 @@ export class ProductInfoComponent implements OnInit {
 
   constructor(
     private market: MarketService,
+    private user: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -34,7 +36,10 @@ export class ProductInfoComponent implements OnInit {
 
         if (item) {
           this.view = view as MarketProductItem;
-        } else this.router.navigate([`/products/${view.path}`], { replaceUrl: true });
+        } else
+          this.router.navigate([`/products/${view.path}`], {
+            replaceUrl: true,
+          });
       } else this.router.navigate(['/'], { replaceUrl: true });
     });
   }
@@ -44,6 +49,8 @@ export class ProductInfoComponent implements OnInit {
   }
 
   order(): void {
-
+    if (this.view.item && this.view.item.id) {
+      this.user.addItem({ id: this.view.item.id, qty: this.ui.qty });
+    }
   }
 }

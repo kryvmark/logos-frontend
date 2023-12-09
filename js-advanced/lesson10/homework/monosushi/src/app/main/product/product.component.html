@@ -57,6 +57,7 @@
         class="products-view-wrap-item"
         *ngFor="let item of items | filter : product.path : ui.category"
         [item]="item"
+        (orderEvent)="order($event)"
       ></app-item>
     </div>
   </div>
