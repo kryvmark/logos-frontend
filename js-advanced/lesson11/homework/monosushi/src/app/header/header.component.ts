@@ -96,4 +96,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
       ? window.document.body.classList.add('locked')
       : window.document.body.classList.remove('locked');
   }
+
+  login(): void {
+    this.ui.menuToggle(false);
+
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user.email && user.password) {
+      this.user.login(user.email, user.password).subscribe((success) => {
+        if (success) {
+          if (this.user.admin) this.router.navigateByUrl('/admin/offer');
+          else this.router.navigateByUrl('/profile/main');
+        } else {
+          localStorage.removeItem('user');
+          this.router.navigateByUrl('/login');
+        }
+      });
+    } else this.router.navigateByUrl('/login');
+  }
 }

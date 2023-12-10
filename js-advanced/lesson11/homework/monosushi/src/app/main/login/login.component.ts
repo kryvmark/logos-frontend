@@ -40,8 +40,8 @@ export class LoginComponent {
 
     this.service.login(email, password).subscribe((success) => {
       if (success) {
-        if (this.service.admin) this.router.navigate(['/admin']);
-        else this.router.navigate(['/profile']);
+        if (this.service.admin) this.router.navigateByUrl('/admin/offer', { replaceUrl: true });
+        else this.router.navigateByUrl('/profile/main', { replaceUrl: true });
       }
       else this.error = true;
     });

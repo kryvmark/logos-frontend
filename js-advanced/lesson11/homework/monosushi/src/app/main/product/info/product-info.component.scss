@@ -57,9 +57,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 3rem;
 
     @include _768 {
       flex-direction: row;
+      margin-bottom: 5rem;
     }
 
     &-img {
@@ -107,7 +109,7 @@
         padding-top: 1.5rem;
 
         &-price {
-          width: 4rem;
+          width: 5rem;
 
           @include _1200 {
             width: 5.5rem;
@@ -132,4 +134,48 @@
 
 .monosushi {
   color: $monosushi;
+}
+
+.suggested {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+
+  h2 {
+    align-self: center;
+    @include h2();
+    margin-bottom: 1.5rem;
+
+    @include _768 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+    }
+  }
+
+  .view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include _768 {
+      align-self: stretch;
+      display: grid;
+      grid-template-columns: repeat(2, 22rem);
+      grid-gap: 4rem;
+      justify-content: center;
+    }
+
+    @include _1200 {
+      margin-inline: -10.5vw;
+    }
+
+    .item {
+      width: calc(10rem + 40vw);
+
+      @include _768 {
+        width: auto;
+      }
+    }
+  }
 }

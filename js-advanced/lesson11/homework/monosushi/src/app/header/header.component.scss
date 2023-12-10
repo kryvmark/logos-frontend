@@ -248,7 +248,8 @@
         flex: auto;
       }
 
-      &-link {
+      &-button {
+        @include button-custom();
         @include header-top-link();
         @include border($animated: true);
       }

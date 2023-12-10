@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/core/admin/admin.service';
 import { MarketService } from 'src/core/market/market.service';
@@ -383,6 +383,7 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private market: MarketService,
     private user: UserService,
     private admin: AdminService,
@@ -435,6 +436,7 @@ export class AdminComponent implements OnInit {
   }
 
   logout() {
+    this.router.navigateByUrl('/login', { replaceUrl: true });
     this.user.logout();
   }
 }

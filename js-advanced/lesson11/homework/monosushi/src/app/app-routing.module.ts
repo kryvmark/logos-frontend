@@ -47,7 +47,30 @@ const routes: Routes = [
   { path: 'delivery', component: DeliveryComponent },
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [profileGuard] },
+  {
+    path: 'profile',
+    canActivateChild: [profileGuard],
+    children: [
+      {
+        path: 'main',
+        component: ProfileComponent,
+      },
+      {
+        path: 'history',
+        component: ProfileComponent,
+      },
+      {
+        path: '',
+        redirectTo: 'main',
+        pathMatch: 'full',
+      },
+      {
+        path: '**',
+        redirectTo: 'main',
+        pathMatch: 'full',
+      },
+    ],
+  },
   {
     path: 'admin',
     canActivateChild: [adminGuard],
@@ -85,7 +108,11 @@ const routes: Routes = [
     ],
   },
   { path: 'terms', component: TermsComponent },
-  { path: 'checkout', component: CheckoutComponent },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    resolve: { response: marketResolver },
+  },
 ];
 
 @NgModule({

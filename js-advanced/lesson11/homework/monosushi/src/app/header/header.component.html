@@ -51,13 +51,12 @@
       </div>
     </ng-template>
     <div class="header-top-client">
-      <a
-        class="header-top-client-link"
-        routerLink="login"
-        (click)="ui.menuToggle(false)"
+      <button
+        class="header-top-client-button"
+        (click)="login()"
       >
         <i class="i-header-user"></i>
-      </a>
+      </button>
     </div>
     <div class="header-top-menu">
       <button class="header-top-menu-button" (click)="ui.menuToggle()">

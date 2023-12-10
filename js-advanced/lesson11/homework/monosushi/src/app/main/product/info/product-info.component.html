@@ -36,4 +36,16 @@
       </div>
     </div>
   </ng-container>
+  <section class="suggested" *ngIf="rolls.length > 0">
+    <h2>Також спробуйте</h2>
+    <div class="view">
+      <app-item *ngFor="let item of rolls" class="item" [item]="item" (orderEvent)="orderSuggested($event)"></app-item>
+    </div>
+  </section>
+  <section class="suggested" *ngIf="similar.length > 0">
+    <h2>Смакує разом</h2>
+    <div class="view">
+      <app-item *ngFor="let item of similar" class="item" [item]="item" (orderEvent)="orderSuggested($event)"></app-item>
+    </div>
+  </section>
 </div>

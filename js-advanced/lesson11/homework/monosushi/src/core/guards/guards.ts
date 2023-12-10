@@ -13,8 +13,8 @@ export const loginGuard: CanActivateFn = () => {
       map((success) => {
         if (success) {
           if (service.admin)
-            router.navigateByUrl('/admin', { replaceUrl: true });
-          else router.navigateByUrl('/profile', { replaceUrl: true });
+            router.navigateByUrl('/admin/offer', { replaceUrl: true });
+          else router.navigateByUrl('/profile/main', { replaceUrl: true });
           return false;
         } else {
           localStorage.removeItem('user');
@@ -26,7 +26,7 @@ export const loginGuard: CanActivateFn = () => {
   return true;
 };
 
-export const profileGuard: CanActivateFn = () => {
+export const profileGuard: CanActivateChildFn = () => {
   const service = inject(UserService);
   const router = inject(Router);
 
@@ -36,7 +36,7 @@ export const profileGuard: CanActivateFn = () => {
       map((success) => {
         if (success) {
           if (service.admin) {
-            router.navigateByUrl('/admin', { replaceUrl: true });
+            router.navigateByUrl('/admin/offer', { replaceUrl: true });
             return false;
           } else return true;
         } else {
@@ -62,7 +62,7 @@ export const adminGuard: CanActivateChildFn = () => {
         if (success) {
           if (service.admin) return true;
           else {
-            router.navigateByUrl('/profile', { replaceUrl: true });
+            router.navigateByUrl('/profile/main', { replaceUrl: true });
             return false;
           }
         } else {
