@@ -35,6 +35,8 @@ export class UserService {
             orderItems.push({
               id: record.id,
               name: item.name,
+              product: item.product,
+              path: item.path,
               logo: item.logo,
               price: parseInt(item.price),
               qty: record.qty,

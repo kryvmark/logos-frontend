@@ -87,22 +87,56 @@
 
       &-item {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         border-block: 1px solid $gray;
         margin-top: -1px;
         padding: 2rem 1rem;
+        justify-content: center;
+
+        @include _768 {
+          justify-content: space-between;
+        }
+
+        &-wrap {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+
+          @include _768 {
+            flex-wrap: nowrap;
+            width: 100%;
+          }
+        }
+
+        &-link {
+          @include link($bold: true, $highlight: true);
+
+          &.wrap {
+            width: 100%;
+            margin-bottom: 0.75rem;
+
+            @include _768 {
+              width: auto;
+              flex: auto;
+              margin-bottom: 0;
+            }
+          }
+        }
 
         &-img {
           width: 6rem;
           height: 3.375rem;
           object-fit: contain;
           margin-inline-end: 1rem;
-        }
 
-        &-name {
-          flex: auto;
-          font-weight: bold;
+          @include _1200 {
+            transition: 0.33s;
+
+            &:hover {
+              opacity: 0.5;
+            }
+          }
         }
 
         &-price {

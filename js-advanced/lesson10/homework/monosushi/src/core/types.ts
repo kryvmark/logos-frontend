@@ -63,6 +63,8 @@ export type MarketStoredItem = {
 
 export type MarketOrderItem = MarketStoredItem & {
   name: string;
+  product: string;
+  path: string;
   logo: string;
   price: number;
 };

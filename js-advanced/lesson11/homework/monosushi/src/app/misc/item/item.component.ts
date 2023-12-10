@@ -31,6 +31,8 @@ export class ItemComponent {
       this.orderEvent.emit({
         id: this.item.id,
         name: this.item.name,
+        product: this.item.product,
+        path: this.item.path,
         logo: this.item.logo,
         price: parseInt(this.item.price),
         qty: this.qty,
