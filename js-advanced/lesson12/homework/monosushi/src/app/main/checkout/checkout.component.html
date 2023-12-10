@@ -1,0 +1,54 @@
+<div class="checkout">
+  <ng-container *ngIf="cart">
+    <div
+      class="checkout-stub"
+      *ngIf="cart.items.length < 1; else checkoutItems"
+    >
+      <i class="i-main-empty"></i>
+      <h1 class="checkout-h1 stub">Кошик порожній</h1>
+      <a routerLink="/" class="checkout-stub-link">Перейти до каталогу</a>
+    </div>
+    <ng-template #checkoutItems>
+      <div class="checkout-view">
+        <h1 class="checkout-h1">Оформити замовлення</h1>
+        <div
+          class="checkout-view-item"
+          *ngFor="let item of cart.items; index as i"
+        >
+          <a
+            class="checkout-view-item-link"
+            [routerLink]="['/products/', item.product, '/', item.path].join('')"
+          >
+            <img
+              [src]="ui.firebase(item.logo)"
+              class="checkout-view-item-img"
+            />
+          </a>
+          <div class="checkout-view-item-wrap">
+            <a
+              class="checkout-view-item-link wrap"
+              [routerLink]="
+                ['/products/', item.product, '/', item.path].join('')
+              "
+            >
+              {{ item.name }}
+            </a>
+            <app-numeric
+              class="checkout-view-item-numeric"
+              [value]="item.qty"
+              (changeEvent)="changeQty(i, $event)"
+            ></app-numeric>
+            <span class="checkout-view-item-price">
+              <b>{{ item.price * item.qty }}</b>
+              грн
+            </span>
+            <i class="i-misc-remove" (click)="remove(i)"></i>
+          </div>
+        </div>
+        <span class="checkout-view-total">
+          До оплати: <b>{{ cart.total.price }}</b> грн
+        </span>
+      </div>
+    </ng-template>
+  </ng-container>
+</div>

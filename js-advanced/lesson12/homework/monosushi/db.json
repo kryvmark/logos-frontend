@@ -1,0 +1,172 @@
+{
+  "offers": [
+    {
+      "date": 1701693054138,
+      "name": "рол тижня",
+      "title": "50% знижки на \"Рол тижня\"",
+      "terms": [
+        "Щотижня діє знижка 50% на один з ролів у нашому меню.",
+        "\"Рол тижня\" ви можете знайти на головній сторінці нашого сайту.",
+        "Знижка діє при мінімальній сумі замовлення 300 грн.",
+        "Ця акція не поєднується з іншими акціями."
+      ],
+      "logo": "1701693054138.jpg",
+      "id": 1
+    },
+    {
+      "date": 1701693097884,
+      "name": "3+1=5",
+      "title": "\"3+1=5\"",
+      "terms": [
+        "Замовляйте 5 ролів, а платіть за 4.",
+        "Замовляйте 10 ролів, а платіть за 8 і так далі.",
+        "Безкоштовним вважається рол з найменшою вартістю.",
+        "Ця акція не поєднується з іншими акціями."
+      ],
+      "logo": "1701693140809.jpg",
+      "id": 2
+    }
+  ],
+  "products": [
+    {
+      "name": "роли",
+      "path": "rolls",
+      "logo": "1701692874708.svg",
+      "id": 1
+    },
+    {
+      "name": "сети",
+      "path": "sets",
+      "logo": "1701692884429.svg",
+      "id": 2
+    },
+    {
+      "name": "напої",
+      "path": "drinks",
+      "logo": "1701692894344.svg",
+      "id": 3
+    },
+    {
+      "name": "соуси",
+      "path": "sauces",
+      "logo": "1701692917883.svg",
+      "id": 4
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "product": "rolls",
+      "category": "philadelphia",
+      "name": "Філадельфія в кунжуті",
+      "path": "philadelphia-sesame",
+      "comp": "Рис, крем сир, огірок, лосось, кунжут",
+      "weight": "240 г",
+      "price": "268 грн",
+      "logo": "1701889769957.jpg"
+    },
+    {
+      "product": "rolls",
+      "category": "california",
+      "name": "Каліфорнія з крабом",
+      "path": "california-crab",
+      "comp": "Рис, спайсі соус, авокадо, огірок, краб, кунжут",
+      "weight": "250 г",
+      "price": "263 грн",
+      "logo": "1701970942134.jpg",
+      "id": 2
+    },
+    {
+      "product": "rolls",
+      "category": "baked",
+      "name": "Запечений сирний з креветкою",
+      "path": "baked-cheese-shrimp",
+      "comp": "Рис, крем сир, салат айсберг, креветка, кунжут, сирний соус, унагі соус",
+      "weight": "330 г",
+      "price": "344 грн",
+      "logo": "1701971122623.jpg",
+      "id": 3
+    },
+    {
+      "product": "rolls",
+      "category": "craft",
+      "name": "Сирний",
+      "path": "cheese",
+      "comp": "Рис, крем сир, фета, кунжут",
+      "weight": "240 г",
+      "price": "204 грн",
+      "logo": "1701971260003.jpg",
+      "id": 4
+    },
+    {
+      "product": "rolls",
+      "category": "premium",
+      "name": "Мексиканський",
+      "path": "mexican",
+      "comp": "Рис, крем сир, креветка, огірок, кунжут, лосось, гуакамоле, шрірача",
+      "weight": "370 г",
+      "price": "399 грн",
+      "logo": "1701971349352.jpg",
+      "id": 5
+    },
+    {
+      "product": "rolls",
+      "category": "maki",
+      "name": "Макі з огірком",
+      "path": "maki-cucumber",
+      "comp": "Рис, норі, огірок",
+      "weight": "120 г",
+      "price": "115 грн",
+      "logo": "1701971452387.jpg",
+      "id": 6
+    },
+    {
+      "product": "sets",
+      "category": "",
+      "name": "Сет Філадельфія",
+      "path": "set-philadelphia",
+      "comp": "Філадельфія: з лососем / в кунжуті / з тунцем / з вугрем",
+      "weight": "1070 г",
+      "price": "1150 грн",
+      "logo": "1701971735528.jpg",
+      "id": 7
+    },
+    {
+      "product": "drinks",
+      "category": "",
+      "name": "Fanta апельсин",
+      "path": "fanta-orange",
+      "comp": "",
+      "weight": "0.33 л",
+      "price": "31 грн",
+      "logo": "1701971821052.jpg",
+      "id": 8
+    },
+    {
+      "product": "sauces",
+      "category": "",
+      "name": "Імбир",
+      "path": "ginger",
+      "comp": "",
+      "weight": "30 г",
+      "price": "15 грн",
+      "logo": "1701972849317.png",
+      "id": 9
+    }
+  ],
+  "users": [
+    {
+      "id": 0,
+      "email": "admin@example.com",
+      "password": "YWRtaW5fcGFzcw==",
+      "admin": true
+    },
+    {
+      "id": 1000,
+      "firstName": "Іван",
+      "lastName": "Іваненко",
+      "email": "iivanenko@example.com",
+      "password": "aXZhbl9uYXZp"
+    }
+  ]
+}

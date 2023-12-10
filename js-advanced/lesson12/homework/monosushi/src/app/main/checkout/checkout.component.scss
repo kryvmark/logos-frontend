@@ -1,0 +1,146 @@
+@import "../../../style/media";
+@import "../../../style/colors";
+@import "../../../style/mixins";
+
+.checkout {
+  @include container();
+
+  @include _1200 {
+    margin-inline: 12.5vw;
+  }
+
+  &-h1 {
+    @include h1();
+    margin-bottom: 1.5rem;
+
+    @include _768 {
+      margin-bottom: 2.5rem;
+
+      &.stub {
+        font-size: 2rem !important;
+      }
+    }
+  }
+
+  &-stub {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .i-main-empty {
+      width: 6rem;
+      height: 6rem;
+      margin-bottom: 1.5rem;
+
+      @include _768 {
+        width: 8rem;
+        height: 8rem;
+        margin-bottom: 3rem;
+      }
+    }
+
+    &-link {
+      @include button();
+      margin-block: 0.5rem;
+
+      @include _768 {
+        padding: 1rem;
+      }
+    }
+  }
+
+  &-view {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-item {
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      border-block: 1px solid $gray;
+      margin-top: -1px;
+      padding: 2rem 1rem;
+      justify-content: center;
+
+      @include _768 {
+        justify-content: space-between;
+      }
+
+      &-wrap {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+
+        @include _768 {
+          flex-wrap: nowrap;
+          width: 100%;
+        }
+      }
+
+      &-link {
+        @include link($bold: true, $highlight: true);
+
+        &.wrap {
+          width: 100%;
+          margin-bottom: 0.75rem;
+
+          @include _768 {
+            width: auto;
+            flex: auto;
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      &-img {
+        width: 6rem;
+        height: 3.375rem;
+        object-fit: contain;
+        margin-inline-end: 1rem;
+
+        @include _1200 {
+          transition: 0.33s;
+
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+
+      &-price {
+        margin: 1rem 0;
+        width: 5rem;
+        text-align: right;
+        color: $muted;
+
+        b {
+          color: $text;
+        }
+      }
+
+      .i-misc-remove {
+        margin-block: 1rem;
+        margin-inline-start: 0.5rem;
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+
+    &-total {
+      align-self: flex-end;
+      padding-block: 0.5rem;
+      font-size: 1.125rem;
+      color: $muted;
+
+      b {
+        color: $text;
+      }
+    }
+  }
+}

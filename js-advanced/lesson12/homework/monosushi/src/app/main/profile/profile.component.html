@@ -1,0 +1,75 @@
+<div class="profile">
+  <div class="profile-control">
+    <nav class="profile-control-nav">
+      <a
+        routerLink="../main"
+        routerLinkActive="active"
+        class="profile-control-nav-link"
+        >Особисті дані</a
+      >
+      <a
+        routerLink="../history"
+        routerLinkActive="active"
+        class="profile-control-nav-link"
+        >Історія замовлень</a
+      >
+    </nav>
+    <button (click)="logout()" class="profile-control-logout">Вихід</button>
+  </div>
+  <div class="profile-view">
+    <ng-container [ngSwitch]="path">
+      <ng-container *ngSwitchCase="'main'">
+        <h3 class="profile-view-h3">Особисті дані</h3>
+        <form class="profile-view-form" [formGroup]="form">
+          <div class="profile-view-form-row">
+            <input
+              type="text"
+              class="profile-view-form-row-input"
+              formControlName="firstName"
+              [ngClass]="{
+                touched:
+                  form.controls['firstName'].touched &&
+                  form.controls['firstName'].invalid
+              }"
+              name="inputFirstName"
+              id="inputFirstName"
+              placeholder="Ваше ім'я"
+            />
+            <input
+              type="text"
+              class="profile-view-form-row-input"
+              formControlName="lastName"
+              [ngClass]="{
+                touched:
+                  form.controls['lastName'].touched &&
+                  form.controls['lastName'].invalid
+              }"
+              name="inputLastName"
+              id="inputLastName"
+              placeholder="Ваше прізвище"
+            />
+          </div>
+          <input
+            type="email"
+            class="profile-view-form-input"
+            formControlName="email"
+            [ngClass]="{
+              touched:
+                form.controls['email'].touched && form.controls['email'].invalid
+            }"
+            name="inputEmail"
+            id="inputEmail"
+            placeholder="Ваша електронна пошта"
+          />
+        </form>
+      </ng-container>
+    </ng-container>
+    <button
+      *ngIf="ui.mobile"
+      (click)="logout()"
+      class="profile-view-logout"
+    >
+      Вихід
+    </button>
+  </div>
+</div>

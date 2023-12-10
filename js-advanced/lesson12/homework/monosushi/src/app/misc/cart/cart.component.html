@@ -1,0 +1,66 @@
+<div class="blur" [ngClass]="{ active }" (click)="close()"></div>
+<div class="cart" [ngClass]="{ active }">
+  <div class="cart-container">
+    <div
+      class="cart-container-stub"
+      *ngIf="cart.items.length < 1; else cartView"
+    >
+      <i class="i-main-empty"></i>
+      <h4 class="cart-container-stub-h4">Кошик порожній</h4>
+      <a routerLink="/" class="cart-container-stub-link" (click)="close()"
+        >Перейти до каталогу</a
+      >
+    </div>
+    <ng-template #cartView>
+      <div class="cart-container-view">
+        <div
+          class="cart-container-view-item"
+          *ngFor="let item of cart.items; index as i"
+        >
+          <a
+            class="cart-container-view-item-link"
+            [routerLink]="['/products/', item.product, '/', item.path].join('')"
+          >
+            <img
+              [src]="ui.firebase(item.logo)"
+              class="cart-container-view-item-img"
+            />
+          </a>
+          <div class="cart-container-view-item-wrap">
+            <a
+              class="cart-container-view-item-link wrap"
+              [routerLink]="
+                ['/products/', item.product, '/', item.path].join('')
+              "
+            >
+              {{ item.name }}
+            </a>
+            <app-numeric
+              class="cart-container-view-item-numeric"
+              [value]="item.qty"
+              (changeEvent)="changeQty(i, $event)"
+            ></app-numeric>
+            <span class="cart-container-view-item-price">
+              <b>{{ item.price * item.qty }}</b>
+              грн
+            </span>
+            <i class="i-misc-remove" (click)="remove(i)"></i>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <div class="cart-container-order">
+      <span class="cart-container-order-total">
+        Сума: <strong>{{ cart.total.price }}</strong> грн
+      </span>
+      <a
+        *ngIf="cart.total.items > 0"
+        routerLink="/checkout"
+        class="cart-container-order-link"
+        (click)="close()"
+      >
+        Оформити замовлення
+      </a>
+    </div>
+  </div>
+</div>
