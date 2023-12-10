@@ -2,13 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   Market,
-  MarketCart,
   MarketItem,
   MarketOffer,
   MarketPath,
   MarketProduct,
 } from '../types';
-import { Observable, Subject, forkJoin, map } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({

@@ -61,7 +61,7 @@
 
   &-h1 {
     align-self: center;
-    @include h1-lined();
+    @include h1();
   }
 
   &-view {

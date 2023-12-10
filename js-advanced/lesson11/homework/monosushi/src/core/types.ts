@@ -69,4 +69,16 @@ export type MarketOrderItem = MarketStoredItem & {
 
 export type MarketPath = 'offers' | 'products' | 'items';
 
+export type User = UserCredentials & {
+  id: number,
+  firstName?: string;
+  lastName?: string;
+  admin: boolean;
+};
+
+export type UserCredentials = {
+  email: string;
+  password: string;
+};
+
 export type AdminPath = MarketPath | 'orders';

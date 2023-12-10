@@ -10,7 +10,7 @@
   }
 
   &-h1 {
-    @include h1-lined();
+    @include h1();
     margin-bottom: 1.5rem;
 
     @include _768 {

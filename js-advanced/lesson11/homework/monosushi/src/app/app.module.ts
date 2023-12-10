@@ -19,6 +19,7 @@ import { OfferInfoComponent } from './main/offer/info/offer-info.component';
 import { ProductComponent } from './main/product/product.component';
 import { ProductInfoComponent } from './main/product/info/product-info.component';
 import { TermsComponent } from './main/terms/terms.component';
+import { ProfileComponent } from './main/profile/profile.component';
 import { AdminComponent } from './main/admin/admin.component';
 import { MapComponent } from './misc/map/map.component';
 
@@ -31,6 +32,7 @@ import { NumericComponent } from './misc/numeric/numeric.component';
 import { FilterPipe } from '../core/filter/filter.pipe';
 import { CartComponent } from './misc/cart/cart.component';
 import { CheckoutComponent } from './main/checkout/checkout.component';
+import { LoginComponent } from './main/login/login.component';
 
 register();
 
@@ -54,6 +56,8 @@ register();
     FilterPipe,
     CartComponent,
     CheckoutComponent,
+    LoginComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

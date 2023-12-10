@@ -6,6 +6,6 @@
   @include container();
 
   &-h1 {
-    @include h1-lined();
+    @include h1();
   }
 }

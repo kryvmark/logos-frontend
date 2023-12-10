@@ -33,8 +33,12 @@
   overflow-y: hidden;
   border-top: 1px solid $gray;
   top: 4rem;
+  visibility: hidden;
+  opacity: 0;
 
   &.active {
+    visibility: visible;
+    opacity: 1;
     height: calc(100% - 8rem);
   }
 
@@ -165,8 +169,6 @@
   @include _768 {
     width: 40rem;
     height: 60vh;
-    visibility: hidden;
-    opacity: 0;
 
     border: {
       bottom-left-radius: 0.75rem;
@@ -174,8 +176,6 @@
     }
 
     &.active {
-      visibility: visible;
-      opacity: 1;
       height: 60vh;
     }
   }

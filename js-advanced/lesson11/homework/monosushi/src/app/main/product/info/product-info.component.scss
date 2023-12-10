@@ -53,50 +53,6 @@
     }
   }
 
-  &-banner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 10rem;
-    padding: 2.5rem;
-    border-radius: 0.75rem;
-
-    background: {
-      color: $monosushi;
-      image: app-firebase("main/background.svg"),
-        app-firebase("main/background.svg");
-      position: 0 0, 190px -52px;
-    }
-
-    margin-bottom: 1.5rem;
-
-    @include _768 {
-      margin-bottom: 3rem;
-    }
-  }
-
-  &-h1 {
-    @include h1-lined();
-    text-align: center;
-
-    &::before {
-      background-color: $text;
-    }
-  }
-
-  &-ul {
-    @include ul(true);
-
-    &-li {
-      font-size: 1rem !important;
-
-      @include _768 {
-        font-size: 1.125rem !important;
-      }
-    }
-  }
-
   &-view {
     display: flex;
     flex-direction: column;
@@ -127,7 +83,7 @@
       align-items: flex-start;
 
       &-h1 {
-        @include h1();
+        @include h1(false);
         text-align: left;
         font-size: 2.5rem !important;
         margin-bottom: 1.5rem;

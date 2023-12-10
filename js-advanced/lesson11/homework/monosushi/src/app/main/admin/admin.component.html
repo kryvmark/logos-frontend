@@ -26,7 +26,7 @@
         >Замовлення</a
       >
     </nav>
-    <a routerLink="/" class="admin-control-logout">Вихід</a>
+    <a (click)="logout()" routerLink="/login" class="admin-control-logout">Вихід</a>
   </div>
   <div class="admin-view">
     <ng-container *ngIf="path != 'orders'">
@@ -775,6 +775,6 @@
         </button>
       </form>
     </ng-template>
-    <a *ngIf="ui.mobile && !ui.form" routerLink="/" class="admin-view-logout">Вихід</a>
+    <a *ngIf="ui.mobile && !ui.form" (click)="logout()" routerLink="/login" class="admin-view-logout">Вихід</a>
   </div>
 </div>

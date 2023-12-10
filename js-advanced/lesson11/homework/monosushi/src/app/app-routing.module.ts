@@ -8,9 +8,11 @@ import { ProductComponent } from './main/product/product.component';
 import { ProductInfoComponent } from './main/product/info/product-info.component';
 import { DeliveryComponent } from './main/delivery/delivery.component';
 import { AboutComponent } from './main/about/about.component';
+import { ProfileComponent } from './main/profile/profile.component';
 import { AdminComponent } from './main/admin/admin.component';
 import { TermsComponent } from './main/terms/terms.component';
 import { CheckoutComponent } from './main/checkout/checkout.component';
+import { LoginComponent } from './main/login/login.component';
 
 import {
   itemResolver,
@@ -18,6 +20,7 @@ import {
   offerResolver,
   productResolver,
 } from 'src/core/resolvers/resolvers';
+import { adminGuard, loginGuard, profileGuard } from 'src/core/guards/guards';
 
 const routes: Routes = [
   { path: '', component: MainComponent, resolve: { response: marketResolver } },
@@ -43,8 +46,11 @@ const routes: Routes = [
   },
   { path: 'delivery', component: DeliveryComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [profileGuard] },
   {
     path: 'admin',
+    canActivateChild: [adminGuard],
     children: [
       {
         path: 'offers',

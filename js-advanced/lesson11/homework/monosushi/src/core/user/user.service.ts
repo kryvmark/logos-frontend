@@ -1,21 +1,26 @@
-import { Subject } from 'rxjs';
+import { Observable, Subject, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 import {
   MarketCart,
   MarketItem,
   MarketOrderItem,
   MarketStoredItem,
+  User,
 } from '../types';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private _cart!: MarketCart;
   private _subject = new Subject<void>();
+  private _cart!: MarketCart;
   private _storedItems: MarketStoredItem[] = [];
 
-  constructor() {}
+  private _user!: User;
+
+  constructor(private http: HttpClient) {}
 
   getCart(items: MarketItem[]): MarketCart {
     const orderItems: MarketOrderItem[] = [];
@@ -72,11 +77,52 @@ export class UserService {
     this.subject.next();
   }
 
+  get subject(): Subject<void> {
+    return this._subject;
+  }
+
   get cart(): MarketCart {
     return this._cart;
   }
 
-  get subject(): Subject<void> {
-    return this._subject;
+  login(email: string, password: string): Observable<boolean> {
+    return this.http.get<User[]>(`${environment.backendUrl}/users`).pipe(
+      map((users) => {
+        const user = users.find(
+          (u) => u.email == email && u.password == password
+        );
+        if (user) {
+          this._user = user;
+          if (!localStorage.getItem('user')) {
+            localStorage.setItem(
+              'user',
+              JSON.stringify({ email, password: password })
+            );
+          }
+          return true;
+        }
+        return false;
+      })
+    );
+  }
+
+  logout(): void {
+    localStorage.removeItem('user');
+  }
+
+  get firstName(): string | undefined {
+    return this._user.firstName;
+  }
+
+  get lastName(): string | undefined {
+    return this._user.lastName;
+  }
+
+  get email(): string | undefined {
+    return this._user.email;
+  }
+
+  get admin(): boolean | undefined {
+    return this._user.admin;
   }
 }

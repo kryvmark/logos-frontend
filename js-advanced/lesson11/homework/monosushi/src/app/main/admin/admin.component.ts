@@ -12,6 +12,7 @@ import {
   AdminPath,
   Market,
 } from 'src/core/types';
+import { UserService } from 'src/core/user/user.service';
 
 @Component({
   selector: 'app-admin',
@@ -383,6 +384,7 @@ export class AdminComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private market: MarketService,
+    private user: UserService,
     private admin: AdminService,
     private forms: FormBuilder
   ) {}
@@ -430,5 +432,9 @@ export class AdminComponent implements OnInit {
   @HostListener('window:resize')
   onResize() {
     this.ui.mobile = window.innerWidth < 1200;
+  }
+
+  logout() {
+    this.user.logout();
   }
 }

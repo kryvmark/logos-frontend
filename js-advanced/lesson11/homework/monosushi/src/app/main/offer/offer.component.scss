@@ -2,13 +2,13 @@
 @import "../../../style/colors";
 @import "../../../style/mixins";
 
-.offer {
+.offers {
   @include container();
   align-items: flex-start;
 
   &-h1 {
     align-self: center;
-    @include h1-lined();
+    @include h1();
   }
 
   &-h2 {

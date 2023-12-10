@@ -271,7 +271,7 @@
     align-items: flex-start;
 
     &-h1 {
-      @include h1();
+      @include h1(false);
       align-self: center;
       margin-bottom: 1.5rem;
     }
