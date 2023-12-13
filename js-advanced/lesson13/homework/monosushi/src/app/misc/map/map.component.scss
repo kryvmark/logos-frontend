@@ -1,0 +1,27 @@
+@import "../../../style/media";
+@import "../../../style/mixins";
+
+.map {
+  position: relative;
+  width: 100%;
+
+  &-input {
+    @include input-text(false);
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 1rem;
+    width: calc(100% - 2rem);
+
+    @include _768 {
+      width: calc(75% - 2rem);
+    }
+    @include _1200 {
+      width: calc(50% - 2rem);
+    }
+
+    &.touched {
+      @include input-touched();
+    }
+  }
+}

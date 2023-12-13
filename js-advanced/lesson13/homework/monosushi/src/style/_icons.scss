@@ -1,0 +1,229 @@
+.i {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  background: {
+    size: contain;
+    repeat: no-repeat;
+    position: center;
+  }
+
+  &-logo {
+    @extend .i;
+    background-image: app-firebase("logo.svg");
+  }
+
+  &-header {
+    &-phone {
+      @extend .i;
+      background-image: app-firebase("header/phone.svg");
+    }
+
+    &-user {
+      @extend .i;
+      background-image: app-firebase("header/user.svg");
+    }
+
+    &-basket {
+      @extend .i;
+      background-image: app-firebase("header/basket.svg");
+    }
+
+    &-offer {
+      @extend .i;
+      background-image: app-firebase("header/offer.svg");
+    }
+  }
+
+  &-main {
+    &-delivery {
+      @extend .i;
+      background-image: app-firebase("main/delivery.svg");
+    }
+
+    &-monoman {
+      @extend .i;
+      background-image: app-firebase("main/monoman.svg");
+    }
+
+    &-monobonus {
+      @extend .i;
+      background-image: app-firebase("main/monobonus.svg");
+    }
+
+    &-empty {
+      @extend .i;
+      background-image: app-firebase("main/empty.svg");
+    }
+
+    &-error {
+      @extend .i;
+      background-image: app-firebase("main/error.svg");
+    }
+  }
+
+  &-delivery {
+    &-cash {
+      @extend .i;
+      background-image: app-firebase("main/delivery/cash.svg");
+    }
+
+    &-card {
+      @extend .i;
+      background-image: app-firebase("main/delivery/card.svg");
+    }
+  }
+
+  &-about {
+    &-fresh {
+      @extend .i;
+      background-image: app-firebase("main/about/fresh.svg");
+    }
+
+    &-cuisine {
+      @extend .i;
+      background-image: app-firebase("main/about/cuisine.svg");
+    }
+
+    &-parcel {
+      @extend .i;
+      background-image: app-firebase("main/about/parcel.svg");
+    }
+
+    &-crisp {
+      @extend .i;
+      background-image: app-firebase("main/about/crisp.svg");
+    }
+  }
+
+  &-footer {
+    &-facebook {
+      @extend .i;
+      background-image: app-firebase("footer/facebook.svg");
+    }
+
+    &-instagram {
+      @extend .i;
+      background-image: app-firebase("footer/instagram.svg");
+    }
+
+    &-mastercard {
+      @extend .i;
+      background-image: app-firebase("footer/mastercard.svg");
+    }
+
+    &-visa {
+      @extend .i;
+      background-image: app-firebase("footer/visa.svg");
+    }
+
+    &-liqpay {
+      @extend .i;
+      background-image: app-firebase("footer/liqpay.svg");
+    }
+
+    &-redstone {
+      @extend .i;
+      background-image: app-firebase("footer/redstone.svg");
+    }
+  }
+
+  &-misc {
+    &-stub {
+      @extend .i;
+      background-color: $gray;
+    }
+
+    &-remove {
+      @extend .i;
+      position: relative;
+      display: block;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        background: $muted;
+        cursor: pointer;
+        transition: 0.33s;
+      }
+
+      &::before {
+        bottom: 0;
+        left: 3px;
+        width: 10px;
+        height: 12px;
+        border-radius: 0 0 3px 3px;
+      }
+
+      &::after {
+        top: 0;
+        left: 1px;
+        width: 14px;
+        height: 4px;
+
+        clip-path: polygon(
+          35% 0,
+          65% 0,
+          75% 50%,
+          100% 50%,
+          100% 100%,
+          0 100%,
+          0 50%,
+          25% 50%
+        );
+
+        transform: translateY(-1px);
+      }
+
+      @include _1200 {
+        &:hover {
+          &::before,
+          &::after {
+            background-color: $monosushi;
+          }
+
+          &::after {
+            transform: translateY(-4px);
+          }
+        }
+      }
+    }
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+
+  &-top,
+  &-middle,
+  &-bottom {
+    fill: none;
+    stroke: $text;
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+
+  &-top,
+  &-bottom {
+    stroke-dasharray: 20 33;
+  }
+}
+
+.counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.125rem;
+}

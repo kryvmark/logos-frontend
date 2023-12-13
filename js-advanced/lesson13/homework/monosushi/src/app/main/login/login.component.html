@@ -1,0 +1,44 @@
+<div class="login">
+  <h1 class="login-h1">Вхід</h1>
+  <form class="login-form" [formGroup]="form">
+    <input
+      class="login-form-input"
+      [ngClass]="{
+        error: form.controls['email'].touched && form.controls['email'].invalid
+      }"
+      type="email"
+      name="loginEmail"
+      id="loginEmail"
+      formControlName="email"
+      placeholder="Електронна пошта"
+      (input)="unError()"
+    />
+    <input
+      class="login-form-input"
+      [ngClass]="{
+        error:
+          form.controls['password'].touched && form.controls['password'].invalid
+      }"
+      type="password"
+      name="loginPass"
+      id="loginPass"
+      formControlName="password"
+      placeholder="Пароль"
+      (input)="unError()"
+    />
+    <span
+      class="login-form-error"
+      [ngClass]="{ active: form.touched && form.invalid || error }"
+    >
+      Невірні дані
+    </span>
+    <button
+      class="login-form-submit"
+      type="submit"
+      [disabled]="form.invalid || error"
+      (click)="login()"
+    >
+      Увійти
+    </button>
+  </form>
+</div>
