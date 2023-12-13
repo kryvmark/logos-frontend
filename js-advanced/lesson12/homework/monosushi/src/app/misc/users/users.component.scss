@@ -47,14 +47,6 @@
         padding: 2rem;
       }
 
-      &-input {
-        @include input-text();
-
-        &.error {
-          @include input-touched();
-        }
-      }
-
       &-row {
         display: flex;
         flex-direction: column;
@@ -64,12 +56,6 @@
           display: grid;
           grid-template-columns: repeat(auto-fill, calc(50% - 0.5rem));
           gap: 1rem;
-        }
-
-        &.half {
-          @include _768 {
-            width: calc(50% - 0.5rem);
-          }
         }
       }
 

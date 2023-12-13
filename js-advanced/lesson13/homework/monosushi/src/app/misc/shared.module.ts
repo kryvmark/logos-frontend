@@ -10,6 +10,7 @@ import { ProfileComponent } from './../main/profile/profile.component';
 import { UsersComponent } from './users/users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
+import { CallComponent } from './call/call.component';
 
 const MATERIAL = [
   MatDialogModule,
@@ -19,7 +20,7 @@ const MATERIAL = [
 ];
 
 @NgModule({
-  declarations: [ProfileComponent, UsersComponent],
+  declarations: [ProfileComponent, UsersComponent, CallComponent],
   imports: [CommonModule, AppRoutingModule, FormsModule, ReactiveFormsModule, ...MATERIAL],
 })
 export class SharedModule {}

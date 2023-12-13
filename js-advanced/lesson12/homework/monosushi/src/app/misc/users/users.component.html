@@ -15,11 +15,6 @@
             matInput
             type="text"
             formControlName="firstName"
-            [ngClass]="{
-              error:
-                form.controls['firstName'].touched &&
-                form.controls['firstName'].invalid
-            }"
             name="inputFirstName"
             id="inputFirstName"
             placeholder="Ваше ім'я"
@@ -30,11 +25,6 @@
             matInput
             type="text"
             formControlName="lastName"
-            [ngClass]="{
-              error:
-                form.controls['lastName'].touched &&
-                form.controls['lastName'].invalid
-            }"
             name="inputLastName"
             id="inputLastName"
             placeholder="Ваше прізвище"
@@ -46,10 +36,6 @@
           matInput
           type="tel"
           formControlName="phone"
-          [ngClass]="{
-            error:
-              form.controls['phone'].touched && form.controls['phone'].invalid
-          }"
           name="inputPhone"
           id="inputPhone"
           placeholder="0987654321"
@@ -61,10 +47,6 @@
           matInput
           type="email"
           formControlName="email"
-          [ngClass]="{
-            error:
-              form.controls['email'].touched && form.controls['email'].invalid
-          }"
           name="inputEmail"
           id="inputEmail"
           placeholder="Ваша електронна пошта"
@@ -76,11 +58,6 @@
             matInput
             [type]="ui.obscure ? 'password' : 'text'"
             formControlName="password"
-            [ngClass]="{
-              error:
-                form.controls['password'].touched &&
-                form.controls['password'].invalid
-            }"
             name="inputPassword"
             id="inputPassword"
             placeholder="Пароль"
