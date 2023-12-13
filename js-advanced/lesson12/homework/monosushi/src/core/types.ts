@@ -69,18 +69,38 @@ export type MarketOrderItem = MarketStoredItem & {
   price: number;
 };
 
-export type MarketPath = 'offers' | 'products' | 'items';
+export type MarketOrder = {
+  id?: string;
+  uid?: string;
+  date: number;
+  firstName: string;
+  phone: string;
+  items: MarketOrderItem[];
 
-export type User = UserCredentials & {
-  id: number;
-  firstName?: string;
-  lastName?: string;
-  admin: boolean;
+  utensils: {
+    regular: number;
+    trial: number;
+  };
+
+  cash: boolean;
+  selfPickup: boolean;
+  address: string;
+  call: boolean;
+  complete: boolean;
+  total: number;
 };
 
-export type UserCredentials = {
+export type MarketPath = 'offers' | 'products' | 'items';
+
+export type User = {
+  id?: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
-  password: string;
+  phone?: string;
+  admin?: boolean;
+  orders?: MarketOrder[];
+  addresses?: string[];
 };
 
 export type UserPath = 'main' | 'history';

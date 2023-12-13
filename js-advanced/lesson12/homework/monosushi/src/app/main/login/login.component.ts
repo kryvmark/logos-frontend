@@ -36,14 +36,16 @@ export class LoginComponent {
 
   login(): void {
     const email = this.form.controls['email'].value;
-    const password = btoa(this.form.controls['password'].value);
-
-    this.service.login(email, password).subscribe((success) => {
+    const password = this.form.controls['password'].value;
+    this.service.login(email, password).then((success) => {
       if (success) {
-        if (this.service.admin) this.router.navigateByUrl('/admin/offer', { replaceUrl: true });
-        else this.router.navigateByUrl('/profile/main', { replaceUrl: true });
-      }
-      else this.error = true;
+        if (this.service.admin) {
+          this.router.navigateByUrl('/admin/offer', { replaceUrl: true });
+        } else {
+          this.service.logout();
+          this.error = true;
+        }
+      } else this.error = true;
     });
   }
 }

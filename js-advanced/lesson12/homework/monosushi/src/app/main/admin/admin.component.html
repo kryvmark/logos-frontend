@@ -298,7 +298,7 @@
                     {{ ui.misc.itemProductName(i) | titlecase }}
                     <br /><br />
                     <i *ngIf="item.category">
-                      "{{ ui.misc.itemSubcatDict[item.category] }}"
+                      "{{ ui.misc.categories[item.category] }}"
                     </i>
                   </td>
                 </tr>
@@ -349,6 +349,107 @@
               </tbody>
             </table>
           </ng-container>
+          <ng-container *ngSwitchCase="'orders'">
+            <table class="admin-view-wrap-table stub" *ngIf="orders.length < 1">
+              <tbody class="admin-view-wrap-table-tbody">
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">№ замовлення</th>
+                  <td class="admin-view-wrap-table-td">-</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Дата та час</th>
+                  <td class="admin-view-wrap-table-td">...</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Адреса</th>
+                  <td class="admin-view-wrap-table-td">(немає)</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Сума</th>
+                  <td class="admin-view-wrap-table-td"><b>0</b> грн</td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Статус</th>
+                  <td class="admin-view-wrap-table-td">-</td>
+                </tr>
+              </tbody>
+            </table>
+            <table
+              class="admin-view-wrap-table"
+              *ngFor="let order of orders; index as i"
+            >
+              <tbody class="admin-view-wrap-table-tbody">
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">№ замовлення</th>
+                  <td class="admin-view-wrap-table-td">
+                    {{ order.id }}<br /><br />
+                    <b>{{ order.phone }}</b>
+                    <br />
+                    <b>{{ order.firstName }}</b>
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Дата та час</th>
+                  <td class="admin-view-wrap-table-td">
+                    {{ order.date | date : "HH:mm dd.MM.yyyy" }}
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Адреса</th>
+                  <td class="admin-view-wrap-table-td">
+                    {{ order.address }}
+                    <ng-container *ngIf="order.selfPickup">
+                      <br /><b>(самовивіз)</b>
+                    </ng-container>
+                    <ng-container *ngIf="order.call">
+                      <br /><b>(перетелефонувати)</b>
+                    </ng-container>
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Сума</th>
+                  <td class="admin-view-wrap-table-td">
+                    <b>{{ order.total }}</b> грн<br />
+                    {{ order.cash ? "готівкою" : "безготвіково" }}
+                    <br /><br />
+                    <ng-container *ngFor="let item of order.items">
+                      <i>"{{ item.name }}"</i>&nbsp;<b>({{ item.qty }})</b>
+                      <br /><br />
+                    </ng-container>
+                    <ng-container
+                      *ngIf="order.selfPickup && order.total >= 300"
+                    >
+                      <i>"Запечені моно макі з лососем"</i>&nbsp;<b>(1)</b>
+                      <br /><br />
+                    </ng-container>
+                    прибори &ndash; <b>{{ order.utensils.regular }}</b>
+                    <br />
+                    <b *ngIf="order.utensils.trial != 0"> (+навчальний) </b>
+                  </td>
+                </tr>
+                <tr class="admin-view-wrap-table-tr">
+                  <th class="admin-view-wrap-table-th">Статус</th>
+                  <td class="admin-view-wrap-table-td">
+                    <div class="admin-view-action">
+                      <span *ngIf="!order.complete" class="order pending">
+                        Очікується
+                      </span>
+                      <span *ngIf="order.complete" class="order complete">
+                        Виконано
+                      </span>
+                      <button
+                        *ngIf="!order.complete"
+                        class="admin-view-action-control"
+                        (click)="ui.confirm(i)"
+                      >
+                        Підтвердити
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-container>
         </ng-container>
       </div>
       <ng-template #adminTableDesktop>
@@ -389,6 +490,17 @@
                     Картинка
                   </th>
                   <th class="admin-view-table-th" style="width: 15%">Дії</th>
+                </ng-container>
+                <ng-container *ngSwitchCase="'orders'">
+                  <th class="admin-view-table-th" style="width: 15%">
+                    № замовлення
+                  </th>
+                  <th class="admin-view-table-th" style="width: 20%">
+                    Дата та час
+                  </th>
+                  <th class="admin-view-table-th" style="width: 35%">Адреса</th>
+                  <th class="admin-view-table-th" style="width: 15%">Сума</th>
+                  <th class="admin-view-table-th" style="width: 15%">Статус</th>
                 </ng-container>
               </ng-container>
             </tr>
@@ -543,7 +655,7 @@
                     {{ ui.misc.itemProductName(i) | titlecase }}
                     <br /><br />
                     <i *ngIf="item.category">
-                      "{{ ui.misc.itemSubcatDict[item.category] }}"
+                      "{{ ui.misc.categories[item.category] }}"
                     </i>
                   </td>
                   <td class="admin-view-table-td">{{ item.name }}</td>
@@ -574,13 +686,93 @@
                   </td>
                 </tr>
               </ng-container>
+              <ng-container *ngSwitchCase="'orders'">
+                <tr class="admin-view-table-tr stub" *ngIf="orders.length < 1">
+                  <td class="admin-view-table-td">-</td>
+                  <td class="admin-view-table-td">...</td>
+                  <td class="admin-view-table-td">(немає)</td>
+                  <td class="admin-view-table-td"><b>0</b> грн</td>
+                  <td class="admin-view-table-td">-</td>
+                </tr>
+                <ng-container *ngFor="let order of orders; index as i">
+                  <tr class="admin-view-table-tr">
+                    <td class="admin-view-table-td lined">
+                      {{ order.id }}<br /><br />
+                      <b>{{ order.phone }}</b>
+                      <br />
+                      <b>{{ order.firstName }}</b>
+                    </td>
+                    <td class="admin-view-table-td lined">
+                      {{ order.date | date : "HH:mm dd.MM.yyyy" }}
+                    </td>
+                    <td class="admin-view-table-td lined">
+                      {{ order.address }}
+                      <ng-container *ngIf="order.selfPickup">
+                        <br /><b>(самовивіз)</b>
+                      </ng-container>
+                      <ng-container *ngIf="order.call">
+                        <br /><b>(перетелефонувати)</b>
+                      </ng-container>
+                    </td>
+                    <td class="admin-view-table-td lined">
+                      <b>{{ order.total }}</b> грн<br />
+                      {{ order.cash ? "готівкою" : "безготвіково" }}
+                      <br /><br />
+                      прибори &ndash; <b>{{ order.utensils.regular }}</b>
+                      <br />
+                      <b *ngIf="order.utensils.trial != 0"> (+навчальний) </b>
+                    </td>
+                    <td class="admin-view-table-td lined">
+                      <div class="admin-view-action">
+                        <span *ngIf="!order.complete" class="order pending">
+                          Очікується
+                        </span>
+                        <span *ngIf="order.complete" class="order complete">
+                          Виконано
+                        </span>
+                        <button
+                          *ngIf="!order.complete"
+                          class="admin-view-action-control"
+                          (click)="ui.confirm(i)"
+                        >
+                          Підтвердити
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    *ngFor="let item of order.items"
+                    class="admin-view-table-tr"
+                  >
+                    <td class="admin-view-table-td"></td>
+                    <td class="admin-view-table-td" colspan="2">
+                      {{ item.name }}
+                    </td>
+                    <td class="admin-view-table-td" colspan="2">
+                      <b>{{ item.qty }}</b>
+                    </td>
+                  </tr>
+                  <tr
+                    *ngIf="order.selfPickup && order.total >= 300"
+                    class="admin-view-table-tr"
+                  >
+                    <td class="admin-view-table-td"></td>
+                    <td class="admin-view-table-td" colspan="2">
+                      Запечені моно макі з лососем
+                    </td>
+                    <td class="admin-view-table-td" colspan="2">
+                      <b>1</b>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
             </ng-container>
           </tbody>
         </table>
       </ng-template>
     </ng-container>
     <ng-template #adminForm>
-      <form class="admin-view-form" [formGroup]="form">
+      <form *ngIf="path != 'orders'" class="admin-view-form" [formGroup]="form">
         <input
           *ngIf="path == 'offers'"
           type="text"
@@ -623,7 +815,6 @@
         </div>
         <div *ngIf="path == 'items'" class="admin-view-form-row">
           <select
-            type=""
             class="admin-view-form-row-input"
             formControlName="product"
             name="inputProduct"
@@ -638,7 +829,6 @@
             </option>
           </select>
           <select
-            type="text"
             class="admin-view-form-row-input"
             formControlName="category"
             name="inputCategory"
@@ -646,10 +836,10 @@
           >
             <option value="" selected>Підкатегорія</option>
             <option
-              *ngFor="let subcat of ui.misc.itemSubcat()"
-              [value]="subcat.name"
+              *ngFor="let category of ui.misc.itemCategories()"
+              [value]="category.name"
             >
-              {{ subcat.title }} ({{ subcat.name }})
+              {{ category.title }} ({{ category.name }})
             </option>
           </select>
         </div>

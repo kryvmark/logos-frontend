@@ -201,7 +201,7 @@
   }
 }
 
-@mixin h3 {
+@mixin h3($counter: false) {
   font: {
     weight: bold;
     size: 1.25rem;
@@ -209,6 +209,37 @@
 
   @include _768 {
     font-size: 1.75rem;
+  }
+
+  @if $counter {
+    position: relative;
+    padding-inline-start: 2.5rem;
+
+    @include _768 {
+      padding-inline-start: 3rem;
+    }
+
+    &::before {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      counter-increment: h3-counter;
+      content: counter(h3-counter);
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $monosushi;
+      border-radius: 0.25rem;
+
+      @include _768 {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.125rem;
+      }
+    }
   }
 }
 
@@ -314,6 +345,12 @@
   }
 }
 
+@mixin hr {
+  height: 0.25rem;
+  border: none;
+  background-color: $monosushi;
+}
+
 @mixin action {
   font-weight: bold;
   color: $monosushi;
@@ -349,6 +386,10 @@
   outline-color: transparent;
   transition: 0.33s;
 
+  &:disabled {
+    cursor: text;
+  }
+
   &:focus {
     outline: 0.25rem solid rgba($monosushi, 0.33);
     border-color: $monosushi;
@@ -357,6 +398,45 @@
   @include _1200 {
     @if $larger {
       font-size: 1.125rem;
+    }
+  }
+}
+
+@mixin input-check() {
+  appearance: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 1px solid $gray;
+  border-radius: 0.125rem;
+  cursor: pointer;
+  position: relative;
+
+  @include _1200 {
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: 0.33s;
+    }
+  }
+
+  &:checked {
+    border-color: $monosushi;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0.625rem;
+      height: 0.625rem;
+      border-radius: 0.125rem;
+      background-color: $monosushi;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }
@@ -408,5 +488,38 @@
       url(https://monosushi.com.ua/wp-content/themes/monosushi/img/bg-monosushi-logo.svg);
     repeat: repeat;
     position: 0 0, 190px -52px;
+  }
+}
+
+@mixin order($complete: false) {
+  font-weight: bold;
+  padding-inline-start: 1rem;
+  position: relative;
+  text-transform: lowercase;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: $text;
+  }
+
+  @if $complete {
+    color: $green;
+  } @else {
+    color: $yellow;
+  }
+
+  &::before {
+    @if $complete {
+      background-color: $green;
+    } @else {
+      background-color: $yellow;
+    }
   }
 }

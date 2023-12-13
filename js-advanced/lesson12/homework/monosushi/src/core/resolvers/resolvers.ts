@@ -2,18 +2,35 @@ import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 import {
   Market,
   MarketOffer,
+  MarketOrder,
   MarketProduct,
   MarketProductItem,
 } from '../types';
 import { inject } from '@angular/core';
 import { MarketService } from '../market/market.service';
 import { map } from 'rxjs';
+import { AdminService } from '../admin/admin.service';
+import { UserService } from '../user/user.service';
 
 export const marketResolver: ResolveFn<Market | undefined> = () => {
   const market = inject(MarketService);
 
   if (!market.records) return market.read().pipe(map(() => market.records));
   else return market.records;
+};
+
+export const ordersResolver: ResolveFn<MarketOrder[] | undefined> = async () => {
+  const admin = inject(AdminService);
+
+  if (!admin.orders) await admin.readOrders();
+  return admin.orders;
+};
+
+export const historyResolver: ResolveFn<MarketOrder[] | undefined> = async () => {
+  const user = inject(UserService);
+
+  if (!user.orders) await user.checkLogin();
+  return user.orders;
 };
 
 export const offerResolver: ResolveFn<MarketOffer | undefined> = (

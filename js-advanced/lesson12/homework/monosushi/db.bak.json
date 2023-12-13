@@ -153,20 +153,5 @@
       "logo": "1701972849317.png",
       "id": 9
     }
-  ],
-  "users": [
-    {
-      "id": 0,
-      "email": "admin@example.com",
-      "password": "YWRtaW5fcGFzcw==",
-      "admin": true
-    },
-    {
-      "id": 1000,
-      "firstName": "Іван",
-      "lastName": "Іваненко",
-      "email": "iivanenko@example.com",
-      "password": "aXZhbl9uYXZp"
-    }
   ]
 }

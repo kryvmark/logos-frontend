@@ -10,11 +10,11 @@
   <input
     #mapAutofill
     class="map-input"
-    [ngClass]="{ touched: ui.inputTouched }"
+    [ngClass]="{ touched: ui.inputTouched && highlight }"
     type="text"
     name="mapAutofill"
     id="mapAutofill"
-    placeholder="Виберіть адресу"
+    placeholder="Пошук адреси"
     (blur)="ui.inputRegister()"
   />
 </div>

@@ -1,78 +1,71 @@
 import { inject } from '@angular/core';
 import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
-import { map } from 'rxjs';
 import { UserService } from '../user/user.service';
 
-export const loginGuard: CanActivateFn = () => {
+export const loginGuard: CanActivateFn = async () => {
   const service = inject(UserService);
   const router = inject(Router);
 
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-  if (user.email && user.password) {
-    return service.login(user.email, user.password).pipe(
-      map((success) => {
-        if (success) {
-          if (service.admin)
-            router.navigateByUrl('/admin/offer', { replaceUrl: true });
-          else router.navigateByUrl('/profile/main', { replaceUrl: true });
-          return false;
-        } else {
-          localStorage.removeItem('user');
-          return true;
-        }
-      })
-    );
+  const success = await service.checkLogin();
+  if (success) {
+    if (service.admin) {
+      router.navigateByUrl('/admin/offer', { replaceUrl: true });
+      return false;
+    } else {
+      router.navigateByUrl('/profile/main', { replaceUrl: true });
+      return false;
+    }
   }
   return true;
 };
 
-export const profileGuard: CanActivateChildFn = () => {
+export const profileGuard: CanActivateChildFn = async () => {
   const service = inject(UserService);
   const router = inject(Router);
 
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-  if (user.email && user.password) {
-    return service.login(user.email, user.password).pipe(
-      map((success) => {
-        if (success) {
-          if (service.admin) {
-            router.navigateByUrl('/admin/offer', { replaceUrl: true });
-            return false;
-          } else return true;
-        } else {
-          router.navigateByUrl('/login', { replaceUrl: true });
-          return false;
-        }
-      })
-    );
+  const success = await service.checkLogin();
+  if (success) {
+    if (service.admin) {
+      router.navigateByUrl('/admin/offer', { replaceUrl: true });
+      return false;
+    }
+    return true;
+  } else {
+    router.navigateByUrl('/', { replaceUrl: true });
+    return false;
+  }
+};
+
+export const adminGuard: CanActivateChildFn = async () => {
+  const service = inject(UserService);
+  const router = inject(Router);
+
+  const success = await service.checkLogin();
+  if (success) {
+    if (service.admin) return true;
+    else {
+      router.navigateByUrl('/', { replaceUrl: true });
+      return false;
+    }
   } else {
     router.navigateByUrl('/login', { replaceUrl: true });
     return false;
   }
 };
 
-export const adminGuard: CanActivateChildFn = () => {
+export const checkoutGuard: CanActivateFn = async () => {
   const service = inject(UserService);
   const router = inject(Router);
 
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-  if (user.email && user.password) {
-    return service.login(user.email, user.password).pipe(
-      map((success) => {
-        if (success) {
-          if (service.admin) return true;
-          else {
-            router.navigateByUrl('/profile/main', { replaceUrl: true });
-            return false;
-          }
-        } else {
-          router.navigateByUrl('/login', { replaceUrl: true });
-          return false;
-        }
-      })
-    );
+  const success = await service.checkLogin();
+  if (success) {
+    if (service.admin) {
+      router.navigateByUrl('/admin/offer', { replaceUrl: true });
+      return false;
+    }
+    return true;
   } else {
-    router.navigateByUrl('/login', { replaceUrl: true });
+    router.navigateByUrl('/', { replaceUrl: true });
     return false;
   }
 };

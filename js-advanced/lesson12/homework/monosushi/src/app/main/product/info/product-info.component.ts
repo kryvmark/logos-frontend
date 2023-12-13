@@ -42,6 +42,8 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
           this.view = view as MarketProductItem;
 
           let promo = () => {
+            let ids = new Array<number>();
+
             this.rolls = this._shuffle(
               this.market.records.items.filter(
                 (record) =>
@@ -52,16 +54,21 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
               )
             ).slice(0, 4);
 
+            this.rolls.forEach((roll) => {
+              if (roll.id) ids.push(roll.id);
+            });
+
             this.similar = this._shuffle(
               this.market.records.items.filter(
                 (record) =>
                   record.product == item.product &&
                   record.id &&
                   item.id &&
-                  record.id != item.id
+                  record.id != item.id &&
+                  !ids.find(id => id == record.id)
               )
             ).slice(0, 2);
-          }
+          };
 
           promo();
           this.interval = setInterval(promo, 30000);

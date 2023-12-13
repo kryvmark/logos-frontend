@@ -55,6 +55,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 3rem;
 
     &-item {
       align-self: stretch;
@@ -140,6 +141,80 @@
 
       b {
         color: $text;
+      }
+    }
+  }
+
+  &-form {
+    counter-reset: h3-counter;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+
+    &-h3 {
+      @include h3(true);
+      margin-bottom: 1.5rem;
+    }
+
+    &-row {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.5rem;
+
+      @include _768 {
+        flex-direction: row;
+
+        &.text {
+          justify-content: space-between;
+        }
+      }
+
+      &-input {
+        @include input-text();
+        margin-bottom: 1.5rem;
+
+        @include _768 {
+          width: calc(50% - 0.75rem);
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &-input {
+      @include input-text();
+      margin-bottom: 1.5rem;
+    }
+
+    &-check {
+      display: flex;
+      margin-bottom: 1rem;
+
+      &-control {
+        @include input-check();
+        min-width: 1.125rem;
+      }
+
+      &-label {
+        padding-inline-start: 0.5rem;
+        margin-inline-end: 2rem;
+        color: $muted;
+        cursor: pointer;
+        line-height: 1.5rem;
+      }
+    }
+
+    &-delimiter {
+      @include hr();
+      margin-bottom: 1.5rem;
+    }
+
+    &-submit {
+      align-self: center;
+      @include button();
+      margin-block: 1.5rem;
+
+      @include _1200 {
+        padding: 1rem;
       }
     }
   }

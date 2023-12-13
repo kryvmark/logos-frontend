@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 import { conf } from 'src/core/conf';
 
@@ -8,6 +8,9 @@ import { conf } from 'src/core/conf';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements AfterViewInit {
+  @Input('highlight')
+  public highlight = true;
+
   public ui = {
     deliveryPoints: conf.deliveryPoints,
     inputTouched: false,

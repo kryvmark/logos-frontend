@@ -19,12 +19,13 @@ import { OfferInfoComponent } from './main/offer/info/offer-info.component';
 import { ProductComponent } from './main/product/product.component';
 import { ProductInfoComponent } from './main/product/info/product-info.component';
 import { TermsComponent } from './main/terms/terms.component';
-import { ProfileComponent } from './main/profile/profile.component';
 import { AdminComponent } from './main/admin/admin.component';
 import { MapComponent } from './misc/map/map.component';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment.development';
 import { register } from 'swiper/element/bundle';
 import { ItemComponent } from './misc/item/item.component';
@@ -33,6 +34,8 @@ import { FilterPipe } from '../core/filter/filter.pipe';
 import { CartComponent } from './misc/cart/cart.component';
 import { CheckoutComponent } from './main/checkout/checkout.component';
 import { LoginComponent } from './main/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './misc/shared.module';
 
 register();
 
@@ -57,7 +60,6 @@ register();
     CartComponent,
     CheckoutComponent,
     LoginComponent,
-    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,10 @@ register();
     GoogleMapsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
+    BrowserAnimationsModule,
+    SharedModule,
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

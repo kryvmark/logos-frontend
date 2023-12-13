@@ -1,7 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { MarketService } from 'src/core/market/market.service';
-import { MarketCart, MarketItem, MarketOrderItem } from 'src/core/types';
+import { MarketCart, MarketItem } from 'src/core/types';
 import { UserService } from 'src/core/user/user.service';
+import { UsersComponent } from '../users/users.component';
 
 @Component({
   selector: 'app-cart',
@@ -24,7 +27,12 @@ export class CartComponent {
 
   @Output() closeEvent = new EventEmitter<void>();
 
-  constructor(private market: MarketService, private user: UserService) {}
+  constructor(
+    private market: MarketService,
+    private user: UserService,
+    private router: Router,
+    public dialog: MatDialog
+  ) {}
 
   changeQty(i: number, qty: number) {
     this.user.changeQty(i, qty);
@@ -32,6 +40,26 @@ export class CartComponent {
 
   remove(i: number) {
     this.user.removeItem(i);
+  }
+
+  checkout() {
+    this.user.checkLogin().then((success) => {
+      if (success) {
+        this.router.navigateByUrl('/checkout');
+        this.close();
+      }
+      else {
+        this.dialog
+          .open(UsersComponent, {
+            backdropClass: 'dialog_users-back',
+            panelClass: 'dialog_users',
+            autoFocus: false,
+            maxWidth: undefined,
+          })
+          .afterClosed()
+          .subscribe();
+      }
+    });
   }
 
   close() {

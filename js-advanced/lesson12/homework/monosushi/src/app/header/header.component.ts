@@ -4,6 +4,8 @@ import { MarketCart, MarketItem, MarketProduct } from 'src/core/types';
 import { conf } from '../../core/conf';
 import { UserService } from 'src/core/user/user.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { UsersComponent } from '../misc/users/users.component';
 
 @Component({
   selector: 'app-header',
@@ -59,7 +61,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private market: MarketService,
     private user: UserService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
     this.onResize();
   }
@@ -100,17 +103,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   login(): void {
     this.ui.menuToggle(false);
 
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    if (user.email && user.password) {
-      this.user.login(user.email, user.password).subscribe((success) => {
-        if (success) {
-          if (this.user.admin) this.router.navigateByUrl('/admin/offer');
-          else this.router.navigateByUrl('/profile/main');
-        } else {
-          localStorage.removeItem('user');
-          this.router.navigateByUrl('/login');
-        }
-      });
-    } else this.router.navigateByUrl('/login');
+    this.user.checkLogin().then((success) => {
+      if (success) {
+        if (this.user.admin) this.router.navigateByUrl('/admin/offer');
+        else this.router.navigateByUrl('/profile/main');
+      } else {
+        this.dialog
+          .open(UsersComponent, {
+            backdropClass: 'dialog_users-back',
+            panelClass: 'dialog_users',
+            autoFocus: false,
+            maxWidth: undefined,
+          })
+          .afterClosed()
+          .subscribe();
+      }
+    });
   }
 }

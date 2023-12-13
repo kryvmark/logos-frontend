@@ -2,13 +2,13 @@
   <ng-container *ngIf="cart">
     <div
       class="checkout-stub"
-      *ngIf="cart.items.length < 1; else checkoutItems"
+      *ngIf="cart.items.length < 1; else checkoutLayout"
     >
       <i class="i-main-empty"></i>
       <h1 class="checkout-h1 stub">Кошик порожній</h1>
       <a routerLink="/" class="checkout-stub-link">Перейти до каталогу</a>
     </div>
-    <ng-template #checkoutItems>
+    <ng-template #checkoutLayout>
       <div class="checkout-view">
         <h1 class="checkout-h1">Оформити замовлення</h1>
         <div
@@ -49,6 +49,147 @@
           До оплати: <b>{{ cart.total.price }}</b> грн
         </span>
       </div>
+      <form class="checkout-form" [formGroup]="form">
+        <h3 class="checkout-form-h3">Оберіть кількість приборів</h3>
+        <div class="checkout-form-row text">
+          <select
+            class="checkout-form-row-input"
+            name="inputProduct"
+            id="inputProduct"
+            formControlName="utensilsRegular"
+          >
+            <option [value]="1" selected>1</option>
+            <option [value]="2">2</option>
+            <option [value]="3">3</option>
+            <option [value]="4">4</option>
+            <option [value]="5">5</option>
+          </select>
+          <select
+            class="checkout-form-row-input"
+            name="inputProduct"
+            id="inputProduct"
+            formControlName="utensilsTrial"
+          >
+            <option [value]="0" disabled selected>Навчальні тримачі</option>
+            <option [value]="0">0</option>
+            <option [value]="1">1</option>
+          </select>
+        </div>
+        <h3 class="checkout-form-h3">Спосіб оплати</h3>
+        <div class="checkout-form-row">
+          <div class="checkout-form-check">
+            <input
+              type="radio"
+              id="inputPaymentCash"
+              formControlName="cash"
+              class="checkout-form-check-control"
+              [value]="true"
+              checked
+            />
+            <label for="inputPaymentCash" class="checkout-form-check-label">
+              Оплата готівкою
+            </label>
+          </div>
+          <div class="checkout-form-check">
+            <input
+              type="radio"
+              id="inputPaymentCard"
+              formControlName="cash"
+              class="checkout-form-check-control"
+              [value]="false"
+            />
+            <label for="inputPaymentCard" class="checkout-form-check-label">
+              Безготівкова оплата
+            </label>
+          </div>
+        </div>
+        <h3 class="checkout-form-h3">Спосіб доставки</h3>
+        <div class="checkout-form-row">
+          <div class="checkout-form-check">
+            <input
+              type="radio"
+              id="inputDeliveryCourier"
+              formControlName="selfPickup"
+              class="checkout-form-check-control"
+              [value]="false"
+              (click)="ui.setSelfPickup(false)"
+              checked
+            />
+            <label for="inputDeliveryCourier" class="checkout-form-check-label">
+              Доставка
+            </label>
+          </div>
+          <div class="checkout-form-check">
+            <input
+              type="radio"
+              id="inputDeliverySelf"
+              formControlName="selfPickup"
+              class="checkout-form-check-control"
+              (click)="ui.setSelfPickup(true)"
+              [value]="true"
+            />
+            <label for="inputDeliverySelf" class="checkout-form-check-label">
+              Самовивіз (запечені моно макі з лососем в подарунок)
+            </label>
+          </div>
+        </div>
+        <div class="checkout-form-row text">
+          <input
+            type="text"
+            class="checkout-form-row-input"
+            name="inputFirstName"
+            id="inputFirstName"
+            formControlName="firstName"
+            placeholder="Ваше ім'я"
+          />
+          <input
+            type="text"
+            class="checkout-form-row-input"
+            name="inputPhone"
+            id="inputPhone"
+            formControlName="phone"
+            placeholder="Телефон"
+          />
+        </div>
+        <select
+          *ngIf="!ui.selfPickup"
+          class="checkout-form-input"
+          name="inputAddress"
+          id="inputAddress"
+          formControlName="address"
+        >
+          <option value="" disabled selected>Адреса доставки</option>
+          <option *ngFor="let address of ui.addresses" [value]="address">{{ address }}</option>
+        </select>
+        <select
+          *ngIf="ui.selfPickup"
+          class="checkout-form-input"
+          name="inputDeliveryPoint"
+          id="inputDeliveryPoint"
+          formControlName="address"
+        >
+          <option value="" disabled selected>Адреса самовивозу</option>
+          <option *ngFor="let point of ui.deliveryPoints" [value]="point.address">{{ point.address }}</option>
+        </select>
+        <hr class="checkout-form-delimiter" />
+        <div class="checkout-form-check">
+          <input
+            type="checkbox"
+            name="inputCall"
+            id="inputCall"
+            formControlName="call"
+            class="checkout-form-check-control"
+            [value]="false"
+          />
+          <label for="inputCall" class="checkout-form-check-label">
+            Зателефонуйте мені для уточнення деталей
+          </label>
+        </div>
+        <app-map [highlight]="false"></app-map>
+        <button class="checkout-form-submit" type="submit" [disabled]="form.invalid" (click)="checkout()">
+          Оформити замовлення
+        </button>
+      </form>
     </ng-template>
   </ng-container>
 </div>

@@ -15,12 +15,19 @@ import { CheckoutComponent } from './main/checkout/checkout.component';
 import { LoginComponent } from './main/login/login.component';
 
 import {
+  historyResolver,
   itemResolver,
   marketResolver,
   offerResolver,
+  ordersResolver,
   productResolver,
 } from 'src/core/resolvers/resolvers';
-import { adminGuard, loginGuard, profileGuard } from 'src/core/guards/guards';
+import {
+  adminGuard,
+  checkoutGuard,
+  loginGuard,
+  profileGuard,
+} from 'src/core/guards/guards';
 
 const routes: Routes = [
   { path: '', component: MainComponent, resolve: { response: marketResolver } },
@@ -58,6 +65,11 @@ const routes: Routes = [
       {
         path: 'history',
         component: ProfileComponent,
+        resolve: { response: historyResolver },
+      },
+      {
+        path: 'password',
+        component: ProfileComponent,
       },
       {
         path: '',
@@ -93,7 +105,7 @@ const routes: Routes = [
       {
         path: 'orders',
         component: AdminComponent,
-        resolve: { response: marketResolver },
+        resolve: { response: ordersResolver },
       },
       {
         path: '',
@@ -112,7 +124,13 @@ const routes: Routes = [
     path: 'checkout',
     component: CheckoutComponent,
     resolve: { response: marketResolver },
+    canActivate: [checkoutGuard],
   },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
+  }
 ];
 
 @NgModule({

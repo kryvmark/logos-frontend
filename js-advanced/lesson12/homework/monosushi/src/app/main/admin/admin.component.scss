@@ -193,6 +193,10 @@
           border: 0.125rem solid $gray;
           vertical-align: top;
 
+          &.lined {
+            border-top: 3px solid $monosushi;
+          }
+
           .i-misc-stub {
             width: 10rem;
             height: 6rem;
@@ -368,5 +372,17 @@
         display: none;
       }
     }
+  }
+}
+
+.order {
+  margin-bottom: 0.5rem;
+
+  &.pending {
+    @include order();
+  }
+
+  &.complete {
+    @include order(true);
   }
 }

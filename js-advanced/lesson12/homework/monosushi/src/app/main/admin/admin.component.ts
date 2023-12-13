@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/core/admin/admin.service';
+import { conf } from 'src/core/conf';
 import { MarketService } from 'src/core/market/market.service';
 import {
   MarketItem,
@@ -11,6 +12,7 @@ import {
   MarketPath,
   AdminPath,
   Market,
+  MarketOrder,
 } from 'src/core/types';
 import { UserService } from 'src/core/user/user.service';
 
@@ -24,11 +26,13 @@ export class AdminComponent implements OnInit {
   public routing!: Subscription;
   public form!: FormGroup;
 
-  public records = {
+  public records: Market = {
     offers: new Array<MarketOffer>(),
     products: new Array<MarketProduct>(),
     items: new Array<MarketItem>(),
   };
+
+  public orders: MarketOrder[] = [];
 
   public ui = {
     mobile: window.innerWidth < 1200,
@@ -149,15 +153,27 @@ export class AdminComponent implements OnInit {
     read: (update = true) => {
       this.ui.formToggle(false);
 
-      this.route.data.subscribe((data) => {
-        if (data['response']) this.records = data['response'] as Market;
-      });
-
-      if (update) {
-        this.market.read().subscribe(() => {
-          const { offers, products, items } = this.market.records;
-          this.records = { offers, products, items };
+      if (this.path != 'orders') {
+        this.route.data.subscribe((data) => {
+          if (data['response']) this.records = data['response'] as Market;
         });
+
+        if (update) {
+          this.market.read().subscribe(() => {
+            const { offers, products, items } = this.market.records;
+            this.records = { offers, products, items };
+          });
+        }
+      } else {
+        this.route.data.subscribe((data) => {
+          if (data['response']) this.orders = data['response'] as MarketOrder[];
+        });
+
+        if (update) {
+          this.admin.readOrders().then(() => {
+            this.orders = this.admin.orders;
+          });
+        }
       }
     },
 
@@ -297,6 +313,14 @@ export class AdminComponent implements OnInit {
       }
     },
 
+    confirm: (i: number) => {
+      if (this.path == 'orders') {
+        this.admin.confirmOrder(i).then(() => {
+          this.ui.read();
+        })
+      }
+    },
+
     delete: (i: number) => {
       switch (this.path) {
         case 'offers':
@@ -355,28 +379,20 @@ export class AdminComponent implements OnInit {
         return 'Невідомо';
       },
 
-      itemSubcatDict: {
-        philadelphia: 'Роли Філадельфія',
-        california: 'Роли Каліфорнія',
-        baked: 'Запечені Роли',
-        craft: 'Фірмові Суші',
-        maki: 'Роли Макі',
-        premium: 'Преміум Суші',
-      },
-
-      itemSubcat: () => {
-        const object: any = { ...this.ui.misc.itemSubcatDict };
-        const subcat = [];
+      categories: conf.categories,
+      itemCategories: () => {
+        const object: any = { ...this.ui.misc.categories };
+        const category = [];
 
         for (const key in object) {
           if (Object.prototype.hasOwnProperty.call(object, key)) {
-            subcat.push({
+            category.push({
               name: key,
               title: object[key],
             });
           }
         }
-        return subcat;
+        return category;
       },
     },
   };
@@ -436,7 +452,8 @@ export class AdminComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigateByUrl('/login', { replaceUrl: true });
-    this.user.logout();
+    this.user.logout().then(() => {
+      this.router.navigateByUrl('/login', { replaceUrl: true });
+    });
   }
 }

@@ -1,0 +1,21 @@
+.mat-mdc-form-field-infix {
+  min-height: auto;
+}
+
+.mdc-button[color="warn"] {
+  .mdc-button__label {
+    color: $red;
+    text-transform: uppercase;
+    font: {
+      size: 1rem;
+      weight: bold;
+    }
+  }
+}
+
+.mdc-list-item__primary-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}

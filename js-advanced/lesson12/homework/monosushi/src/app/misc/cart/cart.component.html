@@ -20,6 +20,7 @@
           <a
             class="cart-container-view-item-link"
             [routerLink]="['/products/', item.product, '/', item.path].join('')"
+            (click)="close()"
           >
             <img
               [src]="ui.firebase(item.logo)"
@@ -32,6 +33,7 @@
               [routerLink]="
                 ['/products/', item.product, '/', item.path].join('')
               "
+              (click)="close()"
             >
               {{ item.name }}
             </a>
@@ -53,14 +55,13 @@
       <span class="cart-container-order-total">
         Сума: <strong>{{ cart.total.price }}</strong> грн
       </span>
-      <a
+      <button
         *ngIf="cart.total.items > 0"
-        routerLink="/checkout"
         class="cart-container-order-link"
-        (click)="close()"
+        (click)="checkout()"
       >
         Оформити замовлення
-      </a>
+      </button>
     </div>
   </div>
 </div>
