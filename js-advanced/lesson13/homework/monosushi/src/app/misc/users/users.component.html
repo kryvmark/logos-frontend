@@ -73,7 +73,7 @@
             formControlName="passwordAux"
             name="inputPasswordAux"
             id="inputPasswordAux"
-            placeholder="Підтвердіть пароль"
+            placeholder="Повторіть пароль"
           />
           <mat-icon matSuffix (click)="ui.obscure = !ui.obscure">
             {{ ui.obscure ? "visibility_off" : "visibility" }}
@@ -145,13 +145,16 @@
       <mat-form-field appearance="outline">
         <input
           matInput
-          type="password"
+          [type]="ui.obscure ? 'password' : 'text'"
           name="loginPass"
           id="loginPass"
           formControlName="password"
           placeholder="Пароль"
           (input)="unError()"
         />
+        <mat-icon matSuffix (click)="ui.obscure = !ui.obscure">
+          {{ ui.obscure ? "visibility_off" : "visibility" }}
+        </mat-icon>
       </mat-form-field>
       <span
         class="dialog_users-container-form-error"

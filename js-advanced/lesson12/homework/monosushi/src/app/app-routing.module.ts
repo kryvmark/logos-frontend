@@ -109,7 +109,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'offer',
+        redirectTo: 'offers',
         pathMatch: 'full',
       },
       {

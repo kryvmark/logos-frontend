@@ -95,14 +95,11 @@
             </ng-container>
           </ng-container>
           <div class="profile-view-form-spaced">
-            <button
-              class="profile-view-form-addresses"
-              (click)="ui.createAddress()"
-            >
+            <button class="profile-view-form-aux" (click)="ui.createAddress()">
               Додати адресу
             </button>
             <button
-              class="profile-view-form-save"
+              class="profile-view-form-main"
               [disabled]="form.invalid"
               (click)="save()"
             >
@@ -305,6 +302,76 @@
             </tbody>
           </table>
         </ng-template>
+      </ng-container>
+      <ng-container *ngSwitchCase="'password'">
+        <form class="profile-view-form" [formGroup]="form" (input)="unError()">
+          <h3 class="profile-view-form-h3">Змінити пароль</h3>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              [type]="ui.obscure ? 'password' : 'text'"
+              formControlName="password"
+              name="inputPassword"
+              id="inputPassword"
+              placeholder="Старий пароль"
+            />
+            <mat-icon matSuffix (click)="ui.obscure = !ui.obscure">
+              {{ ui.obscure ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              [type]="ui.obscure ? 'password' : 'text'"
+              formControlName="newPassword"
+              name="inputNewPassword"
+              id="inputNewPassword"
+              placeholder="Новий пароль"
+            />
+            <mat-icon matSuffix (click)="ui.obscure = !ui.obscure">
+              {{ ui.obscure ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              [type]="ui.obscure ? 'password' : 'text'"
+              formControlName="newPasswordAux"
+              name="inputNewPasswordAux"
+              id="inputNewPasswordAux"
+              placeholder="Повторіть новий пароль"
+            />
+            <mat-icon matSuffix (click)="ui.obscure = !ui.obscure">
+              {{ ui.obscure ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </mat-form-field>
+          <span
+            class="profile-view-form-error"
+            [ngClass]="{
+              active:
+                form.controls['newPassword'].value !=
+                  form.controls['newPasswordAux'].value || error
+            }"
+          >
+            Паролі не співпадають
+          </span>
+          <div class="profile-view-form-spaced">
+            <a
+              class="profile-view-form-aux"
+              routerLink="../main"
+              (click)="ui.resetForm()"
+            >
+              Скасувати
+            </a>
+            <button
+              class="profile-view-form-main"
+              [disabled]="form.invalid"
+              (click)="save()"
+            >
+              Зберегти зміни
+            </button>
+          </div>
+        </form>
       </ng-container>
     </ng-container>
     <button

@@ -35,7 +35,7 @@
     </ng-container>
     <ng-template #desktopTel>
       <div class="header-top-call">
-        <button class="header-top-call-button">
+        <button class="header-top-call-button" (click)="call()">
           <i class="i-header-phone"></i>
           <span class="header-top-call-button-text">Ми зателефонуємо</span>
         </button>
@@ -116,7 +116,7 @@
         >Акції на суші
       </a>
       <a class="header-side-tel" href="tel:+380978780837">+380978780837</a>
-      <button class="header-side-call">
+      <button class="header-side-call" (click)="call()">
         <i class="i-header-phone"></i> Ми зателефонуємо
       </button>
     </nav>

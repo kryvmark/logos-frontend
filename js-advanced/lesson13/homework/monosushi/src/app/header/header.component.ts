@@ -6,6 +6,7 @@ import { UserService } from 'src/core/user/user.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersComponent } from '../misc/users/users.component';
+import { CallComponent } from '../misc/call/call.component';
 
 @Component({
   selector: 'app-header',
@@ -98,6 +99,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.ui.cart
       ? window.document.body.classList.add('locked')
       : window.document.body.classList.remove('locked');
+  }
+
+  call(): void {
+    this.ui.menuToggle(false);
+
+    this.dialog
+      .open(CallComponent, {
+        backdropClass: 'dialog_call-back',
+        panelClass: 'dialog_call',
+        autoFocus: false,
+        maxWidth: undefined,
+      })
+      .afterClosed()
+      .subscribe();
   }
 
   login(): void {

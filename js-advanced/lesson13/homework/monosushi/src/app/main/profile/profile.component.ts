@@ -11,6 +11,7 @@ import { UserService } from 'src/core/user/user.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  public error = false;
   public path!: UserPath;
   public routing!: Subscription;
   public form!: FormGroup;
@@ -19,6 +20,10 @@ export class ProfileComponent implements OnInit {
 
   public ui = {
     mobile: window.innerWidth < 1200,
+    obscure: true,
+    resetForm: () => {
+      if (this.path == 'password') this.form.reset();
+    },
     createAddress: () => {
       const length = this.addresses.controls.length - 1;
       const lastControl = this.addresses.controls[length];
@@ -100,6 +105,35 @@ export class ProfileComponent implements OnInit {
             }
           });
           break;
+        case 'password':
+          this.form = this.forms.group({
+            password: [
+              '',
+              [
+                Validators.required,
+                Validators.minLength(8),
+                Validators.maxLength(16),
+              ],
+            ],
+            newPassword: [
+              '',
+              [
+                Validators.required,
+                Validators.minLength(8),
+                Validators.maxLength(16),
+              ],
+            ],
+            newPasswordAux: [
+              '',
+              [
+                Validators.required,
+                Validators.minLength(8),
+                Validators.maxLength(16),
+              ],
+            ],
+          });
+
+          break;
       }
     });
   }
@@ -114,12 +148,29 @@ export class ProfileComponent implements OnInit {
   }
 
   save(): void {
-    const data = {
-      firstName: this.form.controls['firstName'].value,
-      lastName: this.form.controls['lastName'].value,
-      phone: this.form.controls['phone'].value,
-    };
-    this.user.update(data);
+    switch (this.path) {
+      case 'main':
+        const data = {
+          firstName: this.form.controls['firstName'].value,
+          lastName: this.form.controls['lastName'].value,
+          phone: this.form.controls['phone'].value,
+        };
+        this.user.update(data);
+        break;
+      case 'password':
+        const password = this.form.controls['password'].value;
+        const newPassword = this.form.controls['newPassword'].value;
+        const newPasswordAux = this.form.controls['newPasswordAux'].value;
+
+        if (password && newPassword && newPasswordAux && (newPassword == newPasswordAux)) {
+          this.user.changePassword(password, newPassword).then((success) => {
+            if (success) this.router.navigateByUrl('/profile/main');
+            else this.error = true;
+          })
+        }
+
+        break;
+    }
   }
 
   repeatOrder(i: number): void {
@@ -134,5 +185,9 @@ export class ProfileComponent implements OnInit {
     this.user.logout().then(() => {
       this.router.navigateByUrl('/', { replaceUrl: true });
     });
+  }
+
+  unError(): void {
+    this.error = false;
   }
 }

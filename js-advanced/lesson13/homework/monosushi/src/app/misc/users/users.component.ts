@@ -22,6 +22,8 @@ export class UsersComponent {
       this.ui.onRegisterToggle();
     },
     onRegisterToggle: () => {
+      this.ui.obscure = true;
+      
       if (this.ui.register) {
         this.form = this.forms.group({
           firstName: ['', Validators.required],

@@ -2,9 +2,12 @@
   <button class="dialog_call-container-close" mat-icon-button (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
-  <h2 class="dialog_users-container-title">Ми зателефонуємо</h2>
-  <p class="dialog_call-container-p">Залиште номер телефону і наші менеджери зв'яжуться з вами</p>
-  <form class="dialog_users-container-form" [formGroup]="form">
+  <h2 class="dialog_call-container-title">Ми зателефонуємо</h2>
+  <p class="dialog_call-container-p">
+    Залиште номер телефону і наші менеджери<br />
+    зв'яжуться з вами
+  </p>
+  <form class="dialog_call-container-form" [formGroup]="form">
     <mat-form-field appearance="outline">
       <input
         matInput
@@ -26,5 +29,12 @@
       />
       <span matTextPrefix>+38</span>
     </mat-form-field>
+    <button
+      class="dialog_call-container-form-submit"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Зареєструватись
+    </button>
   </form>
 </div>

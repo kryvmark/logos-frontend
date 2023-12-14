@@ -14,6 +14,8 @@ import {
   signOut,
   User as AuthUser,
   Auth,
+  updatePassword,
+  reauthenticateWithCredential,
 } from '@angular/fire/auth';
 import {
   addDoc,
@@ -25,7 +27,10 @@ import {
   updateDoc,
   getDocs,
 } from '@angular/fire/firestore';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  EmailAuthProvider,
+  createUserWithEmailAndPassword,
+} from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -109,7 +114,7 @@ export class UserService {
 
   async repeatOrder(i: number): Promise<void> {
     if (this.id && this.orders) {
-      const order: MarketOrder = {...this.orders[i]};
+      const order: MarketOrder = { ...this.orders[i] };
       delete order.id;
       order.date = Date.now();
       order.complete = false;
@@ -149,7 +154,9 @@ export class UserService {
           addresses: data['addresses'],
         };
 
-        const orders = (await getDocs(collection(this.db, 'users', user.uid, 'orders'))).docs;
+        const orders = (
+          await getDocs(collection(this.db, 'users', user.uid, 'orders'))
+        ).docs;
         _user.orders = new Array<MarketOrder>();
         orders.forEach((order) => {
           const _order = { ...order.data() } as MarketOrder;
@@ -186,7 +193,9 @@ export class UserService {
           addresses: data['addresses'],
         };
 
-        const orders = (await getDocs(collection(this.db, 'users', login.user.uid, 'orders'))).docs;
+        const orders = (
+          await getDocs(collection(this.db, 'users', login.user.uid, 'orders'))
+        ).docs;
         _user.orders = new Array<MarketOrder>();
         orders.forEach((order) => {
           const _order = { ...order.data() } as MarketOrder;
@@ -206,6 +215,31 @@ export class UserService {
     try {
       await signOut(this.auth);
     } catch {}
+  }
+
+  async changePassword(
+    password: string,
+    newPassword: string
+  ): Promise<boolean> {
+    const user: AuthUser | null = await new Promise((resolve) => {
+      const unsubscribe = this.auth.onAuthStateChanged((user) => {
+        unsubscribe();
+        resolve(user);
+      });
+    });
+
+    if (user) {
+      const credential = EmailAuthProvider.credential(
+        this._user.email,
+        password
+      );
+
+      await reauthenticateWithCredential(user, credential);
+      await updatePassword(user, newPassword);
+
+      return true;
+    }
+    return false;
   }
 
   async register(user: User, password: string): Promise<void> {

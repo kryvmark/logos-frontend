@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MarketService } from 'src/core/market/market.service';
 import { MarketOffer } from 'src/core/types';
 
@@ -14,15 +15,11 @@ export class OfferComponent implements OnInit {
     firebase: (name: string) => this.market.image('offers', name),
   };
 
-  constructor(private market: MarketService) {}
+  constructor(private market: MarketService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    if (!this.market.records) {
-      this.market.read().subscribe(() => {
-        this.offers = this.market.records.offers;
-      });
-    } else {
-      this.offers = this.market.records.offers;
-    }
+    this.route.data.subscribe((data) => {
+      if (data['response']) this.offers = data['response'].offers as MarketOffer[];
+    });
   }
 }

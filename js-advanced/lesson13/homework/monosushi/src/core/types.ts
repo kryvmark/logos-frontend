@@ -103,6 +103,6 @@ export type User = {
   addresses?: string[];
 };
 
-export type UserPath = 'main' | 'history';
+export type UserPath = 'main' | 'history' | 'password';
 
 export type AdminPath = MarketPath | 'orders';
