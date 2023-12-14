@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Auth } from '@angular/fire/auth';
+import { Firestore } from '@angular/fire/firestore';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ProfileComponent } from './profile.component';
 
@@ -8,7 +12,18 @@ describe('ProfileComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ProfileComponent]
+      imports: [RouterTestingModule, HttpClientTestingModule],
+      declarations: [ProfileComponent],
+      providers: [
+        {
+          provide: Auth,
+          useValue: {},
+        },
+        {
+          provide: Firestore,
+          useValue: {},
+        }
+      ],
     });
     fixture = TestBed.createComponent(ProfileComponent);
     component = fixture.componentInstance;

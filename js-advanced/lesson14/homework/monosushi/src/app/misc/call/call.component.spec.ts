@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Auth } from '@angular/fire/auth';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { CallComponent } from './call.component';
 
@@ -8,7 +12,13 @@ describe('CallComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CallComponent]
+      imports: [ReactiveFormsModule],
+      declarations: [CallComponent],
+      providers: [
+        { provide: Auth, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
     fixture = TestBed.createComponent(CallComponent);
     component = fixture.componentInstance;
