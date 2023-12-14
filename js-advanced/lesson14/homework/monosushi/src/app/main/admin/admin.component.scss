@@ -1,0 +1,388 @@
+@import "../../../style/media";
+@import "../../../style/colors";
+@import "../../../style/mixins";
+
+.admin {
+  @include container();
+  flex-direction: column;
+
+  @include _1200 {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-inline: 2.5vw;
+  }
+
+  &-control {
+    display: flex;
+    flex-direction: column;
+
+    @include _1200 {
+      width: 15%;
+    }
+
+    &-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: center;
+      margin-bottom: 1rem;
+
+      @include _1200 {
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 3rem;
+      }
+
+      &-link {
+        text-decoration: none;
+        padding: 0.25rem;
+        margin: 0.5rem;
+        color: $muted;
+
+        @include _1200 {
+          padding: 1.5rem 1rem;
+          margin: 0;
+          border: 1px solid $gray;
+          border-left: none;
+          margin-top: -1px;
+          transition: 0.33s;
+
+          &:hover {
+            color: $text;
+          }
+        }
+
+        &.active {
+          color: $text;
+          font-weight: bold;
+          position: relative;
+          border-color: transparent;
+
+          &::before {
+            content: "";
+            position: absolute;
+            height: 0.25rem;
+            top: -0.25rem;
+            left: 0;
+            right: 0;
+            background-color: $monosushi;
+
+            @include _1200 {
+              top: 0;
+            }
+          }
+        }
+      }
+    }
+
+    &-logout {
+      display: none;
+
+      @include _1200 {
+        align-self: center;
+        @include button(true);
+
+        display: block;
+      }
+    }
+  }
+
+  &-view {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include _1200 {
+      align-self: auto;
+      width: 80%;
+      align-items: flex-start;
+    }
+
+    &-switch {
+      @include button(true, true);
+      margin-bottom: 1rem;
+
+      @include _1200 {
+        margin-bottom: 3rem;
+      }
+
+      &.form {
+        @include button(true, false);
+      }
+    }
+
+    &-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      &-table {
+        margin: 0.5rem;
+        max-width: 25rem;
+
+        @include _768 {
+          margin: 1rem;
+        }
+
+        &-th,
+        &-td {
+          padding: 1rem;
+          vertical-align: top;
+        }
+
+        &-th {
+          font-weight: bold;
+          text-align: right;
+          border: 0.125rem solid $monosushi;
+        }
+
+        &-td {
+          border: 0.125rem solid $gray;
+        }
+
+        &-img {
+          width: calc(2rem + 40vw);
+          max-width: 16rem;
+          border-radius: 0.75rem;
+        }
+
+        &-logo {
+          width: 4rem;
+          height: 4rem;
+        }
+
+        &-photo {
+          width: calc(2rem + 40vw);
+          max-width: 16rem;
+        }
+
+        &.stub {
+          .admin-view-wrap-table {
+            &-td {
+              color: $muted;
+            }
+          }
+
+          .i-misc-stub {
+            width: 8rem;
+            height: 5rem;
+            border-radius: 0.75rem;
+          }
+        }
+      }
+    }
+
+    @include _1200 {
+      &-table {
+        margin-bottom: 5rem;
+        font-size: 1.125rem;
+        width: 100%;
+
+        &-th {
+          font-weight: bold;
+          text-align: left;
+          padding: 1rem 0.5rem;
+          border: 0.125rem solid $monosushi;
+        }
+
+        &-td {
+          padding: 1rem 0.5rem;
+          border: 0.125rem solid $gray;
+          vertical-align: top;
+
+          &.lined {
+            border-top: 3px solid $monosushi;
+          }
+
+          .i-misc-stub {
+            width: 10rem;
+            height: 6rem;
+            border-radius: 0.75rem;
+          }
+        }
+
+        &-img {
+          width: calc(2rem + 40vw);
+          max-width: 16rem;
+          border-radius: 0.75rem;
+        }
+
+        &-logo {
+          width: 4rem;
+          height: 4rem;
+        }
+
+        &-photo {
+          width: calc(2rem + 40vw);
+          max-width: 16rem;
+        }
+      }
+    }
+
+    &-action {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      &-control {
+        @include button-custom();
+        @include action();
+        margin-bottom: 0.75rem;
+
+        &:disabled {
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    &-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @include _768 {
+        width: 70%;
+      }
+
+      @include _1200 {
+        align-items: flex-start;
+      }
+
+      &-row {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        @include _768 {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        &-input {
+          @include input-text();
+          margin-block: 0.5rem;
+
+          &.touched {
+            @include input-touched();
+          }
+
+          @include _768 {
+            width: calc(50% - 0.5rem);
+          }
+
+          @include _1200 {
+            margin: 0;
+            margin-bottom: 1rem;
+          }
+        }
+      }
+
+      &-input {
+        @include input-text();
+        width: 100%;
+        margin: 0.5rem;
+
+        &.bold {
+          font-weight: bold;
+        }
+
+        &.touched {
+          @include input-touched();
+        }
+
+        @include _1200 {
+          margin: 0;
+          margin-bottom: 1rem;
+        }
+      }
+
+      &-terms,
+      &-comp {
+        @include input-text();
+        resize: vertical;
+        width: 100%;
+        margin: 0.5rem;
+
+        &.touched {
+          @include input-touched();
+        }
+
+        @include _1200 {
+          margin: 0;
+          margin-bottom: 1rem;
+        }
+      }
+
+      &-terms {
+        height: 13rem;
+        min-height: 13rem;
+        max-height: 26rem;
+      }
+
+      &-comp {
+        height: 6.5rem;
+        min-height: 6.5rem;
+        max-height: 13rem;
+      }
+
+      &-file {
+        @include input-file();
+        width: 100%;
+        margin: 0.5rem;
+
+        @include _1200 {
+          margin: 0;
+          margin-bottom: 1rem;
+        }
+      }
+
+      &-img {
+        width: calc(2rem + 80vw);
+        max-width: 32rem;
+        border-radius: 0.75rem;
+        margin-block: 0.5rem;
+      }
+
+      &-logo {
+        width: 4rem;
+        height: 4rem;
+        margin-block: 0.5rem;
+      }
+
+      &-photo {
+        width: calc(2rem + 80vw);
+        max-width: 32rem;
+        margin-block: 0.5rem;
+      }
+
+      &-submit {
+        @include button(true);
+        margin: 0.5rem 0;
+      }
+    }
+
+    &-logout {
+      @include button(true);
+      margin: 1rem;
+
+      @include _1200 {
+        display: none;
+      }
+    }
+  }
+}
+
+.order {
+  margin-bottom: 0.5rem;
+
+  &.pending {
+    @include order();
+  }
+
+  &.complete {
+    @include order(true);
+  }
+}

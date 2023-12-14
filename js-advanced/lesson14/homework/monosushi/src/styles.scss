@@ -1,0 +1,107 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+$monosushi-primary: mat.define-palette(mat.$indigo-palette);
+$monosushi-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$monosushi-warn: mat.define-palette(mat.$red-palette);
+
+$monosushi-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $monosushi-primary,
+      accent: $monosushi-accent,
+      warn: $monosushi-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($monosushi-theme);
+
+@import "swiper/css/bundle";
+@import "ngx-toastr/toastr";
+
+@import "style/reset";
+@import "style/fonts";
+@import "style/colors";
+@import "style/media";
+@import "style/methods";
+@import "style/icons";
+@import "style/mixins";
+@import "style/maps";
+@import "style/swiper";
+@import "style/material";
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: $text;
+
+  font: {
+    size: 1rem;
+    family: RotondaC, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+  }
+}
+
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  &.locked {
+    overflow-y: hidden;
+  }
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+i,
+em {
+  font-style: italic;
+}
+
+::selection {
+  background-color: $monosushi;
+  color: #fff;
+}
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  height: 0.25rem;
+}
+
+::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+  background-color: $monosushi;
+}
+
+#toast-container {
+  .ngx-toastr,
+  .ngx-toastr:hover {
+    box-shadow: none;
+    top: 4.5rem;
+
+    @include _1200 {
+      top: 6.5rem;
+    }
+  }
+
+  .toast-message {
+    color: #fff;
+    font-family: RotondaC, system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+      "Helvetica Neue", sans-serif;
+  }
+}

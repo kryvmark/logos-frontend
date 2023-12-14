@@ -1,0 +1,40 @@
+<div class="dialog_call-container">
+  <button class="dialog_call-container-close" mat-icon-button (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <h2 class="dialog_call-container-title">Ми зателефонуємо</h2>
+  <p class="dialog_call-container-p">
+    Залиште номер телефону і наші менеджери<br />
+    зв'яжуться з вами
+  </p>
+  <form class="dialog_call-container-form" [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        type="text"
+        formControlName="firstName"
+        name="inputFirstName"
+        id="inputFirstName"
+        placeholder="Ваше ім'я"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        type="tel"
+        formControlName="phone"
+        name="inputPhone"
+        id="inputPhone"
+        placeholder="0987654321"
+      />
+      <span matTextPrefix>+38</span>
+    </mat-form-field>
+    <button
+      class="dialog_call-container-form-submit"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Зареєструватись
+    </button>
+  </form>
+</div>

@@ -1,0 +1,129 @@
+@import "../../../style/media";
+@import "../../../style/colors";
+@import "../../../style/mixins";
+
+.offers {
+  @include container();
+  align-items: flex-start;
+
+  &-h1 {
+    align-self: center;
+    @include h1();
+  }
+
+  &-h2 {
+    @include h2();
+    margin-bottom: 1.5rem;
+
+    @include _1200 {
+      font-size: 2.5rem;
+    }
+  }
+
+  &-h5 {
+    @include h5();
+    text-transform: uppercase;
+  }
+
+  &-p {
+    @include p();
+    margin-bottom: 1.5rem;
+  }
+
+  &-ul {
+    @include ul();
+    margin-bottom: 1.5rem;
+
+    &-li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &-wrap {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 1rem 5rem;
+
+    @include _768 {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-bottom: 8rem;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding-block: 1rem;
+      max-width: calc(2vw + 24rem);
+      margin: 1rem;
+
+      @include _1200 {
+        max-width: calc(50% - 4rem);
+      }
+
+      &-overflow {
+        overflow: hidden;
+        margin-bottom: 1rem;
+        border-radius: 0.75rem;
+      }
+
+      &-img {
+        max-width: 100%;
+        background-color: $monosushi;
+        transform: scale(1.05);
+
+        @include _1200 {
+          transition: 0.33s;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+      }
+
+      &-upper {
+        text-decoration: none;
+        position: relative;
+        margin-bottom: 2.5rem;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -1.5rem;
+          left: 0;
+          right: 0;
+          height: 0.25rem;
+          background-color: $monosushi;
+        }
+
+        @include _1200 {
+          .offer-h5 {
+            transition: 0.33s;
+          }
+
+          &:hover {
+            .offer-h5 {
+              color: $monosushi;
+            }
+          }
+        }
+      }
+
+      &-lower {
+        @include button();
+        align-self: center;
+        font-size: 14px;
+      }
+
+      &.stub {
+        .offer-wrap-item-upper {
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}

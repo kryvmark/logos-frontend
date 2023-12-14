@@ -1,0 +1,152 @@
+<div class="about">
+  <h1 class="about-h1">Про нас</h1>
+  <h2 class="about-h2">
+    Monosushi &ndash; доставка неймовірно смачних суші у Львові.
+  </h2>
+  <p class="about-p">
+    Головний пріоритет &ndash; висока якість їжі та сервісу. Ми &ndash; команда
+    професіоналів, яка щодня працює для Вас. Якість та Швидкість! &ndash; це два
+    основних пріоритети в роботі команди. В першу чергу звичайно ж Якість. Суші
+    готуються без затримок, одразу ж після Вашого замовлення. А завдяки сучасним
+    технологіям та відповідальному навчанню працівників, свіжі страви можливо
+    доставляти до 59 хв в 75% замовлень.
+  </p>
+  <ul class="about-ul">
+    <li class="about-ul-li">висока якість їжі та сервісу</li>
+    <li class="about-ul-li">команда професіоналів</li>
+    <li class="about-ul-li">сучасні технології приготування</li>
+  </ul>
+  <div class="about-left">
+    <img
+      [src]="ui.appFirebase('main/about/about-l.jpg')"
+      class="about-left-img"
+    />
+    <article class="about-left-article">
+      <h2 class="about-h2-nested">Привіт! Познайомимось?</h2>
+      <p class="about-p">
+        <b>Monosushi</b> &ndash; це доставка найсмачніших суші у Львові, яка
+        була створена командою перфекціоністів. Двоє друзів, які обожнюють роли
+        вирішили створити продукт, якого їм не вистачало на ринку Львова.
+        Продукт, в якому ідеальним буде все: смак, упакування, сервіс &ndash; і
+        все це за лояльною ціною!
+      </p>
+    </article>
+  </div>
+  <div class="about-right">
+    <img
+      [src]="ui.appFirebase('main/about/about-r.jpg')"
+      class="about-right-img"
+    />
+    <article class="about-right-article">
+      <h2 class="about-h2-nested">
+        Наш пріоритет &ndash; ваша посмішка від задоволення
+      </h2>
+      <p class="about-p">
+        <b>Monosushi</b> &ndash; це доставка одного (mono) продукту. Роли вже
+        давно стали рядовою стравою, проте процес їх приготування всеодно
+        залишається цілим мистецтвом. Суші потрібно готувати за чіткою
+        технологією суворо дотримуючись традицій. І в цьому ми справжні
+        експерти! Сумніваєтесь? Тоді замовляйте безкоштовну доставку Monosushi і
+        насолоджуйтесь.
+      </p>
+    </article>
+  </div>
+  <h2 class="about-h2">Наші переваги</h2>
+  <article class="about-benefits">
+    <section class="about-benefits-info">
+      <span class="about-benefits-info-icon">
+        <i class="i-about-fresh"></i>
+      </span>
+      <h4 class="about-h4">Свіжі продукти</h4>
+      <p class="about-p-small">
+        Наші інгредієнти ще вчора <br />
+        плавали у морі, а сьогодні вже у <br />
+        Ваших сушиках
+      </p>
+    </section>
+    <section class="about-benefits-info">
+      <span class="about-benefits-info-icon">
+        <i class="i-about-cuisine"></i
+      ></span>
+      <h4 class="about-h4">Неймовірний смак</h4>
+      <p class="about-p-small">
+        Ми створили сушики, які змусять <br />
+        Ваші рецептори вибухнути від <br />
+        насолоди
+      </p>
+    </section>
+    <section class="about-benefits-info">
+      <span class="about-benefits-info-icon">
+        <i class="i-about-parcel"></i
+      ></span>
+      <h4 class="about-h4">Великі порції</h4>
+      <p class="about-p-small">
+        Ми віднайшли ідеальні порції <br />
+        ролів та завжди дотримуємось<br />
+        грамажу, вказаного на сайті
+      </p>
+    </section>
+    <section class="about-benefits-info">
+      <span class="about-benefits-info-icon">
+        <i class="i-about-crisp"></i
+      ></span>
+      <h4 class="about-h4">Чистота на кухні</h4>
+      <p class="about-p-small">
+        Ми як ніхто інший розуміємо, що <br />
+        морепродукти потребують <br />
+        абсолютної чистоти на кухні
+      </p>
+    </section>
+  </article>
+  <h2 class="about-h2">Популярні запитання</h2>
+  <div class="about-faq">
+    <div class="about-faq-item" [class]="ui.faqItem === 0 ? 'about-faq-item-active' : 'about-faq-item'">
+      <h4 class="about-faq-item-h4" (click)="ui.toggleItem(0)">
+        Як можна замовити, якщо наша адреса не входить у вашу зону доставки?
+      </h4>
+      <div class="about-faq-item-info">
+        <p class="about-faq-item-p">
+          Якщо ваша адреса знаходиться поза межами нашої зони доставки, ви
+          можете:
+        </p>
+        <ol class="about-faq-item-ol">
+          <li class="about-faq-item-ol-li">
+            Забрати замовлення самовивозом за однією з наших адрес. (В такому
+            випадку ви отримаєте “Запечені моно макі з лососем у подарунок).
+          </li>
+          <li class="about-faq-item-ol-li">
+            Дізнатись в оператора, чи є можливість зробити виключення для
+            доставки поза межі зони в даний момент часу.
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="about-faq-item" [class]="ui.faqItem === 1 ? 'about-faq-item-active' : 'about-faq-item'">
+      <h4 class="about-faq-item-h4" (click)="ui.toggleItem(1)">Скільки часу очікувати на замовлення?</h4>
+      <div class="about-faq-item-info">
+        <p class="about-faq-item-p">
+          Час доставки залежить від адреси замовлення.<br />
+          Доставка в зелену зону – до 1 год.<br />
+          Доставка в жовту зону – до 1,5 год.<br />
+        </p>
+      </div>
+    </div>
+    <div class="about-faq-item" [class]="ui.faqItem === 2 ? 'about-faq-item-active' : 'about-faq-item'">
+      <h4 class="about-faq-item-h4" (click)="ui.toggleItem(2)">Доставка безкоштовна?</h4>
+      <div class="about-faq-item-info">
+        <p class="about-faq-item-p">
+          Так, доставка безкоштовна при мінімальній сумі замовлення 300 грн в
+          зелену зону доставки та 400 грн в жовту зону.
+        </p>
+      </div>
+    </div>
+    <div class="about-faq-item" [class]="ui.faqItem === 3 ? 'about-faq-item-active' : 'about-faq-item'">
+      <h4 class="about-faq-item-h4" (click)="ui.toggleItem(3)">До котрої години ви приймаєте замовлення?</h4>
+      <div class="about-faq-item-info">
+        <p class="about-faq-item-p">
+          Ми приймаємо замовлення кожного дня з 11:00 по 22:30.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

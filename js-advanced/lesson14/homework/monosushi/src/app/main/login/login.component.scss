@@ -1,0 +1,42 @@
+@import "../../../style/media";
+@import "../../../style/colors";
+@import "../../../style/mixins";
+
+.login {
+  @include container();
+
+  &-h1 {
+    @include h1();
+    margin-bottom: 3rem;
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-input {
+      @include input-text();
+      margin-bottom: 1.5rem;
+
+      &.error {
+        @include input-touched();
+      }
+    }
+
+    &-error {
+      display: none;
+
+      &.active {
+        display: block;
+        font-weight: bold;
+        color: $red;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    &-submit {
+      @include button();
+    }
+  }
+}
