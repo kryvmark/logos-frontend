@@ -91,14 +91,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.ui.mobile = window.innerWidth < 1200;
 
     if (this.ui.mobile) {
-      this.ui.menu
+      this.ui.menu || this.ui.cart
         ? window.document.body.classList.add('locked')
         : window.document.body.classList.remove('locked');
     }
-
-    this.ui.cart
-      ? window.document.body.classList.add('locked')
-      : window.document.body.classList.remove('locked');
   }
 
   call(): void {

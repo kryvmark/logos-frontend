@@ -12,6 +12,7 @@ import { UsersComponent } from './users/users.component';
 import { CallComponent } from './call/call.component';
 import { CartComponent } from './cart/cart.component';
 import { MapComponent } from './map/map.component';
+import { FilterPipe } from 'src/core/filter/filter.pipe';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
@@ -32,6 +33,7 @@ const MATERIAL = [
     CallComponent,
     CartComponent,
     MapComponent,
+    FilterPipe,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ const MATERIAL = [
     CallComponent,
     CartComponent,
     MapComponent,
+    FilterPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

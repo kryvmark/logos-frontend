@@ -5,10 +5,9 @@ import { ProductComponent } from './product.component';
 import { ProductInfoComponent } from './info/product-info.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MiscModule } from 'src/app/misc/misc.module';
-import { FilterPipe } from 'src/core/filter/filter.pipe';
 
 @NgModule({
-  declarations: [ProductComponent, ProductInfoComponent, FilterPipe],
+  declarations: [ProductComponent, ProductInfoComponent],
   imports: [CommonModule, ProductRoutingModule, HttpClientModule, MiscModule],
 })
 export class ProductModule {}

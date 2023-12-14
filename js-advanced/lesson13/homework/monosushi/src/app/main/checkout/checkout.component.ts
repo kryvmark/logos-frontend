@@ -40,7 +40,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       if (data['response']) {
-        this.items = data['response'].items;
+        this.items = data['response'].items as MarketItem[];
         this.subject = this.user.subject.subscribe(() => {
           this.cart = this.user.getCart(this.items);
         });

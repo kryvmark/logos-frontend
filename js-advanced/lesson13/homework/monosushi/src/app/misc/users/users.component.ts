@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/core/types';
 import { UserService } from 'src/core/user/user.service';
 
@@ -23,7 +24,7 @@ export class UsersComponent {
     },
     onRegisterToggle: () => {
       this.ui.obscure = true;
-      
+
       if (this.ui.register) {
         this.form = this.forms.group({
           firstName: ['', Validators.required],
@@ -67,7 +68,8 @@ export class UsersComponent {
   constructor(
     private dialog: MatDialogRef<UsersComponent>,
     private service: UserService,
-    private forms: FormBuilder
+    private forms: FormBuilder,
+    private toastr: ToastrService
   ) {
     this.ui.onRegisterToggle();
   }
@@ -81,8 +83,12 @@ export class UsersComponent {
     const password = this.form.controls['password'].value;
     this.service.login(email, password).then((success) => {
       if (success) {
-        if (!this.service.admin) this.close();
-        else {
+        if (!this.service.admin) {
+          this.close();
+          this.toastr.success(
+            `Вітаємо, ${this.service.firstName ?? 'Користувач'}!`
+          );
+        } else {
           this.service.logout();
           this.error = true;
         }

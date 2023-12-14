@@ -15,6 +15,8 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment.development';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
+import { MiscModule } from './misc/misc.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -28,6 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
+    MiscModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
